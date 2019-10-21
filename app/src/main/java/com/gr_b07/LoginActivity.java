@@ -15,5 +15,6 @@ public class LoginActivity extends AppCompatActivity {
         usernameText = findViewById(R.id.usernameText);
         passwordText = findViewById(R.id.passwordText);
         //1st sprint
+        //slet
     }
 }
