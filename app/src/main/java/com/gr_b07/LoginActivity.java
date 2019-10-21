@@ -1,6 +1,8 @@
 package com.gr_b07;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -39,6 +41,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 loginLogic.login(usernameText.getText().toString(),passwordText.getText().toString());
                 if (loginLogic.isLoggedIn()) {
                     Toast.makeText(this, "Login virker", Toast.LENGTH_SHORT).show();
+                    Intent mainmenuIntent = new Intent(this,MainMenu.class);
+                    startActivity(mainmenuIntent);
                 }
                 break;
         }
