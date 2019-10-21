@@ -2,6 +2,7 @@ package com.gr_b07;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -23,16 +24,22 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener{
     @Override
     public void onClick(View v) {
         if (v == mainButton1){
-
+            Intent intent = new Intent(this, NutritionActivity.class);
+            startActivity(intent);
         }
+
         else if (v == mainButton2){
-
+            Intent intent = new Intent(this, ActivityActivity.class);
+            startActivity(intent);
         }
-        else if (v == mainButton3){
 
+        else if (v == mainButton3){
+            Intent intent = new Intent(this, SocialActivity.class);
+            startActivity(intent);
         }
         else if (v == mainButton4){
-
+            Intent intent = new Intent(this, RewardsActivity.class);
+            startActivity(intent);
         }
         else if (v == mainButton5){
 
