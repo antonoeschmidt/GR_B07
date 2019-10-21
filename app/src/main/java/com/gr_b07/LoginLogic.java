@@ -14,7 +14,7 @@ public class LoginLogic {
 
     public void mockUp() {
         users = new ArrayList<>();
-        user1 = new User("anton","1234");
+        user1 = new User("anton", "1234");
         user2 = new User("harald", "4321");
         users.add(user1);
         users.add(user2);
@@ -22,8 +22,8 @@ public class LoginLogic {
     }
 
     public boolean login(String username, String password) {
-        for (User user: users
-             ) {
+        for (User user : users
+        ) {
             if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
                 currentUser = user;
                 return true;
