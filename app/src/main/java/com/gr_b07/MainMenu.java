@@ -16,9 +16,9 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener{
         setContentView(R.layout.activity_main_menu);
 
         mainButton1 = findViewById(R.id.mainmenu_button1); mainButton1.setOnClickListener(this);
-        mainButton2 = findViewById(R.id.mainmenu_button2); mainButton1.setOnClickListener(this);
-        mainButton3 = findViewById(R.id.mainmenu_button3); mainButton1.setOnClickListener(this);
-        mainButton4 = findViewById(R.id.mainmenu_button4); mainButton1.setOnClickListener(this);
+        mainButton2 = findViewById(R.id.mainmenu_button2); mainButton2.setOnClickListener(this);
+        mainButton3 = findViewById(R.id.mainmenu_button3); mainButton3.setOnClickListener(this);
+        mainButton4 = findViewById(R.id.mainmenu_button4); mainButton4.setOnClickListener(this);
     }
 
     @Override
