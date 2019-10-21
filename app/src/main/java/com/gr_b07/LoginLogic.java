@@ -29,6 +29,8 @@ public class LoginLogic {
             }
             if (password.equals(user.getPassword())) {
                 loggedIn = true;
+            } else {
+                loggedIn = false;
             }
         }
     }
