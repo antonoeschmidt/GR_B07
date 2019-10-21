@@ -6,8 +6,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
-public class MainMenu extends AppCompatActivity implements View.OnClickListener{
+public class MainMenuActivity extends AppCompatActivity implements View.OnClickListener{
     private Button mainButton1, mainButton2, mainButton3, mainButton4, mainButton5;
 
     @Override
@@ -19,6 +20,7 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener{
         mainButton2 = findViewById(R.id.mainmenu_button2); mainButton2.setOnClickListener(this);
         mainButton3 = findViewById(R.id.mainmenu_button3); mainButton3.setOnClickListener(this);
         mainButton4 = findViewById(R.id.mainmenu_button4); mainButton4.setOnClickListener(this);
+        mainButton5 = findViewById(R.id.mainmenu_button5); mainButton5.setOnClickListener(this);
     }
 
     @Override
@@ -38,7 +40,8 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener{
             Intent rewardsIntent = new Intent(this, RewardsActivity.class); startActivity(rewardsIntent);
         }
         else if (v == mainButton5){
-            // Settings not made yet.
+            Intent settingsIntent = new Intent(this, RewardsActivity.class); startActivity(settingsIntent);
+            Toast.makeText(this, "hej", Toast.LENGTH_SHORT).show();
         }
     }
 }

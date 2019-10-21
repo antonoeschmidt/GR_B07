@@ -42,7 +42,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 loginLogic.login(usernameText.getText().toString(),passwordText.getText().toString());
                 if (loginLogic.isLoggedIn()) {
                     Toast.makeText(this, "Login virker", Toast.LENGTH_SHORT).show();
-                    Intent mainmenuIntent = new Intent(this,MainMenu.class);
+                    Intent mainmenuIntent = new Intent(this, MainMenuActivity.class);
                     startActivity(mainmenuIntent);
                 }
                 break;
