@@ -31,6 +31,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         imageViewPass = findViewById(R.id.imageViewPassword);
         loginButton = findViewById(R.id.loginButton);
         loginButton.setOnClickListener(this);
+        loginLogic.mockUp();
 
     }
 

@@ -22,14 +22,12 @@ public class LoginLogic {
     }
 
     public void login(String username, String password) {
-        mockUp();
-        //lidt fucked up det her, men tester
         for (User user: users
              ) {
             if (user.getUsername().equals(username)) {
                 currentUser = user;
             }
-            if (password.equals(currentUser.getPassword())) {
+            if (password.equals(user.getPassword())) {
                 loggedIn = true;
             }
         }
