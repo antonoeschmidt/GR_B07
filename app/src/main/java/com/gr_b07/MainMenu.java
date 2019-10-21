@@ -24,25 +24,21 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener{
     @Override
     public void onClick(View v) {
         if (v == mainButton1){
-            Intent intent = new Intent(this, NutritionActivity.class);
-            startActivity(intent);
+            Intent intent = new Intent(this, NutritionActivity.class); startActivity(intent);
         }
 
         else if (v == mainButton2){
-            Intent intent = new Intent(this, ActivityActivity.class);
-            startActivity(intent);
+            Intent intent = new Intent(this, ActivityActivity.class); startActivity(intent);
         }
 
         else if (v == mainButton3){
-            Intent intent = new Intent(this, SocialActivity.class);
-            startActivity(intent);
+            Intent intent = new Intent(this, SocialActivity.class); startActivity(intent);
         }
         else if (v == mainButton4){
-            Intent intent = new Intent(this, RewardsActivity.class);
-            startActivity(intent);
+            Intent intent = new Intent(this, RewardsActivity.class); startActivity(intent);
         }
         else if (v == mainButton5){
-
+            // Settings not made yet.
         }
     }
 }
