@@ -21,18 +21,15 @@ public class LoginLogic {
 
     }
 
-    public void login(String username, String password) {
+    public boolean login(String username, String password) {
         for (User user: users
              ) {
-            if (user.getUsername().equals(username)) {
+            if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
                 currentUser = user;
-            }
-            if (password.equals(user.getPassword())) {
-                loggedIn = true;
-            } else {
-                loggedIn = false;
+                return true;
             }
         }
+        return false;
     }
 
     public boolean isLoggedIn() {

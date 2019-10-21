@@ -39,11 +39,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.loginButton:
-                loginLogic.login(usernameText.getText().toString(),passwordText.getText().toString());
-                if (loginLogic.isLoggedIn()) {
+                if (loginLogic.login(usernameText.getText().toString()
+                        ,passwordText.getText().toString())) {
                     Toast.makeText(this, "Login virker", Toast.LENGTH_SHORT).show();
-                    Intent mainmenuIntent = new Intent(this,MainMenu.class);
+                    Intent mainmenuIntent = new Intent(this, MainMenu.class);
                     startActivity(mainmenuIntent);
+                } else {
+                    Toast.makeText(this, "Forkert login", Toast.LENGTH_SHORT).show();
                 }
                 break;
         }
