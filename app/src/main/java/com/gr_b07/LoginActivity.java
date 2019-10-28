@@ -18,6 +18,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private ImageView imageViewPass;
     private Button loginButton;
 
+    public LoginLogic getLoginLogic() {
+        return loginLogic;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,4 +54,5 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
 
     }
+
 }

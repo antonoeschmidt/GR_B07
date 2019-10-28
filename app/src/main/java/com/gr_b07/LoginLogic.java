@@ -1,23 +1,20 @@
 package com.gr_b07;
 
-import android.widget.Toast;
-
 import java.util.ArrayList;
 
 public class LoginLogic {
     private ArrayList<User> users;
     private LoginActivity loginActivity;
-    private User currentUser;
     private boolean loggedIn = false;
-    private User user1;
-    private User user2;
+    private User pupil1;
+    private User pupil2;
 
     public void mockUp() {
         users = new ArrayList<>();
-        user1 = new User("anton", "1234");
-        user2 = new User("harald", "4321");
-        users.add(user1);
-        users.add(user2);
+        pupil1 = new Pupil("anton", "1234",false,0,0,0);
+        pupil2 = new Pupil("harald", "4321",false,0,0,0);
+        users.add(pupil1);
+        users.add(pupil2);
 
     }
 
@@ -25,15 +22,14 @@ public class LoginLogic {
         for (User user : users
         ) {
             if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
-                currentUser = user;
-                return true;
+                user.setLoggedIn(true);
+                return user.isLoggedIn();
             }
         }
         return false;
     }
 
-    public boolean isLoggedIn() {
-        return loggedIn;
+    public ArrayList<User> getUsers() {
+        return users;
     }
-
 }

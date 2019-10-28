@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -72,6 +73,7 @@ public class InputDataActivity extends AppCompatActivity implements View.OnClick
                 datePickerDialog.show();
                 break;
             case R.id.doneButton:
+
                 // Checks if radio button is selected, if not - Toast prints "choose gender" etc.
                 if (!maleRadioButton.isChecked() && !femaleRadioButton.isChecked()){
                     Toast.makeText(this, "Choose gender please.", Toast.LENGTH_SHORT).show();
@@ -88,6 +90,16 @@ public class InputDataActivity extends AppCompatActivity implements View.OnClick
                         weight = Integer.parseInt(editTextWeigth.getText().toString());
                         bmi = weight/height^2;
                         Toast.makeText(this, "Your body mass index is : " + bmi, Toast.LENGTH_SHORT).show();
+
+                       /* for (User user :
+                        ) {
+                            if (user.isLoggedIn()) {
+                                Log.d("Hej","HEeej");
+                            }
+                        }
+                        */
+
+
                         Intent mainMenuIntent = new Intent(this, MainMenuActivity.class);
                         startActivity(mainMenuIntent);
                     }
