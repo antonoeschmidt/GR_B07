@@ -42,8 +42,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 if (loginLogic.login(usernameText.getText().toString()
                         ,passwordText.getText().toString())) {
                     Toast.makeText(this, "Login virker", Toast.LENGTH_SHORT).show();;
-                    Intent mainmenuIntent = new Intent(this, MainMenuActivity.class);
-                    startActivity(mainmenuIntent);
+                    Intent inputDataIntent = new Intent(this, InputDataActivity.class);
+                    startActivity(inputDataIntent);
                 } else {
                     Toast.makeText(this, "Forkert login", Toast.LENGTH_SHORT).show();
                 }
