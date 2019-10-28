@@ -6,9 +6,9 @@ public class Pupil extends User {
 
     public Pupil(String username,String password,boolean loggedIn, int height, int weight, int bmi) {
         super(username, password, loggedIn);
-        height = this.height;
-        weight = this.weight;
-        bmi = this.bmi;
+        this.height = height;
+        this.weight = weight;
+        this.bmi = bmi;
     }
 
     public int getHeight() {
