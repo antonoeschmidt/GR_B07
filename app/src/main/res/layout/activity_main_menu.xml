@@ -12,7 +12,7 @@
         android:layout_width="32dp"
         android:layout_height="32dp"
         android:layout_marginBottom="1600px"
-        android:background="@drawable/settings_button"
+        android:background="@drawable/mainmenu_settings_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.98"
@@ -31,28 +31,28 @@
             android:id="@+id/mainmenu_button1"
             android:layout_width="match_parent"
             android:layout_height="426px"
-            android:background="@drawable/nutrition_button"
+            android:background="@drawable/mainmenu_nutrition_button"
             android:gravity="center" />
 
         <Button
             android:id="@+id/mainmenu_button2"
             android:layout_width="match_parent"
             android:layout_height="426px"
-            android:background="@drawable/activity_button"
+            android:background="@drawable/mainmenu_activity_button"
             android:gravity="center" />
 
         <Button
             android:id="@+id/mainmenu_button3"
             android:layout_width="match_parent"
             android:layout_height="426px"
-            android:background="@drawable/social_button"
+            android:background="@drawable/mainmenu_social_button"
             android:gravity="center" />
 
         <Button
             android:id="@+id/mainmenu_button4"
             android:layout_width="match_parent"
             android:layout_height="426px"
-            android:background="@drawable/rewards_button"
+            android:background="@drawable/mainmenu_rewards_button"
             android:gravity="center" />
 
     </LinearLayout>
