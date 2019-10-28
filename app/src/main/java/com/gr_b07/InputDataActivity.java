@@ -3,6 +3,7 @@ package com.gr_b07;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -64,5 +65,10 @@ public class InputDataActivity extends AppCompatActivity implements View.OnClick
                 }, year, month, day);
 
         datePickerDialog.show();
+        if (v == doneButton){
+            Intent mainMenuIntent = new Intent(this, MainMenuActivity.class); startActivity(mainMenuIntent);
+        }
+
+
     }
 }
