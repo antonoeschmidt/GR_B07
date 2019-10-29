@@ -2,36 +2,36 @@ package com.gr_b07;
 
 public class Pupil extends User {
 
-    private int height, weight, bmi;
+    private double height, weight, bmi;
 
-    public Pupil(String username,String password,boolean loggedIn, int height, int weight, int bmi) {
+    public Pupil(String username,String password,boolean loggedIn, double height, double weight, double bmi) {
         super(username, password, loggedIn);
         this.height = height;
         this.weight = weight;
         this.bmi = bmi;
     }
 
-    public int getHeight() {
+    public double getHeight() {
         return height;
     }
 
-    public void setHeight(int height) {
+    public void setHeight(double height) {
         this.height = height;
     }
 
-    public int getWeight() {
+    public double getWeight() {
         return weight;
     }
 
-    public void setWeight(int weight) {
+    public void setWeight(double weight) {
         this.weight = weight;
     }
 
-    public int getBmi() {
+    public double getBmi() {
         return bmi;
     }
 
-    public void setBmi(int bmi) {
+    public void setBmi(double bmi) {
         this.bmi = bmi;
     }
 }

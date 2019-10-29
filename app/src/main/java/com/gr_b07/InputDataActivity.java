@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import java.text.DecimalFormat;
 import java.util.Calendar;
+import java.util.Set;
 
 public class InputDataActivity extends AppCompatActivity implements View.OnClickListener {
     private TextView textView1;
@@ -32,7 +33,7 @@ public class InputDataActivity extends AppCompatActivity implements View.OnClick
     private TextView textViewKG;
     private Button doneButton;
     private Calendar calendar;
-    double weight, height, bmi;
+    //double weight, height, bmi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,31 +76,40 @@ public class InputDataActivity extends AppCompatActivity implements View.OnClick
             case R.id.doneButton:
 
                 // Checks if radio button is selected, if not - Toast prints "choose gender" etc.
-                if (!maleRadioButton.isChecked() && !femaleRadioButton.isChecked()){
+                if (!maleRadioButton.isChecked() && !femaleRadioButton.isChecked()) {
                     Toast.makeText(this, "Choose gender please.", Toast.LENGTH_SHORT).show();
                 }
                 // If one the radio buttons is selected, jump into next loop
-                else if (maleRadioButton.isChecked() || femaleRadioButton.isChecked()){
+                else if (maleRadioButton.isChecked() || femaleRadioButton.isChecked()) {
                     // If date of birth is more than 10 characters long (xx/xx/xxxx), that must mean its still the
                     // original text in the box (alternative method but it works)
-                    if (dateTextView.getText().toString().length() > 10){
+                    if (dateTextView.getText().toString().length() > 10) {
                         Toast.makeText(this, "Enter date of birth, please.", Toast.LENGTH_SHORT).show();
-                    }
-                    else if (editTextWeigth.getText().toString().isEmpty() || editTextHeigth.getText().toString().isEmpty()){
+                    } else if (editTextWeigth.getText().toString().isEmpty() || editTextHeigth.getText().toString().isEmpty()) {
                         Toast.makeText(this, "Enter height and weight, please.", Toast.LENGTH_SHORT).show();
                     }
                     // else if they're both containing something - set height, weight and calculate body mass index.
-                    else if (!editTextWeigth.getText().toString().isEmpty() && !editTextHeigth.getText().toString().isEmpty() && dateTextView.getText().toString().length() <= 10 && (maleRadioButton.isChecked() || femaleRadioButton.isChecked()) ){
-                        height = Double.parseDouble(editTextHeigth.getText().toString());
-                        weight = Double.parseDouble(editTextWeigth.getText().toString());
-                        bmi = (weight)/((height/100)*(height/100));
+                    else if (!editTextWeigth.getText().toString().isEmpty() && !editTextHeigth.getText().toString().isEmpty()
+                            && dateTextView.getText().toString().length() <= 10 && (maleRadioButton.isChecked() || femaleRadioButton.isChecked())) {
+                        //height = Double.parseDouble(editTextHeigth.getText().toString());
+                        Settings.getCurrentUser().setHeight(Double.parseDouble(editTextHeigth.getText().toString()));
+                        Log.d("heigth", "" + Settings.getCurrentUser().getHeight());
+                        //weight = Double.parseDouble(editTextWeigth.getText().toString());
+                        Settings.getCurrentUser().setWeight(Double.parseDouble(editTextWeigth.getText().toString()));
+                        Log.d("weigth", "" + Settings.getCurrentUser().getWeight());
+                        //bmi = (weight)/((height/100)*(height/100));
+                        Settings.getCurrentUser().setBmi(Settings.getCurrentUser().getWeight() /
+                                (Math.pow(Settings.getCurrentUser().getHeight() / 100, 2)));
+                        Log.d("bmi", "" + Settings.getCurrentUser().getBmi());
                         DecimalFormat df = new DecimalFormat("#.##");
-                        Toast.makeText(this, "Your body mass index is : " + df.format(bmi), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "Your body mass index is : " + df.format(Settings.getCurrentUser().getBmi()),
+                                Toast.LENGTH_SHORT).show();
 
                         Intent mainMenuIntent = new Intent(this, MainMenuActivity.class);
                         startActivity(mainMenuIntent);
                     }
                 }
+                break;
         }
     }
 }

@@ -11,20 +11,13 @@ package com.gr_b07;
         this.loggedIn = loggedIn;
     }
 
+
     public String getUsername() {
         return username;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
     public String getPassword() {
         return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public boolean isLoggedIn() {
@@ -34,4 +27,13 @@ package com.gr_b07;
     public void setLoggedIn(boolean loggedIn) {
         this.loggedIn = loggedIn;
     }
+
+     public abstract double getHeight();
+     public abstract void setHeight(double height);
+     public abstract double getWeight();
+     public abstract void setWeight(double weight);
+     public abstract double getBmi();
+     public abstract void setBmi(double bmi);
+
+
 }
