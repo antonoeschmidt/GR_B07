@@ -17,6 +17,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DecimalFormat;
 import java.util.Calendar;
 
 public class InputDataActivity extends AppCompatActivity implements View.OnClickListener {
@@ -31,7 +32,8 @@ public class InputDataActivity extends AppCompatActivity implements View.OnClick
     private TextView textViewKG;
     private Button doneButton;
     private Calendar calendar;
-    int height, weight, bmi;
+    double weight, height, bmi;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +51,6 @@ public class InputDataActivity extends AppCompatActivity implements View.OnClick
         textViewKG = findViewById(R.id.textViewKG);
         doneButton = findViewById(R.id.doneButton);
         doneButton.setOnClickListener(this);
-
     }
 
     @Override
@@ -79,7 +80,8 @@ public class InputDataActivity extends AppCompatActivity implements View.OnClick
                 }
                 // If one the radio buttons is selected, jump into next loop
                 else if (maleRadioButton.isChecked() || femaleRadioButton.isChecked()){
-                    // If height or weight is empty - Toast prints "enter weight" etc.
+                    // If date of birth is more than 10 characters long (xx/xx/xxxx), that must mean its still the
+                    // original text in the box (alternative method but it works)
                     if (dateTextView.getText().toString().length() > 10){
                         Toast.makeText(this, "Enter date of birth, please.", Toast.LENGTH_SHORT).show();
                     }
@@ -88,10 +90,11 @@ public class InputDataActivity extends AppCompatActivity implements View.OnClick
                     }
                     // else if they're both containing something - set height, weight and calculate body mass index.
                     else if (!editTextWeigth.getText().toString().isEmpty() && !editTextHeigth.getText().toString().isEmpty() && dateTextView.getText().toString().length() <= 10 && (maleRadioButton.isChecked() || femaleRadioButton.isChecked()) ){
-                        height = Integer.parseInt(editTextHeigth.getText().toString());
-                        weight = Integer.parseInt(editTextWeigth.getText().toString());
-                        bmi = weight/height^2;
-                        Toast.makeText(this, "Your body mass index is : " + bmi, Toast.LENGTH_SHORT).show();
+                        height = Double.parseDouble(editTextHeigth.getText().toString());
+                        weight = Double.parseDouble(editTextWeigth.getText().toString());
+                        bmi = (weight)/((height/100)*(height/100));
+                        DecimalFormat df = new DecimalFormat("#.##");
+                        Toast.makeText(this, "Your body mass index is : " + df.format(bmi), Toast.LENGTH_SHORT).show();
 
                         Intent mainMenuIntent = new Intent(this, MainMenuActivity.class);
                         startActivity(mainMenuIntent);

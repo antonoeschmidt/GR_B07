@@ -32,4 +32,8 @@ public class LoginLogic {
     public ArrayList<User> getUsers() {
         return users;
     }
+
+    public LoginActivity getLoginActivity() {
+        return loginActivity;
+    }
 }
