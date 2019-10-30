@@ -1,7 +1,7 @@
 package com.gr_b07;
 
 import java.util.ArrayList;
-
+//TODO: slet denne her klasse
 public class LoginLogic {
     private ArrayList<User> users;
     private LoginActivity loginActivity;
