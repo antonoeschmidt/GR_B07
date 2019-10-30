@@ -47,14 +47,14 @@ public class NutritionActivity extends AppCompatActivity implements View.OnClick
         fProgress.setMax(99);
 
         // Logger lige min morgenmad fra 30/10 som eksempel (lol) - Harald
-        pProgress.setProgress(89);   // Main Progress
-        cProgress.setProgress(56);
-        fProgress.setProgress(59);
+        pProgress.setProgress((int) Math.round(Settings.getCurrentUser().getProtein()));   // Main Progress
+        cProgress.setProgress((int) Math.round(Settings.getCurrentUser().getCarbs()));
+        fProgress.setProgress((int) Math.round(Settings.getCurrentUser().getFat()));
 
         // Protein og fedt er 4 kcal pr. gram og fedt er 9.
-        consumedCalories = pProgress.getProgress()*4+cProgress.getProgress()*4+fProgress.getProgress()*9;
+        //consumedCalories = pProgress.getProgress()*4+cProgress.getProgress()*4+fProgress.getProgress()*9;
+        consumedCalories = (int) Math.round(Settings.getCurrentUser().getCalories());
         totalCalories = pProgress.getMax() * 4 + cProgress.getMax() * 4 + fProgress.getMax() * 9;
-        Log.d(Double.toString(consumedCalories), "onCreate: ");
 
         caloriesTextView.setText(consumedCalories + "  /  " + totalCalories );
     }
@@ -85,10 +85,13 @@ public class NutritionActivity extends AppCompatActivity implements View.OnClick
     }
 
     public void eatFood(Food food){
-        pProgress.setProgress(Math.round(pProgress.getProgress() + (int)Math.round(food.getProtein())));
-        cProgress.setProgress(Math.round(cProgress.getProgress() + (int)Math.round(food.getCarbs())));
-        fProgress.setProgress(Math.round(fProgress.getProgress() + (int)Math.round(food.getFat())));
-
-        consumedCalories = (consumedCalories + food.getCalories());
+        Settings.getCurrentUser().setCalories(Settings.getCurrentUser().getCalories()+food.getCalories());
+        Settings.getCurrentUser().setProtein(Settings.getCurrentUser().getProtein()+food.getProtein());
+        Settings.getCurrentUser().setCarbs(Settings.getCurrentUser().getCarbs()+food.getCarbs());
+        Settings.getCurrentUser().setFat(Settings.getCurrentUser().getFat()+food.getFat());
+        consumedCalories = consumedCalories+food.getCalories();
+        pProgress.setProgress((int) Math.round(Settings.getCurrentUser().getProtein()));
+        cProgress.setProgress((int) Math.round(Settings.getCurrentUser().getCarbs()));
+        fProgress.setProgress((int) Math.round(Settings.getCurrentUser().getFat()));
     }
 }
