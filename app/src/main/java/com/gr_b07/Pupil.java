@@ -2,13 +2,17 @@ package com.gr_b07;
 
 public class Pupil extends User {
 
-    private double height, weight, bmi;
+    private double height, weight, bmi, calories, protein, carbs, fat;
 
-    public Pupil(String username,String password, char gender,boolean loggedIn, double height, double weight, double bmi) {
+    public Pupil(String username,String password, char gender,boolean loggedIn, double height, double weight, double bmi, double calories, double protein, double carbs, double fat) {
         super(username, password,gender, loggedIn);
         this.height = height;
         this.weight = weight;
         this.bmi = bmi;
+        this.calories = calories;
+        this.protein = protein;
+        this.carbs = carbs;
+        this.fat = fat;
     }
 
     public double getHeight() {
@@ -34,5 +38,21 @@ public class Pupil extends User {
     public void setBmi(double bmi) {
         this.bmi = bmi;
     }
+
+    public double getCalories() { return calories; }
+
+    public void setCalories(double calories) { this.calories = calories; }
+
+    public double getProtein() { return protein; }
+
+    public void setProtein(double protein) { this.protein = protein; }
+
+    public double getCarbs() { return carbs; }
+
+    public void setCarbs(double carbs) { this.carbs = carbs; }
+
+    public double getFat() { return fat; }
+
+    public void setFat(double fat) { this.fat = fat; }
 }
 
