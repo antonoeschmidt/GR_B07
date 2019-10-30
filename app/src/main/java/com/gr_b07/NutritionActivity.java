@@ -88,7 +88,7 @@ public class NutritionActivity extends AppCompatActivity implements View.OnClick
         Settings.getCurrentUser().setCalories(Settings.getCurrentUser().getCalories()+food.getCalories());
         Settings.getCurrentUser().setProtein(Settings.getCurrentUser().getProtein()+food.getProtein());
         Settings.getCurrentUser().setCarbs(Settings.getCurrentUser().getCarbs()+food.getCarbs());
-        Settings.getCurrentUser().setFat(Settings.getCurrentUser().getFat()+food.getCalories());
+        Settings.getCurrentUser().setFat(Settings.getCurrentUser().getFat()+food.getFat());
         consumedCalories = consumedCalories+food.getCalories();
         pProgress.setProgress((int) Math.round(Settings.getCurrentUser().getProtein()));
         cProgress.setProgress((int) Math.round(Settings.getCurrentUser().getCarbs()));
