@@ -51,13 +51,4 @@ public class Food {
         this.fat = fat;
     }
 
-    public Food getPizza() {
-        return pizza;
-    }
-
-    public void setPizza(Food pizza) {
-        this.pizza = pizza;
-    }
-
-    Food pizza = new Food("ææææææææægte Italiensk",5,10,20,30);
 }

@@ -8,12 +8,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class NutritionActivity extends AppCompatActivity implements View.OnClickListener{
     private ProgressBar pProgress, cProgress, fProgress;
     private double consumedCalories, totalCalories;
     private TextView caloriesTextView;
     private Button bananaButton;
+    // TODO: FIX
+    private Food banana = new Food("banana",100,10,10,10);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +27,8 @@ public class NutritionActivity extends AppCompatActivity implements View.OnClick
         cProgress = findViewById(R.id.progressbarCarbs);
         fProgress = findViewById(R.id.progressbarFat);
         caloriesTextView = findViewById(R.id.caloriesTextView);
-        bananaButton = findViewById(R.id.banana);
+        bananaButton = findViewById(R.id.bananaButton);
+        bananaButton.setOnClickListener(this);
 
         // TODO: Lave en eller anden form for IIFYM der ud fra aktivitetsniveau, alder, højde og vægt beregner hvor meget protein, kulhydrat og fedt man skal have.
 
@@ -45,26 +49,25 @@ public class NutritionActivity extends AppCompatActivity implements View.OnClick
         Log.d(Double.toString(consumedCalories), "onCreate: ");
 
         caloriesTextView.setText(consumedCalories + "  /  " + totalCalories );
-
-        // etc. spiser en banan
-
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.banana:
-                Food banana = new Food("Banana",98,2,12,0.5);
+            case R.id.bananaButton:
                 eatFood(banana);
                 caloriesTextView.setText(consumedCalories + "  /  " + totalCalories);
+                Toast.makeText(this, "Hej", Toast.LENGTH_SHORT).show();
+                break;
+
         }
     }
 
     public void eatFood(Food food){
-        pProgress.setProgress(pProgress.getProgress() + (int)Math.round(food.getProtein()));
-        cProgress.setProgress(cProgress.getProgress() + (int)Math.round(food.getCarbs()));
-        fProgress.setProgress(fProgress.getProgress() + (int)Math.round(food.getFat()));
+        pProgress.setProgress(Math.round(pProgress.getProgress() + (int)Math.round(food.getProtein())));
+        cProgress.setProgress(Math.round(cProgress.getProgress() + (int)Math.round(food.getCarbs())));
+        fProgress.setProgress(Math.round(fProgress.getProgress() + (int)Math.round(food.getFat())));
 
-        consumedCalories += pProgress.getProgress()*4+cProgress.getProgress()*4+fProgress.getProgress()*9;
+        consumedCalories = (consumedCalories + food.getCalories());
     }
 }
