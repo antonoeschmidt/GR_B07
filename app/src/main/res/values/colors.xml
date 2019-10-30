@@ -2,8 +2,9 @@
 <resources>
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#1FBBA6</color>
+    <color name="colorHealthy">#1FBBA6</color>
     <color name="colorProtein">#DA555C</color>
     <color name="colorCarbs">#FBE17D</color>
     <color name="colorFat">#8DB9D4</color>
+
 </resources>
