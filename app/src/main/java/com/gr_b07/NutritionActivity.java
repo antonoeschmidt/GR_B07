@@ -11,13 +11,18 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
 public class NutritionActivity extends AppCompatActivity implements View.OnClickListener{
     private ProgressBar pProgress, cProgress, fProgress;
     private double consumedCalories, totalCalories;
     private TextView caloriesTextView;
     private Button testButton, breakfastButton, lunchButton, dinnerButton, snacksButton;
-    // TODO: FIX
-    private Food banana = new Food("banana",100,10,10,10);
+    private InputStream inputStream;
+    private String[] data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,9 +68,10 @@ public class NutritionActivity extends AppCompatActivity implements View.OnClick
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.testButton:
-                eatFood(banana);
+                eatFood("banan");
                 caloriesTextView.setText(consumedCalories + "  /  " + totalCalories);
                 Toast.makeText(this, "Hej", Toast.LENGTH_SHORT).show();
+                Log.d("Output ", "" + accessDatabase("fisk").getFat());
                 break;
             case R.id.breakfastButton:
                 Intent breakfastIntent = new Intent(this, BreakfastActivity.class); startActivity(breakfastIntent);
@@ -84,14 +90,37 @@ public class NutritionActivity extends AppCompatActivity implements View.OnClick
 
     }
 
-    public void eatFood(Food food){
-        Settings.getCurrentUser().setCalories(Settings.getCurrentUser().getCalories()+food.getCalories());
-        Settings.getCurrentUser().setProtein(Settings.getCurrentUser().getProtein()+food.getProtein());
-        Settings.getCurrentUser().setCarbs(Settings.getCurrentUser().getCarbs()+food.getCarbs());
-        Settings.getCurrentUser().setFat(Settings.getCurrentUser().getFat()+food.getFat());
-        consumedCalories = consumedCalories+food.getCalories();
+    public void eatFood(String food){
+        Food foodToEat = accessDatabase(food);
+        Settings.getCurrentUser().setCalories(Settings.getCurrentUser().getCalories()+foodToEat.getCalories());
+        Settings.getCurrentUser().setProtein(Settings.getCurrentUser().getProtein()+foodToEat.getProtein());
+        Settings.getCurrentUser().setCarbs(Settings.getCurrentUser().getCarbs()+foodToEat.getCarbs());
+        Settings.getCurrentUser().setFat(Settings.getCurrentUser().getFat()+foodToEat.getFat());
+        consumedCalories = consumedCalories+foodToEat.getCalories();
         pProgress.setProgress((int) Math.round(Settings.getCurrentUser().getProtein()));
         cProgress.setProgress((int) Math.round(Settings.getCurrentUser().getCarbs()));
         fProgress.setProgress((int) Math.round(Settings.getCurrentUser().getFat()));
     }
+
+    private Food accessDatabase(String food) {
+        inputStream = getResources().openRawResource(R.raw.mad);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+        try {
+            String csvLine;
+            while ((csvLine = reader.readLine()) != null) {
+                data = csvLine.split(";");
+                if (data[0].equalsIgnoreCase(food)) {
+                    return new Food(data[0], Double.parseDouble(data[1]),Double.parseDouble(data[2]),
+                            Double.parseDouble(data[3]),Double.parseDouble(data[4]));
+                }
+
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            Log.d("Error ", "Cannot read file");
+        }
+        return null;
+    }
+
+
 }
