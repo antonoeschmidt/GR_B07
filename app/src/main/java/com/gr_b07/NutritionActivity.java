@@ -62,6 +62,7 @@ public class NutritionActivity extends AppCompatActivity implements View.OnClick
         totalCalories = pProgress.getMax() * 4 + cProgress.getMax() * 4 + fProgress.getMax() * 9;
 
         caloriesTextView.setText(consumedCalories + "  /  " + totalCalories );
+
     }
 
     @Override
