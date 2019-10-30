@@ -6,8 +6,8 @@ import java.util.ArrayList;
 public class Settings {
     private static ArrayList<User> users = new ArrayList<User>() {
         {
-            add(new Pupil("anton","1234",'n',false,182,70,0,0,0,0,0);
-            add(new Pupil("harald","4321",'n',false,183,75,0,0,0,0,0);
+            add(new Pupil("anton","1234",'n',false,182,70,0,0,0,0,0));
+            add(new Pupil("harald","4321",'n',false,183,75,0,0,0,0,0));
         }
     };
     private static User currentUser;
