@@ -43,6 +43,14 @@ package com.gr_b07;
      public abstract void setWeight(double weight);
      public abstract double getBmi();
      public abstract void setBmi(double bmi);
+     public abstract double getCalories();
+     public abstract void setCalories(double calories);
+     public abstract double getProtein();
+     public abstract void setProtein(double protein);
+     public abstract double getCarbs();
+     public abstract void setCarbs(double carbs);
+     public abstract double getFat();
+     public abstract void setFat(double fat);
 
 
  }
