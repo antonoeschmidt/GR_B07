@@ -55,7 +55,8 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerHorizontal="true"
+            android:progressTint="@color/colorCarbs" />
 
         <TextView
             android:layout_width="match_parent"
@@ -69,14 +70,15 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerHorizontal="true"
+            android:progressTint="@color/colorFat" />
 
 
         <Button
             android:id="@+id/bananaButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Button" />
+            android:text="EAT SOMETHING TEST :D :D :D " />
 
         <Button
             android:id="@+id/mainmenu_button1"
