@@ -17,9 +17,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 public class NutritionActivity extends AppCompatActivity implements View.OnClickListener{
-    private ProgressBar pProgress, cProgress, fProgress;
-    private double consumedCalories, totalCalories;
-    private TextView caloriesTextView;
+    private ProgressBar pProgress, cProgress, fProgress, cRing;
+    private TextView caloriesTextView, proteinTextView, carbsTextView, fatTextView;
     private Button testButton, breakfastButton, lunchButton, dinnerButton, snacksButton;
     private InputStream inputStream;
     private String[] data;
@@ -29,50 +28,44 @@ public class NutritionActivity extends AppCompatActivity implements View.OnClick
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nutrition);
 
+        cRing = findViewById(R.id.progressbarCalories);
         pProgress = findViewById(R.id.progressbarProtein);
         cProgress = findViewById(R.id.progressbarCarbs);
         fProgress = findViewById(R.id.progressbarFat);
+
         caloriesTextView = findViewById(R.id.caloriesTextView);
+        proteinTextView = findViewById(R.id.proteinTextView);
+        carbsTextView = findViewById(R.id.carbsTextView);
+        fatTextView = findViewById(R.id.fatTextView);
+
         testButton = findViewById(R.id.testButton);
         breakfastButton = findViewById(R.id.breakfastButton);
         lunchButton = findViewById(R.id.lunchButton);
         dinnerButton = findViewById(R.id.dinnerButton);
         snacksButton = findViewById(R.id.snacksButton);
+
         testButton.setOnClickListener(this);
         breakfastButton.setOnClickListener(this);
         lunchButton.setOnClickListener(this);
         dinnerButton.setOnClickListener(this);
         snacksButton.setOnClickListener(this);
-        // TODO: Lave en eller anden form for IIFYM der ud fra aktivitetsniveau, alder, højde og vægt beregner hvor meget protein, kulhydrat og fedt man skal have.
 
-
-        // eksempel med mine daglige macros
+        // TODO: IIFYM-formel ud fra alder, højde, vægt, aktivitetsniveau.
         pProgress.setMax(149);
         cProgress.setMax(372);
         fProgress.setMax(99);
+        cRing.setMax(3200);
 
-        // Logger lige min morgenmad fra 30/10 som eksempel (lol) - Harald
-        pProgress.setProgress((int) Math.round(Settings.getCurrentUser().getProtein()));   // Main Progress
-        cProgress.setProgress((int) Math.round(Settings.getCurrentUser().getCarbs()));
-        fProgress.setProgress((int) Math.round(Settings.getCurrentUser().getFat()));
-
-        // Protein og fedt er 4 kcal pr. gram og fedt er 9.
-        //consumedCalories = pProgress.getProgress()*4+cProgress.getProgress()*4+fProgress.getProgress()*9;
-        consumedCalories = (int) Math.round(Settings.getCurrentUser().getCalories());
-        totalCalories = pProgress.getMax() * 4 + cProgress.getMax() * 4 + fProgress.getMax() * 9;
-
-        caloriesTextView.setText(consumedCalories + "  /  " + totalCalories );
-
+        updateView();
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.testButton:
-                eatFood("banan");
-                caloriesTextView.setText(consumedCalories + "  /  " + totalCalories);
-                Toast.makeText(this, "Hej", Toast.LENGTH_SHORT).show();
+                eatFood("test");
                 Log.d("Output ", "" + accessDatabase("fisk").getFat());
+                updateView();
                 break;
             case R.id.breakfastButton:
                 Intent breakfastIntent = new Intent(this, BreakfastActivity.class); startActivity(breakfastIntent);
@@ -86,21 +79,31 @@ public class NutritionActivity extends AppCompatActivity implements View.OnClick
             case R.id.snacksButton:
                 Intent snacksIntent = new Intent(this, SnacksActivity.class); startActivity(snacksIntent);
                 break;
-
         }
 
     }
 
     public void eatFood(String food){
         Food foodToEat = accessDatabase(food);
-        Settings.getCurrentUser().setCalories(Settings.getCurrentUser().getCalories()+foodToEat.getCalories());
-        Settings.getCurrentUser().setProtein(Settings.getCurrentUser().getProtein()+foodToEat.getProtein());
-        Settings.getCurrentUser().setCarbs(Settings.getCurrentUser().getCarbs()+foodToEat.getCarbs());
-        Settings.getCurrentUser().setFat(Settings.getCurrentUser().getFat()+foodToEat.getFat());
-        consumedCalories = consumedCalories+foodToEat.getCalories();
+        Settings.getCurrentUser().setCalories(Settings.getCurrentUser().getCalories() + foodToEat.getCalories());
+        Settings.getCurrentUser().setProtein(Settings.getCurrentUser().getProtein() + foodToEat.getProtein());
+        Settings.getCurrentUser().setCarbs(Settings.getCurrentUser().getCarbs() + foodToEat.getCarbs());
+        Settings.getCurrentUser().setFat(Settings.getCurrentUser().getFat() + foodToEat.getFat());
+        cRing.setProgress((int) Math.round(Settings.getCurrentUser().getCalories()));
         pProgress.setProgress((int) Math.round(Settings.getCurrentUser().getProtein()));
         cProgress.setProgress((int) Math.round(Settings.getCurrentUser().getCarbs()));
         fProgress.setProgress((int) Math.round(Settings.getCurrentUser().getFat()));
+    }
+
+    public void updateView(){
+        pProgress.setProgress((int) Math.round(Settings.getCurrentUser().getProtein()));
+        cProgress.setProgress((int) Math.round(Settings.getCurrentUser().getCarbs()));
+        fProgress.setProgress((int) Math.round(Settings.getCurrentUser().getFat()));
+        cRing.setProgress((int) Math.round(Settings.getCurrentUser().getCalories()));
+        caloriesTextView.setText("Calories: " + cRing.getProgress() + "  /  " + cRing.getMax());
+        proteinTextView.setText("Protein: " + pProgress.getProgress() +  "  /  " + pProgress.getMax());
+        carbsTextView.setText("Carbs: "+ cProgress.getProgress() + "  /  " + cProgress.getMax());
+        fatTextView.setText("Fat: " + fProgress.getProgress() + "  /  " + fProgress.getMax());
     }
 
     private Food accessDatabase(String food) {
