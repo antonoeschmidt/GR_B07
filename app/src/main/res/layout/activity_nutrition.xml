@@ -24,8 +24,8 @@
             android:id="@+id/caloriesTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="14dp"
-            android:text=""
+            android:textSize="20dp"
+            android:text="CARBS / TOTAL CARBS"
             android:textAlignment="center"/>
 
         <TextView
@@ -75,13 +75,13 @@
 
 
         <Button
-            android:id="@+id/bananaButton"
+            android:id="@+id/testButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="EAT SOMETHING TEST :D :D :D " />
 
         <Button
-            android:id="@+id/mainmenu_button1"
+            android:id="@+id/breakfastButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/nutrition_breakfast_button"
@@ -89,7 +89,7 @@
             android:layout_marginTop="10dp"/>
 
         <Button
-            android:id="@+id/mainmenu_button2"
+            android:id="@+id/lunchButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/nutrition_lunch_button"
@@ -97,7 +97,7 @@
             android:layout_marginTop="10dp"/>
 
         <Button
-            android:id="@+id/mainmenu_button3"
+            android:id="@+id/dinnerButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/nutrition_dinner_button"
@@ -105,7 +105,7 @@
             android:layout_marginTop="10dp"/>
 
         <Button
-            android:id="@+id/mainmenu_button4"
+            android:id="@+id/snacksButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/nutrition_snacks_button"

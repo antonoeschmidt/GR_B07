@@ -2,6 +2,7 @@ package com.gr_b07;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -14,7 +15,7 @@ public class NutritionActivity extends AppCompatActivity implements View.OnClick
     private ProgressBar pProgress, cProgress, fProgress;
     private double consumedCalories, totalCalories;
     private TextView caloriesTextView;
-    private Button bananaButton;
+    private Button testButton, breakfastButton, lunchButton, dinnerButton, snacksButton;
     // TODO: FIX
     private Food banana = new Food("banana",100,10,10,10);
 
@@ -27,9 +28,16 @@ public class NutritionActivity extends AppCompatActivity implements View.OnClick
         cProgress = findViewById(R.id.progressbarCarbs);
         fProgress = findViewById(R.id.progressbarFat);
         caloriesTextView = findViewById(R.id.caloriesTextView);
-        bananaButton = findViewById(R.id.bananaButton);
-        bananaButton.setOnClickListener(this);
-
+        testButton = findViewById(R.id.testButton);
+        breakfastButton = findViewById(R.id.breakfastButton);
+        lunchButton = findViewById(R.id.lunchButton);
+        dinnerButton = findViewById(R.id.dinnerButton);
+        snacksButton = findViewById(R.id.snacksButton);
+        testButton.setOnClickListener(this);
+        breakfastButton.setOnClickListener(this);
+        lunchButton.setOnClickListener(this);
+        dinnerButton.setOnClickListener(this);
+        snacksButton.setOnClickListener(this);
         // TODO: Lave en eller anden form for IIFYM der ud fra aktivitetsniveau, alder, højde og vægt beregner hvor meget protein, kulhydrat og fedt man skal have.
 
 
@@ -54,13 +62,26 @@ public class NutritionActivity extends AppCompatActivity implements View.OnClick
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.bananaButton:
+            case R.id.testButton:
                 eatFood(banana);
                 caloriesTextView.setText(consumedCalories + "  /  " + totalCalories);
                 Toast.makeText(this, "Hej", Toast.LENGTH_SHORT).show();
                 break;
+            case R.id.breakfastButton:
+                Intent breakfastIntent = new Intent(this, BreakfastActivity.class); startActivity(breakfastIntent);
+                break;
+            case R.id.lunchButton:
+                Intent lunchIntent = new Intent(this, LunchActivity.class); startActivity(lunchIntent);
+                break;
+            case R.id.dinnerButton:
+                Intent dinnerIntent = new Intent(this, DinnerActivity.class); startActivity(dinnerIntent);
+                break;
+            case R.id.snacksButton:
+                Intent snacksIntent = new Intent(this, SnacksActivity.class); startActivity(snacksIntent);
+                break;
 
         }
+
     }
 
     public void eatFood(Food food){
