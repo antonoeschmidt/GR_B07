@@ -5,11 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".NutritionActivity"
-    android:background="@color/colorAccent">
-
-
-
-
+    android:background="@color/colorHealthy">
 
     <LinearLayout
         android:id="@+id/linearLayoutNutrition"
@@ -27,6 +23,21 @@
             android:textSize="20dp"
             android:text="CARBS / TOTAL CARBS"
             android:textAlignment="center"/>
+
+        <ProgressBar
+            android:layout_marginTop="2dp"
+            android:id="@+id/progressbarCalories"
+            style="?android:progressBarStyleHorizontal"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginStart="120dp"
+            android:progress="80"
+            android:progressDrawable="@drawable/circle"
+            android:rotation="-90"
+            app:layout_constraintBottom_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="parent" />
 
         <TextView
             android:layout_width="match_parent"
@@ -75,10 +86,11 @@
 
 
         <Button
+            android:layout_marginTop="2dp"
             android:id="@+id/testButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="EAT SOMETHING TEST :D :D :D " />
+            android:text="TEST" />
 
         <Button
             android:id="@+id/breakfastButton"
@@ -86,7 +98,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/nutrition_breakfast_button"
             android:gravity="center"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="2dp"/>
 
         <Button
             android:id="@+id/lunchButton"
@@ -94,7 +106,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/nutrition_lunch_button"
             android:gravity="center"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="2dp"/>
 
         <Button
             android:id="@+id/dinnerButton"
@@ -102,7 +114,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/nutrition_dinner_button"
             android:gravity="center"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="2dp"/>
 
         <Button
             android:id="@+id/snacksButton"
@@ -110,7 +122,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/nutrition_snacks_button"
             android:gravity="center"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="2dp"/>
 
     </LinearLayout>
 
