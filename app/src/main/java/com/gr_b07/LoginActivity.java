@@ -30,6 +30,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         loginButton = findViewById(R.id.loginButton);
         loginButton.setOnClickListener(this);
 
+        // TODO: DELETE THIS
+        usernameText.setText("anton");
+        passwordText.setText("1234");
+
     }
 
     @Override

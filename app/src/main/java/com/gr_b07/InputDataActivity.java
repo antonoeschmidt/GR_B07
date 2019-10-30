@@ -46,6 +46,13 @@ public class InputDataActivity extends AppCompatActivity implements View.OnClick
         textViewKG = findViewById(R.id.textViewKG);
         doneButton = findViewById(R.id.doneButton);
         doneButton.setOnClickListener(this);
+
+
+        // TODO: DELETE THIS
+        dateTextView.setText("01/12/1998");
+        maleRadioButton.toggle();
+        editTextWeigth.setText("76");
+        editTextHeigth.setText("184");
     }
 
     @Override
