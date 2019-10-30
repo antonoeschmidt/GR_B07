@@ -4,8 +4,8 @@ public class Pupil extends User {
 
     private double height, weight, bmi;
 
-    public Pupil(String username,String password,boolean loggedIn, double height, double weight, double bmi) {
-        super(username, password, loggedIn);
+    public Pupil(String username,String password, char gender,boolean loggedIn, double height, double weight, double bmi) {
+        super(username, password,gender, loggedIn);
         this.height = height;
         this.weight = weight;
         this.bmi = bmi;

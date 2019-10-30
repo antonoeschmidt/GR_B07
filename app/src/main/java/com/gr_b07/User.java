@@ -1,13 +1,14 @@
 package com.gr_b07;
 
  public abstract class User {
-    private String username;
-    private String password;
+    private String username, password;
+    private char gender;
     private boolean loggedIn;
 
-    public User(String username, String password, boolean loggedIn) {
+    public User(String username, String password, char gender, boolean loggedIn) {
         this.username = username;
         this.password = password;
+        this.gender = gender;
         this.loggedIn = loggedIn;
     }
 
@@ -28,6 +29,14 @@ package com.gr_b07;
         this.loggedIn = loggedIn;
     }
 
+     public char getGender() {
+         return gender;
+     }
+
+     public void setGender(char gender) {
+         this.gender = gender;
+     }
+
      public abstract double getHeight();
      public abstract void setHeight(double height);
      public abstract double getWeight();
@@ -36,4 +45,4 @@ package com.gr_b07;
      public abstract void setBmi(double bmi);
 
 
-}
+ }

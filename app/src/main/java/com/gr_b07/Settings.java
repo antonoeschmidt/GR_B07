@@ -1,12 +1,13 @@
 package com.gr_b07;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class Settings {
     private static ArrayList<User> users = new ArrayList<User>() {
         {
-            add(new Pupil("anton", "1234",false,0,0,0));
-            add(new Pupil("harald", "4321",false,0,0,0));
+            add(new Pupil("anton", "1234",'n',false,0,0,0));
+            add(new Pupil("harald", "4321",'n',false,0,0,0));
         }
     };
     private static User currentUser;
@@ -26,4 +27,7 @@ public class Settings {
     public static void setCurrentUser(User currentUser) {
         Settings.currentUser = currentUser;
     }
-}
+
+
+    }
+

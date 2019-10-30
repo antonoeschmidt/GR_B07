@@ -4,8 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -19,27 +17,23 @@ import android.widget.Toast;
 
 import java.text.DecimalFormat;
 import java.util.Calendar;
-import java.util.Set;
 
 public class InputDataActivity extends AppCompatActivity implements View.OnClickListener {
-    private TextView textView1;
+    private TextView infoTextView;
     private TextView dateTextView;
     private RadioGroup radioGroup;
-    private RadioButton maleRadioButton;
-    private RadioButton femaleRadioButton;
-    private EditText editTextHeigth;
-    private EditText editTextWeigth;
+    private RadioButton maleRadioButton, femaleRadioButton;
+    private EditText editTextHeigth, editTextWeigth;
     private TextView textViewCM;
     private TextView textViewKG;
     private Button doneButton;
     private Calendar calendar;
-    //double weight, height, bmi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_input_data);
-        textView1 = findViewById(R.id.textView1);
+        infoTextView = findViewById(R.id.infoTextView);
         dateTextView = findViewById(R.id.dateTextView);
         dateTextView.setOnClickListener(this);
 
@@ -58,58 +52,76 @@ public class InputDataActivity extends AppCompatActivity implements View.OnClick
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.dateTextView:
-                calendar = Calendar.getInstance();
-                int day = calendar.get(Calendar.DAY_OF_MONTH);
-                int month = calendar.get(Calendar.MONTH);
-                int year = calendar.get(Calendar.YEAR);
-
-                DatePickerDialog datePickerDialog = new DatePickerDialog(this, android.R.style.Theme_Holo_Dialog,
-                        new DatePickerDialog.OnDateSetListener() {
-                            @Override
-                            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                                dateTextView.setText(dayOfMonth + "/" + month + "/" + year);
-                            }
-                        }, year, month, day);
-
-                datePickerDialog.show();
+                calendarClick();
                 break;
             case R.id.doneButton:
-
-                // Checks if radio button is selected, if not - Toast prints "choose gender" etc.
-                if (!maleRadioButton.isChecked() && !femaleRadioButton.isChecked()) {
-                    Toast.makeText(this, "Choose gender please.", Toast.LENGTH_SHORT).show();
-                }
-                // If one the radio buttons is selected, jump into next loop
-                else if (maleRadioButton.isChecked() || femaleRadioButton.isChecked()) {
-                    // If date of birth is more than 10 characters long (xx/xx/xxxx), that must mean its still the
-                    // original text in the box (alternative method but it works)
-                    if (dateTextView.getText().toString().length() > 10) {
-                        Toast.makeText(this, "Enter date of birth, please.", Toast.LENGTH_SHORT).show();
-                    } else if (editTextWeigth.getText().toString().isEmpty() || editTextHeigth.getText().toString().isEmpty()) {
-                        Toast.makeText(this, "Enter height and weight, please.", Toast.LENGTH_SHORT).show();
-                    }
-                    // else if they're both containing something - set height, weight and calculate body mass index.
-                    else if (!editTextWeigth.getText().toString().isEmpty() && !editTextHeigth.getText().toString().isEmpty()
-                            && dateTextView.getText().toString().length() <= 10 && (maleRadioButton.isChecked() || femaleRadioButton.isChecked())) {
-                        //height = Double.parseDouble(editTextHeigth.getText().toString());
-                        Settings.getCurrentUser().setHeight(Double.parseDouble(editTextHeigth.getText().toString()));
-                        Log.d("heigth", "" + Settings.getCurrentUser().getHeight());
-                        //weight = Double.parseDouble(editTextWeigth.getText().toString());
-                        Settings.getCurrentUser().setWeight(Double.parseDouble(editTextWeigth.getText().toString()));
-                        Log.d("weigth", "" + Settings.getCurrentUser().getWeight());
-                        //bmi = (weight)/((height/100)*(height/100));
-                        Settings.getCurrentUser().setBmi(Settings.getCurrentUser().getWeight() /
-                                (Math.pow(Settings.getCurrentUser().getHeight() / 100, 2)));
-                        Log.d("bmi", "" + Settings.getCurrentUser().getBmi());
-                        DecimalFormat df = new DecimalFormat("#.##");
-                        Toast.makeText(this, "Your body mass index is : " + df.format(Settings.getCurrentUser().getBmi()),
-                                Toast.LENGTH_SHORT).show();
-
-                        Intent mainMenuIntent = new Intent(this, MainMenuActivity.class);
-                        startActivity(mainMenuIntent);
-                    }
-                }
+                doneButtonClick();
                 break;
         }
     }
+
+
+    public void calendarClick(){
+
+        calendar = Calendar.getInstance();
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        int month = calendar.get(Calendar.MONTH);
+        int year = calendar.get(Calendar.YEAR);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this, android.R.style.Theme_Holo_Dialog,
+                new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        dateTextView.setText(dayOfMonth + "/" + month + "/" + year);
+                    }
+                }, year, month, day);
+
+        datePickerDialog.show();
+    }
+    public void doneButtonClick(){
+        // Checks if radio button is selected, if not - Toast prints "choose gender" etc.
+        if (!maleRadioButton.isChecked() && !femaleRadioButton.isChecked()) {
+            Toast.makeText(this, "Choose gender please.", Toast.LENGTH_SHORT).show();
+        }
+        // If one the radio buttons is selected, jump into next loop
+        else if (maleRadioButton.isChecked() || femaleRadioButton.isChecked()) {
+            // If date of birth is more than 10 characters long (xx/xx/xxxx), that must mean its still the
+            // original text in the box (alternative method but it works)
+            if (dateTextView.getText().toString().length() > 10) {
+                Toast.makeText(this, "Enter date of birth, please.", Toast.LENGTH_SHORT).show();
+            } else if (editTextWeigth.getText().toString().isEmpty() || editTextHeigth.getText().toString().isEmpty()) {
+                Toast.makeText(this, "Enter height and weight, please.", Toast.LENGTH_SHORT).show();
+            }
+            // else if they're both containing something - set height, weight and calculate body mass index.
+            else if (!editTextWeigth.getText().toString().isEmpty() && !editTextHeigth.getText().toString().isEmpty()
+                    && dateTextView.getText().toString().length() <= 10 && (maleRadioButton.isChecked() || femaleRadioButton.isChecked())) {
+                //height = Double.parseDouble(editTextHeigth.getText().toString());
+                Settings.getCurrentUser().setHeight(Double.parseDouble(editTextHeigth.getText().toString()));
+                Log.d("heigth", "" + Settings.getCurrentUser().getHeight());
+                //weight = Double.parseDouble(editTextWeigth.getText().toString());
+                Settings.getCurrentUser().setWeight(Double.parseDouble(editTextWeigth.getText().toString()));
+                Log.d("weigth", "" + Settings.getCurrentUser().getWeight());
+                //bmi = (weight)/((height/100)*(height/100));
+                Settings.getCurrentUser().setBmi(Settings.getCurrentUser().getWeight() /
+                        (Math.pow(Settings.getCurrentUser().getHeight() / 100, 2)));
+                Log.d("bmi", "" + Settings.getCurrentUser().getBmi());
+                DecimalFormat df = new DecimalFormat("#.##");
+                Toast.makeText(this, "Your body mass index is : " + df.format(Settings.getCurrentUser().getBmi()),
+                        Toast.LENGTH_SHORT).show();
+                if (maleRadioButton.isChecked()){
+                    Settings.getCurrentUser().setGender('m');
+                }
+                else if (femaleRadioButton.isChecked()){
+                    Settings.getCurrentUser().setGender('f');
+                }
+
+                Intent mainMenuIntent = new Intent(this, MainMenuActivity.class);
+                startActivity(mainMenuIntent);
+            }
+        }
+    }
+
+
+
+
 }
