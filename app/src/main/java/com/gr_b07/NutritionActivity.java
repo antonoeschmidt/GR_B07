@@ -60,6 +60,12 @@ public class NutritionActivity extends AppCompatActivity implements View.OnClick
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        updateView();
+    }
+
+    @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.testButton:

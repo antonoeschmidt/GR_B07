@@ -59,7 +59,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.dateTextView:
-                // InputDataActivity.calendarClick();
+                //InputDataActivity.calendarClick();
                 break;
             case R.id.doneButton:
                 // InputDataActivity.doneButtonClick();
