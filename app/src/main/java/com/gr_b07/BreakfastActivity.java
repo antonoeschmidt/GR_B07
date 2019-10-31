@@ -57,9 +57,11 @@ public class BreakfastActivity extends AppCompatActivity implements View.OnClick
                 }
                 break;
             case R.id.addMealButtonBreakfast:
-                eatFood(chosenFood);
+                if (chosenFood != null) {
+                    eatFood(chosenFood);
+                    Toast.makeText(this,"Meal added",Toast.LENGTH_SHORT).show();
+                }
                 Log.d("Cals ", ""+Settings.getCurrentUser().getCalories());
-                Toast.makeText(this,"Meal added",Toast.LENGTH_SHORT).show();
                 break;
         }
     }
