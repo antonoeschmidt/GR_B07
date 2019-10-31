@@ -26,27 +26,6 @@ public class Settings {
     public static void setCurrentUser(User currentUser) {
         Settings.currentUser = currentUser;
     }
-    /*
-    private Food accessDatabase(String food) {
-        InputStream inputStream = getResources().openRawResource(R.raw.mad);
-        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-        try {
-            String csvLine;
-            while ((csvLine = reader.readLine()) != null) {
-                data = csvLine.split(";");
-                if (data[0].equalsIgnoreCase(food)) {
-                    return new Food(data[0], Double.parseDouble(data[1]),Double.parseDouble(data[2]),
-                            Double.parseDouble(data[3]),Double.parseDouble(data[4]));
-                }
-
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-            Log.d("Error ", "Cannot read file");
-        }
-        return null;
-    }
-     */
 
     }
 
