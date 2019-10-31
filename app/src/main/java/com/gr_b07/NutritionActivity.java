@@ -82,7 +82,7 @@ public class NutritionActivity extends AppCompatActivity implements View.OnClick
         }
 
     }
-
+    //TODO: kan slettes evt
     public void eatFood(String food){
         Food foodToEat = accessDatabase(food);
         Settings.getCurrentUser().setCalories(Settings.getCurrentUser().getCalories() + foodToEat.getCalories());
@@ -105,7 +105,7 @@ public class NutritionActivity extends AppCompatActivity implements View.OnClick
         carbsTextView.setText("Carbs: "+ cProgress.getProgress() + "  /  " + cProgress.getMax());
         fatTextView.setText("Fat: " + fProgress.getProgress() + "  /  " + fProgress.getMax());
     }
-
+    //TODO: kan slettes evt
     private Food accessDatabase(String food) {
         inputStream = getResources().openRawResource(R.raw.mad);
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
