@@ -34,10 +34,11 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
             case R.id.mainmenu_button3:
             Intent socialIntent = new Intent(this, SocialActivity.class); startActivity(socialIntent); break;
             case R.id.mainmenu_button4:
-                Intent rewardsIntent = new Intent(this, RewardsActivity.class); startActivity(rewardsIntent);
+                Intent rewardsIntent = new Intent(this, RewardsActivity.class); startActivity(rewardsIntent); break;
             case R.id.mainmenu_button5:
-            Intent settingsIntent = new Intent(this, SettingsActivity.class); startActivity(settingsIntent);
-            Toast.makeText(this, "Settings", Toast.LENGTH_SHORT).show();
+                Intent settingsIntent = new Intent(this, SettingsActivity.class); startActivity(settingsIntent);
+                Toast.makeText(this, "Settings", Toast.LENGTH_SHORT).show();
+                break;
         }
     }
 }
