@@ -1,6 +1,9 @@
 package com.gr_b07;
 
- public abstract class User {
+import java.time.LocalDate;
+import java.util.Date;
+
+public abstract class User {
     private String username, password;
     private char gender;
     private boolean loggedIn;
@@ -51,6 +54,10 @@ package com.gr_b07;
      public abstract void setCarbs(double carbs);
      public abstract double getFat();
      public abstract void setFat(double fat);
+     public abstract Date getDateOfBirth();
+     public abstract void setDateOfBirth(Date dateOfBirth);
+     public abstract int getAge();
+     public abstract void setAge(int age);
 
 
  }
