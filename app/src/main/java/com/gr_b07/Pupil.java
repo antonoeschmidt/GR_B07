@@ -1,10 +1,13 @@
 package com.gr_b07;
 
+import java.util.Date;
+
 public class Pupil extends User {
 
     private double height, weight, bmi, calories, protein, carbs, fat;
+    private Date dateOfBirth;
 
-    public Pupil(String username,String password, char gender,boolean loggedIn, double height, double weight, double bmi, double calories, double protein, double carbs, double fat) {
+    public Pupil(String username, String password, char gender, boolean loggedIn, double height, double weight, double bmi, double calories, double protein, double carbs, double fat, Date dateOfBirth) {
         super(username, password,gender, loggedIn);
         this.height = height;
         this.weight = weight;
@@ -13,6 +16,7 @@ public class Pupil extends User {
         this.protein = protein;
         this.carbs = carbs;
         this.fat = fat;
+        this.dateOfBirth = dateOfBirth;
     }
 
     public double getHeight() {
@@ -54,5 +58,11 @@ public class Pupil extends User {
     public double getFat() { return fat; }
 
     public void setFat(double fat) { this.fat = fat; }
+
+    @Override
+    public Date getDateOfBirth() { return dateOfBirth; }
+
+    @Override
+    public void setDateOfBirth(Date dateOfBirth) { this.dateOfBirth = dateOfBirth; }
 }
 

@@ -1,19 +1,12 @@
 package com.gr_b07;
 
-import android.util.Log;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class Settings {
     private static ArrayList<User> users = new ArrayList<User>() {
         {
-            add(new Pupil("anton","1234",'n',false,182,70,0,0,0,0,0));
-            add(new Pupil("harald","4321",'n',false,183,75,0,0,0,0,0));
+            add(new Pupil("anton","1234",'n',false,182,70,0,0,0,0,0,null));
+            add(new Pupil("harald","4321",'n',false,183,75,0,0,0,0,0,null));
         }
     };
     private static User currentUser;
@@ -33,7 +26,6 @@ public class Settings {
     public static void setCurrentUser(User currentUser) {
         Settings.currentUser = currentUser;
     }
-
     /*
     private Food accessDatabase(String food) {
         InputStream inputStream = getResources().openRawResource(R.raw.mad);
