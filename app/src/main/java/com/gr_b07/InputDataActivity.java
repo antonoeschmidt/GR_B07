@@ -127,28 +127,8 @@ public class InputDataActivity extends AppCompatActivity implements View.OnClick
                 Toast.makeText(this, "Your body mass index is : " + df.format(Settings.getCurrentUser().getBmi()),
                         Toast.LENGTH_SHORT).show();
 
-
-                SimpleDateFormat f1 = new SimpleDateFormat("dd/MM/yyyy");
-                SimpleDateFormat f2 = new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
-                Date now = new Date (System.currentTimeMillis());
-
-                Settings.getCurrentUser().setDateOfBirth(calendar.getTime());
-
-
-
-                Log.d(Long.toString(Settings.getCurrentUser().getDateOfBirth().getTime()), "doneButtonClick: MILISEC BIRTH");
-                Log.d(Long.toString(now.getTime()), "doneButtonClick: MILISEC NOW");
-
-
-
-
-
-
-
-
-                Log.d(f1.format(Settings.getCurrentUser().getDateOfBirth()), "doneButtonClick: DATEOFBIRTH");
-                Log.d(f2.format(System.currentTimeMillis()), "doneButtonClick: CURRENTTIME");
-
+                Log.d(Integer.toString(calculateAge()), "doneButtonClick: AGE ");
+                Settings.getCurrentUser().setAge(calculateAge());
 
 
                 if (maleRadioButton.isChecked()){
@@ -164,13 +144,18 @@ public class InputDataActivity extends AppCompatActivity implements View.OnClick
         }
     }
 
-    public int calculateAge(Date dateOfBirth) throws NumberFormatException {
+    public int calculateAge() throws NumberFormatException, ParseException {
         SimpleDateFormat f1 = new SimpleDateFormat("dd/MM/yyyy");
         SimpleDateFormat f2 = new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
-        int d1 = Integer.parseInt(f1.format(dateOfBirth));
-        int d2 = Integer.parseInt(f2.format(System.currentTimeMillis()));
-        int age = (d2-d1) / 10000;
+        Date now = new Date(System.currentTimeMillis());
+        Settings.getCurrentUser().setDateOfBirth(f1.parse(dateTextView.getText().toString()));
+        long timeBetween = now.getTime() - Settings.getCurrentUser().getDateOfBirth().getTime();
+        double yearsBetween = timeBetween / 3.15576e+10;
+        int age = (int) Math.floor(yearsBetween);
+        Log.d(Integer.toString(age), "doneButtonClick: AGE");
         return age;
+
+    }
 
         /*
         //int d1 = Integer.parseInt(f1.format(Settings.getCurrentUser().getDateOfBirth()));
@@ -185,5 +170,5 @@ public class InputDataActivity extends AppCompatActivity implements View.OnClick
                 //Log.d(Integer.toString(age), "doneButtonClick: ");
                 //Log.d(Integer.toString(calculateAge(Settings.getCurrentUser().getDateOfBirth())), "doneButtonClick: ");
          */
-    }
+
 }
