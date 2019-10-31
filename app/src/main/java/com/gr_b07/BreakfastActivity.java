@@ -52,7 +52,9 @@ public class BreakfastActivity extends AppCompatActivity implements View.OnClick
         switch (v.getId()) {
             case R.id.searchFoodButtonBreakfast:
                 chosenFood = accessDatabase(searchFoodEditText.getText().toString());
-                setTextViews(chosenFood);
+                if (chosenFood != null) {
+                    setTextViews(chosenFood);
+                }
                 break;
             case R.id.addMealButtonBreakfast:
                 eatFood(chosenFood);
