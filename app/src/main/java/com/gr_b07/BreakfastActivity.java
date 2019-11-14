@@ -27,7 +27,6 @@ public class BreakfastActivity extends AppCompatActivity implements View.OnClick
     private TextView tvBreakfast2;
     private TextView tvBreakfast3;
     private TextView tvBreakfast4;
-    private EditText searchFoodEditText;
     private Button searchFoodButton;
     private Button addFoodButton;
     private InputStream inputStream;
@@ -44,7 +43,6 @@ public class BreakfastActivity extends AppCompatActivity implements View.OnClick
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_breakfast);
         textViewBreakfast = findViewById(R.id.textViewBreakfast);
-        searchFoodEditText = findViewById(R.id.searchFoodEditText);
         searchFoodButton = findViewById(R.id.searchFoodButtonBreakfast);
         searchFoodButton.setOnClickListener(this);
         addFoodButton = findViewById(R.id.addMealButtonBreakfast);
@@ -54,20 +52,21 @@ public class BreakfastActivity extends AppCompatActivity implements View.OnClick
         tvBreakfast2 = findViewById(R.id.tvBreakfast2);
         tvBreakfast3 = findViewById(R.id.tvBreakfast3);
         tvBreakfast4 = findViewById(R.id.tvBreakfast4);
-
-
         autoTextView = findViewById(R.id.autoTextViewBreakfast);
 
+        initAutoCompleter();
+
+    }
+
+    private void initAutoCompleter() {
         for (int i = 0; i < foodDB.size(); i++) {
             foods[i] = foodDB.get(i).getName();
         }
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>
+        ArrayAdapter<String> adapter = new ArrayAdapter<>
                 (this, android.R.layout.select_dialog_item, foods);
-        autoTextView.setThreshold(1); //will start working from first character
+        autoTextView.setThreshold(1);
         autoTextView.setAdapter(adapter);
-
-
 
     }
 
@@ -75,7 +74,7 @@ public class BreakfastActivity extends AppCompatActivity implements View.OnClick
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.searchFoodButtonBreakfast:
-                chosenFood = accessDatabase(searchFoodEditText.getText().toString());
+                chosenFood = accessDatabase(autoTextView.getText().toString());
                 if (chosenFood != null) {
                     setTextViews(chosenFood);
                 }

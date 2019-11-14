@@ -1,23 +1,14 @@
 package com.gr_b07;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-
-public class DinnerActivity extends AbstractMealActivity {
+public class NewBreakfastTEst extends AbstractMealActivity {
     protected TextView textViewHeader;
     protected TextView tvFood0;
     protected TextView tvFood1;
@@ -25,11 +16,9 @@ public class DinnerActivity extends AbstractMealActivity {
     protected TextView tvFood3;
     protected TextView tvFood4;
     protected Food chosenFood;
-    //protected EditText searchFoodEditText;
+    protected EditText searchFoodEditText;
     protected Button searchFoodButton;
     protected Button addFoodButton;
-
-    protected AutoCompleteTextView autoTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,27 +30,20 @@ public class DinnerActivity extends AbstractMealActivity {
         tvFood3 = findViewById(R.id.tvFood3);
         tvFood4 = findViewById(R.id.tvFood4);
         textViewHeader = findViewById(R.id.textViewHeader);
-        //searchFoodEditText = findViewById(R.id.searchFoodEditText);
+        searchFoodEditText = findViewById(R.id.searchFoodEditText);
         searchFoodButton = findViewById(R.id.searchFoodButton);
         searchFoodButton.setOnClickListener(this);
         addFoodButton = findViewById(R.id.addMealButton);
         addFoodButton.setOnClickListener(this);
 
-        initAutoCompleter();
-        autoTextView = findViewById(R.id.autoTextView);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>
-                (this, android.R.layout.select_dialog_item, foodAuto);
-        autoTextView.setThreshold(1);
-        autoTextView.setAdapter(adapter);
-
-        textViewHeader.setText("Dinner2");
+        textViewHeader.setText("Denne her BreakF");
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.searchFoodButton:
-                chosenFood = accessDatabase(autoTextView.getText().toString());
+                chosenFood = accessDatabase(searchFoodEditText.getText().toString());
                 if (chosenFood != null) {
                     setTextViews(chosenFood);
                 }
@@ -93,12 +75,5 @@ public class DinnerActivity extends AbstractMealActivity {
     @Override
     public Food accessDatabase(String food) {
         return super.accessDatabase(food);
-    }
-
-    @Override
-    public void initAutoCompleter() {
-        super.initAutoCompleter();
-
-
     }
 }

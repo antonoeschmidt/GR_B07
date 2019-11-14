@@ -15,91 +15,73 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-public class LunchActivity extends AppCompatActivity implements View.OnClickListener {
-    private TextView textViewLunch;
-    private TextView tvLunch0;
-    private TextView tvLunch1;
-    private TextView tvLunch2;
-    private TextView tvLunch3;
-    private TextView tvLunch4;
-    private EditText searchFoodEditText;
-    private Button searchFoodButton;
-    private Button addFoodButton;
-    private InputStream inputStream;
-    private String[] data;
-    private Food chosenFood;
+public class LunchActivity extends AbstractMealActivity {
+
+    protected TextView textViewHeader;
+    protected TextView tvFood0;
+    protected TextView tvFood1;
+    protected TextView tvFood2;
+    protected TextView tvFood3;
+    protected TextView tvFood4;
+    protected Food chosenFood;
+    protected EditText searchFoodEditText;
+    protected Button searchFoodButton;
+    protected Button addFoodButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lunch);
-        textViewLunch = findViewById(R.id.textViewLunch);
+        setContentView(R.layout.activity_add_food_template);
+        tvFood0 = findViewById(R.id.tvFood0);
+        tvFood1 = findViewById(R.id.tvFood1);
+        tvFood2 = findViewById(R.id.tvFood2);
+        tvFood3 = findViewById(R.id.tvFood3);
+        tvFood4 = findViewById(R.id.tvFood4);
+        textViewHeader = findViewById(R.id.textViewHeader);
         searchFoodEditText = findViewById(R.id.searchFoodEditText);
-        searchFoodButton = findViewById(R.id.searchFoodButtonLunch);
+        searchFoodButton = findViewById(R.id.searchFoodButton);
         searchFoodButton.setOnClickListener(this);
-        addFoodButton = findViewById(R.id.addMealButtonLunch);
+        addFoodButton = findViewById(R.id.addMealButton);
         addFoodButton.setOnClickListener(this);
-        tvLunch0 = findViewById(R.id.tvLunch0);
-        tvLunch1 = findViewById(R.id.tvLunch1);
-        tvLunch2 = findViewById(R.id.tvLunch2);
-        tvLunch3 = findViewById(R.id.tvLunch3);
-        tvLunch4 = findViewById(R.id.tvLunch4);
 
+        textViewHeader.setText("Denne her LUUNCH");
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.searchFoodButtonLunch:
+            case R.id.searchFoodButton:
                 chosenFood = accessDatabase(searchFoodEditText.getText().toString());
                 if (chosenFood != null) {
                     setTextViews(chosenFood);
                 }
                 break;
-            case R.id.addMealButtonLunch:
+            case R.id.addMealButton:
                 if (chosenFood != null) {
                     eatFood(chosenFood);
-                    Toast.makeText(this,"Meal added",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Meal added", Toast.LENGTH_SHORT).show();
                 }
-                Log.d("Cals ", ""+Settings.getCurrentUser().getCalories());
+                Log.d("Cals ", "" + Settings.getCurrentUser().getCalories());
                 break;
         }
     }
 
-    private void setTextViews(Food food) {
-        tvLunch0.setText(food.getName());
-        tvLunch1.setText("Calories: "+food.getCalories());
-        tvLunch2.setText("Protein: "+food.getProtein());
-        tvLunch3.setText("Carbs: "+food.getCarbs());
-        tvLunch4.setText("Fat: "+food.getFat());
+    @Override
+    public void setTextViews(Food food) {
+        tvFood0.setText(food.getName());
+        tvFood1.setText("Calories: "+food.getCalories());
+        tvFood2.setText("Protein: "+food.getProtein());
+        tvFood3.setText("Carbs: "+food.getCarbs());
+        tvFood4.setText("Fat: "+food.getFat());
     }
 
-    public void eatFood(Food food){
-        Settings.getCurrentUser().setCalories(Settings.getCurrentUser().getCalories()+food.getCalories());
-        Settings.getCurrentUser().setProtein(Settings.getCurrentUser().getProtein()+food.getProtein());
-        Settings.getCurrentUser().setCarbs(Settings.getCurrentUser().getCarbs()+food.getCarbs());
-        Settings.getCurrentUser().setFat(Settings.getCurrentUser().getFat()+food.getFat());
+    @Override
+    public void eatFood(Food food) {
+        super.eatFood(food);
     }
 
-    private Food accessDatabase(String food) {
-        inputStream = getResources().openRawResource(R.raw.mad);
-        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-        try {
-            String csvLine;
-            while ((csvLine = reader.readLine()) != null) {
-                data = csvLine.split(";");
-                if (data[0].equalsIgnoreCase(food)) {
-                    return new Food(data[0], Double.parseDouble(data[1]),Double.parseDouble(data[2]),
-                            Double.parseDouble(data[3]),Double.parseDouble(data[4]));
-                }
-
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-            Log.d("Error ", "Cannot read file");
-        }
-        return null;
+    @Override
+    public Food accessDatabase(String food) {
+        return super.accessDatabase(food);
     }
-
-
 }
