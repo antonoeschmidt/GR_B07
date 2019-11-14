@@ -1,10 +1,13 @@
 package com.gr_b07;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatAutoCompleteTextView;
 
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -14,6 +17,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+
+import static com.gr_b07.NutritionActivity.foodDB;
 
 public class BreakfastActivity extends AppCompatActivity implements View.OnClickListener {
     private TextView textViewBreakfast;
@@ -28,6 +33,11 @@ public class BreakfastActivity extends AppCompatActivity implements View.OnClick
     private InputStream inputStream;
     private String[] data;
     private Food chosenFood;
+
+    private AutoCompleteTextView autoTextView;
+
+    private String[] foods = new String[foodDB.size()];
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +54,20 @@ public class BreakfastActivity extends AppCompatActivity implements View.OnClick
         tvBreakfast2 = findViewById(R.id.tvBreakfast2);
         tvBreakfast3 = findViewById(R.id.tvBreakfast3);
         tvBreakfast4 = findViewById(R.id.tvBreakfast4);
+
+
+        autoTextView = findViewById(R.id.autoTextViewBreakfast);
+
+        for (int i = 0; i < foodDB.size(); i++) {
+            foods[i] = foodDB.get(i).getName();
+        }
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>
+                (this, android.R.layout.select_dialog_item, foods);
+        autoTextView.setThreshold(1); //will start working from first character
+        autoTextView.setAdapter(adapter);
+
+
 
     }
 

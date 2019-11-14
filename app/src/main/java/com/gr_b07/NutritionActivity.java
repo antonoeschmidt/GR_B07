@@ -15,6 +15,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 public class NutritionActivity extends AppCompatActivity implements View.OnClickListener{
     private ProgressBar pProgress, cProgress, fProgress, cRing;
@@ -22,6 +23,7 @@ public class NutritionActivity extends AppCompatActivity implements View.OnClick
     private Button testButton, breakfastButton, lunchButton, dinnerButton, snacksButton;
     private InputStream inputStream;
     private String[] data;
+    protected static ArrayList<Food> foodDB = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +59,7 @@ public class NutritionActivity extends AppCompatActivity implements View.OnClick
         cRing.setMax(3200);
 
         updateView();
+        createDBarray();
     }
 
     @Override
@@ -130,6 +133,29 @@ public class NutritionActivity extends AppCompatActivity implements View.OnClick
             Log.d("Error ", "Cannot read file");
         }
         return null;
+    }
+
+    private void createDBarray() {
+        inputStream = getResources().openRawResource(R.raw.mad);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+
+        try {
+            String csvLine;
+            while ((csvLine = reader.readLine()) != null) {
+                data = csvLine.split(";");
+                foodDB.add(new Food(data[0], Double.parseDouble(data[1]),Double.parseDouble(data[2]),
+                            Double.parseDouble(data[3]),Double.parseDouble(data[4])));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            Log.d("Error ", "Cannot read file");
+        }
+        for (Food food :
+                foodDB) {
+            System.out.println(food.getName());
+        }
+
+
     }
 
 
