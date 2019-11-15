@@ -162,7 +162,7 @@ public class NutritionActivity extends AppCompatActivity implements View.OnClick
             System.out.println(food.getName());
         }
 
-        //bruges til autoText inde i 'Add Meal'
+        //bruges til autoText inde i nutrition
         foodAutoText = new String[foodDB.size()];
         for (int i = 0; i < foodDB.size(); i++) {
             foodAutoText[i] = foodDB.get(i).getName();
