@@ -1,6 +1,4 @@
-package com.gr_b07;
-
-import androidx.appcompat.app.AppCompatActivity;
+package com.gr_b07.nutrition;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -8,16 +6,15 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import com.gr_b07.NutritionActivity;
+import com.gr_b07.R;
+import com.gr_b07.logik.Food;
+import com.gr_b07.logik.Settings;
 
-public class DinnerActivity extends AbstractMealActivity {
+public class LunchActivity extends AbstractMealActivity {
     protected TextView textViewHeader;
     protected TextView tvFood0;
     protected TextView tvFood1;
@@ -25,10 +22,8 @@ public class DinnerActivity extends AbstractMealActivity {
     protected TextView tvFood3;
     protected TextView tvFood4;
     protected Food chosenFood;
-    //protected EditText searchFoodEditText;
     protected Button searchFoodButton;
     protected Button addFoodButton;
-
     protected AutoCompleteTextView autoTextView;
 
     @Override
@@ -41,20 +36,19 @@ public class DinnerActivity extends AbstractMealActivity {
         tvFood3 = findViewById(R.id.tvFood3);
         tvFood4 = findViewById(R.id.tvFood4);
         textViewHeader = findViewById(R.id.textViewHeader);
-        //searchFoodEditText = findViewById(R.id.searchFoodEditText);
         searchFoodButton = findViewById(R.id.searchFoodButton);
         searchFoodButton.setOnClickListener(this);
         addFoodButton = findViewById(R.id.addMealButton);
         addFoodButton.setOnClickListener(this);
 
-        initAutoCompleter();
+        //autocomplete
         autoTextView = findViewById(R.id.autoTextView);
         ArrayAdapter<String> adapter = new ArrayAdapter<>
-                (this, android.R.layout.select_dialog_item, foodAuto);
+                (this, android.R.layout.select_dialog_item, NutritionActivity.foodAutoText);
         autoTextView.setThreshold(1);
         autoTextView.setAdapter(adapter);
 
-        textViewHeader.setText("Dinner2");
+        textViewHeader.setText("Lunch");
     }
 
     @Override
@@ -93,12 +87,5 @@ public class DinnerActivity extends AbstractMealActivity {
     @Override
     public Food accessDatabase(String food) {
         return super.accessDatabase(food);
-    }
-
-    @Override
-    public void initAutoCompleter() {
-        super.initAutoCompleter();
-
-
     }
 }
