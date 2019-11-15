@@ -79,8 +79,8 @@ public class NutritionActivity extends AppCompatActivity implements View.OnClick
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.testButton:
-                eatFood("test");
-                Log.d("Output ", "" + accessDatabase("fisk").getFat());
+                //eatFood("test");
+                //Log.d("Output ", "" + accessDatabase("fisk").getFat());
                 updateView();
                 break;
             case R.id.breakfastButton:
@@ -98,18 +98,6 @@ public class NutritionActivity extends AppCompatActivity implements View.OnClick
         }
 
     }
-    //TODO: kan slettes evt
-    public void eatFood(String food){
-        Food foodToEat = accessDatabase(food);
-        Settings.getCurrentUser().setCalories(Settings.getCurrentUser().getCalories() + foodToEat.getCalories());
-        Settings.getCurrentUser().setProtein(Settings.getCurrentUser().getProtein() + foodToEat.getProtein());
-        Settings.getCurrentUser().setCarbs(Settings.getCurrentUser().getCarbs() + foodToEat.getCarbs());
-        Settings.getCurrentUser().setFat(Settings.getCurrentUser().getFat() + foodToEat.getFat());
-        cRing.setProgress((int) Math.round(Settings.getCurrentUser().getCalories()));
-        pProgress.setProgress((int) Math.round(Settings.getCurrentUser().getProtein()));
-        cProgress.setProgress((int) Math.round(Settings.getCurrentUser().getCarbs()));
-        fProgress.setProgress((int) Math.round(Settings.getCurrentUser().getFat()));
-    }
 
     public void updateView(){
         pProgress.setProgress((int) Math.round(Settings.getCurrentUser().getProtein()));
@@ -120,26 +108,6 @@ public class NutritionActivity extends AppCompatActivity implements View.OnClick
         proteinTextView.setText("Protein: " + pProgress.getProgress() +  "  /  " + pProgress.getMax());
         carbsTextView.setText("Carbs: "+ cProgress.getProgress() + "  /  " + cProgress.getMax());
         fatTextView.setText("Fat: " + fProgress.getProgress() + "  /  " + fProgress.getMax());
-    }
-    //TODO: kan slettes evt
-    private Food accessDatabase(String food) {
-        inputStream = getResources().openRawResource(R.raw.mad);
-        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-        try {
-            String csvLine;
-            while ((csvLine = reader.readLine()) != null) {
-                data = csvLine.split(";");
-                if (data[0].equalsIgnoreCase(food)) {
-                    return new Food(data[0], Double.parseDouble(data[1]),Double.parseDouble(data[2]),
-                            Double.parseDouble(data[3]),Double.parseDouble(data[4]));
-                }
-
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-            Log.d("Error ", "Cannot read file");
-        }
-        return null;
     }
 
     private void createDBarray() {
@@ -168,4 +136,44 @@ public class NutritionActivity extends AppCompatActivity implements View.OnClick
             foodAutoText[i] = foodDB.get(i).getName();
         }
     }
+
+    //TODO: kan slettes evt
+    /*
+    public void eatFood(String food){
+        Food foodToEat = accessDatabase(food);
+        Settings.getCurrentUser().setCalories(Settings.getCurrentUser().getCalories() + foodToEat.getCalories());
+        Settings.getCurrentUser().setProtein(Settings.getCurrentUser().getProtein() + foodToEat.getProtein());
+        Settings.getCurrentUser().setCarbs(Settings.getCurrentUser().getCarbs() + foodToEat.getCarbs());
+        Settings.getCurrentUser().setFat(Settings.getCurrentUser().getFat() + foodToEat.getFat());
+        cRing.setProgress((int) Math.round(Settings.getCurrentUser().getCalories()));
+        pProgress.setProgress((int) Math.round(Settings.getCurrentUser().getProtein()));
+        cProgress.setProgress((int) Math.round(Settings.getCurrentUser().getCarbs()));
+        fProgress.setProgress((int) Math.round(Settings.getCurrentUser().getFat()));
+    }
+     */
+
+    //TODO: kan slettes evt
+    /*
+    private Food accessDatabase(String food) {
+        inputStream = getResources().openRawResource(R.raw.mad);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+        try {
+            String csvLine;
+            while ((csvLine = reader.readLine()) != null) {
+                data = csvLine.split(";");
+                if (data[0].equalsIgnoreCase(food)) {
+                    return new Food(data[0], Double.parseDouble(data[1]),Double.parseDouble(data[2]),
+                            Double.parseDouble(data[3]),Double.parseDouble(data[4]));
+                }
+
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            Log.d("Error ", "Cannot read file");
+        }
+        return null;
+    }
+
+     */
+
 }
