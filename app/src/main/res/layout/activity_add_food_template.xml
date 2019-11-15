@@ -5,14 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#D7FCD1"
-    tools:context=".nutrition.LunchActivity">
+    tools:context=".nutrition.DinnerActivity">
 
     <TextView
-        android:id="@+id/textViewLunch"
+        android:id="@+id/textViewHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/raleway"
-        android:text="Lunch"
+        android:text="Dinner"
         android:textColor="#000000"
         android:textSize="35sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -22,7 +22,7 @@
         app:layout_constraintVertical_bias="0.048" />
 
     <TextView
-        android:id="@+id/tvLunch0"
+        android:id="@+id/tvFood0"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/raleway"
@@ -36,7 +36,7 @@
 
 
     <TextView
-        android:id="@+id/tvLunch1"
+        android:id="@+id/tvFood1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/raleway"
@@ -50,7 +50,7 @@
         app:layout_constraintVertical_bias="0.35" />
 
     <TextView
-        android:id="@+id/tvLunch2"
+        android:id="@+id/tvFood2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/raleway"
@@ -64,7 +64,7 @@
         app:layout_constraintVertical_bias="0.396" />
 
     <TextView
-        android:id="@+id/tvLunch3"
+        android:id="@+id/tvFood3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/raleway"
@@ -78,7 +78,7 @@
         app:layout_constraintVertical_bias="0.448" />
 
     <TextView
-        android:id="@+id/tvLunch4"
+        android:id="@+id/tvFood4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/raleway"
@@ -92,7 +92,7 @@
         app:layout_constraintVertical_bias="0.499" />
 
     <Button
-        android:id="@+id/addMealButtonLunch"
+        android:id="@+id/addMealButton"
         android:layout_width="217dp"
         android:layout_height="55dp"
         android:background="@drawable/add_meal_button"
@@ -102,21 +102,21 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.885" />
 
-    <EditText
-        android:id="@+id/searchFoodEditText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Search food"
-        android:text=""
+    <AutoCompleteTextView
+        android:id="@+id/autoTextView"
+        android:layout_width="241dp"
+        android:layout_height="42dp"
+        android:hint="søg frugt"
+        android:inputType="text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.429"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.164" />
+        app:layout_constraintVertical_bias="0.166" />
 
     <Button
-        android:id="@+id/searchFoodButtonLunch"
+        android:id="@+id/searchFoodButton"
         android:layout_width="71dp"
         android:layout_height="41dp"
         android:background="@drawable/search_food_button"

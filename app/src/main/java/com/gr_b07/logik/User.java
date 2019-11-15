@@ -1,6 +1,5 @@
-package com.gr_b07;
+package com.gr_b07.logik;
 
-import java.time.LocalDate;
 import java.util.Date;
 
 public abstract class User {

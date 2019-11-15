@@ -1,7 +1,5 @@
 package com.gr_b07;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,7 +7,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.gr_b07.logik.Food;
+import com.gr_b07.logik.Settings;
+import com.gr_b07.nutrition.BreakfastActivity;
+import com.gr_b07.nutrition.DinnerActivity;
+import com.gr_b07.nutrition.LunchActivity;
+import com.gr_b07.nutrition.SnacksActivity;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -24,6 +30,7 @@ public class NutritionActivity extends AppCompatActivity implements View.OnClick
     private InputStream inputStream;
     private String[] data;
     protected static ArrayList<Food> foodDB = new ArrayList<>();
+    public static String[] foodAutoText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -155,8 +162,10 @@ public class NutritionActivity extends AppCompatActivity implements View.OnClick
             System.out.println(food.getName());
         }
 
-
+        //bruges til autoText inde i nutrition
+        foodAutoText = new String[foodDB.size()];
+        for (int i = 0; i < foodDB.size(); i++) {
+            foodAutoText[i] = foodDB.get(i).getName();
+        }
     }
-
-
 }
