@@ -24,13 +24,16 @@
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="1704px"
-        android:orientation="vertical">
-
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <Button
             android:id="@+id/mainmenu_button1"
             android:layout_width="match_parent"
-            android:layout_height="426px"
+            android:layout_height="430px"
             android:background="@drawable/mainmenu_nutrition_button"
             android:gravity="center"
             />
@@ -38,21 +41,21 @@
         <Button
             android:id="@+id/mainmenu_button2"
             android:layout_width="match_parent"
-            android:layout_height="426px"
+            android:layout_height="430px"
             android:background="@drawable/mainmenu_activity_button"
             android:gravity="center" />
 
         <Button
             android:id="@+id/mainmenu_button3"
             android:layout_width="match_parent"
-            android:layout_height="426px"
+            android:layout_height="430px"
             android:background="@drawable/mainmenu_social_button"
             android:gravity="center" />
 
         <Button
             android:id="@+id/mainmenu_button4"
             android:layout_width="match_parent"
-            android:layout_height="426px"
+            android:layout_height="430px"
             android:background="@drawable/mainmenu_rewards_button"
             android:gravity="center" />
 
