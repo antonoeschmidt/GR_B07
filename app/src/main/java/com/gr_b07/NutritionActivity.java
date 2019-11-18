@@ -84,7 +84,9 @@ public class NutritionActivity extends AppCompatActivity implements View.OnClick
                 updateView();
                 break;
             case R.id.breakfastButton:
-                Intent breakfastIntent = new Intent(this, BreakfastActivity.class); startActivity(breakfastIntent);
+                Intent breakfastIntent = new Intent(this, BreakfastActivity.class);
+                breakfastIntent.putExtra("HEADER", "OST");
+                startActivity(breakfastIntent);
                 break;
             case R.id.lunchButton:
                 Intent lunchIntent = new Intent(this, LunchActivity.class); startActivity(lunchIntent);

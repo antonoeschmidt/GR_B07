@@ -3,6 +3,7 @@ package com.gr_b07.nutrition;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -47,8 +48,16 @@ public class BreakfastActivity extends AbstractMealActivity {
                 (this, android.R.layout.select_dialog_item, NutritionActivity.foodAutoText);
         autoTextView.setThreshold(1);
         autoTextView.setAdapter(adapter);
-
-        textViewHeader.setText("Breakfast");
+        autoTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                chosenFood = accessDatabase(autoTextView.getText().toString());
+                if (chosenFood != null) {
+                    setTextViews(chosenFood);
+                }
+            }
+        });
+        textViewHeader.setText(getIntent().getStringExtra("HEADER"));
     }
 
     @Override
