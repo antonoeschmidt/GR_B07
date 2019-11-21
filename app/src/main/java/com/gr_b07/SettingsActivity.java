@@ -1,5 +1,6 @@
 package com.gr_b07;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -8,14 +9,16 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.gr_b07.logik.Settings;
 
 import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.util.Calendar;
 
-public class SettingsActivity extends AppCompatActivity implements View.OnClickListener {
+public class SettingsActivity extends InputDataActivity implements View.OnClickListener  {
     private TextView infoTextView;
     private TextView dateTextView;
     private RadioGroup radioGroup;
@@ -57,15 +60,33 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.dateTextView:
-                //InputDataActivity.calendarClick();
+                //calendarClick();
                 break;
             case R.id.doneButton:
-                // InputDataActivity.doneButtonClick();
+                /* TODO: Gør så den nedarver korrekt.
+                try {
+                    doneButtonClick();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                 */
                 break;
         }
+    }
+
+    @Override
+    public void calendarClick() {
+        super.calendarClick();
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    @Override
+    public void doneButtonClick() throws ParseException {
+        super.doneButtonClick();
     }
 }
