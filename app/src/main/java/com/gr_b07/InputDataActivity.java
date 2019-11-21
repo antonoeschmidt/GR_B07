@@ -56,7 +56,7 @@ public class InputDataActivity extends AppCompatActivity implements View.OnClick
         doneButton.setOnClickListener(this);
 
 
-        // TODO: DELETE THIS
+        // TODO: DELETE THIS. Only here for easier testing
         dateTextView.setText("01/12/1998");
         maleRadioButton.toggle();
         editTextWeigth.setText("76");
