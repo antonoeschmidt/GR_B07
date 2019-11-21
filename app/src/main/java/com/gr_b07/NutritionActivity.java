@@ -78,7 +78,7 @@ public class NutritionActivity extends AppCompatActivity implements View.OnClick
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.  testButton:
+            case R.id.testButton:
                 //eatFood("test");
                 //Log.d("Output ", "" + accessDatabase("fisk").getFat());
                 updateView();

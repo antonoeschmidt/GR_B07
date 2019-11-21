@@ -58,8 +58,8 @@ public abstract class User {
      public abstract int getAge();
      public abstract void setAge(int age);
      public abstract Experience getExperience();
-     public abstract void setExperience(Experience experience);
-
-
+     public abstract void setExperience (Experience experience);
+     public abstract int getTicket();
+     public abstract void setTicket(int ticket);
      }
 
