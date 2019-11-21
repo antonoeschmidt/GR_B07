@@ -32,7 +32,7 @@
             android:layout_height="120dp"
             android:layout_marginStart="120dp"
             android:progress="0"
-            android:progressDrawable="@drawable/circle"
+            android:progressDrawable="@drawable/circle_nutrition"
             android:rotation="-90"
             app:layout_constraintBottom_toTopOf="parent"
             app:layout_constraintEnd_toStartOf="parent"
@@ -130,4 +130,4 @@
     </LinearLayout>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>

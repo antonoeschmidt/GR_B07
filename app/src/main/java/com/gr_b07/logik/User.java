@@ -57,6 +57,9 @@ public abstract class User {
      public abstract void setDateOfBirth(Date dateOfBirth);
      public abstract int getAge();
      public abstract void setAge(int age);
+     public abstract Experience getExperience();
+     public abstract void setExperience(Experience experience);
 
 
- }
+     }
+

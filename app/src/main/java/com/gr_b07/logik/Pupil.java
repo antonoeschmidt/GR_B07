@@ -25,10 +25,6 @@ public class Pupil extends User {
         this.experience = experience;
     }
 
-    public Experience getExperience() {
-        return experience;
-    }
-
     public double getHeight() {
         return height;
     }
@@ -69,14 +65,18 @@ public class Pupil extends User {
 
     public void setFat(double fat) { this.fat = fat; }
 
-    @Override
     public Date getDateOfBirth() { return dateOfBirth; }
 
-    @Override
     public void setDateOfBirth(Date dateOfBirth) { this.dateOfBirth = dateOfBirth; }
 
     public int getAge() { return age; }
 
     public void setAge(int age) { this.age = age; }
+
+    public Experience getExperience() {
+        return experience;
+    }
+
+    public void setExperience(Experience experience) { this.experience = experience; }
 }
 

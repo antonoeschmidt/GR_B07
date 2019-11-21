@@ -12,8 +12,9 @@ public class Level {
     public int getRange() {
         return range;
     }
-
+    public void setRange(int range) { this.range = range; }
     public int getIndex() {
         return index;
     }
+    public void setIndex(int index) { this.index = index; }
 }

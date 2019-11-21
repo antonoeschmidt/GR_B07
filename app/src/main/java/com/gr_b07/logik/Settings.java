@@ -12,6 +12,8 @@ public class Settings {
         {
             add(new Pupil("anton", "1234", 'n', false, 182, 70, 0, 0, 0, 0, 0, null, 0,new Experience(0, levels[0], levels)));
             add(new Pupil("harald", "4321", 'n', false, 183, 75, 0, 0, 0, 0, 0, null, 0,new Experience(0, levels[0], levels)));
+            levels[0].setIndex(1);
+            levels[0].setRange(100);
         }
     };
     private static User currentUser;
