@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".NutritionActivity"
-    android:background="@color/colorHealthy">
+    android:background="@drawable/gradient_nutrition">
 
     <LinearLayout
         android:id="@+id/linearLayoutNutrition"
