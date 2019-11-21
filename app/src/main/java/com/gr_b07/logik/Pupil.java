@@ -6,9 +6,12 @@ public class Pupil extends User {
 
     private double height, weight, bmi, calories, protein, carbs, fat;
     private Date dateOfBirth;
-    int age;
+    private int age;
+    private Experience experience;
 
-    public Pupil(String username, String password, char gender, boolean loggedIn, double height, double weight, double bmi, double calories, double protein, double carbs, double fat, Date dateOfBirth, int age) {
+    public Pupil(String username, String password, char gender, boolean loggedIn, double height,
+                 double weight, double bmi, double calories, double protein, double carbs, double fat,
+                 Date dateOfBirth, int age, Experience experience) {
         super(username, password,gender, loggedIn);
         this.height = height;
         this.weight = weight;
@@ -19,6 +22,11 @@ public class Pupil extends User {
         this.fat = fat;
         this.dateOfBirth = dateOfBirth;
         this.age = age;
+        this.experience = experience;
+    }
+
+    public Experience getExperience() {
+        return experience;
     }
 
     public double getHeight() {

@@ -50,6 +50,7 @@ public abstract class AbstractMealActivity extends AppCompatActivity implements 
     }
 
     public void eatFood(Food food){
+        //TODO: flyt denne metode til pupil og implementer rewards
         Settings.getCurrentUser().setCalories(Settings.getCurrentUser().getCalories()+food.getCalories());
         Settings.getCurrentUser().setProtein(Settings.getCurrentUser().getProtein()+food.getProtein());
         Settings.getCurrentUser().setCarbs(Settings.getCurrentUser().getCarbs()+food.getCarbs());
