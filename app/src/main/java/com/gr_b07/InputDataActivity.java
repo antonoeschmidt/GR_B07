@@ -40,6 +40,7 @@ public class InputDataActivity extends AppCompatActivity implements View.OnClick
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_input_data);
+
         infoTextView = findViewById(R.id.infoTextView);
         dateTextView = findViewById(R.id.dateTextView);
         dateTextView.setOnClickListener(this);

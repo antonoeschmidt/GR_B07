@@ -2,6 +2,7 @@ package com.gr_b07;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
@@ -40,6 +41,12 @@ public class RewardsActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        updateTextViews();
+    }
+
+    @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.buttonRewardTest:
@@ -50,8 +57,9 @@ public class RewardsActivity extends AppCompatActivity implements View.OnClickLi
                 updateTextViews();
                 break;
             case R.id.buttonRewards:
-                Settings.getCurrentUser().setTicket(Settings.getCurrentUser().getTicket()-1);
                 updateTextViews();
+                Intent gameIntent = new Intent(this, GameActivity.class);
+                startActivity(gameIntent);
                 break;
         }
 
