@@ -58,10 +58,11 @@ public class InputDataActivity extends AppCompatActivity implements View.OnClick
 
 
         // TODO: DELETE THIS. Only here for easier testing
+        //nedenstående gør at man ikke kan ændre i sin data - men hurtigere for testing
         dateTextView.setText("01/12/1998");
-        //maleRadioButton.toggle();
-        //editTextWeigth.setText("76");
-        //editTextHeight.setText("184");
+        maleRadioButton.toggle();
+        editTextWeigth.setText("76");
+        editTextHeight.setText("184");
         if (((Pupil)Settings.getCurrentUser()).getGender() != null && Settings.getCurrentUser().getHeight() != 0
                 && Settings.getCurrentUser().getWeight() != 0) {
             if (((Pupil)Settings.getCurrentUser()).getGender().equals("male")) {
