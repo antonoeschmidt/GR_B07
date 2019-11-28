@@ -9,14 +9,15 @@ public class Settings {
 
     private static ArrayList<User> users = new ArrayList<User>() {
         {
-            add(new Pupil("anton", "1234", 'n', false,
-                    182, 70, 0, 0, 0, 0, 0,
-                    null, 0, new Experience(1,0),0));
+            add(new Pupil("anton","1234",false,0,0,0,0,
+                    0,0,0,null,0,
+                    new Experience(1,0),0,"male"));
 
 
-            add(new Pupil("harald", "4321", 'n', false,
-                    183, 75, 0, 0, 0, 0, 0,
-                    null, 0,new Experience(1,0),0));
+
+            add(new Pupil("harald","4321",false,0,0,0,0,
+                    0,0,0,null,0,
+                    new Experience(1,0),0,"male"));
             // TODO : REMOVE
         }
     };

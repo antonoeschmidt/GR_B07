@@ -17,6 +17,7 @@ import android.widget.Toast;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.gr_b07.logik.Pupil;
 import com.gr_b07.logik.Settings;
 
 import java.text.DecimalFormat;
@@ -29,8 +30,8 @@ public class InputDataActivity extends AppCompatActivity implements View.OnClick
     private TextView infoTextView;
     private TextView dateTextView;
     private RadioGroup radioGroup;
-    private RadioButton maleRadioButton, femaleRadioButton;
-    private EditText editTextHeigth, editTextWeigth;
+    protected RadioButton maleRadioButton, femaleRadioButton;
+    protected EditText editTextHeight, editTextWeigth;
     private TextView textViewCM;
     private TextView textViewKG;
     private Button doneButton;
@@ -48,7 +49,7 @@ public class InputDataActivity extends AppCompatActivity implements View.OnClick
         radioGroup = findViewById(R.id.radioGroup);
         maleRadioButton = findViewById(R.id.maleRadioButton);
         femaleRadioButton = findViewById(R.id.femaleRadioButton);
-        editTextHeigth = findViewById(R.id.editTextHeight);
+        editTextHeight = findViewById(R.id.editTextHeight);
         editTextWeigth = findViewById(R.id.editTextWeight);
         textViewCM = findViewById(R.id.textViewCM);
         textViewKG = findViewById(R.id.textViewKG);
@@ -58,9 +59,21 @@ public class InputDataActivity extends AppCompatActivity implements View.OnClick
 
         // TODO: DELETE THIS. Only here for easier testing
         dateTextView.setText("01/12/1998");
-        maleRadioButton.toggle();
-        editTextWeigth.setText("76");
-        editTextHeigth.setText("184");
+        //maleRadioButton.toggle();
+        //editTextWeigth.setText("76");
+        //editTextHeight.setText("184");
+        if (((Pupil)Settings.getCurrentUser()).getGender() != null && Settings.getCurrentUser().getHeight() != 0
+                && Settings.getCurrentUser().getWeight() != 0) {
+            if (((Pupil)Settings.getCurrentUser()).getGender().equals("male")) {
+                maleRadioButton.toggle();
+            } else {
+                femaleRadioButton.toggle();
+            }
+            editTextWeigth.setText("" + Settings.getCurrentUser().getWeight());
+            editTextHeight.setText("" + Settings.getCurrentUser().getHeight());
+        }
+
+
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -110,19 +123,18 @@ public class InputDataActivity extends AppCompatActivity implements View.OnClick
             // original text in the box (alternative method but it works)
             if (dateTextView.getText().toString().length() > 10) {
                 Toast.makeText(this, "Enter date of birth, please.", Toast.LENGTH_SHORT).show();
-            } else if (editTextWeigth.getText().toString().isEmpty() || editTextHeigth.getText().toString().isEmpty()) {
+            } else if (editTextWeigth.getText().toString().isEmpty() || editTextHeight.getText().toString().isEmpty()) {
                 Toast.makeText(this, "Enter height and weight, please.", Toast.LENGTH_SHORT).show();
             }
             // else if they're both containing something - set height, weight and calculate body mass index.
-            else if (!editTextWeigth.getText().toString().isEmpty() && !editTextHeigth.getText().toString().isEmpty()
+            else if (!editTextWeigth.getText().toString().isEmpty() && !editTextHeight.getText().toString().isEmpty()
                     && dateTextView.getText().toString().length() <= 10 && (maleRadioButton.isChecked() || femaleRadioButton.isChecked())) {
-                //height = Double.parseDouble(editTextHeigth.getText().toString());
-                Settings.getCurrentUser().setHeight(Double.parseDouble(editTextHeigth.getText().toString()));
+                Settings.getCurrentUser().setHeight(Double.parseDouble(editTextHeight.getText().toString()));
+                editTextHeight.setText(editTextHeight.getText().toString());
                 Log.d("heigth", "" + Settings.getCurrentUser().getHeight());
-                //weight = Double.parseDouble(editTextWeigth.getText().toString());
                 Settings.getCurrentUser().setWeight(Double.parseDouble(editTextWeigth.getText().toString()));
+                editTextWeigth.setText(editTextWeigth.getText().toString());
                 Log.d("weigth", "" + Settings.getCurrentUser().getWeight());
-                //bmi = (weight)/((height/100)*(height/100));
                 Settings.getCurrentUser().setBmi(Settings.getCurrentUser().getWeight() /
                         (Math.pow(Settings.getCurrentUser().getHeight() / 100, 2)));
                 Log.d("bmi", "" + Settings.getCurrentUser().getBmi());
@@ -135,10 +147,12 @@ public class InputDataActivity extends AppCompatActivity implements View.OnClick
 
 
                 if (maleRadioButton.isChecked()){
-                    Settings.getCurrentUser().setGender('m');
+                    ((Pupil)Settings.getCurrentUser()).setGender("male");
+                    maleRadioButton.toggle();
                 }
                 else if (femaleRadioButton.isChecked()){
-                    Settings.getCurrentUser().setGender('f');
+                    ((Pupil)Settings.getCurrentUser()).setGender("female");
+                    femaleRadioButton.toggle();
                 }
 
                 Intent mainMenuIntent = new Intent(this, MainMenuActivity.class);

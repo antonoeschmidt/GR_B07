@@ -4,13 +4,11 @@ import java.util.Date;
 
 public abstract class User {
     private String username, password;
-    private char gender;
     private boolean loggedIn;
 
-    public User(String username, String password, char gender, boolean loggedIn) {
+    public User(String username, String password, boolean loggedIn) {
         this.username = username;
         this.password = password;
-        this.gender = gender;
         this.loggedIn = loggedIn;
     }
 
@@ -30,14 +28,6 @@ public abstract class User {
     public void setLoggedIn(boolean loggedIn) {
         this.loggedIn = loggedIn;
     }
-
-     public char getGender() {
-         return gender;
-     }
-
-     public void setGender(char gender) {
-         this.gender = gender;
-     }
 
      public abstract double getHeight();
      public abstract void setHeight(double height);
