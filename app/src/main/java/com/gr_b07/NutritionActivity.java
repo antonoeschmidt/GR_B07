@@ -100,10 +100,10 @@ public class NutritionActivity extends AppCompatActivity implements View.OnClick
     }
 
     public void updateView(){
-        pProgress.setProgress((int) Math.round(Settings.getCurrentUser().getProtein()));
-        cProgress.setProgress((int) Math.round(Settings.getCurrentUser().getCarbs()));
-        fProgress.setProgress((int) Math.round(Settings.getCurrentUser().getFat()));
-        cRing.setProgress((int) Math.round(Settings.getCurrentUser().getCalories()));
+        pProgress.setProgress((int) Math.round(Settings.getCurrentPupil().getProtein()));
+        cProgress.setProgress((int) Math.round(Settings.getCurrentPupil().getCarbs()));
+        fProgress.setProgress((int) Math.round(Settings.getCurrentPupil().getFat()));
+        cRing.setProgress((int) Math.round(Settings.getCurrentPupil().getCalories()));
         caloriesTextView.setText("Calories: " + cRing.getProgress() + "  /  " + cRing.getMax());
         proteinTextView.setText("Protein: " + pProgress.getProgress() +  "  /  " + pProgress.getMax());
         carbsTextView.setText("Carbs: "+ cProgress.getProgress() + "  /  " + cProgress.getMax());
@@ -141,14 +141,14 @@ public class NutritionActivity extends AppCompatActivity implements View.OnClick
     /*
     public void eatFood(String food){
         Food foodToEat = accessDatabase(food);
-        Settings.getCurrentUser().setCalories(Settings.getCurrentUser().getCalories() + foodToEat.getCalories());
-        Settings.getCurrentUser().setProtein(Settings.getCurrentUser().getProtein() + foodToEat.getProtein());
-        Settings.getCurrentUser().setCarbs(Settings.getCurrentUser().getCarbs() + foodToEat.getCarbs());
-        Settings.getCurrentUser().setFat(Settings.getCurrentUser().getFat() + foodToEat.getFat());
-        cRing.setProgress((int) Math.round(Settings.getCurrentUser().getCalories()));
-        pProgress.setProgress((int) Math.round(Settings.getCurrentUser().getProtein()));
-        cProgress.setProgress((int) Math.round(Settings.getCurrentUser().getCarbs()));
-        fProgress.setProgress((int) Math.round(Settings.getCurrentUser().getFat()));
+        Settings.getCurrentPupil().setCalories(Settings.getCurrentPupil().getCalories() + foodToEat.getCalories());
+        Settings.getCurrentPupil().setProtein(Settings.getCurrentPupil().getProtein() + foodToEat.getProtein());
+        Settings.getCurrentPupil().setCarbs(Settings.getCurrentPupil().getCarbs() + foodToEat.getCarbs());
+        Settings.getCurrentPupil().setFat(Settings.getCurrentPupil().getFat() + foodToEat.getFat());
+        cRing.setProgress((int) Math.round(Settings.getCurrentPupil().getCalories()));
+        pProgress.setProgress((int) Math.round(Settings.getCurrentPupil().getProtein()));
+        cProgress.setProgress((int) Math.round(Settings.getCurrentPupil().getCarbs()));
+        fProgress.setProgress((int) Math.round(Settings.getCurrentPupil().getFat()));
     }
      */
 

@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.gr_b07.logik.Pupil;
 import com.gr_b07.logik.Settings;
 import com.gr_b07.logik.User;
 
@@ -61,6 +62,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
                 user.setLoggedIn(true); //kan evt. slettes
                 Settings.setCurrentUser(user);
+                if (user.getClass().equals(Pupil.class)) {
+                    Settings.setCurrentPupil((Pupil)user);
+                }
                 return user.isLoggedIn();
             }
         }

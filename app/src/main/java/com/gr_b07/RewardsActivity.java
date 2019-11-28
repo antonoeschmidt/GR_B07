@@ -31,11 +31,11 @@ public class RewardsActivity extends AppCompatActivity implements View.OnClickLi
         rewardButton.setOnClickListener(this);
 
 
-        rProgress.setMax(Settings.getCurrentUser().getExperience().getRange());
+        rProgress.setMax(Settings.getCurrentPupil().getExperience().getRange());
         rProgress.setProgress(0);
 
 
-        levelTextView.setText("Level: " + Integer.toString(Settings.getCurrentUser().getExperience().getLevel()));
+        levelTextView.setText("Level: " + Integer.toString(Settings.getCurrentPupil().getExperience().getLevel()));
 
 
     }
@@ -50,9 +50,9 @@ public class RewardsActivity extends AppCompatActivity implements View.OnClickLi
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.buttonRewardTest:
-                levelTextView.setText("Level: " + Settings.getCurrentUser().getExperience().getLevel());
-                Settings.getCurrentUser().getExperience().setXp(Settings.getCurrentUser().getExperience().getXp()+2);
-                rProgress.setProgress(Settings.getCurrentUser().getExperience().getXp());
+                levelTextView.setText("Level: " + Settings.getCurrentPupil().getExperience().getLevel());
+                Settings.getCurrentPupil().getExperience().setXp(Settings.getCurrentPupil().getExperience().getXp()+2);
+                rProgress.setProgress(Settings.getCurrentPupil().getExperience().getXp());
                 checkLevel();
                 updateTextViews();
                 break;
@@ -66,21 +66,21 @@ public class RewardsActivity extends AppCompatActivity implements View.OnClickLi
     }
     public void checkLevel(){
         if (rProgress.getProgress() >= rProgress.getMax()){
-            Settings.getCurrentUser().getExperience().setLevel(Settings.getCurrentUser().getExperience().getLevel()+1);
-            Settings.getCurrentUser().getExperience().fixRange();
-            Settings.getCurrentUser().getExperience().setXp(Settings.getCurrentUser().getExperience().getXp()%rProgress.getMax());
+            Settings.getCurrentPupil().getExperience().setLevel(Settings.getCurrentPupil().getExperience().getLevel()+1);
+            Settings.getCurrentPupil().getExperience().fixRange();
+            Settings.getCurrentPupil().getExperience().setXp(Settings.getCurrentPupil().getExperience().getXp()%rProgress.getMax());
 
-            rProgress.setMax(Settings.getCurrentUser().getExperience().getRange());
-            rProgress.setProgress(Settings.getCurrentUser().getExperience().getXp());
+            rProgress.setMax(Settings.getCurrentPupil().getExperience().getRange());
+            rProgress.setProgress(Settings.getCurrentPupil().getExperience().getXp());
 
-            Settings.getCurrentUser().setTicket(Settings.getCurrentUser().getTicket()+1);
+            Settings.getCurrentPupil().setTicket(Settings.getCurrentPupil().getTicket()+1);
 
         }
     }
     public void updateTextViews() {
-        levelTextView.setText("Level: " + Settings.getCurrentUser().getExperience().getLevel());
-        xpTextView.setText("Progress: \n " + Settings.getCurrentUser().getExperience().getXp() + " / " + Settings.getCurrentUser().getExperience().getRange());
-        if (Settings.getCurrentUser().getTicket()>= 1){
+        levelTextView.setText("Level: " + Settings.getCurrentPupil().getExperience().getLevel());
+        xpTextView.setText("Progress: \n " + Settings.getCurrentPupil().getExperience().getXp() + " / " + Settings.getCurrentPupil().getExperience().getRange());
+        if (Settings.getCurrentPupil().getTicket()>= 1){
             turnOnTextBlink();
         }
         else rewardButton.clearAnimation();

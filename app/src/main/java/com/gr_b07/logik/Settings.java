@@ -23,6 +23,8 @@ public class Settings {
     };
     private static User currentUser;
 
+    private static Pupil currentPupil;
+
     public static void addUser(User user) {
         users.add(user);
     }
@@ -45,5 +47,12 @@ public class Settings {
                 activity.getCurrentFocus().getWindowToken(), 0);
     }
 
+    public static Pupil getCurrentPupil() {
+        return currentPupil;
+    }
+
+    public static void setCurrentPupil(Pupil currentPupil) {
+        Settings.currentPupil = currentPupil;
+    }
 }
 

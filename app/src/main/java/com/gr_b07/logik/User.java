@@ -28,7 +28,8 @@ public abstract class User {
     public void setLoggedIn(boolean loggedIn) {
         this.loggedIn = loggedIn;
     }
-
+    //TODO: abstrakte metoder slettes
+    /*
      public abstract double getHeight();
      public abstract void setHeight(double height);
      public abstract double getWeight();
@@ -51,5 +52,7 @@ public abstract class User {
      public abstract void setExperience (Experience experience);
      public abstract int getTicket();
      public abstract void setTicket(int ticket);
+
+     */
      }
 

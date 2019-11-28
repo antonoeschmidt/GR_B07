@@ -75,7 +75,7 @@ public class BreakfastActivity extends AbstractMealActivity {
                     eatFood(chosenFood);
                     Toast.makeText(this, "Meal added", Toast.LENGTH_SHORT).show();
                 }
-                Log.d("Cals ", "" + Settings.getCurrentUser().getCalories());
+                Log.d("Cals ", "" + Settings.getCurrentPupil().getCalories());
                 break;
         }
     }

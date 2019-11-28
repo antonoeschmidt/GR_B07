@@ -60,18 +60,19 @@ public class InputDataActivity extends AppCompatActivity implements View.OnClick
         // TODO: DELETE THIS. Only here for easier testing
         //nedenstående gør at man ikke kan ændre i sin data - men hurtigere for testing
         dateTextView.setText("01/12/1998");
-        maleRadioButton.toggle();
-        editTextWeigth.setText("76");
-        editTextHeight.setText("184");
-        if (((Pupil)Settings.getCurrentUser()).getGender() != null && Settings.getCurrentUser().getHeight() != 0
-                && Settings.getCurrentUser().getWeight() != 0) {
-            if (((Pupil)Settings.getCurrentUser()).getGender().equals("male")) {
+
+        //maleRadioButton.toggle();
+        //editTextWeigth.setText("76");
+        //editTextHeight.setText("184");
+        if (((Pupil)Settings.getCurrentPupil()).getGender() != null && Settings.getCurrentPupil().getHeight() != 0
+                && Settings.getCurrentPupil().getWeight() != 0) {
+            if (((Pupil)Settings.getCurrentPupil()).getGender().equals("male")) {
                 maleRadioButton.toggle();
             } else {
                 femaleRadioButton.toggle();
             }
-            editTextWeigth.setText("" + Settings.getCurrentUser().getWeight());
-            editTextHeight.setText("" + Settings.getCurrentUser().getHeight());
+            editTextWeigth.setText("" + Settings.getCurrentPupil().getWeight());
+            editTextHeight.setText("" + Settings.getCurrentPupil().getHeight());
         }
 
 
@@ -130,29 +131,29 @@ public class InputDataActivity extends AppCompatActivity implements View.OnClick
             // else if they're both containing something - set height, weight and calculate body mass index.
             else if (!editTextWeigth.getText().toString().isEmpty() && !editTextHeight.getText().toString().isEmpty()
                     && dateTextView.getText().toString().length() <= 10 && (maleRadioButton.isChecked() || femaleRadioButton.isChecked())) {
-                Settings.getCurrentUser().setHeight(Double.parseDouble(editTextHeight.getText().toString()));
+                Settings.getCurrentPupil().setHeight(Double.parseDouble(editTextHeight.getText().toString()));
                 editTextHeight.setText(editTextHeight.getText().toString());
-                Log.d("heigth", "" + Settings.getCurrentUser().getHeight());
-                Settings.getCurrentUser().setWeight(Double.parseDouble(editTextWeigth.getText().toString()));
+                Log.d("heigth", "" + Settings.getCurrentPupil().getHeight());
+                Settings.getCurrentPupil().setWeight(Double.parseDouble(editTextWeigth.getText().toString()));
                 editTextWeigth.setText(editTextWeigth.getText().toString());
-                Log.d("weigth", "" + Settings.getCurrentUser().getWeight());
-                Settings.getCurrentUser().setBmi(Settings.getCurrentUser().getWeight() /
-                        (Math.pow(Settings.getCurrentUser().getHeight() / 100, 2)));
-                Log.d("bmi", "" + Settings.getCurrentUser().getBmi());
+                Log.d("weigth", "" + Settings.getCurrentPupil().getWeight());
+                Settings.getCurrentPupil().setBmi(Settings.getCurrentPupil().getWeight() /
+                        (Math.pow(Settings.getCurrentPupil().getHeight() / 100, 2)));
+                Log.d("bmi", "" + Settings.getCurrentPupil().getBmi());
                 DecimalFormat df = new DecimalFormat("#.##");
-                Toast.makeText(this, "Your body mass index is : " + df.format(Settings.getCurrentUser().getBmi()),
+                Toast.makeText(this, "Your body mass index is : " + df.format(Settings.getCurrentPupil().getBmi()),
                         Toast.LENGTH_SHORT).show();
 
                 Log.d(Integer.toString(calculateAge()), "doneButtonClick: AGE ");
-                Settings.getCurrentUser().setAge(calculateAge());
+                Settings.getCurrentPupil().setAge(calculateAge());
 
 
                 if (maleRadioButton.isChecked()){
-                    ((Pupil)Settings.getCurrentUser()).setGender("male");
+                    ((Pupil)Settings.getCurrentPupil()).setGender("male");
                     maleRadioButton.toggle();
                 }
                 else if (femaleRadioButton.isChecked()){
-                    ((Pupil)Settings.getCurrentUser()).setGender("female");
+                    ((Pupil)Settings.getCurrentPupil()).setGender("female");
                     femaleRadioButton.toggle();
                 }
 
@@ -166,8 +167,8 @@ public class InputDataActivity extends AppCompatActivity implements View.OnClick
         SimpleDateFormat f1 = new SimpleDateFormat("dd/MM/yyyy");
         SimpleDateFormat f2 = new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
         Date now = new Date(System.currentTimeMillis());
-        Settings.getCurrentUser().setDateOfBirth(f1.parse(dateTextView.getText().toString()));
-        long timeBetween = now.getTime() - Settings.getCurrentUser().getDateOfBirth().getTime();
+        Settings.getCurrentPupil().setDateOfBirth(f1.parse(dateTextView.getText().toString()));
+        long timeBetween = now.getTime() - Settings.getCurrentPupil().getDateOfBirth().getTime();
         double yearsBetween = timeBetween / 3.15576e+10;
         int age = (int) Math.floor(yearsBetween);
         Log.d(Integer.toString(age), "doneButtonClick: AGE");
@@ -176,9 +177,8 @@ public class InputDataActivity extends AppCompatActivity implements View.OnClick
     }
 
         /*
-        //int d1 = Integer.parseInt(f1.format(Settings.getCurrentUser().getDateOfBirth()));
+        //int d1 = Integer.parseInt(f1.format(Settings.getCurrentPupil().getDateOfBirth()));
                 //int d2 = Integer.parseInt(f2.format(System.currentTimeMillis()));
-
 
                 int d1 = 100;
                 int d2 = 100;
@@ -186,7 +186,7 @@ public class InputDataActivity extends AppCompatActivity implements View.OnClick
                 Log.d(Integer.toString(d2), "doneButtonClick: int2");
                 //int age = (d2-d1) / 10000;
                 //Log.d(Integer.toString(age), "doneButtonClick: ");
-                //Log.d(Integer.toString(calculateAge(Settings.getCurrentUser().getDateOfBirth())), "doneButtonClick: ");
+                //Log.d(Integer.toString(calculateAge(Settings.getCurrentPupil().getDateOfBirth())), "doneButtonClick: ");
          */
 
 }
