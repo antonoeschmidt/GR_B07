@@ -89,13 +89,6 @@
 
 
         <Button
-            android:layout_marginTop="2dp"
-            android:id="@+id/testButton"
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:text="TEST" />
-
-        <Button
             android:id="@+id/breakfastButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

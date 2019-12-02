@@ -6,6 +6,6 @@ public class SnacksActivity extends BreakfastActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        textViewHeader.setText("Snacks123");
+        textViewHeader.setText("Snacks");
     }
 }

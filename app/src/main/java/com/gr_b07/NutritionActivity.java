@@ -26,7 +26,7 @@ import java.util.ArrayList;
 public class NutritionActivity extends AppCompatActivity implements View.OnClickListener{
     private ProgressBar pProgress, cProgress, fProgress, cRing;
     private TextView caloriesTextView, proteinTextView, carbsTextView, fatTextView;
-    private Button testButton, breakfastButton, lunchButton, dinnerButton, snacksButton;
+    private Button breakfastButton, lunchButton, dinnerButton, snacksButton;
     private InputStream inputStream;
     private String[] data;
     protected static ArrayList<Food> foodDB = new ArrayList<>();
@@ -47,13 +47,11 @@ public class NutritionActivity extends AppCompatActivity implements View.OnClick
         carbsTextView = findViewById(R.id.carbsTextView);
         fatTextView = findViewById(R.id.fatTextView);
 
-        testButton = findViewById(R.id.testButton);
         breakfastButton = findViewById(R.id.breakfastButton);
         lunchButton = findViewById(R.id.lunchButton);
         dinnerButton = findViewById(R.id.dinnerButton);
         snacksButton = findViewById(R.id.snacksButton);
 
-        testButton.setOnClickListener(this);
         breakfastButton.setOnClickListener(this);
         lunchButton.setOnClickListener(this);
         dinnerButton.setOnClickListener(this);
@@ -78,11 +76,6 @@ public class NutritionActivity extends AppCompatActivity implements View.OnClick
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.testButton:
-                //eatFood("test");
-                //Log.d("Output ", "" + accessDatabase("fisk").getFat());
-                updateView();
-                break;
             case R.id.breakfastButton:
                 Intent breakfastIntent = new Intent(this, BreakfastActivity.class); startActivity(breakfastIntent);
                 break;
