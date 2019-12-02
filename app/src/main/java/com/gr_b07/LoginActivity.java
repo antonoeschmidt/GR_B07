@@ -34,10 +34,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         loginButton.setOnClickListener(this);
 
         // TODO: DELETE THIS
-        /*
+
         usernameText.setText("anton");
         passwordText.setText("1234");
-        */
+
 
     }
 

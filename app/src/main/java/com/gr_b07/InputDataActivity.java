@@ -60,20 +60,21 @@ public class InputDataActivity extends AppCompatActivity implements View.OnClick
         // TODO: DELETE THIS. Only here for easier testing
         //nedenstående gør at man ikke kan ændre i sin data - men hurtigere for testing
 
-        // dateTextView.setText("01/12/1998");
+        dateTextView.setText("01/12/1998");
 
-        //maleRadioButton.toggle();
-        //editTextWeigth.setText("76");
-        //editTextHeight.setText("184");
-        if (((Pupil)Settings.getCurrentPupil()).getGender() != null && Settings.getCurrentPupil().getHeight() != 0
+        maleRadioButton.toggle();
+        editTextHeight.setText("184");
+        editTextWeigth.setText("76");
+
+        if ((Settings.getCurrentPupil()).getGender() != null && Settings.getCurrentPupil().getHeight() != 0
                 && Settings.getCurrentPupil().getWeight() != 0) {
-            if (((Pupil)Settings.getCurrentPupil()).getGender().equals("male")) {
+            if (((Settings.getCurrentPupil()).getGender().equals("male"))) {
                 maleRadioButton.toggle();
             } else {
                 femaleRadioButton.toggle();
             }
-            editTextWeigth.setText("" + Settings.getCurrentPupil().getWeight());
-            editTextHeight.setText("" + Settings.getCurrentPupil().getHeight());
+            editTextWeigth.setText("" + (int) Settings.getCurrentPupil().getWeight());
+            editTextHeight.setText("" + (int) Settings.getCurrentPupil().getHeight());
         }
 
 
@@ -102,13 +103,13 @@ public class InputDataActivity extends AppCompatActivity implements View.OnClick
         calendar = Calendar.getInstance();
         int day = calendar.get(Calendar.DAY_OF_MONTH);
         int month = calendar.get(Calendar.MONTH);
-        int year = calendar.get(Calendar.YEAR);
+        int year = calendar.get(Calendar.YEAR) - 13;
 
         DatePickerDialog datePickerDialog = new DatePickerDialog(this, android.R.style.Theme_Holo_Dialog,
                 new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        dateTextView.setText(dayOfMonth + "/" + month + "/" + year);
+                        dateTextView.setText(dayOfMonth + "/" + (month + 1)  + "/" + year); //TODO: fix month
                     }
                 }, year, month, day);
 
@@ -150,11 +151,11 @@ public class InputDataActivity extends AppCompatActivity implements View.OnClick
 
 
                 if (maleRadioButton.isChecked()){
-                    ((Pupil)Settings.getCurrentPupil()).setGender("male");
+                    (Settings.getCurrentPupil()).setGender("male");
                     maleRadioButton.toggle();
                 }
                 else if (femaleRadioButton.isChecked()){
-                    ((Pupil)Settings.getCurrentPupil()).setGender("female");
+                    (Settings.getCurrentPupil()).setGender("female");
                     femaleRadioButton.toggle();
                 }
 

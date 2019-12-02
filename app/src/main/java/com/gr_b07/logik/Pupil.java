@@ -20,7 +20,7 @@ public class Pupil extends User {
         this.calories = calories;
         this.protein = protein;
         this.carbs = carbs;
-        this.fat = fat;
+        this.fat = fat; 
         this.dateOfBirth = dateOfBirth;
         this.age = age;
         this.experience = experience;

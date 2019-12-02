@@ -80,6 +80,7 @@ public class RewardsActivity extends AppCompatActivity implements View.OnClickLi
     public void updateTextViews() {
         levelTextView.setText("Level: " + Settings.getCurrentPupil().getExperience().getLevel());
         xpTextView.setText("Progress: \n " + Settings.getCurrentPupil().getExperience().getXp() + " / " + Settings.getCurrentPupil().getExperience().getRange());
+        rProgress.setProgress(Settings.getCurrentPupil().getExperience().getXp());
         if (Settings.getCurrentPupil().getTicket()>= 1){
             turnOnTextBlink();
         }
@@ -87,7 +88,7 @@ public class RewardsActivity extends AppCompatActivity implements View.OnClickLi
     }
     public void turnOnTextBlink(){
         Animation anim = new AlphaAnimation(0.0f, 1.0f);
-        anim.setDuration(400);
+        anim.setDuration(1);
         anim.setStartOffset(20);
         anim.setRepeatMode(Animation.REVERSE);
         anim.setRepeatCount(Animation.INFINITE);

@@ -37,8 +37,6 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
                 Intent rewardsIntent = new Intent(this, RewardsActivity.class); startActivity(rewardsIntent); break;
             case R.id.mainmenu_button5:
                 Intent inputDataIntent = new Intent(this, InputDataActivity.class); startActivity(inputDataIntent);
-                //Intent settingsIntent = new Intent(this, Settings2Activity.class); startActivity(settingsIntent);
-                //Toast.makeText(this, "Settings", Toast.LENGTH_SHORT).show();
                 break;
         }
     }
