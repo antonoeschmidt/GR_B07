@@ -7,21 +7,44 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.gr_b07.logik.Settings;
 
 public class MainMenuActivity extends AppCompatActivity implements View.OnClickListener{
     private Button mainButton1, mainButton2, mainButton3, mainButton4, mainButton5;
+    private TextView levelTextView;
+    private ProgressBar xpProgressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
 
-        mainButton1 = findViewById(R.id.mainmenu_button1); mainButton1.setOnClickListener(this);
-        mainButton2 = findViewById(R.id.mainmenu_button2); mainButton2.setOnClickListener(this);
-        mainButton3 = findViewById(R.id.mainmenu_button3); mainButton3.setOnClickListener(this);
-        mainButton4 = findViewById(R.id.mainmenu_button4); mainButton4.setOnClickListener(this);
-        mainButton5 = findViewById(R.id.mainmenu_button5); mainButton5.setOnClickListener(this);
+        mainButton1 = findViewById(R.id.mainmenu_button1);
+        mainButton1.setOnClickListener(this);
+        mainButton2 = findViewById(R.id.mainmenu_button2);
+        mainButton2.setOnClickListener(this);
+        mainButton3 = findViewById(R.id.mainmenu_button3);
+        mainButton3.setOnClickListener(this);
+        mainButton4 = findViewById(R.id.mainmenu_button4);
+        mainButton4.setOnClickListener(this);
+        mainButton5 = findViewById(R.id.mainmenu_button5);
+        mainButton5.setOnClickListener(this);
+
+        levelTextView = findViewById(R.id.mainmenu_textview);
+
+        levelTextView.setText(Integer.toString(Settings.getCurrentPupil().getExperience().getLevel()).toString());
+
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        levelTextView.setText(Integer.toString(Settings.getCurrentPupil().getExperience().getLevel()).toString());
     }
 
     @Override
@@ -39,5 +62,6 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
                 Intent inputDataIntent = new Intent(this, InputDataActivity.class); startActivity(inputDataIntent);
                 break;
         }
+
     }
 }
