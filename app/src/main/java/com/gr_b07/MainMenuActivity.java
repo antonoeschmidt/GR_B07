@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,6 +19,7 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
     private Button mainButton1, mainButton2, mainButton3, mainButton4, mainButton5;
     private TextView levelTextView, xpTextView;
     private ProgressBar xpProgressBar;
+    private ImageView ticketView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +40,8 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
         levelTextView = findViewById(R.id.mainmenu_levelTextView);
         xpTextView = findViewById(R.id.mainmenu_xpTextView);
         xpProgressBar = findViewById(R.id.progressBarXP);
+        ticketView = findViewById(R.id.ticketImageView);
+
 
     }
 
@@ -69,5 +73,11 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
         xpTextView.setText((Integer.toString(Settings.getCurrentPupil().getExperience().getXp())) + " / " + Integer.toString(Settings.getCurrentPupil().getExperience().getRange()));
         xpProgressBar.setMax(Settings.getCurrentPupil().getExperience().getRange());
         xpProgressBar.setProgress(Settings.getCurrentPupil().getExperience().getXp());
+        if (Settings.getCurrentPupil().getTicket() >= 1){
+            ticketView.setVisibility(View.VISIBLE);
+        }
+        else if (Settings.getCurrentPupil().getTicket()==0){
+            ticketView.setVisibility(View.INVISIBLE);
+        }
     }
 }
