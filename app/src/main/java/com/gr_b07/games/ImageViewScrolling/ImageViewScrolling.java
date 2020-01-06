@@ -1,4 +1,4 @@
-package com.gr_b07.games;
+package com.gr_b07.games.ImageViewScrolling;
 
 import android.animation.Animator;
 import android.content.Context;
@@ -20,7 +20,7 @@ public class ImageViewScrolling extends FrameLayout {
 
     IEventEnd eventEnd;
 
-    public void setEventEnd(IEventEnd eventEnd) {
+    public void setEventEnd(IEventEnd eventEnd)  {
         this.eventEnd = eventEnd;
     }
 
@@ -83,8 +83,21 @@ public class ImageViewScrolling extends FrameLayout {
         if(value == Util.GROCERIES){
             imageView.setImageResource(R.drawable.groceries);
         } else if(value == Util.APPLE){
-          imageView.setImageResource(R.drawable.groceries);
-        }                                                  
+          imageView.setImageResource(R.drawable.apple);
+        } else if(value == Util.CARROT){
+            imageView.setImageResource(R.drawable.carrot);
+        } else if(value == Util.SALAD){
+            imageView.setImageResource(R.drawable.salad);
+        } else if(value == Util.AUBERGINE){
+            imageView.setImageResource(R.drawable.aubergine);
+        } else if(value == Util.STRAWBERRY){
+            imageView.setImageResource(R.drawable.strawberry);
+        }
+        imageView.setTag(value);
+        lastResult = value;
     }
 
+    public int getValue(){
+     return Integer.parseInt(nextImage.getTag().toString());
+    }
 }

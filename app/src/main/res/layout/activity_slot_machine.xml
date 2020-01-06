@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:padding="8dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,17 +9,28 @@
     tools:context=".games.SlotMachineActivity"
     android:background="@drawable/gradient_rewards">
 
-    <ImageView
-        android:id="@+id/currentImage"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:src="@drawable/groceries"/>
 
-    <ImageView
-        android:id="@+id/nextImage"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:src="@drawable/apple"/>
+    <FrameLayout
+        android:id="@+id/slotFrame"
+        android:layout_width="300dp"
+        android:layout_height="180dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/frame">
 
+        <LinearLayout
+            android:layout_width="48dp"
+            android:layout_height="73dp"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:orientation="vertical">
+
+            <com.gr_b07.games.ImageViewScrolling.ImageViewScrolling
+                android:id="@+id/image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+    </LinearLayout>
 
 </FrameLayout>
+
+
+</RelativeLayout>
