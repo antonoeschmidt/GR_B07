@@ -60,15 +60,11 @@ public class NutritionActivity extends AppCompatActivity implements View.OnClick
         // TODO: IIFYM-formel ud fra alder, højde, vægt, aktivitetsniveau.
         if (Settings.getCurrentPupil().getGender().equals("male")){
             cRing.setMax((int) Math.round((10 * Settings.getCurrentPupil().getWeight()) + (6.25 * Settings.getCurrentPupil().getHeight()) - (5 * Settings.getCurrentPupil().getAge()) + 5));
-            pProgress.setMax((int) Math.round ((cRing.getMax()*0.25)/4));
-            cProgress.setMax((int) Math.round ((cRing.getMax()*0.5)/4));
-            fProgress.setMax((int) Math.round ((cRing.getMax()*0.25)/9));
+            updateMacros();
         }
         else if (Settings.getCurrentPupil().getGender().equals("female")){
             cRing.setMax((int) Math.round((10 * Settings.getCurrentPupil().getWeight()) + (6.25 * Settings.getCurrentPupil().getHeight()) - (5 * Settings.getCurrentPupil().getAge()) - 161));
-            pProgress.setMax((int) Math.round ((cRing.getMax()*0.25)/4));
-            cProgress.setMax((int) Math.round ((cRing.getMax()*0.5)/4));
-            fProgress.setMax((int) Math.round ((cRing.getMax()*0.25)/9));
+            updateMacros();
         }
         updateView();
         createDBarray();
@@ -135,6 +131,12 @@ public class NutritionActivity extends AppCompatActivity implements View.OnClick
         for (int i = 0; i < foodDB.size(); i++) {
             foodAutoText[i] = foodDB.get(i).getName();
         }
+    }
+
+    public void updateMacros() {
+        pProgress.setMax((int) Math.round ((cRing.getMax()*0.25)/4));
+        cProgress.setMax((int) Math.round ((cRing.getMax()*0.5)/4));
+        fProgress.setMax((int) Math.round ((cRing.getMax()*0.25)/9));
     }
 
     //TODO: kan slettes evt
