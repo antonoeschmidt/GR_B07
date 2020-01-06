@@ -58,11 +58,18 @@ public class NutritionActivity extends AppCompatActivity implements View.OnClick
         snacksButton.setOnClickListener(this);
 
         // TODO: IIFYM-formel ud fra alder, højde, vægt, aktivitetsniveau.
-        pProgress.setMax(149);
-        cProgress.setMax(372);
-        fProgress.setMax(99);
-        cRing.setMax(3200);
-
+        if (Settings.getCurrentPupil().getGender().equals("male")){
+            cRing.setMax((int) Math.round((10 * Settings.getCurrentPupil().getWeight()) + (6.25 * Settings.getCurrentPupil().getHeight()) - (5 * Settings.getCurrentPupil().getAge()) + 5));
+            pProgress.setMax((int) Math.round ((cRing.getMax()*0.25)/4));
+            cProgress.setMax((int) Math.round ((cRing.getMax()*0.5)/4));
+            fProgress.setMax((int) Math.round ((cRing.getMax()*0.25)/9));
+        }
+        else if (Settings.getCurrentPupil().getGender().equals("female")){
+            cRing.setMax((int) Math.round((10 * Settings.getCurrentPupil().getWeight()) + (6.25 * Settings.getCurrentPupil().getHeight()) - (5 * Settings.getCurrentPupil().getAge()) - 161));
+            pProgress.setMax((int) Math.round ((cRing.getMax()*0.25)/4));
+            cProgress.setMax((int) Math.round ((cRing.getMax()*0.5)/4));
+            fProgress.setMax((int) Math.round ((cRing.getMax()*0.25)/9));
+        }
         updateView();
         createDBarray();
     }
@@ -98,9 +105,9 @@ public class NutritionActivity extends AppCompatActivity implements View.OnClick
         fProgress.setProgress((int) Math.round(Settings.getCurrentPupil().getFat()));
         cRing.setProgress((int) Math.round(Settings.getCurrentPupil().getCalories()));
         caloriesTextView.setText("Calories: " + cRing.getProgress() + "  /  " + cRing.getMax());
-        proteinTextView.setText("Protein: " + pProgress.getProgress() +  "  /  " + pProgress.getMax());
-        carbsTextView.setText("Carbs: "+ cProgress.getProgress() + "  /  " + cProgress.getMax());
-        fatTextView.setText("Fat: " + fProgress.getProgress() + "  /  " + fProgress.getMax());
+        proteinTextView.setText("Protein: " + pProgress.getProgress() +  "  /  " + pProgress.getMax() + " g");
+        carbsTextView.setText("Carbs: "+ cProgress.getProgress() + "  /  " + cProgress.getMax() + " g");
+        fatTextView.setText("Fat: " + fProgress.getProgress() + "  /  " + fProgress.getMax() + " g");
     }
 
     private void createDBarray() {
