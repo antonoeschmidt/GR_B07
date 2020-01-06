@@ -16,7 +16,7 @@ import com.gr_b07.logik.Settings;
 
 public class MainMenuActivity extends AppCompatActivity implements View.OnClickListener{
     private Button mainButton1, mainButton2, mainButton3, mainButton4, mainButton5;
-    private TextView levelTextView;
+    private TextView levelTextView, xpTextView;
     private ProgressBar xpProgressBar;
 
     @Override
@@ -35,7 +35,8 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
         mainButton5 = findViewById(R.id.mainmenu_button5);
         mainButton5.setOnClickListener(this);
 
-        levelTextView = findViewById(R.id.mainmenu_textview);
+        levelTextView = findViewById(R.id.mainmenu_levelTextView);
+        xpTextView = findViewById(R.id.mainmenu_xpTextView);
         xpProgressBar = findViewById(R.id.progressBarXP);
 
     }
@@ -65,6 +66,7 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
     }
     public void updateMainMenu() {
         levelTextView.setText(Integer.toString(Settings.getCurrentPupil().getExperience().getLevel()).toString());
+        xpTextView.setText((Integer.toString(Settings.getCurrentPupil().getExperience().getXp())) + " / " + Integer.toString(Settings.getCurrentPupil().getExperience().getRange()));
         xpProgressBar.setMax(Settings.getCurrentPupil().getExperience().getRange());
         xpProgressBar.setProgress(Settings.getCurrentPupil().getExperience().getXp());
     }
