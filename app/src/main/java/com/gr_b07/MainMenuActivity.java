@@ -3,6 +3,7 @@ package com.gr_b07;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -35,16 +36,14 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
         mainButton5.setOnClickListener(this);
 
         levelTextView = findViewById(R.id.mainmenu_textview);
-
-        levelTextView.setText(Integer.toString(Settings.getCurrentPupil().getExperience().getLevel()).toString());
-
+        xpProgressBar = findViewById(R.id.progressBarXP);
 
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        levelTextView.setText(Integer.toString(Settings.getCurrentPupil().getExperience().getLevel()).toString());
+        updateMainMenu();
     }
 
     @Override
@@ -63,5 +62,10 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
                 break;
         }
 
+    }
+    public void updateMainMenu() {
+        levelTextView.setText(Integer.toString(Settings.getCurrentPupil().getExperience().getLevel()).toString());
+        xpProgressBar.setMax(Settings.getCurrentPupil().getExperience().getRange());
+        xpProgressBar.setProgress(Settings.getCurrentPupil().getExperience().getXp());
     }
 }
