@@ -59,11 +59,13 @@ public class NutritionActivity extends AppCompatActivity implements View.OnClick
 
         // TODO: IIFYM-formel mangler at ændre sig ud fra aktivitetsniveau.
         if (Settings.getCurrentPupil().getGender().equals("male")){
-            cRing.setMax((int) Math.round((10 * Settings.getCurrentPupil().getWeight()) + (6.25 * Settings.getCurrentPupil().getHeight()) - (5 * Settings.getCurrentPupil().getAge()) + 5));
+            cRing.setMax((int) Math.round((10 * Settings.getCurrentPupil().getWeight()) + (6.25 * Settings.getCurrentPupil().getHeight())
+                    - (5 * Settings.getCurrentPupil().getAge()) + 5) + (Settings.getCurrentPupil().getActivityLevel() * 150));
             updateMacros();
         }
         else if (Settings.getCurrentPupil().getGender().equals("female")){
-            cRing.setMax((int) Math.round((10 * Settings.getCurrentPupil().getWeight()) + (6.25 * Settings.getCurrentPupil().getHeight()) - (5 * Settings.getCurrentPupil().getAge()) - 161));
+            cRing.setMax((int) Math.round((10 * Settings.getCurrentPupil().getWeight()) + (6.25 * Settings.getCurrentPupil().getHeight())
+                    - (5 * Settings.getCurrentPupil().getAge()) - 161)+ (Settings.getCurrentPupil().getActivityLevel() * 150));
             updateMacros();
         }
         updateView();
