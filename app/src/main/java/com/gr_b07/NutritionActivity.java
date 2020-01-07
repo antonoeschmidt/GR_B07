@@ -140,6 +140,7 @@ public class NutritionActivity extends AppCompatActivity implements View.OnClick
         pProgress.setMax((int) Math.round ((cRing.getMax()*0.25)/4));
         cProgress.setMax((int) Math.round ((cRing.getMax()*0.5)/4));
         fProgress.setMax((int) Math.round ((cRing.getMax()*0.25)/9));
+        Log.d(Settings.getUsers().toString(), "updateMacros: Users");
     }
 
     //TODO: kan slettes evt
