@@ -58,7 +58,7 @@ public class InputDataActivity extends AppCompatActivity implements View.OnClick
         activityLevelRatingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-                updateActivityLevel();
+                updateActivityLevelView();
                 Log.d(String.valueOf(activityLevelRatingBar.getRating()), "onRatingChanged: Hejmeddig");
 
             }
@@ -106,7 +106,7 @@ public class InputDataActivity extends AppCompatActivity implements View.OnClick
                 }
                 break;
             case R.id.activityLevelRatingBar:
-                updateActivityLevel();
+                updateActivityLevelView();
                 Log.d(Integer.toString(activityLevelRatingBar.getProgress()), "onClick: Hey");
         }
     }
@@ -165,7 +165,7 @@ public class InputDataActivity extends AppCompatActivity implements View.OnClick
                 Log.d(Integer.toString(calculateAge()), "doneButtonClick: AGE ");
                 Settings.getCurrentPupil().setAge(calculateAge());
 
-                Settings.getCurrentPupil().setActivityLevel(activityLevelRatingBar.getNumStars());
+                Settings.getCurrentPupil().setActivityLevel((int) Math.round(activityLevelRatingBar.getRating()));
                 Log.d(Integer.toString(Settings.getCurrentPupil().getActivityLevel()), "doneButtonClick: Activitylevel");
 
 
@@ -196,7 +196,7 @@ public class InputDataActivity extends AppCompatActivity implements View.OnClick
         return age;
     }
 
-    public void updateActivityLevel() {
+    public void updateActivityLevelView() {
         if (activityLevelRatingBar.getRating()==0){
             activityLevelRatingBar.setRating(1);
         }

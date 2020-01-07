@@ -58,16 +58,8 @@ public class NutritionActivity extends AppCompatActivity implements View.OnClick
         snacksButton.setOnClickListener(this);
 
         // TODO: IIFYM-formel mangler at ændre sig ud fra aktivitetsniveau.
-        if (Settings.getCurrentPupil().getGender().equals("male")){
-            cRing.setMax((int) Math.round((10 * Settings.getCurrentPupil().getWeight()) + (6.25 * Settings.getCurrentPupil().getHeight())
-                    - (5 * Settings.getCurrentPupil().getAge()) + 5) + (Settings.getCurrentPupil().getActivityLevel() * 150));
-            updateMacros();
-        }
-        else if (Settings.getCurrentPupil().getGender().equals("female")){
-            cRing.setMax((int) Math.round((10 * Settings.getCurrentPupil().getWeight()) + (6.25 * Settings.getCurrentPupil().getHeight())
-                    - (5 * Settings.getCurrentPupil().getAge()) - 161)+ (Settings.getCurrentPupil().getActivityLevel() * 150));
-            updateMacros();
-        }
+
+        updateMacros();
         updateView();
         createDBarray();
     }
@@ -75,6 +67,7 @@ public class NutritionActivity extends AppCompatActivity implements View.OnClick
     @Override
     protected void onResume() {
         super.onResume();
+        updateMacros();
         updateView();
     }
 
@@ -98,10 +91,10 @@ public class NutritionActivity extends AppCompatActivity implements View.OnClick
     }
 
     public void updateView(){
+        cRing.setProgress((int) Math.round(Settings.getCurrentPupil().getCalories()));
         pProgress.setProgress((int) Math.round(Settings.getCurrentPupil().getProtein()));
         cProgress.setProgress((int) Math.round(Settings.getCurrentPupil().getCarbs()));
         fProgress.setProgress((int) Math.round(Settings.getCurrentPupil().getFat()));
-        cRing.setProgress((int) Math.round(Settings.getCurrentPupil().getCalories()));
         caloriesTextView.setText("Calories: \n" +  cRing.getProgress() + "  /  " + cRing.getMax());
         proteinTextView.setText("Protein: " + pProgress.getProgress() +  "  /  " + pProgress.getMax() + " g");
         carbsTextView.setText("Carbs: "+ cProgress.getProgress() + "  /  " + cProgress.getMax() + " g");
@@ -136,6 +129,14 @@ public class NutritionActivity extends AppCompatActivity implements View.OnClick
     }
 
     public void updateMacros() {
+        if (Settings.getCurrentPupil().getGender().equals("male")){
+            cRing.setMax((int) Math.round((10 * Settings.getCurrentPupil().getWeight()) + (6.25 * Settings.getCurrentPupil().getHeight())
+                    - (5 * Settings.getCurrentPupil().getAge()) + 5) + (Settings.getCurrentPupil().getActivityLevel() * 150));
+        }
+        else if (Settings.getCurrentPupil().getGender().equals("female")) {
+            cRing.setMax((int) Math.round((10 * Settings.getCurrentPupil().getWeight()) + (6.25 * Settings.getCurrentPupil().getHeight())
+                    - (5 * Settings.getCurrentPupil().getAge()) - 161) + (Settings.getCurrentPupil().getActivityLevel() * 150));
+        }
         pProgress.setMax((int) Math.round ((cRing.getMax()*0.25)/4));
         cProgress.setMax((int) Math.round ((cRing.getMax()*0.5)/4));
         fProgress.setMax((int) Math.round ((cRing.getMax()*0.25)/9));
