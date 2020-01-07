@@ -11,13 +11,13 @@ public class Settings {
         {
             add(new Pupil("anton","1234",false,0,0,0,0,
                     0,0,0,null,0,
-                    new Experience(1,0),0,"male"));
+                    new Experience(1,0),0,"male",0));
 
 
 
             add(new Pupil("harald","4321",false,0,0,0,0,
                     0,0,0,null,0,
-                    new Experience(1,0),0,"male"));
+                    new Experience(1,0),0,"male",0));
             // TODO : REMOVE
         }
     };

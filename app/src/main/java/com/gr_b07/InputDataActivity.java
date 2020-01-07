@@ -2,6 +2,7 @@ package com.gr_b07;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.media.Rating;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +12,8 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RatingBar;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,15 +30,13 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class InputDataActivity extends AppCompatActivity implements View.OnClickListener {
-    private TextView infoTextView;
-    private TextView dateTextView;
+    private TextView infoTextView, textViewCM, textViewKG, dateTextView, activityLevelTextView;
     private RadioGroup radioGroup;
     protected RadioButton maleRadioButton, femaleRadioButton;
     protected EditText editTextHeight, editTextWeigth;
-    private TextView textViewCM;
-    private TextView textViewKG;
     private Button doneButton;
     private Calendar calendar;
+    private RatingBar activityLevelRatingBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +54,16 @@ public class InputDataActivity extends AppCompatActivity implements View.OnClick
         editTextWeigth = findViewById(R.id.editTextWeight);
         textViewCM = findViewById(R.id.textViewCM);
         textViewKG = findViewById(R.id.textViewKG);
+        activityLevelRatingBar = findViewById(R.id.activityLevelRatingBar);
+        activityLevelRatingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                updateActivityLevel();
+                Log.d(String.valueOf(activityLevelRatingBar.getRating()), "onRatingChanged: Hejmeddig");
+
+            }
+        });
+        activityLevelTextView = findViewById(R.id.activityLevelTextView);
         doneButton = findViewById(R.id.doneButton);
         doneButton.setOnClickListener(this);
 
@@ -94,6 +105,9 @@ public class InputDataActivity extends AppCompatActivity implements View.OnClick
                     e.printStackTrace();
                 }
                 break;
+            case R.id.activityLevelRatingBar:
+                updateActivityLevel();
+                Log.d(Integer.toString(activityLevelRatingBar.getProgress()), "onClick: Hey");
         }
     }
 
@@ -129,10 +143,12 @@ public class InputDataActivity extends AppCompatActivity implements View.OnClick
                 Toast.makeText(this, "Enter date of birth, please.", Toast.LENGTH_SHORT).show();
             } else if (editTextWeigth.getText().toString().isEmpty() || editTextHeight.getText().toString().isEmpty()) {
                 Toast.makeText(this, "Enter height and weight, please.", Toast.LENGTH_SHORT).show();
-            }
+            } else if (activityLevelRatingBar.getRating()==0){
+                Toast.makeText(this, "Enter activity-level please.", Toast.LENGTH_SHORT).show();
+        }
             // else if they're both containing something - set height, weight and calculate body mass index.
             else if (!editTextWeigth.getText().toString().isEmpty() && !editTextHeight.getText().toString().isEmpty()
-                    && dateTextView.getText().toString().length() <= 10 && (maleRadioButton.isChecked() || femaleRadioButton.isChecked())) {
+                    && dateTextView.getText().toString().length() <= 10 && (maleRadioButton.isChecked() || femaleRadioButton.isChecked()) && activityLevelRatingBar.getRating()!=0) {
                 Settings.getCurrentPupil().setHeight(Double.parseDouble(editTextHeight.getText().toString()));
                 editTextHeight.setText(editTextHeight.getText().toString());
                 Log.d("heigth", "" + Settings.getCurrentPupil().getHeight());
@@ -148,6 +164,9 @@ public class InputDataActivity extends AppCompatActivity implements View.OnClick
 
                 Log.d(Integer.toString(calculateAge()), "doneButtonClick: AGE ");
                 Settings.getCurrentPupil().setAge(calculateAge());
+
+                Settings.getCurrentPupil().setActivityLevel(activityLevelRatingBar.getNumStars());
+                Log.d(Integer.toString(Settings.getCurrentPupil().getActivityLevel()), "doneButtonClick: Activitylevel");
 
 
                 if (maleRadioButton.isChecked()){
@@ -175,9 +194,25 @@ public class InputDataActivity extends AppCompatActivity implements View.OnClick
         int age = (int) Math.floor(yearsBetween);
         Log.d(Integer.toString(age), "doneButtonClick: AGE");
         return age;
-
     }
 
+    public void updateActivityLevel() {
+        if (activityLevelRatingBar.getRating()==0){
+            activityLevelRatingBar.setRating(1);
+        }
+        int i = (int) Math.round(activityLevelRatingBar.getRating());
+        if (i<=1) {
+            activityLevelTextView.setText("Lavt aktivititetsniveau");
+        } else if (i==2) {
+            activityLevelTextView.setText("Acceptabelt aktivitetsniveau");
+        } else if (i==3) {
+            activityLevelTextView.setText("Moderat aktivitetsniveau");
+        } else if (i==4) {
+            activityLevelTextView.setText("Højt aktivitetsniveau");
+        } else if (i==5) {
+            activityLevelTextView.setText("Ekstremt aktivitetsniveau");
+        }
+    }
         /*
         //int d1 = Integer.parseInt(f1.format(Settings.getCurrentPupil().getDateOfBirth()));
                 //int d2 = Integer.parseInt(f2.format(System.currentTimeMillis()));
