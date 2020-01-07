@@ -18,6 +18,9 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.gr_b07.logik.Experience;
 import com.gr_b07.logik.Pupil;
 import com.gr_b07.logik.Settings;
 import com.gr_b07.logik.User;
@@ -32,6 +35,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private FirebaseAuth auth;
     private FirebaseAuth.AuthStateListener authStateListener;
+    private FirebaseDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,13 +43,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_login);
 
         auth = FirebaseAuth.getInstance();
+        db = FirebaseDatabase.getInstance();
 
         authStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 if (firebaseAuth.getCurrentUser() != null) {
                     //login
-                    Toast.makeText(LoginActivity.this,"Det virker", Toast.LENGTH_LONG);
+                    Toast.makeText(LoginActivity.this,"Det virker", Toast.LENGTH_LONG).show();
+                } else {
+                    //logout
                 }
             }
         };
@@ -60,7 +67,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         signUpButton.setOnClickListener(this);
 
         progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("logger ind");
+        progressDialog.setMessage("Logger ind");
 
         // TODO: DELETE THIS
 
@@ -71,7 +78,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onStart() {
         super.onStart();
-        FirebaseUser currentUser = auth.getCurrentUser();
+        //FirebaseUser currentUser = auth.getCurrentUser();
         auth.addAuthStateListener(authStateListener);
 
     }
@@ -142,5 +149,37 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     }
                 });
     }
+
+    private void getDataFromDatabase(String email, String password, FirebaseUser firebaseUser) {
+
+        DatabaseReference myRef = db.getReference(firebaseUser.getUid());
+        Pupil newUser = new Pupil(email,password,false,0,0,0,0,
+                0,0,0,null,0,
+                new Experience(1,0),0,"male");
+        myRef.setValue(newUser);
+
+
+        /*
+        // Read from the database
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                Pupil value = dataSnapshot.getValue(Pupil.class);
+                Log.d("dataRead", "Value is: " + value.getUsername());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w("dataRead", "Failed to read value.", error.toException());
+            }
+        });
+         */
+
+
+    }
+
 
 }
