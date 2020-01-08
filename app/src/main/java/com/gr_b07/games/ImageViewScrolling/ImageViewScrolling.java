@@ -24,26 +24,25 @@ public class ImageViewScrolling extends FrameLayout {
         this.eventEnd = eventEnd;
     }
 
-    public ImageViewScrolling(@NonNull Context context) {
+    public ImageViewScrolling(Context context) {
         super(context);
         init(context);
     }
 
-    public ImageViewScrolling(@NonNull Context context, @Nullable AttributeSet attrs) {
+    public ImageViewScrolling(Context context,AttributeSet attrs) {
         super(context, attrs);
         init(context);
     }
 
     private void init(Context context) {
-        LayoutInflater.from(context).inflate(R.layout.activity_slot_machine,this);
+        LayoutInflater.from(context).inflate(R.layout.image_view_scrolling,this);
         currentImage = (ImageView)getRootView().findViewById(R.id.currentImage);
         nextImage = (ImageView)getRootView().findViewById(R.id.nextImage);
-
         nextImage.setTranslationY(getHeight());
     }
 
-    public void setValueRandom(final int image, final int rotateCout){
-       currentImage.animate().translationY(-getHeight()).setDuration(animationDuration).start();
+    public void setValueRandom(final int image, final int rotateCount){
+        currentImage.animate().translationY(-getHeight()).setDuration(animationDuration).start();
        nextImage.setTranslationY(nextImage.getHeight());
        nextImage.animate().translationY(0).setDuration(animationDuration).setListener(new Animator.AnimatorListener() {
            @Override
@@ -55,14 +54,14 @@ public class ImageViewScrolling extends FrameLayout {
            public void onAnimationEnd(Animator animation) {
            setImage(currentImage,oldValue%6);
            currentImage.setTranslationY(0);
-           if(oldValue != rotateCout){
-               setValueRandom(image,rotateCout);
+           if(oldValue != rotateCount){
+               setValueRandom(image,rotateCount);
                oldValue++;
                }else{
                lastResult = 0;
                oldValue = 0;
                setImage(nextImage,image);
-               eventEnd.eventEnd(image%6,rotateCout);
+               eventEnd.eventEnd(image%6,rotateCount);
                }
            }
 
