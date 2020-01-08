@@ -17,6 +17,7 @@ import android.widget.Toast;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.gr_b07.logik.FB;
 import com.gr_b07.logik.Pupil;
 import com.gr_b07.logik.Settings;
 
@@ -36,6 +37,7 @@ public class InputDataActivity extends AppCompatActivity implements View.OnClick
     private TextView textViewKG;
     private Button doneButton;
     private Calendar calendar;
+    private FB fb = new FB();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -135,18 +137,13 @@ public class InputDataActivity extends AppCompatActivity implements View.OnClick
                     && dateTextView.getText().toString().length() <= 10 && (maleRadioButton.isChecked() || femaleRadioButton.isChecked())) {
                 Settings.getCurrentPupil().setHeight(Double.parseDouble(editTextHeight.getText().toString()));
                 editTextHeight.setText(editTextHeight.getText().toString());
-                Log.d("heigth", "" + Settings.getCurrentPupil().getHeight());
                 Settings.getCurrentPupil().setWeight(Double.parseDouble(editTextWeigth.getText().toString()));
                 editTextWeigth.setText(editTextWeigth.getText().toString());
-                Log.d("weigth", "" + Settings.getCurrentPupil().getWeight());
                 Settings.getCurrentPupil().setBmi(Settings.getCurrentPupil().getWeight() /
                         (Math.pow(Settings.getCurrentPupil().getHeight() / 100, 2)));
-                Log.d("bmi", "" + Settings.getCurrentPupil().getBmi());
                 DecimalFormat df = new DecimalFormat("#.##");
-                Toast.makeText(this, "Your body mass index is : " + df.format(Settings.getCurrentPupil().getBmi()),
-                        Toast.LENGTH_SHORT).show();
 
-                Log.d(Integer.toString(calculateAge()), "doneButtonClick: AGE ");
+
                 Settings.getCurrentPupil().setAge(calculateAge());
 
 
@@ -158,6 +155,8 @@ public class InputDataActivity extends AppCompatActivity implements View.OnClick
                     (Settings.getCurrentPupil()).setGender("female");
                     femaleRadioButton.toggle();
                 }
+
+                fb.updateDatabase(Settings.getCurrentPupil(),fb.getAuth().getCurrentUser());
 
                 Intent mainMenuIntent = new Intent(this, MainMenuActivity.class);
                 startActivity(mainMenuIntent);
@@ -172,7 +171,6 @@ public class InputDataActivity extends AppCompatActivity implements View.OnClick
         long timeBetween = now.getTime() - Settings.getCurrentPupil().getDateOfBirth().getTime();
         double yearsBetween = timeBetween / 3.15576e+10;
         int age = (int) Math.floor(yearsBetween);
-        Log.d(Integer.toString(age), "doneButtonClick: AGE");
         return age;
 
     }

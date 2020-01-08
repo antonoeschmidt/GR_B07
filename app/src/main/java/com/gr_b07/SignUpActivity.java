@@ -3,7 +3,9 @@ package com.gr_b07;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -27,7 +29,9 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.gr_b07.logik.Experience;
+import com.gr_b07.logik.FB;
 import com.gr_b07.logik.Pupil;
+import com.gr_b07.logik.Settings;
 import com.gr_b07.logik.User;
 
 import java.util.HashMap;
@@ -43,6 +47,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
     private FirebaseAuth auth;
     private FirebaseDatabase db;
+
+    private FB fb = new FB();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,67 +73,10 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.signUpButton:
-                signUp();
+                final String email = usernameText.getText().toString();
+                final String password = passwordText.getText().toString();
+                fb.signUp(this, email,password);
                 break;
         }
-    }
-
-    private void signUp() {
-        progressDialog.show();
-
-        final String email = usernameText.getText().toString();
-        final String password = passwordText.getText().toString();
-
-        auth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            Log.d("createUser", "createUserWithEmail:success");
-                            Toast.makeText(SignUpActivity.this, "Authentication success.",
-                                    Toast.LENGTH_SHORT).show();
-                            FirebaseUser user = auth.getCurrentUser();
-                            insertToDatabase(email, password, user);
-                            progressDialog.hide();
-                        } else {
-                            Log.d("createUser", "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(SignUpActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                            progressDialog.hide();
-                        }
-                    }
-                });
-
-
-    }
-
-    private void insertToDatabase(String email, String password, FirebaseUser firebaseUser) {
-
-        DatabaseReference myRef = db.getReference(firebaseUser.getUid());
-        Pupil newUser = new Pupil(true, email,password,false,0,0,0,0,
-                0,0,0,null,0,
-                new Experience(1,0),0,"male");
-        myRef.setValue(newUser);
-
-        /*
-        // Read from the database
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                Pupil value = dataSnapshot.getValue(Pupil.class);
-                Log.d("dataRead", "Value is: " + value.getUsername());
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                Log.w("dataRead", "Failed to read value.", error.toException());
-            }
-        });
-         */
-
-
     }
 }
