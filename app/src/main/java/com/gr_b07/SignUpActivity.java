@@ -104,11 +104,10 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     private void insertToDatabase(String email, String password, FirebaseUser firebaseUser) {
 
         DatabaseReference myRef = db.getReference(firebaseUser.getUid());
-        Pupil newUser = new Pupil(email,password,false,0,0,0,0,
+        Pupil newUser = new Pupil(true, email,password,false,0,0,0,0,
                 0,0,0,null,0,
                 new Experience(1,0),0,"male");
         myRef.setValue(newUser);
-
 
         /*
         // Read from the database

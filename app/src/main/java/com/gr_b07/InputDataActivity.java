@@ -167,7 +167,6 @@ public class InputDataActivity extends AppCompatActivity implements View.OnClick
 
     public int calculateAge() throws NumberFormatException, ParseException {
         SimpleDateFormat f1 = new SimpleDateFormat("dd/MM/yyyy");
-        SimpleDateFormat f2 = new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
         Date now = new Date(System.currentTimeMillis());
         Settings.getCurrentPupil().setDateOfBirth(f1.parse(dateTextView.getText().toString()));
         long timeBetween = now.getTime() - Settings.getCurrentPupil().getDateOfBirth().getTime();

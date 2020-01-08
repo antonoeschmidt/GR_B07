@@ -3,6 +3,7 @@ package com.gr_b07;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -18,12 +19,17 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.gr_b07.logik.Experience;
 import com.gr_b07.logik.Pupil;
 import com.gr_b07.logik.Settings;
 import com.gr_b07.logik.User;
+
+import java.util.Date;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     private EditText usernameText;
@@ -71,8 +77,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         // TODO: DELETE THIS
 
-        usernameText.setText("test@test.dk");
-        passwordText.setText("test123");
+        usernameText.setText("nyigen@kk.dk");
+        passwordText.setText("nyziyang123");
     }
 
     @Override
@@ -87,7 +93,25 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.loginButton:
-                signIn();
+                /*
+                if (usernameText.getText().toString().equals("admin") && passwordText.getText().toString().equals("admin")) {
+                    //adminlogin
+                } else {
+                    firebaseSignIn();
+                }
+                */
+                Log.d("pupil", ""+ Settings.getCurrentPupil());
+                Log.d("user", ""+ Settings.getCurrentUser());
+                firebaseSignIn();
+                Log.d("pupil", ""+ Settings.getCurrentPupil());
+                Log.d("user", ""+ Settings.getCurrentUser());
+
+
+
+
+
+
+
                 /*if (login(usernameText.getText().toString()
                         ,passwordText.getText().toString())) {
                     //Toast.makeText(this, "Login virker", Toast.LENGTH_SHORT).show();
@@ -122,8 +146,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         return false;
     }
 
-    public void signIn() {
-
+    public void firebaseSignIn() {
         progressDialog.show();
 
         String email = usernameText.getText().toString();
@@ -136,9 +159,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             Log.d("loginFire", "signInWithEmail:success");
-                            Toast.makeText(LoginActivity.this, "Authentication success.",
-                                    Toast.LENGTH_SHORT).show();
-                            FirebaseUser user = auth.getCurrentUser();
+                            Toast.makeText(LoginActivity.this, "Authentication success.", Toast.LENGTH_SHORT).show();
+
+                            FirebaseUser firebaseUser = auth.getCurrentUser();
+                            if (firebaseUser != null) getDataFromDatabase(firebaseUser);
+                            if (Settings.getCurrentUser() != null) {
+                                if (Settings.getCurrentUser().getClass().equals(Pupil.class)) {
+                                    Settings.setCurrentPupil((Pupil)Settings.getCurrentUser());
+                                }
+                            }
                             progressDialog.hide();
                         } else {
                             Log.d("loginFire", "signInWithEmail:failure", task.getException());
@@ -150,36 +179,73 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 });
     }
 
-    private void getDataFromDatabase(String email, String password, FirebaseUser firebaseUser) {
-
+    private void getDataFromDatabase(FirebaseUser firebaseUser) {
         DatabaseReference myRef = db.getReference(firebaseUser.getUid());
-        Pupil newUser = new Pupil(email,password,false,0,0,0,0,
-                0,0,0,null,0,
-                new Experience(1,0),0,"male");
-        myRef.setValue(newUser);
 
-
-        /*
         // Read from the database
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                Pupil value = dataSnapshot.getValue(Pupil.class);
-                Log.d("dataRead", "Value is: " + value.getUsername());
-            }
 
+                String email = dataSnapshot.child("username").getValue(String.class);
+                String password = dataSnapshot.child("password").getValue(String.class);
+                double height = (double)(dataSnapshot.child("height").getValue(Long.class));
+                double weight = (double)(dataSnapshot.child("weight").getValue(Long.class));
+                double bmi = (double)(dataSnapshot.child("bmi").getValue(Long.class));
+                double calories = (double)(dataSnapshot.child("calories").getValue(Long.class));
+                double protein = (double)(dataSnapshot.child("protein").getValue(Long.class));
+                double carbs = (double)(dataSnapshot.child("carbs").getValue(Long.class));
+                double fat = (double)(dataSnapshot.child("fat").getValue(Long.class));
+                Date dateOfBirth = null;
+                int age = (dataSnapshot.child("height").getValue(Long.class).intValue());
+                int ticket = (dataSnapshot.child("ticket").getValue(Long.class).intValue());
+                String gender = dataSnapshot.child("gender").getValue(String.class);
+
+                Settings.setCurrentUser(new Pupil(email,password, true,height,weight,bmi,calories,
+                        protein,carbs,fat,null,age,
+                        new Experience(1,0),0,gender));
+
+                if (Settings.getCurrentUser().getClass().equals(Pupil.class)) {
+                    Settings.setCurrentPupil((Pupil)Settings.getCurrentUser());
+                }
+                //TODO: denne kode burde ikke være i denne metode, men det virkede kun sådan her
+
+                if (Settings.getCurrentUser().isLoggedIn()) {
+                    Intent inputDataIntent = new Intent(LoginActivity.this, InputDataActivity.class);
+                    startActivity(inputDataIntent);
+                }
+
+                Log.d("dataRead", "Value is: " + email);
+                Log.d("dataRead", "Value is: " + password);
+                Log.d("dataRead", "Value is: " + height);
+                Log.d("dataRead", "Value is: " + weight);
+                Log.d("dataRead", "Value is: " + calories);
+                Log.d("dataRead", "Value is: " + bmi);
+                Log.d("dataRead", "Value is: " + protein);
+                Log.d("dataRead", "Value is: " + fat);
+                Log.d("dataRead", "Value is: " + carbs);
+                Log.d("dataRead", "Value is: " + age);
+                Log.d("dataRead", "Value is: " + ticket);
+                Log.d("dataRead", "Value is: " + gender);
+
+
+                //evt kan message bruges
+                /*
+                Message message = dataSnapshot.getValue(Message.class);
+                System.out.println(message);
+
+                 */
+
+
+
+            }
             @Override
             public void onCancelled(DatabaseError error) {
                 // Failed to read value
                 Log.w("dataRead", "Failed to read value.", error.toException());
             }
         });
-         */
-
 
     }
-
 
 }
