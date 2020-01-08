@@ -38,7 +38,7 @@
             android:text="Nutrition"
             android:textSize="28dp"
             android:fontFamily="@font/raleway"
-            android:background="@drawable/mainmenu_n_b"
+            android:background="@drawable/mainmenu_nutrition_button"
             android:gravity="center"
             android:textAllCaps="false" />
 
@@ -46,10 +46,10 @@
             android:id="@+id/mainmenu_button2"
             android:layout_width="match_parent"
             android:layout_height="430px"
-            android:text="Nutrition"
+            android:text="Activity"
             android:textSize="28dp"
             android:fontFamily="@font/raleway"
-            android:background="@drawable/mainmenu_a_b"
+            android:background="@drawable/mainmenu_activity_button"
             android:gravity="center"
             android:textAllCaps="false" />
 
@@ -61,7 +61,7 @@
             android:text="Social"
             android:textSize="28dp"
             android:fontFamily="@font/raleway"
-            android:background="@drawable/mainmenu_s_b"
+            android:background="@drawable/mainmenu_social_button"
             android:gravity="center"
             android:textAllCaps="false" />
 
@@ -69,8 +69,12 @@
             android:id="@+id/mainmenu_button4"
             android:layout_width="match_parent"
             android:layout_height="430px"
-            android:background="@drawable/mainmenu_rewards_button"
-            android:gravity="center" />
+            android:text="Reward"
+            android:textSize="28dp"
+            android:fontFamily="@font/raleway"
+            android:background="@drawable/mainmenu_reward_button"
+            android:gravity="center"
+            android:textAllCaps="false" />
 
     </LinearLayout>
 
@@ -109,6 +113,18 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintHorizontal_bias="0.1"
         app:layout_constraintVertical_bias="0.62"/>
+
+    <ImageView
+        android:id="@+id/reward_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/reward_image"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintVertical_bias="0.85"/>
 
     <TextView
         android:id="@+id/mainmenu_levelTextView"
