@@ -96,7 +96,7 @@ public class FB {
 
                 Settings.setCurrentUser(new Pupil(firstTimeLoggedIn, email, password, true, height, weight, bmi, calories,
                         protein, carbs, fat, null, age,
-                        new Experience(1, 0), 0, gender,0));
+                        new Experience(1, 0), ticket, gender,activityLevel));
 
                 if (Settings.getCurrentUser().getClass().equals(Pupil.class)) {
                     Settings.setCurrentPupil((Pupil) Settings.getCurrentUser());
