@@ -18,6 +18,9 @@ public class ImageViewScrolling extends FrameLayout {
     ImageView currentImage, nextImage;
     int lastResult = 0, oldValue = 0;
 
+    public int image;
+    public int imageCount;
+
     IEventEnd eventEnd;
 
     public void setEventEnd(IEventEnd eventEnd)  {
@@ -42,6 +45,7 @@ public class ImageViewScrolling extends FrameLayout {
     }
 
     public void setValueRandom(final int image, final int rotateCount){
+
         currentImage.animate().translationY(-getHeight()).setDuration(animationDuration).start();
        nextImage.setTranslationY(nextImage.getHeight());
        nextImage.animate().translationY(0).setDuration(animationDuration).setListener(new Animator.AnimatorListener() {
@@ -57,7 +61,7 @@ public class ImageViewScrolling extends FrameLayout {
            if(oldValue != rotateCount){
                setValueRandom(image,rotateCount);
                oldValue++;
-               }else{
+               } else {
                lastResult = 0;
                oldValue = 0;
                setImage(nextImage,image);
