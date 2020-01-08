@@ -77,18 +77,17 @@ public class SlotMachineActivity extends AppCompatActivity implements IEventEnd 
             } else {
                 buttonDown.setVisibility(View.GONE);
                 buttonUp.setVisibility(View.VISIBLE);
-
                 countDone = 0;
             }
 
-            if(image.getValue() == image2.getValue() && image.getValue() == image3.getValue()){
+            if(image.getValue() == image2.getValue() && image2.getValue() == image3.getValue()){
                 Toast.makeText(SlotMachineActivity.this,"Stor pris", Toast.LENGTH_SHORT).show();
                 SlotMachineLogic.tickets += 5;
-                tickets.setText(SlotMachineLogic.tickets);
+                tickets.setText(String.valueOf(SlotMachineLogic.tickets));
             } else if(image.getValue() == image2.getValue() || image2.getValue() == image3.getValue() || image.getValue() == image3.getValue()) {
                 Toast.makeText(SlotMachineActivity.this, "Lille pris", Toast.LENGTH_SHORT).show();
                 SlotMachineLogic.tickets += 2;
-                tickets.setText(SlotMachineLogic.tickets);
+                tickets.setText(String.valueOf(SlotMachineLogic.tickets));
             } else {
                 Toast.makeText(SlotMachineActivity.this, "Du taber", Toast.LENGTH_SHORT).show();
             }

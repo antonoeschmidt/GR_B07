@@ -36,7 +36,7 @@ public class ImageViewScrolling extends FrameLayout {
     }
 
     private void init(Context context) {
-        LayoutInflater.from(context).inflate(R.layout.image_view_scrolling,this);
+         LayoutInflater.from(context).inflate(R.layout.image_view_scrolling,this);
         currentImage = (ImageView)getRootView().findViewById(R.id.currentImage);
         nextImage = (ImageView)getRootView().findViewById(R.id.nextImage);
         nextImage.setTranslationY(getHeight());
