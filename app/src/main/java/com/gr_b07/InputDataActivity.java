@@ -168,6 +168,8 @@ public class InputDataActivity extends AppCompatActivity implements View.OnClick
                     femaleRadioButton.toggle();
                 }
 
+                Settings.getCurrentUser().setFirstTimeLoggedIn(false);
+
                 fb.updateDatabase(Settings.getCurrentPupil(),fb.getAuth().getCurrentUser());
 
                 Intent mainMenuIntent = new Intent(this, MainMenuActivity.class);
@@ -204,17 +206,4 @@ public class InputDataActivity extends AppCompatActivity implements View.OnClick
             activityLevelTextView.setText("Ekstremt aktivitetsniveau");
         }
     }
-        /*
-        //int d1 = Integer.parseInt(f1.format(Settings.getCurrentPupil().getDateOfBirth()));
-                //int d2 = Integer.parseInt(f2.format(System.currentTimeMillis()));
-
-                int d1 = 100;
-                int d2 = 100;
-                Log.d(Integer.toString(d1), "doneButtonClick: int1");
-                Log.d(Integer.toString(d2), "doneButtonClick: int2");
-                //int age = (d2-d1) / 10000;
-                //Log.d(Integer.toString(age), "doneButtonClick: ");
-                //Log.d(Integer.toString(calculateAge(Settings.getCurrentPupil().getDateOfBirth())), "doneButtonClick: ");
-         */
-
 }
