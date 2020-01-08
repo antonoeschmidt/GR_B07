@@ -18,8 +18,6 @@ public class ImageViewScrolling extends FrameLayout {
     ImageView currentImage, nextImage;
     int lastResult = 0, oldValue = 0;
 
-    public int image;
-    public int imageCount;
 
     IEventEnd eventEnd;
 
