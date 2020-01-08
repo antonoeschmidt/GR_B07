@@ -21,7 +21,6 @@
         <activity android:name=".nutrition.LunchActivity" />
         <activity android:name=".nutrition.BreakfastActivity" />
         <activity android:name=".InputDataActivity" />
-        <activity android:name=".SettingsActivity" />
         <activity android:name=".RewardsActivity" />
         <activity android:name=".SocialActivity" />
         <activity android:name=".ActivityActivity" />

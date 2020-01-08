@@ -91,16 +91,22 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.499" />
 
+
     <Button
         android:id="@+id/addMealButton"
-        android:layout_width="217dp"
-        android:layout_height="55dp"
-        android:background="@drawable/add_meal_button"
+        android:layout_width="270dp"
+        android:layout_height="60dp"
+        android:background="@drawable/button"
+        android:text="Add Meal"
+        android:textColor="#000000"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.885" />
+        app:layout_constraintVertical_bias="0.916"
+        android:textAllCaps="false"/>
+
 
     <AutoCompleteTextView
         android:id="@+id/autoTextView"

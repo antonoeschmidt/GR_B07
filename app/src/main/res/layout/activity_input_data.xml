@@ -153,15 +153,22 @@
 
     <Button
         android:id="@+id/doneButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="217dp"
+        android:layout_height="55dp"
         android:background="@drawable/input_done_button"
+        android:text="Done"
+        android:textColor="#1C2C06"
+        android:textSize="18sp"
+        tools:layout_editor_absoluteX="97dp"
+        tools:layout_editor_absoluteY="522dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.51"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.85" />
+        app:layout_constraintVertical_bias="0.85"
+        android:textAllCaps="false"/>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
