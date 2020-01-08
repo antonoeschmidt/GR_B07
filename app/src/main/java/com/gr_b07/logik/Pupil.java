@@ -6,7 +6,7 @@ public class Pupil extends User {
 
     private double height, weight, bmi, calories, protein, carbs, fat;
     private Date dateOfBirth;
-    private int age, ticket;
+    private int age, ticket, activityLevel;
     private Experience experience;
     private String gender;
 

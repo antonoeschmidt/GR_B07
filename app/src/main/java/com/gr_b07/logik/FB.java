@@ -55,7 +55,7 @@ public class FB {
 
                             Pupil newUser = new Pupil(true, email, password, false, 0, 0, 0, 0,
                                     0, 0, 0, null, 0,
-                                    new Experience(1, 0), 0, "n");
+                                    new Experience(1, 0), 0, "n",0);
 
                             updateDatabase(newUser, user);
                         } else {
@@ -92,10 +92,11 @@ public class FB {
                 int ticket = (dataSnapshot.child("ticket").getValue(Long.class).intValue());
                 String gender = dataSnapshot.child("gender").getValue(String.class);
                 boolean firstTimeLoggedIn = dataSnapshot.child("firstTimeLoggedIn").getValue(boolean.class);
+                int activityLevel = (dataSnapshot.child("activityLevel").getValue(Long.class).intValue());
 
                 Settings.setCurrentUser(new Pupil(firstTimeLoggedIn, email, password, true, height, weight, bmi, calories,
                         protein, carbs, fat, null, age,
-                        new Experience(1, 0), 0, gender));
+                        new Experience(1, 0), 0, gender,0));
 
                 if (Settings.getCurrentUser().getClass().equals(Pupil.class)) {
                     Settings.setCurrentPupil((Pupil) Settings.getCurrentUser());
