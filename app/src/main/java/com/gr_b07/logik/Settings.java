@@ -9,7 +9,7 @@ public class Settings {
 
     private static ArrayList<User> users = new ArrayList<User>() {
         {
-            add(new Pupil("anton","1234",false,0,0,0,0,
+            add(new Pupil("anton","1234",false,185,75,0,0,
                     0,0,0,null,0,
                     new Experience(1,0),0,"male",0));
 

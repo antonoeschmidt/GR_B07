@@ -69,27 +69,21 @@ public class InputDataActivity extends AppCompatActivity implements View.OnClick
 
 
         // TODO: DELETE THIS. Only here for easier testing
-        //nedenstående gør at man ikke kan ændre i sin data - men hurtigere for testing
-
-        dateTextView.setText("01/12/1998");
-
-        maleRadioButton.toggle();
-        editTextHeight.setText("184");
-        editTextWeigth.setText("76");
-
-        if ((Settings.getCurrentPupil()).getGender() != null && Settings.getCurrentPupil().getHeight() != 0
-                && Settings.getCurrentPupil().getWeight() != 0) {
-            if (((Settings.getCurrentPupil()).getGender().equals("male"))) {
-                maleRadioButton.toggle();
-            } else {
-                femaleRadioButton.toggle();
-            }
-            editTextWeigth.setText("" + (int) Settings.getCurrentPupil().getWeight());
-            editTextHeight.setText("" + (int) Settings.getCurrentPupil().getHeight());
+        if (((Settings.getCurrentPupil()).getGender().equals("male"))) {
+            maleRadioButton.toggle();
+        } else {
+            femaleRadioButton.toggle();
         }
+        dateTextView.setText("01/12/1998");
+        editTextHeight.setText(Integer.toString((int) Math.round (Settings.getCurrentPupil().getHeight())));
+        editTextWeigth.setText(Integer.toString((int) Math.round (Settings.getCurrentPupil().getWeight())));
+        activityLevelRatingBar.setRating(Settings.getCurrentPupil().getActivityLevel());
+        updateActivityLevelView();
+
 
 
     }
+
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
