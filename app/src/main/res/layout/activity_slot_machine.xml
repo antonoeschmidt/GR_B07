@@ -10,6 +10,15 @@
     android:background="@drawable/gradient_rewards">
 
 
+    <TextView
+        android:id="@+id/tickets"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ticketbtn"
+        android:padding="15dp"
+        android:text="Tickets"
+        android:textColor="@color/colorFat"/>
+
     <FrameLayout
         android:id="@+id/slotFrame"
         android:layout_width="330dp"
@@ -53,6 +62,7 @@
         android:src="@drawable/up" />
 
     <ImageView
+        android:id="@+id/buttonDown"
         android:src="@drawable/down"
         android:layout_width="18dp"
         android:layout_height="176dp"
