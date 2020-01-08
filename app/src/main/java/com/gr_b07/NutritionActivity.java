@@ -87,7 +87,6 @@ public class NutritionActivity extends AppCompatActivity implements View.OnClick
                 Intent snacksIntent = new Intent(this, SnacksActivity.class); startActivity(snacksIntent);
                 break;
         }
-
     }
 
     public void updateView(){

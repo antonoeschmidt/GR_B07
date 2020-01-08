@@ -20,6 +20,7 @@ import android.widget.Toast;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.gr_b07.logik.FB;
 import com.gr_b07.logik.Pupil;
 import com.gr_b07.logik.Settings;
 
@@ -37,6 +38,7 @@ public class InputDataActivity extends AppCompatActivity implements View.OnClick
     private Button doneButton;
     private Calendar calendar;
     private RatingBar activityLevelRatingBar;
+    private FB fb = new FB();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,7 +85,6 @@ public class InputDataActivity extends AppCompatActivity implements View.OnClick
 
 
     }
-
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -142,21 +143,16 @@ public class InputDataActivity extends AppCompatActivity implements View.OnClick
         }
             // else if they're both containing something - set height, weight and calculate body mass index.
             else if (!editTextWeigth.getText().toString().isEmpty() && !editTextHeight.getText().toString().isEmpty()
-                    && dateTextView.getText().toString().length() <= 10 && (maleRadioButton.isChecked() || femaleRadioButton.isChecked()) && activityLevelRatingBar.getRating()!=0) {
+                    && dateTextView.getText().toString().length() <= 10 && (maleRadioButton.isChecked() || femaleRadioButton.isChecked())) {
                 Settings.getCurrentPupil().setHeight(Double.parseDouble(editTextHeight.getText().toString()));
                 editTextHeight.setText(editTextHeight.getText().toString());
-                Log.d("heigth", "" + Settings.getCurrentPupil().getHeight());
                 Settings.getCurrentPupil().setWeight(Double.parseDouble(editTextWeigth.getText().toString()));
                 editTextWeigth.setText(editTextWeigth.getText().toString());
-                Log.d("weigth", "" + Settings.getCurrentPupil().getWeight());
                 Settings.getCurrentPupil().setBmi(Settings.getCurrentPupil().getWeight() /
                         (Math.pow(Settings.getCurrentPupil().getHeight() / 100, 2)));
-                Log.d("bmi", "" + Settings.getCurrentPupil().getBmi());
                 DecimalFormat df = new DecimalFormat("#.##");
-                Toast.makeText(this, "Your body mass index is : " + df.format(Settings.getCurrentPupil().getBmi()),
-                        Toast.LENGTH_SHORT).show();
 
-                Log.d(Integer.toString(calculateAge()), "doneButtonClick: AGE ");
+
                 Settings.getCurrentPupil().setAge(calculateAge());
 
                 Settings.getCurrentPupil().setActivityLevel((int) Math.round(activityLevelRatingBar.getRating()));
@@ -172,6 +168,8 @@ public class InputDataActivity extends AppCompatActivity implements View.OnClick
                     femaleRadioButton.toggle();
                 }
 
+                fb.updateDatabase(Settings.getCurrentPupil(),fb.getAuth().getCurrentUser());
+
                 Intent mainMenuIntent = new Intent(this, MainMenuActivity.class);
                 startActivity(mainMenuIntent);
             }
@@ -180,14 +178,13 @@ public class InputDataActivity extends AppCompatActivity implements View.OnClick
 
     public int calculateAge() throws NumberFormatException, ParseException {
         SimpleDateFormat f1 = new SimpleDateFormat("dd/MM/yyyy");
-        SimpleDateFormat f2 = new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
         Date now = new Date(System.currentTimeMillis());
         Settings.getCurrentPupil().setDateOfBirth(f1.parse(dateTextView.getText().toString()));
         long timeBetween = now.getTime() - Settings.getCurrentPupil().getDateOfBirth().getTime();
         double yearsBetween = timeBetween / 3.15576e+10;
         int age = (int) Math.floor(yearsBetween);
-        Log.d(Integer.toString(age), "doneButtonClick: AGE");
         return age;
+
     }
 
     public void updateActivityLevelView() {

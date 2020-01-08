@@ -6,14 +6,14 @@ public class Pupil extends User {
 
     private double height, weight, bmi, calories, protein, carbs, fat;
     private Date dateOfBirth;
-    private int age, ticket, activityLevel;
+    private int age, ticket;
     private Experience experience;
     private String gender;
 
-    public Pupil(String username, String password, boolean loggedIn, double height,
+    public Pupil(boolean firstTimeLoggedIn, String username, String password, boolean loggedIn, double height,
                  double weight, double bmi, double calories, double protein, double carbs, double fat,
                  Date dateOfBirth, int age, Experience experience, int ticket, String gender, int activityLevel) {
-        super(username, password, loggedIn);
+        super(firstTimeLoggedIn, username, password, loggedIn);
         this.height = height;
         this.weight = weight;
         this.bmi = bmi;
