@@ -33,7 +33,7 @@ public class StatisticsActivity extends AppCompatActivity {
 
 
     public void addData() {
-        Point[] dataObjects = {new Point(1,2),new Point(2,4),new Point(3,7),new Point(4,8)};
+        Point[] dataObjects = {new Point(1, 2), new Point(2, 4), new Point(3, 7), new Point(4, 8)};
         List<Entry> entries = new ArrayList<Entry>();
         for (Point data : dataObjects) {
             // turn your data into Entry objects
@@ -50,13 +50,13 @@ public class StatisticsActivity extends AppCompatActivity {
 
         LimitLine upperLimit = new LimitLine(7, "Daily");
         upperLimit.setLineWidth(4f);
-        upperLimit.enableDashedLine(10f,10f,0);
+        upperLimit.enableDashedLine(10f, 10f, 0);
         upperLimit.setLabelPosition(LimitLine.LimitLabelPosition.LEFT_TOP);
         upperLimit.setTextSize(15f);
 
         YAxis yAxis = lineChart.getAxisLeft();
         yAxis.addLimitLine(upperLimit);
-        yAxis.enableGridDashedLine(10f,10f,0);
+        yAxis.enableGridDashedLine(10f, 10f, 0);
 
 
         LineData lineData = new LineData(dataSet);
@@ -64,11 +64,4 @@ public class StatisticsActivity extends AppCompatActivity {
         lineChart.invalidate();
 
     }
-
-
-
-
-
-
-
 }
