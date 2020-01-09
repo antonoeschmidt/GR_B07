@@ -92,33 +92,53 @@
             android:id="@+id/breakfastButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/nutrition_breakfast_button"
-            android:gravity="center"
-            android:layout_marginTop="2dp"/>
+            android:background="@drawable/nutrition_buttons"
+            android:text="  Breakfast"
+            android:textSize="28dp"
+            android:fontFamily="@font/raleway"
+            android:textAlignment="viewStart"
+            android:layout_marginTop="8dp"
+            android:textAllCaps="false"
+            android:layout_marginBottom="8dp" />
 
         <Button
             android:id="@+id/lunchButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/nutrition_lunch_button"
-            android:gravity="center"
-            android:layout_marginTop="2dp"/>
+            android:background="@drawable/nutrition_buttons"
+            android:text="  Lunch"
+            android:textSize="28dp"
+            android:fontFamily="@font/raleway"
+            android:textAlignment="viewStart"
+            android:layout_marginTop="2dp"
+            android:textAllCaps="false"
+            android:layout_marginBottom="8dp" />
+
 
         <Button
             android:id="@+id/dinnerButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/nutrition_dinner_button"
-            android:gravity="center"
-            android:layout_marginTop="2dp"/>
+            android:background="@drawable/nutrition_buttons"
+            android:text="  Dinner"
+            android:textSize="28dp"
+            android:fontFamily="@font/raleway"
+            android:textAlignment="viewStart"
+            android:layout_marginTop="2dp"
+            android:textAllCaps="false"
+            android:layout_marginBottom="8dp"/>
 
         <Button
-            android:id="@+id/snacksButton"
+            android:id="@+id/snackButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/nutrition_snacks_button"
-            android:gravity="center"
-            android:layout_marginTop="2dp"/>
+            android:background="@drawable/nutrition_buttons"
+            android:text="  Snack"
+            android:textSize="28dp"
+            android:fontFamily="@font/raleway"
+            android:textAlignment="viewStart"
+            android:layout_marginTop="2dp"
+            android:textAllCaps="false"/>
 
     </LinearLayout>
 

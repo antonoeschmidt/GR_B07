@@ -50,7 +50,7 @@ public class NutritionActivity extends AppCompatActivity implements View.OnClick
         breakfastButton = findViewById(R.id.breakfastButton);
         lunchButton = findViewById(R.id.lunchButton);
         dinnerButton = findViewById(R.id.dinnerButton);
-        snacksButton = findViewById(R.id.snacksButton);
+        snacksButton = findViewById(R.id.snackButton);
 
         breakfastButton.setOnClickListener(this);
         lunchButton.setOnClickListener(this);
@@ -83,7 +83,7 @@ public class NutritionActivity extends AppCompatActivity implements View.OnClick
             case R.id.dinnerButton:
                 Intent dinnerIntent = new Intent(this, DinnerActivity.class); startActivity(dinnerIntent);
                 break;
-            case R.id.snacksButton:
+            case R.id.snackButton:
                 Intent snacksIntent = new Intent(this, SnacksActivity.class); startActivity(snacksIntent);
                 break;
         }

@@ -105,7 +105,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.916"
-        android:textAllCaps="false"/>
+        android:textAllCaps="false"
+        style="?android:attr/borderlessButtonStyle"/>
 
 
     <AutoCompleteTextView
@@ -123,15 +124,16 @@
 
     <Button
         android:id="@+id/searchFoodButton"
-        android:layout_width="71dp"
-        android:layout_height="41dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        style="?android:attr/borderlessButtonStyle"
         android:background="@drawable/search_food_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.95"
+        app:layout_constraintHorizontal_bias="0.845"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.167" />
+        app:layout_constraintVertical_bias="0.162" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
