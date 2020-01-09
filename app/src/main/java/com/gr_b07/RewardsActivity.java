@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.gr_b07.logik.FB;
 import com.gr_b07.logik.Settings;
 
 public class RewardsActivity extends AppCompatActivity implements View.OnClickListener{

@@ -61,7 +61,9 @@ public class NutritionActivity extends AppCompatActivity implements View.OnClick
 
         updateMacros();
         updateView();
-        createDBarray();
+        if (foodAutoText == null) {
+            createDBarray();
+        }
     }
 
     @Override
@@ -87,7 +89,6 @@ public class NutritionActivity extends AppCompatActivity implements View.OnClick
                 Intent snacksIntent = new Intent(this, SnacksActivity.class); startActivity(snacksIntent);
                 break;
         }
-
     }
 
     public void updateView(){
@@ -182,4 +183,10 @@ public class NutritionActivity extends AppCompatActivity implements View.OnClick
 
      */
 
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        System.out.println("destroy!");
+    }
 }
