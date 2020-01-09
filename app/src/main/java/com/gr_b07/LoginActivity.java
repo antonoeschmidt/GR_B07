@@ -69,10 +69,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.loginButton:
+                progressDialog.show();
                 if (usernameText.getText().toString().equals("admin") && passwordText.getText().toString().equals("admin")) {
                     //adminlogin
                 } else {
-                    fb.firebaseSignIn(this,usernameText.getText().toString(),passwordText.getText().toString());
+                    fb.firebaseSignIn(progressDialog,this,usernameText.getText().toString(),passwordText.getText().toString());
                 }
                 break;
 

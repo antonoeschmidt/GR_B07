@@ -1,6 +1,7 @@
 package com.gr_b07.logik;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.util.Log;
 import android.widget.Toast;
@@ -44,13 +45,15 @@ public class FB {
         auth.addAuthStateListener(authStateListener);
     }
 
-    public void signUp(final Activity activity, final String email, final String password) {
+    public void signUp(final ProgressDialog progressDialog, final Activity activity, final String email, final String password) {
         auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(activity, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             Log.d("createUser", "createUserWithEmail:success");
+                            Toast.makeText(activity, "Sign Up Success", Toast.LENGTH_SHORT).show();
+
                             FirebaseUser user = auth.getCurrentUser();
 
                             Pupil newUser = new Pupil(true, email, password, false, 0, 0, 0, 0,
@@ -58,8 +61,11 @@ public class FB {
                                     new Experience(1, 0), 0, "n",0);
 
                             updateDatabase(newUser, user);
+                            progressDialog.hide();
                         } else {
                             Log.d("createUser", "createUserWithEmail:failure", task.getException());
+                            Toast.makeText(activity, "Sign Up Failed", Toast.LENGTH_SHORT).show();
+
 
                         }
                     }
@@ -102,6 +108,7 @@ public class FB {
                     Settings.setCurrentPupil((Pupil) Settings.getCurrentUser());
                 }
                 //TODO: denne kode burde ikke være i denne metode, men det virkede kun sådan her
+                //pga async netværkskommunikation - burde være i SignIn/Login
 
                 if (Settings.getCurrentUser().isLoggedIn() && Settings.getCurrentUser().isFirstTimeLoggedIn()) {
                     Intent inputDataIntent = new Intent(activity, InputDataActivity.class);
@@ -121,13 +128,14 @@ public class FB {
 
     }
 
-    public void firebaseSignIn(final Activity activity, String email, String password) {
+    public void firebaseSignIn(final ProgressDialog progressDialog, final Activity activity, String email, String password) {
         auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(activity, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             Log.d("loginFire", "signInWithEmail:success");
+                            Toast.makeText(activity, "Logged In Success", Toast.LENGTH_SHORT).show();
 
                             FirebaseUser firebaseUser = auth.getCurrentUser();
                             if (firebaseUser != null) getDataFromDatabase(activity, firebaseUser);
@@ -136,8 +144,12 @@ public class FB {
                                     Settings.setCurrentPupil((Pupil) Settings.getCurrentUser());
                                 }
                             }
+
+                            progressDialog.hide();
+
                         } else {
                             Log.d("loginFire", "signInWithEmail:failure", task.getException());
+                            Toast.makeText(activity, "Logged In Failed", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

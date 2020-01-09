@@ -73,9 +73,10 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.signUpButton:
+                progressDialog.show();
                 final String email = usernameText.getText().toString();
                 final String password = passwordText.getText().toString();
-                fb.signUp(this, email,password);
+                fb.signUp(progressDialog,this, email,password);
                 break;
         }
     }
