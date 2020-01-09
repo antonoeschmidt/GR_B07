@@ -45,18 +45,12 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     private Button signUpButton;
     private ProgressDialog progressDialog;
 
-    private FirebaseAuth auth;
-    private FirebaseDatabase db;
-
     private FB fb = new FB();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
-
-        auth = FirebaseAuth.getInstance();
-        db = FirebaseDatabase.getInstance();
 
         usernameText = findViewById(R.id.usernameText);
         passwordText = findViewById(R.id.passwordText);
