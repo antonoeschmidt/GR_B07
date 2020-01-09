@@ -181,4 +181,10 @@ public class NutritionActivity extends AppCompatActivity implements View.OnClick
 
      */
 
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        System.out.println("destroy!");
+    }
 }

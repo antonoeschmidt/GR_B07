@@ -77,8 +77,8 @@ public class FB {
         myRef.setValue(pupil);
     }
 
-    public void getDataFromDatabase(final Activity activity, FirebaseUser firebaseUser) {
-        DatabaseReference myRef = db.getReference(firebaseUser.getUid());
+    public void getDataFromDatabase(final Activity activity, String UID) {
+        DatabaseReference myRef = db.getReference(UID);
 
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -138,7 +138,7 @@ public class FB {
                             Toast.makeText(activity, "Logged In Success", Toast.LENGTH_SHORT).show();
 
                             FirebaseUser firebaseUser = auth.getCurrentUser();
-                            if (firebaseUser != null) getDataFromDatabase(activity, firebaseUser);
+                            if (firebaseUser != null) getDataFromDatabase(activity, firebaseUser.getUid());
                             if (Settings.getCurrentUser() != null) {
                                 if (Settings.getCurrentUser().getClass().equals(Pupil.class)) {
                                     Settings.setCurrentPupil((Pupil) Settings.getCurrentUser());
