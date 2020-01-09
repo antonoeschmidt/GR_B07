@@ -96,10 +96,10 @@ public class NutritionActivity extends AppCompatActivity implements View.OnClick
         pProgress.setProgress((int) Math.round(Settings.getCurrentPupil().getProtein()));
         cProgress.setProgress((int) Math.round(Settings.getCurrentPupil().getCarbs()));
         fProgress.setProgress((int) Math.round(Settings.getCurrentPupil().getFat()));
-        caloriesTextView.setText("Calories: \n" +  cRing.getProgress() + "  /  " + cRing.getMax());
-        proteinTextView.setText("Protein: " + pProgress.getProgress() +  "  /  " + pProgress.getMax() + " g");
-        carbsTextView.setText("Carbs: "+ cProgress.getProgress() + "  /  " + cProgress.getMax() + " g");
-        fatTextView.setText("Fat: " + fProgress.getProgress() + "  /  " + fProgress.getMax() + " g");
+        caloriesTextView.setText("Calories: \n" + (int) Settings.getCurrentPupil().getCalories() + "  /  " + cRing.getMax());
+        proteinTextView.setText("Protein: " + (int) Settings.getCurrentPupil().getProtein() +  "  /  " + pProgress.getMax() + " g");
+        carbsTextView.setText("Carbs: "+ (int) Settings.getCurrentPupil().getCarbs() + "  /  " + cProgress.getMax() + " g");
+        fatTextView.setText("Fat: " + (int) Settings.getCurrentPupil().getFat() + "  /  " + fProgress.getMax() + " g");
     }
 
     private void createDBarray() {
