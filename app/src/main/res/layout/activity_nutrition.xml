@@ -142,6 +142,19 @@
             android:layout_marginTop="2dp"
             android:textAllCaps="false"/>
 
+        <Button
+            android:id="@+id/statsButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:background="@drawable/nutrition_buttons"
+            android:fontFamily="@font/raleway"
+            android:text="Stats"
+            android:textAlignment="viewStart"
+            android:textAllCaps="false"
+            android:textSize="28dp" />
+
+
     </LinearLayout>
 
 
