@@ -61,7 +61,9 @@ public class NutritionActivity extends AppCompatActivity implements View.OnClick
 
         updateMacros();
         updateView();
-        createDBarray();
+        if (foodAutoText == null) {
+            createDBarray();
+        }
     }
 
     @Override
