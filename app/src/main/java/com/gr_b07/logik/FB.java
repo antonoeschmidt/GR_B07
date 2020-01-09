@@ -19,7 +19,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.gr_b07.InputDataActivity;
-import com.gr_b07.LoginActivity;
 import com.gr_b07.MainMenuActivity;
 
 import java.util.Date;
@@ -58,7 +57,7 @@ public class FB {
 
                             Pupil newUser = new Pupil(true, email, password, false, 0, 0, 0, 0,
                                     0, 0, 0, null, 0,
-                                    new Experience(1, 0), 0, "n",0);
+                                    new Experience(1, 0), 0, "n", 0);
 
                             updateDatabase(newUser, user);
                             progressDialog.hide();
@@ -77,32 +76,14 @@ public class FB {
         myRef.setValue(pupil);
     }
 
-    public void getDataFromDatabase(final Activity activity, String UID) {
+    public void checkFirstTimeLoggedInFromDatabase(final Activity activity, String UID) {
         DatabaseReference myRef = db.getReference(UID);
 
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onDataChange(DataSnapshot d) {
 
-                String email = dataSnapshot.child("username").getValue(String.class);
-                String password = dataSnapshot.child("password").getValue(String.class);
-                double height = (double) (dataSnapshot.child("height").getValue(Long.class));
-                double weight = (double) (dataSnapshot.child("weight").getValue(Long.class));
-                double bmi = (double) (dataSnapshot.child("bmi").getValue(Long.class));
-                double calories = (double) (dataSnapshot.child("calories").getValue(Long.class));
-                double protein = (double) (dataSnapshot.child("protein").getValue(Long.class));
-                double carbs = (double) (dataSnapshot.child("carbs").getValue(Long.class));
-                double fat = (double) (dataSnapshot.child("fat").getValue(Long.class));
-                Date dateOfBirth = null;
-                int age = (dataSnapshot.child("height").getValue(Long.class).intValue());
-                int ticket = (dataSnapshot.child("ticket").getValue(Long.class).intValue());
-                String gender = dataSnapshot.child("gender").getValue(String.class);
-                boolean firstTimeLoggedIn = dataSnapshot.child("firstTimeLoggedIn").getValue(boolean.class);
-                int activityLevel = (dataSnapshot.child("activityLevel").getValue(Long.class).intValue());
-
-                Settings.setCurrentUser(new Pupil(firstTimeLoggedIn, email, password, true, height, weight, bmi, calories,
-                        protein, carbs, fat, null, age,
-                        new Experience(1, 0), ticket, gender,activityLevel));
+                Settings.setCurrentUser(getUserFromDatabase(d));
 
                 if (Settings.getCurrentUser().getClass().equals(Pupil.class)) {
                     Settings.setCurrentPupil((Pupil) Settings.getCurrentUser());
@@ -138,7 +119,9 @@ public class FB {
                             Toast.makeText(activity, "Logged In Success", Toast.LENGTH_SHORT).show();
 
                             FirebaseUser firebaseUser = auth.getCurrentUser();
-                            if (firebaseUser != null) getDataFromDatabase(activity, firebaseUser.getUid());
+                            if (firebaseUser != null)
+                                checkFirstTimeLoggedInFromDatabase(activity, firebaseUser.getUid());
+
                             if (Settings.getCurrentUser() != null) {
                                 if (Settings.getCurrentUser().getClass().equals(Pupil.class)) {
                                     Settings.setCurrentPupil((Pupil) Settings.getCurrentUser());
@@ -154,6 +137,52 @@ public class FB {
                     }
                 });
     }
+
+    public void getAllUsersFromDatabase() {
+        Settings.getUsers().clear();
+        DatabaseReference myRef = db.getReference();
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    for (DataSnapshot d : dataSnapshot.getChildren()) {
+                        Settings.addUser(getUserFromDatabase(d));
+
+
+                    }
+                }
+            }//onDataChange
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    public User getUserFromDatabase(DataSnapshot d){
+        String email = d.child("username").getValue(String.class);
+        String password = d.child("password").getValue(String.class);
+        double height = (double) (d.child("height").getValue(Long.class));
+        double weight = (double) (d.child("weight").getValue(Long.class));
+        double bmi = (double) (d.child("bmi").getValue(Long.class));
+        double calories = (double) (d.child("calories").getValue(Long.class));
+        double protein = (double) (d.child("protein").getValue(Long.class));
+        double carbs = (double) (d.child("carbs").getValue(Long.class));
+        double fat = (double) (d.child("fat").getValue(Long.class));
+        Date dateOfBirth = null;
+        int age = (d.child("height").getValue(Long.class).intValue());
+        int ticket = (d.child("ticket").getValue(Long.class).intValue());
+        String gender = d.child("gender").getValue(String.class);
+        boolean firstTimeLoggedIn = d.child("firstTimeLoggedIn").getValue(boolean.class);
+        int activityLevel = (d.child("activityLevel").getValue(Long.class).intValue());
+
+        return new Pupil(firstTimeLoggedIn, email, password, true, height, weight, bmi, calories,
+                protein, carbs, fat, null, age,
+                new Experience(1, 0), ticket, gender, activityLevel);
+
+    }
+
 
     public FirebaseAuth getAuth() {
         return auth;

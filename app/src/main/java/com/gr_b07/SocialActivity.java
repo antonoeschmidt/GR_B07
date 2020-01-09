@@ -9,6 +9,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.gr_b07.logik.FB;
 import com.gr_b07.logik.Pupil;
 import com.gr_b07.logik.Settings;
 import com.gr_b07.logik.User;
@@ -23,6 +24,7 @@ public class SocialActivity extends AppCompatActivity implements View.OnClickLis
     private AutoCompleteTextView classmatesTextView;
     boolean firsttime = true;
     private ArrayList<Pupil> pupils = new ArrayList<Pupil>();
+    FB fb = new FB();
     // Pupil pupil = Settings.getUsers().getClass().asSubclass(Pupil);
 
 
@@ -43,14 +45,14 @@ public class SocialActivity extends AppCompatActivity implements View.OnClickLis
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.buttonIncrement:
-                for (User user : Settings.getUsers())
-                    if (user.getClass().equals(Pupil.class)) { // SHOULD BE if (user.getClass().equals(Pupil.class && er i samme klasse/skole etc.))
-                        Pupil pupil = (Pupil) user;
-                        pupils.add(pupil);
+                fb.getAllUsersFromDatabase();
+                //for (User user : Settings.getUsers())
+                  //  if (user.getClass().equals(Pupil.class)) { // SHOULD BE if (user.getClass().equals(Pupil.class && er i samme klasse/skole etc.))
+                        //Pupil pupil = (Pupil) user;
+                        //pupils.add(pupil);
                         //ArrayAdapter<String> adapter = new ArrayAdapter<>
                                 //(this, android.R.layout.select_dialog_item, SocialActivity.);
-                        usersTextView.setText(usersTextView.getText() + "\n" + pupil.getUsername());
-                    }
+                        //usersTextView.setText(usersTextView.getText() + "\n" + pupil.getUsername());
 
                 break;
         }
