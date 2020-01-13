@@ -21,6 +21,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.gr_b07.InputDataActivity;
 import com.gr_b07.MainMenuActivity;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class FB {
@@ -57,7 +58,7 @@ public class FB {
 
                             Pupil newUser = new Pupil(true, email, password, false, 0, 0, 0, 0,
                                     0, 0, 0, null, 0,
-                                    new Experience(1, 0), 0, "n", 0);
+                                    new Experience(1, 0), 0, "n", 0,new ArrayList<Reward>());
 
                             updateDatabase(newUser, user);
                             progressDialog.hide();
@@ -182,7 +183,7 @@ public class FB {
 
         return new Pupil(firstTimeLoggedIn, email, password, true, height, weight, bmi, calories,
                 protein, carbs, fat, dateOfBirth, age,
-                new Experience(1,0), ticket, gender, activityLevel);
+                new Experience(1,0), ticket, gender, activityLevel,new ArrayList<Reward>());
 
     }
 
