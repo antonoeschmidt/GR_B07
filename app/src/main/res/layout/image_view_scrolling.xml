@@ -9,12 +9,14 @@
         android:id="@+id/currentImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@color/white"
         android:src="@drawable/groceries"/>
 
     <ImageView
         android:id="@+id/nextImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@color/white"
         android:src="@drawable/groceries"/>
 
 </FrameLayout>

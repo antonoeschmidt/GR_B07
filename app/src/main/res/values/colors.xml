@@ -6,5 +6,6 @@
     <color name="colorProtein">#DA555C</color>
     <color name="colorCarbs">#FBE17D</color>
     <color name="colorFat">#8DB9D4</color>
+    <color name="white">#FFFFFF</color>
 
 </resources>

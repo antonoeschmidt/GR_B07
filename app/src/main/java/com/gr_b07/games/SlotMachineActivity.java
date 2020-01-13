@@ -52,11 +52,6 @@ public class SlotMachineActivity extends AppCompatActivity implements IEventEnd 
                     image2.setValueRandom(new Random().nextInt(6),new Random().nextInt((15-5)+1)+5);
                     image3.setValueRandom(new Random().nextInt(6),new Random().nextInt((15-5)+1)+5);
 
-
-                   /* image.setValueRandom(new Random().nextInt(6),new Random().nextInt((15-5)+1)+5);
-                    image2.setValueRandom(new Random().nextInt(6),new Random().nextInt((15-5)+1)+5);
-                    image3.setValueRandom(new Random().nextInt(6),new Random().nextInt((15-5)+1)+5);*/
-
                     SlotMachineLogic.tickets -= 1;
 
                     tickets.setText(String.valueOf(SlotMachineLogic.tickets));
@@ -69,7 +64,6 @@ public class SlotMachineActivity extends AppCompatActivity implements IEventEnd 
 
     }
 
-
     @Override
     public void eventEnd(int result, int count) {
             if(countDone < 2){
@@ -78,19 +72,19 @@ public class SlotMachineActivity extends AppCompatActivity implements IEventEnd 
                 buttonDown.setVisibility(View.GONE);
                 buttonUp.setVisibility(View.VISIBLE);
                 countDone = 0;
+                if(image.getValue() == image2.getValue() && image2.getValue() == image3.getValue()){
+                    Toast.makeText(SlotMachineActivity.this,"Stor pris", Toast.LENGTH_SHORT).show();
+                    SlotMachineLogic.tickets += 5;
+                    tickets.setText(String.valueOf(SlotMachineLogic.tickets));
+                } else if(image.getValue() == image2.getValue() || image2.getValue() == image3.getValue() || image.getValue() == image3.getValue()) {
+                    Toast.makeText(SlotMachineActivity.this, "Lille pris", Toast.LENGTH_SHORT).show();
+                    SlotMachineLogic.tickets += 2;
+                    tickets.setText(String.valueOf(SlotMachineLogic.tickets));
+                } else {
+                    Toast.makeText(SlotMachineActivity.this, "Du taber", Toast.LENGTH_SHORT).show();
+                }
             }
 
-            if(image.getValue() == image2.getValue() && image2.getValue() == image3.getValue()){
-                Toast.makeText(SlotMachineActivity.this,"Stor pris", Toast.LENGTH_SHORT).show();
-                SlotMachineLogic.tickets += 5;
-                tickets.setText(String.valueOf(SlotMachineLogic.tickets));
-            } else if(image.getValue() == image2.getValue() || image2.getValue() == image3.getValue() || image.getValue() == image3.getValue()) {
-                Toast.makeText(SlotMachineActivity.this, "Lille pris", Toast.LENGTH_SHORT).show();
-                SlotMachineLogic.tickets += 2;
-                tickets.setText(String.valueOf(SlotMachineLogic.tickets));
-            } else {
-                Toast.makeText(SlotMachineActivity.this, "Du taber", Toast.LENGTH_SHORT).show();
-            }
 
     }
 }
