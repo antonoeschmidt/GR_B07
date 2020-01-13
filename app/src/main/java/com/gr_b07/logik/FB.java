@@ -170,7 +170,7 @@ public class FB {
         double protein = (double) (d.child("protein").getValue(Long.class));
         double carbs = (double) (d.child("carbs").getValue(Long.class));
         double fat = (double) (d.child("fat").getValue(Long.class));
-        Date dateOfBirth = null;
+        Date dateOfBirth = (Date) (d.child("dateOfBirth").getValue(Date.class));
         int age = (d.child("height").getValue(Long.class).intValue());
         int ticket = (d.child("ticket").getValue(Long.class).intValue());
         String gender = d.child("gender").getValue(String.class);
@@ -178,7 +178,7 @@ public class FB {
         int activityLevel = (d.child("activityLevel").getValue(Long.class).intValue());
 
         return new Pupil(firstTimeLoggedIn, email, password, true, height, weight, bmi, calories,
-                protein, carbs, fat, null, age,
+                protein, carbs, fat, dateOfBirth, age,
                 new Experience(1, 0), ticket, gender, activityLevel);
 
     }

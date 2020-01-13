@@ -68,7 +68,7 @@ public class InputDataActivity extends AppCompatActivity implements View.OnClick
         doneButton.setOnClickListener(this);
 
 
-        // TODO: DELETE THIS. Only here for easier testing
+        // TODO: fix code
         getUserInfo();
     }
 
@@ -107,6 +107,7 @@ public class InputDataActivity extends AppCompatActivity implements View.OnClick
                 }, year, month, day);
         datePickerDialog.show();
     }
+
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void doneButtonClick() throws ParseException {
         // Checks if radio button is selected, if not - Toast prints "choose gender" etc.
@@ -137,9 +138,17 @@ public class InputDataActivity extends AppCompatActivity implements View.OnClick
                 Settings.getCurrentPupil().setActivityLevel((int) Math.round(activityLevelRatingBar.getRating()));
 
                 Settings.getCurrentPupil().setDateOfBirth(df.parse(dateTextView.getText().toString()));
+
                 Settings.getCurrentPupil().setAge(Settings.getCurrentPupil().calculateAge(Settings.getCurrentPupil().getDateOfBirth()));
 
+                if (maleRadioButton.isChecked()){
+                    Settings.getCurrentPupil().setGender("male");
+                } else if (femaleRadioButton.isChecked()){
+                    Settings.getCurrentPupil().setGender("female");
+                }
+
                 Settings.getCurrentUser().setFirstTimeLoggedIn(false);
+
                 fb.updateDatabase(Settings.getCurrentPupil(),fb.getAuth().getCurrentUser());
 
                 Intent mainMenuIntent = new Intent(this, MainMenuActivity.class);
@@ -166,21 +175,39 @@ public class InputDataActivity extends AppCompatActivity implements View.OnClick
     }
 
     public void getUserInfo(){
-        if ((Settings.getCurrentPupil()).getGender().equals("male")) {
+        if (Settings.getCurrentPupil().getGender().equals("male")) {
             maleRadioButton.toggle();
         } else if (Settings.getCurrentPupil().getGender().equals("female")){
             femaleRadioButton.toggle();
+        } else  if (Settings.getCurrentPupil().getGender().equals("n")){
+            radioGroup.clearCheck();
         }
 
-        if (Settings.getCurrentPupil().getDateOfBirth()==null){
+        if ((int) Math.round(Settings.getCurrentPupil().getHeight()) == 0){
+            editTextHeight.setText("");
+            editTextHeight.setHint("Enter height");
+        } else if (Settings.getCurrentPupil().getHeight() != 0){
+            editTextHeight.setText(Integer.toString((int) Math.round(Settings.getCurrentPupil().getHeight())));
+        }
+
+        if ((int) Math.round(Settings.getCurrentPupil().getWeight()) == 0){
+            editTextWeigth.setText("");
+            editTextWeigth.setHint("Enter weight.");
+        } else if (Settings.getCurrentPupil().getWeight() != 0 ) {
+            editTextWeigth.setText(Integer.toString((int) Math.round(Settings.getCurrentPupil().getWeight())));
+        }
+
+        if (Settings.getCurrentPupil().getDateOfBirth() == null){
             dateTextView.setText("Enter date of birth");
         } else {
             dateTextView.setText(df.format(Settings.getCurrentPupil().getDateOfBirth()));
         }
 
-        editTextHeight.setText(Integer.toString((int) Math.round (Settings.getCurrentPupil().getHeight())));
-        editTextWeigth.setText(Integer.toString((int) Math.round (Settings.getCurrentPupil().getWeight())));
-        activityLevelRatingBar.setRating(Settings.getCurrentPupil().getActivityLevel());
-        updateActivityLevelView();
+        if (Settings.getCurrentPupil().getActivityLevel() == 0){
+            activityLevelRatingBar.setRating(0);
+        } else if (Settings.getCurrentPupil().getActivityLevel() != 0) {
+            activityLevelRatingBar.setRating(Settings.getCurrentPupil().getActivityLevel());
+            updateActivityLevelView();
+        }
     }
 }
