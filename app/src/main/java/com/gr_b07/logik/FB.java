@@ -161,6 +161,7 @@ public class FB {
     }
 
     public User getUserFromDatabase(DataSnapshot d){
+
         String email = d.child("username").getValue(String.class);
         String password = d.child("password").getValue(String.class);
         double height = (double) (d.child("height").getValue(Long.class));
@@ -172,6 +173,8 @@ public class FB {
         double fat = (double) (d.child("fat").getValue(Long.class));
         Date dateOfBirth = (Date) (d.child("dateOfBirth").getValue(Date.class));
         int age = (d.child("height").getValue(Long.class).intValue());
+        //Experience experience = (Experience) (d.child("experience").getValue(Experience.class));
+        //Log.d(experience.toString(), "getUserFromDatabase: ");
         int ticket = (d.child("ticket").getValue(Long.class).intValue());
         String gender = d.child("gender").getValue(String.class);
         boolean firstTimeLoggedIn = d.child("firstTimeLoggedIn").getValue(boolean.class);
@@ -179,7 +182,7 @@ public class FB {
 
         return new Pupil(firstTimeLoggedIn, email, password, true, height, weight, bmi, calories,
                 protein, carbs, fat, dateOfBirth, age,
-                new Experience(1, 0), ticket, gender, activityLevel);
+                new Experience(1,0), ticket, gender, activityLevel);
 
     }
 
