@@ -47,7 +47,9 @@ public class SocialActivity extends AppCompatActivity implements View.OnClickLis
         switch (v.getId()) {
             case R.id.buttonIncrement:
                 fb.getAllUsersFromDatabase();
-                usersTextView.setText(Settings.getUsers().toString());
+                for (User user : Settings.getUsers()){
+                    usersTextView.setText(usersTextView.getText().toString() + user.getUsername());
+                }
                 Log.d(Settings.getUsers().toString(), "onClick: ");
                 //for (User user : Settings.getUsers())
                   //  if (user.getClass().equals(Pupil.class)) { // SHOULD BE if (user.getClass().equals(Pupil.class && er i samme klasse/skole etc.))

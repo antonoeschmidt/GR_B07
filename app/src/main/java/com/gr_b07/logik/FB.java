@@ -147,8 +147,7 @@ public class FB {
                 if (dataSnapshot.exists()) {
                     for (DataSnapshot d : dataSnapshot.getChildren()) {
                         Settings.addUser(getUserFromDatabase(d));
-
-
+                        Log.d(getUserFromDatabase(d).toString(), "getUsersFromDatabase : Hvilke users?");
                     }
                 }
             }//onDataChange
