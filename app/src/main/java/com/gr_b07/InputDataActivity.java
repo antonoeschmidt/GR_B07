@@ -2,7 +2,6 @@ package com.gr_b07;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
-import android.media.Rating;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,22 +12,20 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RatingBar;
-import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import java.util.Date;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.gr_b07.logik.FB;
-import com.gr_b07.logik.Pupil;
 import com.gr_b07.logik.Settings;
 
-import java.text.DecimalFormat;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 
 public class InputDataActivity extends AppCompatActivity implements View.OnClickListener {
     private TextView infoTextView, textViewCM, textViewKG, dateTextView, activityLevelTextView;
@@ -38,6 +35,7 @@ public class InputDataActivity extends AppCompatActivity implements View.OnClick
     private Button doneButton;
     private Calendar calendar;
     private RatingBar activityLevelRatingBar;
+    private DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
     private FB fb = new FB();
 
     @Override
@@ -71,19 +69,7 @@ public class InputDataActivity extends AppCompatActivity implements View.OnClick
 
 
         // TODO: DELETE THIS. Only here for easier testing
-        if (((Settings.getCurrentPupil()).getGender().equals("male"))) {
-            maleRadioButton.toggle();
-        } else {
-            femaleRadioButton.toggle();
-        }
-        dateTextView.setText("01/12/1998");
-        editTextHeight.setText(Integer.toString((int) Math.round (Settings.getCurrentPupil().getHeight())));
-        editTextWeigth.setText(Integer.toString((int) Math.round (Settings.getCurrentPupil().getWeight())));
-        activityLevelRatingBar.setRating(Settings.getCurrentPupil().getActivityLevel());
-        updateActivityLevelView();
-
-
-
+        getUserInfo();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -112,16 +98,26 @@ public class InputDataActivity extends AppCompatActivity implements View.OnClick
         calendar = Calendar.getInstance();
         int day = calendar.get(Calendar.DAY_OF_MONTH);
         int month = calendar.get(Calendar.MONTH);
-        int year = calendar.get(Calendar.YEAR) - 13;
+        int year = calendar.get(Calendar.YEAR)-13;
+        Log.d(Integer.toString(day), "calendarClick: ");
+        Log.d(Integer.toString(month), "calendarClick: ");
+        Log.d(Integer.toString(year), "calendarClick: ");
 
         DatePickerDialog datePickerDialog = new DatePickerDialog(this, android.R.style.Theme_Holo_Dialog,
                 new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        dateTextView.setText(dayOfMonth + "/" + (month + 1)  + "/" + year); //TODO: fix month
+                        if (dayOfMonth < 10 && (month+1) < 10) {
+                            dateTextView.setText("0" + dayOfMonth + "/" + "0" + (month+1) + "/" + year);
+                        } else if (dayOfMonth >= 10 && (month+1) < 10) {
+                            dateTextView.setText(dayOfMonth + "/" + "0" + (month+1) + "/" + year);
+                        } else if (dayOfMonth < 10 && (month+1) >= 10) {
+                            dateTextView.setText("0" + dayOfMonth + "/" + (month+1) + "/" + year);
+                        } else if (dayOfMonth >= 10 && (month+1) >= 10){
+                            dateTextView.setText(dayOfMonth + "/" + (month+1) + "/" + year);
+                        }
                     }
                 }, year, month, day);
-
         datePickerDialog.show();
     }
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -150,10 +146,18 @@ public class InputDataActivity extends AppCompatActivity implements View.OnClick
                 editTextWeigth.setText(editTextWeigth.getText().toString());
                 Settings.getCurrentPupil().setBmi(Settings.getCurrentPupil().getWeight() /
                         (Math.pow(Settings.getCurrentPupil().getHeight() / 100, 2)));
-                DecimalFormat df = new DecimalFormat("#.##");
+
+                Date blabla = df.parse(dateTextView.getText().toString());
+                Log.d(dateTextView.getText().toString().substring(3,5), "substring month: ");
+                String month = dateTextView.getText().toString().substring(3,4);
+
+                String.format("%02d",month);
 
 
-                Settings.getCurrentPupil().setAge(calculateAge());
+
+
+
+                Settings.getCurrentPupil().setDateOfBirth(df.parse(dateTextView.getText().toString()));
 
                 Settings.getCurrentPupil().setActivityLevel((int) Math.round(activityLevelRatingBar.getRating()));
                 Log.d(Integer.toString(Settings.getCurrentPupil().getActivityLevel()), "doneButtonClick: Activitylevel");
@@ -177,18 +181,6 @@ public class InputDataActivity extends AppCompatActivity implements View.OnClick
             }
         }
     }
-
-    public int calculateAge() throws NumberFormatException, ParseException {
-        SimpleDateFormat f1 = new SimpleDateFormat("dd/MM/yyyy");
-        Date now = new Date(System.currentTimeMillis());
-        Settings.getCurrentPupil().setDateOfBirth(f1.parse(dateTextView.getText().toString()));
-        long timeBetween = now.getTime() - Settings.getCurrentPupil().getDateOfBirth().getTime();
-        double yearsBetween = timeBetween / 3.15576e+10;
-        int age = (int) Math.floor(yearsBetween);
-        return age;
-
-    }
-
     public void updateActivityLevelView() {
         if (activityLevelRatingBar.getRating()==0){
             activityLevelRatingBar.setRating(1);
@@ -205,5 +197,24 @@ public class InputDataActivity extends AppCompatActivity implements View.OnClick
         } else if (i==5) {
             activityLevelTextView.setText("Ekstremt aktivitetsniveau");
         }
+    }
+
+    public void getUserInfo(){
+        if ((Settings.getCurrentPupil()).getGender().equals("male")) {
+            maleRadioButton.toggle();
+        } else if (Settings.getCurrentPupil().getGender().equals("female")){
+            femaleRadioButton.toggle();
+        }
+
+        if (Settings.getCurrentPupil().getDateOfBirth()==null){
+            dateTextView.setText("Enter date of birth");
+        } else {
+            dateTextView.setText(df.format(Settings.getCurrentPupil().getDateOfBirth()));
+        }
+
+        editTextHeight.setText(Integer.toString((int) Math.round (Settings.getCurrentPupil().getHeight())));
+        editTextWeigth.setText(Integer.toString((int) Math.round (Settings.getCurrentPupil().getWeight())));
+        activityLevelRatingBar.setRating(Settings.getCurrentPupil().getActivityLevel());
+        updateActivityLevelView();
     }
 }

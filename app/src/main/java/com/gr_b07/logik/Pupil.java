@@ -1,5 +1,9 @@
 package com.gr_b07.logik;
 
+import android.widget.TextView;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Pupil extends User {
@@ -27,6 +31,18 @@ public class Pupil extends User {
         this.ticket = ticket;
         this.gender = gender;
         this.activityLevel = activityLevel;
+    }
+    //setBmi(Settings.getCurrentPupil().getWeight()/ (Math.pow(Settings.getCurrentPupil().getHeight() / 100, 2)));
+
+    public int calculateAge(Date dateOfBirth) throws NumberFormatException, ParseException {
+        SimpleDateFormat f1 = new SimpleDateFormat("dd/MM/yyyy");
+        Date now = new Date(System.currentTimeMillis());
+
+        long timeBetween = now.getTime() - Settings.getCurrentPupil().getDateOfBirth().getTime();
+        double yearsBetween = timeBetween / 3.15576e+10;
+        int age = (int) Math.floor(yearsBetween);
+        return age;
+
     }
 
     public String getGender() {

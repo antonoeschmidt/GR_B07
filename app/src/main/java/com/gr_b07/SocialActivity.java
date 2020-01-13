@@ -3,6 +3,7 @@ package com.gr_b07;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -46,6 +47,8 @@ public class SocialActivity extends AppCompatActivity implements View.OnClickLis
         switch (v.getId()) {
             case R.id.buttonIncrement:
                 fb.getAllUsersFromDatabase();
+                usersTextView.setText(Settings.getUsers().toString());
+                Log.d(Settings.getUsers().toString(), "onClick: ");
                 //for (User user : Settings.getUsers())
                   //  if (user.getClass().equals(Pupil.class)) { // SHOULD BE if (user.getClass().equals(Pupil.class && er i samme klasse/skole etc.))
                         //Pupil pupil = (Pupil) user;
