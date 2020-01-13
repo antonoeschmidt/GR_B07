@@ -33,7 +33,7 @@ public class InputDataActivity extends AppCompatActivity implements View.OnClick
     protected RadioButton maleRadioButton, femaleRadioButton;
     protected EditText editTextHeight, editTextWeigth;
     private Button doneButton;
-    private Calendar calendar;
+    private Calendar c;
     private RatingBar activityLevelRatingBar;
     private DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
     private FB fb = new FB();
@@ -92,30 +92,17 @@ public class InputDataActivity extends AppCompatActivity implements View.OnClick
         }
     }
 
-
     public void calendarClick(){
-
-        calendar = Calendar.getInstance();
-        int day = calendar.get(Calendar.DAY_OF_MONTH);
-        int month = calendar.get(Calendar.MONTH);
-        int year = calendar.get(Calendar.YEAR)-13;
-        Log.d(Integer.toString(day), "calendarClick: ");
-        Log.d(Integer.toString(month), "calendarClick: ");
-        Log.d(Integer.toString(year), "calendarClick: ");
+        final Calendar c = Calendar.getInstance();
+        int day = c.get(Calendar.DAY_OF_MONTH);
+        int month = c.get(Calendar.MONTH);
+        int year = c.get(Calendar.YEAR);
 
         DatePickerDialog datePickerDialog = new DatePickerDialog(this, android.R.style.Theme_Holo_Dialog,
                 new DatePickerDialog.OnDateSetListener() {
                     @Override
-                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        if (dayOfMonth < 10 && (month+1) < 10) {
-                            dateTextView.setText("0" + dayOfMonth + "/" + "0" + (month+1) + "/" + year);
-                        } else if (dayOfMonth >= 10 && (month+1) < 10) {
-                            dateTextView.setText(dayOfMonth + "/" + "0" + (month+1) + "/" + year);
-                        } else if (dayOfMonth < 10 && (month+1) >= 10) {
-                            dateTextView.setText("0" + dayOfMonth + "/" + (month+1) + "/" + year);
-                        } else if (dayOfMonth >= 10 && (month+1) >= 10){
-                            dateTextView.setText(dayOfMonth + "/" + (month+1) + "/" + year);
-                        }
+                    public void onDateSet(DatePicker view, int year, int month, int day) {
+                        dateTextView.setText(String.format("%02d",day) + "/" + String.format("%02d", (month+1)) + "/" + String.format("%02d", year));
                     }
                 }, year, month, day);
         datePickerDialog.show();
@@ -147,33 +134,12 @@ public class InputDataActivity extends AppCompatActivity implements View.OnClick
                 Settings.getCurrentPupil().setBmi(Settings.getCurrentPupil().getWeight() /
                         (Math.pow(Settings.getCurrentPupil().getHeight() / 100, 2)));
 
-                Date blabla = df.parse(dateTextView.getText().toString());
-                Log.d(dateTextView.getText().toString().substring(3,5), "substring month: ");
-                String month = dateTextView.getText().toString().substring(3,4);
-
-                String.format("%02d",month);
-
-
-
-
+                Settings.getCurrentPupil().setActivityLevel((int) Math.round(activityLevelRatingBar.getRating()));
 
                 Settings.getCurrentPupil().setDateOfBirth(df.parse(dateTextView.getText().toString()));
-
-                Settings.getCurrentPupil().setActivityLevel((int) Math.round(activityLevelRatingBar.getRating()));
-                Log.d(Integer.toString(Settings.getCurrentPupil().getActivityLevel()), "doneButtonClick: Activitylevel");
-
-
-                if (maleRadioButton.isChecked()){
-                    (Settings.getCurrentPupil()).setGender("male");
-                    maleRadioButton.toggle();
-                }
-                else if (femaleRadioButton.isChecked()){
-                    (Settings.getCurrentPupil()).setGender("female");
-                    femaleRadioButton.toggle();
-                }
+                Settings.getCurrentPupil().setAge(Settings.getCurrentPupil().calculateAge(Settings.getCurrentPupil().getDateOfBirth()));
 
                 Settings.getCurrentUser().setFirstTimeLoggedIn(false);
-
                 fb.updateDatabase(Settings.getCurrentPupil(),fb.getAuth().getCurrentUser());
 
                 Intent mainMenuIntent = new Intent(this, MainMenuActivity.class);
