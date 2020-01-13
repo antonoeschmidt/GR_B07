@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.gr_b07.logik.Settings;
 
 public class MainMenuActivity extends AppCompatActivity implements View.OnClickListener{
+
     private Button mainButton1, mainButton2, mainButton3, mainButton4, mainButton5;
     private TextView levelTextView, xpTextView;
     private ProgressBar xpProgressBar;
