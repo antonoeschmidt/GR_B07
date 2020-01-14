@@ -9,14 +9,14 @@ import java.util.Date;
 public class Pupil extends User {
 
     private double height, weight, bmi, calories, protein, carbs, fat;
-    private Date dateOfBirth;
+    private long dateOfBirth;
     private int age, ticket, activityLevel;
     private Experience experience;
     private String gender;
 
     public Pupil(boolean firstTimeLoggedIn, String username, String password, boolean loggedIn, double height,
                  double weight, double bmi, double calories, double protein, double carbs, double fat,
-                 Date dateOfBirth, int age, Experience experience, int ticket, String gender, int activityLevel) {
+                 long dateOfBirth, int age, Experience experience, int ticket, String gender, int activityLevel) {
         super(firstTimeLoggedIn, username, password, loggedIn);
         this.height = height;
         this.weight = weight;
@@ -38,7 +38,7 @@ public class Pupil extends User {
         SimpleDateFormat f1 = new SimpleDateFormat("dd/MM/yyyy");
         Date now = new Date(System.currentTimeMillis());
 
-        long timeBetween = now.getTime() - Settings.getCurrentPupil().getDateOfBirth().getTime();
+        long timeBetween = now.getTime() - Settings.getCurrentPupil().getDateOfBirth();
         double yearsBetween = timeBetween / 3.15576e+10;
         int age = (int) Math.floor(yearsBetween);
         return age;
@@ -93,9 +93,9 @@ public class Pupil extends User {
 
     public void setFat(double fat) { this.fat = fat; }
 
-    public Date getDateOfBirth() { return dateOfBirth; }
+    public long getDateOfBirth() { return dateOfBirth; }
 
-    public void setDateOfBirth(Date dateOfBirth) { this.dateOfBirth = dateOfBirth; }
+    public void setDateOfBirth(long dateOfBirth) { this.dateOfBirth = dateOfBirth; }
 
     public int getAge() { return age; }
 

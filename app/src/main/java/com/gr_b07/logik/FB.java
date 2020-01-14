@@ -56,7 +56,7 @@ public class FB {
                             FirebaseUser user = auth.getCurrentUser();
 
                             Pupil newUser = new Pupil(true, email, password, false, 0, 0, 0, 0,
-                                    0, 0, 0, null, 0,
+                                    0, 0, 0, 0, 0,
                                     new Experience(1, 0), 0, "n", 0);
 
                             updateDatabase(newUser, user);
@@ -170,7 +170,8 @@ public class FB {
         double protein = (double) (d.child("protein").getValue(Long.class));
         double carbs = (double) (d.child("carbs").getValue(Long.class));
         double fat = (double) (d.child("fat").getValue(Long.class));
-        Date dateOfBirth = (Date) (d.child("dateOfBirth").getValue(Date.class));
+        //Date dateOfBirth = (Date) (d.child("dateOfBirth").getValue(Date.class));
+        long dateOfBirth = (d.child("dateOfBirth").getValue(Long.class));
         int age = (d.child("height").getValue(Long.class).intValue());
         //Experience experience = (Experience) (d.child("experience").getValue(Experience.class));
         //Log.d(experience.toString(), "getUserFromDatabase: ");

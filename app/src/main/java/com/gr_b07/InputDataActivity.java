@@ -137,9 +137,10 @@ public class InputDataActivity extends AppCompatActivity implements View.OnClick
 
                 Settings.getCurrentPupil().setActivityLevel((int) Math.round(activityLevelRatingBar.getRating()));
 
-                Settings.getCurrentPupil().setDateOfBirth(df.parse(dateTextView.getText().toString()));
+                Date dateOfBirthDate = df.parse(dateTextView.getText().toString());
+                Settings.getCurrentPupil().setDateOfBirth(dateOfBirthDate.getTime());
 
-                Settings.getCurrentPupil().setAge(Settings.getCurrentPupil().calculateAge(Settings.getCurrentPupil().getDateOfBirth()));
+                Settings.getCurrentPupil().setAge(Settings.getCurrentPupil().calculateAge(dateOfBirthDate));
 
                 if (maleRadioButton.isChecked()){
                     Settings.getCurrentPupil().setGender("male");
@@ -197,7 +198,7 @@ public class InputDataActivity extends AppCompatActivity implements View.OnClick
             editTextWeigth.setText(Integer.toString((int) Math.round(Settings.getCurrentPupil().getWeight())));
         }
 
-        if (Settings.getCurrentPupil().getDateOfBirth() == null){
+        if (Settings.getCurrentPupil().getDateOfBirth() == 0){
             dateTextView.setText("Enter date of birth");
         } else {
             dateTextView.setText(df.format(Settings.getCurrentPupil().getDateOfBirth()));

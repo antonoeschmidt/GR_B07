@@ -61,20 +61,19 @@
 
     <Button
         android:id="@+id/loginButton"
-        android:layout_width="217dp"
-        android:layout_height="55dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:background="@drawable/login_button"
         android:text="Login"
         android:textColor="#1C2C06"
         android:textSize="18sp"
-        tools:layout_editor_absoluteX="97dp"
-        tools:layout_editor_absoluteY="522dp"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.693"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintVertical_bias="0.7"
         android:textAllCaps="false"/>
 
 
@@ -84,10 +83,14 @@
         android:layout_height="wrap_content"
         android:background="@drawable/login_button"
         android:text="Sign up"
+        android:textColor="#1C2C06"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.799" />
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintVertical_bias="0.8"
+        android:textAllCaps="false"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
