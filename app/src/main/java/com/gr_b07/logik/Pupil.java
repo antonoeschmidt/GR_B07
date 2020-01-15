@@ -4,6 +4,7 @@ import android.widget.TextView;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Pupil extends User {
@@ -17,7 +18,7 @@ public class Pupil extends User {
 
     public Pupil(boolean firstTimeLoggedIn, String username, String password, boolean loggedIn, double height,
                  double weight, double bmi, double calories, double protein, double carbs, double fat,
-                 long dateOfBirth, int age, Experience experience, int ticket, String gender, int activityLevel) {
+                 long dateOfBirth, int age, Experience experience, int ticket, String gender, int activityLevel, ArrayList<Reward> rewards) {
         super(firstTimeLoggedIn, username, password, loggedIn);
         this.height = height;
         this.weight = weight;
