@@ -1,3 +1,8 @@
+/**
+ * Slot machine inspireret/kopiret dele fra EDMT dev youtube
+ * https://www.youtube.com/watch?v=Ja2MEpWUyYE
+ */
+
 package com.gr_b07.games.ImageViewScrolling;
 
 import android.animation.Animator;
@@ -17,7 +22,7 @@ import com.gr_b07.R;
 
 public class ImageViewScrolling extends FrameLayout {
 
-    private static int animationDuration = 150;
+    int animationDuration = 150;
     ImageView currentImage, nextImage;
     int lastResult = 0, oldValue = 0, i = 0;
 

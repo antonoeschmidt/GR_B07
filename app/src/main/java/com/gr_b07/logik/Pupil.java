@@ -13,6 +13,7 @@ public class Pupil extends User {
     private int age, ticket, activityLevel;
     private Experience experience;
     private String gender;
+    private ArrayList<Reward> rewards = new ArrayList<>();
 
     public Pupil(boolean firstTimeLoggedIn, String username, String password, boolean loggedIn, double height,
                  double weight, double bmi, double calories, double protein, double carbs, double fat,
@@ -31,6 +32,7 @@ public class Pupil extends User {
         this.ticket = ticket;
         this.gender = gender;
         this.activityLevel = activityLevel;
+        this.rewards = rewards;
     }
     //setBmi(Settings.getCurrentPupil().getWeight()/ (Math.pow(Settings.getCurrentPupil().getHeight() / 100, 2)));
 
@@ -112,5 +114,14 @@ public class Pupil extends User {
     public int getActivityLevel() { return activityLevel; }
 
     public void setActivityLevel(int activityLevel) {this.activityLevel = activityLevel; }
+
+    public ArrayList<Reward> getRewards() {
+        return rewards;
+    }
+
+    public void addReward(Reward reward){
+        rewards.add(reward);
+    }
+
 }
 

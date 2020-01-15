@@ -3,6 +3,7 @@ package com.gr_b07.games;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -11,6 +12,8 @@ import android.widget.Toast;
 import com.gr_b07.R;
 import com.gr_b07.games.ImageViewScrolling.IEventEnd;
 import com.gr_b07.games.ImageViewScrolling.ImageViewScrolling;
+import com.gr_b07.logik.Settings;
+import com.gr_b07.logik.rewardItems;
 
 import java.util.Random;
 
@@ -75,16 +78,22 @@ public class SlotMachineActivity extends AppCompatActivity implements IEventEnd 
                 if(image.getValue() == image2.getValue() && image2.getValue() == image3.getValue()){
                     Toast.makeText(SlotMachineActivity.this,"Stor pris", Toast.LENGTH_SHORT).show();
                     SlotMachineLogic.tickets += 5;
+                    Settings.getCurrentPupil().addReward(rewardItems.bigPrize);
                     tickets.setText(String.valueOf(SlotMachineLogic.tickets));
                 } else if(image.getValue() == image2.getValue() || image2.getValue() == image3.getValue() || image.getValue() == image3.getValue()) {
                     Toast.makeText(SlotMachineActivity.this, "Lille pris", Toast.LENGTH_SHORT).show();
                     SlotMachineLogic.tickets += 2;
+                    Settings.getCurrentPupil().addReward(rewardItems.smallPrize);
+
                     tickets.setText(String.valueOf(SlotMachineLogic.tickets));
                 } else {
                     Toast.makeText(SlotMachineActivity.this, "Du taber", Toast.LENGTH_SHORT).show();
                 }
             }
-
-
+            try {
+                Log.d(Settings.getCurrentPupil().getRewards().toString(), "44444");
+            } catch (NullPointerException e){
+                System.out.println(e);
+        }
     }
 }
