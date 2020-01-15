@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".SignUpActivity"></activity>
-        <activity android:name=".games.RedeemActivity" />
+        <activity android:name=".games.redeemRewards.RedeemActivity" />
         <activity android:name=".games.ChanceActivity" />
         <activity android:name=".games.ChestActivity" />
         <activity android:name=".games.ScratchCardActivity" />

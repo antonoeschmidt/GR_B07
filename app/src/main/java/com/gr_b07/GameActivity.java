@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 import com.gr_b07.games.ChanceActivity;
 import com.gr_b07.games.ChestActivity;
-import com.gr_b07.games.RedeemActivity;
+import com.gr_b07.games.redeemRewards.RedeemActivity;
 import com.gr_b07.games.ScratchCardActivity;
 import com.gr_b07.games.SlotMachineActivity;
 import com.gr_b07.logik.Settings;
