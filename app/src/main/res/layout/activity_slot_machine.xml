@@ -54,10 +54,10 @@
 
     <ImageView
         android:id="@+id/buttonUp"
-        android:layout_width="40dp"
-        android:layout_height="205dp"
+        android:layout_width="22dp"
+        android:layout_height="166dp"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="159dp"
+        android:layout_marginTop="206dp"
         android:layout_toEndOf="@id/slotFrame"
         android:src="@drawable/up" />
 

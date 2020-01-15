@@ -132,11 +132,11 @@ public class NutritionActivity extends AppCompatActivity implements View.OnClick
     public void updateMacros() {
         if (Settings.getCurrentPupil().getGender().equals("male")){
             cRing.setMax((int) Math.round((10 * Settings.getCurrentPupil().getWeight()) + (6.25 * Settings.getCurrentPupil().getHeight())
-                    - (5 * Settings.getCurrentPupil().getAge()) + 5) + (Settings.getCurrentPupil().getActivityLevel() * 150));
+                    - (5 * Settings.getCurrentPupil().getAge()) + 5) + (Settings.getCurrentPupil().getActivityLevel() * 250));
         }
         else if (Settings.getCurrentPupil().getGender().equals("female")) {
             cRing.setMax((int) Math.round((10 * Settings.getCurrentPupil().getWeight()) + (6.25 * Settings.getCurrentPupil().getHeight())
-                    - (5 * Settings.getCurrentPupil().getAge()) - 161) + (Settings.getCurrentPupil().getActivityLevel() * 150));
+                    - (5 * Settings.getCurrentPupil().getAge()) - 161) + (Settings.getCurrentPupil().getActivityLevel() * 250));
         }
         pProgress.setMax((int) Math.round ((cRing.getMax()*0.25)/4));
         cProgress.setMax((int) Math.round ((cRing.getMax()*0.5)/4));
