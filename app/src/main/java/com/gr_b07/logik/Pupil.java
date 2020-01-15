@@ -1,5 +1,6 @@
 package com.gr_b07.logik;
 
+import android.content.res.Resources;
 import android.widget.TextView;
 
 import java.text.ParseException;
@@ -15,10 +16,13 @@ public class Pupil extends User {
     private Experience experience;
     private String gender;
     private ArrayList<Reward> rewards = new ArrayList<>();
+    private ArrayList<Pupil> friends;
+    private Resources resource;
 
     public Pupil(boolean firstTimeLoggedIn, String username, String password, boolean loggedIn, double height,
                  double weight, double bmi, double calories, double protein, double carbs, double fat,
-                 long dateOfBirth, int age, Experience experience, int ticket, String gender, int activityLevel, ArrayList<Reward> rewards) {
+                 long dateOfBirth, int age, Experience experience, int ticket, String gender, int activityLevel,
+                 ArrayList<Reward> rewards, ArrayList<Pupil> friends, Resources resource) {
         super(firstTimeLoggedIn, username, password, loggedIn);
         this.height = height;
         this.weight = weight;
@@ -34,6 +38,8 @@ public class Pupil extends User {
         this.gender = gender;
         this.activityLevel = activityLevel;
         this.rewards = rewards;
+        this.friends = friends;
+        this.resource = resource;
     }
     //setBmi(Settings.getCurrentPupil().getWeight()/ (Math.pow(Settings.getCurrentPupil().getHeight() / 100, 2)));
 
@@ -124,5 +130,16 @@ public class Pupil extends User {
         rewards.add(reward);
     }
 
+    public void setRewards(ArrayList<Reward> rewards) { this.rewards = rewards; }
+
+    public ArrayList<Pupil> getFriends() { return friends; }
+
+    public void addFriend(Pupil friend) {friends.add(friend); }
+
+    public void setFriends(ArrayList<Pupil> friends) { this.friends = friends; }
+
+    public Resources getResource() { return resource; }
+
+    public void setResource(Resources resource) { this.resource = resource; }
 }
 

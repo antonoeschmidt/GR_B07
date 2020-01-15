@@ -23,9 +23,9 @@
         <activity android:name=".nutrition.BreakfastActivity" />
         <activity android:name=".InputDataActivity" />
         <activity android:name=".RewardsActivity" />
-        <activity android:name=".SocialActivity" />
+        <activity android:name=".social.SocialActivity" />
         <activity android:name=".ActivityActivity" />
-        <activity android:name=".NutritionActivity" />
+        <activity android:name=".nutrition.NutritionActivity" />
         <activity android:name=".MainMenuActivity" />
         <activity android:name=".LoginActivity">
             <intent-filter>
