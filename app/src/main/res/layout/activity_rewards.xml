@@ -7,24 +7,21 @@
     android:background="@drawable/gradient_rewards"
     tools:context=".RewardsActivity">
 
-
-
-    <ProgressBar
-        android:id="@+id/progressbarExperience"
-        style="?android:progressBarStyleHorizontal"
-        android:layout_width="380dp"
-        android:layout_height="380dp"
-        android:layout_marginStart="300dp"
-        android:layout_marginTop="2dp"
-        android:progress="100"
-        android:progressDrawable="@drawable/circle_rewards"
-        android:rotation="-90"
-        app:layout_constraintBottom_toTopOf="parent"
-        app:layout_constraintEnd_toStartOf="parent"
-        app:layout_constraintHorizontal_bias="0.637"
-        app:layout_constraintStart_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="parent"
-        app:layout_constraintVertical_bias="0.501" />
+    <com.mikhaellopez.circularprogressbar.CircularProgressBar
+        android:id="@+id/circularProgressBar"
+        android:layout_centerInParent="true"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:cpb_background_progressbar_color="#b6bbd8"
+        app:cpb_background_progressbar_width="5dp"
+        app:cpb_progress_direction="to_right"
+        app:cpb_progressbar_color="#3f51b5"
+        app:cpb_progressbar_width="10dp"
+        app:cpb_round_border="false"/>
 
     <TextView
         android:id="@+id/textViewLevel"
@@ -37,7 +34,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.102" />
+        app:layout_constraintVertical_bias="0.102"/>
 
     <TextView
         android:id="@+id/textViewXpProgress"
@@ -52,28 +49,80 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.157" />
 
-    <Button
-        android:id="@+id/buttonRewardTest"
+    <TextView
+        android:id="@+id/totalXPText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Test (+2)"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/progressbarExperience"
-        app:layout_constraintHorizontal_bias="0.522"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.856" />
+        app:layout_constraintVertical_bias="0.358" />
+
+    <TextView
+        android:id="@+id/totalNutritionXPText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/totalXPText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        android:padding="10dp"/>
+
+    <TextView
+        android:id="@+id/totalActivityXPText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/totalNutritionXPText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        android:padding="10dp"/>
+
+    <TextView
+        android:id="@+id/totalSocialXPText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/totalActivityXPText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        android:padding="10dp"/>
+
+
+
+
+    <Button
+        android:id="@+id/buttonRewardTestNutrition"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Test Nutrition (+2)"
+        app:layout_constraintTop_toBottomOf="@+id/circularProgressBar"/>
+
+    <Button
+        android:id="@+id/buttonRewardTestActivity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Test Activity (+2)"
+        app:layout_constraintTop_toBottomOf="@+id/buttonRewardTestNutrition"
+        app:layout_constraintRight_toRightOf="@+id/buttonRewardTestNutrition"/>
+
+    <Button
+        android:id="@+id/buttonRewardTestSocial"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Test Social (+2)"
+        app:layout_constraintTop_toBottomOf="@+id/buttonRewardTestActivity"
+        app:layout_constraintRight_toRightOf="@+id/buttonRewardTestActivity" />
 
     <Button
         android:id="@+id/buttonRewards"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="REWARDS"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/progressbarExperience"
-        app:layout_constraintHorizontal_bias="0.522"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.941" />
+        app:layout_constraintLeft_toRightOf="@+id/buttonRewardTestActivity"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonRewardTestActivity"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
