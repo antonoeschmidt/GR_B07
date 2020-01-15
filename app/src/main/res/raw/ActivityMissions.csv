@@ -1,0 +1,49 @@
+mission objekt;aktivitetmål;belønninngExperience
+
+Gå 10000 skridt;10000;20
+Gå 9000 skridt;9000;19
+Gå 8000 skridt;8000;18
+Gå 7000 skridt;7000;17
+Gå 6000 skridt;6000;16
+Gå 5000 skridt;5000;15
+Gå 4000 skridt;4000;14
+Gå 3000 skridt;3000;13
+Gå 2000 skridt;2000;12
+Gå 1000 skridt;1000;11
+
+Gå 10 etager op;10;20
+Gå 9 etager op;9;19
+Gå 8 etager op;8;18
+Gå 7 etager op;7;17
+Gå 6 etager op;6;16
+Gå 5 etager op;5;15
+Gå 4 etager op;4;14
+Gå 3 etager op;3;13
+Gå 2 etager op;2;12
+Gå 1 etage op;1;11
+
+Gå 10 etager op med en ven;10;30
+Gå 9 etager op med en ven;9;28
+Gå 8 etager op med en ven;8;26
+Gå 7 etager op med en ven;7;24
+Gå 6 etager op med en ven;6;22
+Gå 5 etager op med en ven;5;20
+Gå 4 etager op med en ven;4;18
+Gå 3 etager op med en ven;3;16
+Gå 2 etager op med en ven;2;14
+Gå 1 etage op med en ven;1;12
+
+
+Løb 10km med en ven;10000;30
+Løb 9km med en ven;9000;28
+Løb 8km med en ven;8000;26
+Løb 7km med en ven;7000;24
+Løb 6km med en ven;6000;22
+Løb 5km med en ven;5000;20
+Løb 4km med en ven;4000;18
+Løb 3km med en ven;3000;16
+Løb 2km med en ven;2000;14
+Løb 1km med en ven;1000;12
+
+
+
