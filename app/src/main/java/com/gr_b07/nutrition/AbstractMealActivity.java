@@ -7,7 +7,9 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.gr_b07.R;
+import com.gr_b07.logik.FB;
 import com.gr_b07.logik.Food;
+import com.gr_b07.logik.Meal;
 import com.gr_b07.logik.Settings;
 
 import java.io.BufferedReader;
@@ -18,6 +20,7 @@ import java.io.InputStreamReader;
 public abstract class AbstractMealActivity extends AppCompatActivity implements View.OnClickListener {
     protected InputStream inputStream;
     protected String[] data;
+    private FB fb = new FB();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,11 +52,12 @@ public abstract class AbstractMealActivity extends AppCompatActivity implements 
         return null;
     }
 
-    public void eatFood(Food food){
+    public void eatFood(Food food, String typeOfMeal){
         //TODO: flyt denne metode til pupil og implementer rewards
-        Settings.getCurrentPupil().setCalories(Settings.getCurrentPupil().getCalories()+food.getCalories());
-        Settings.getCurrentPupil().setProtein(Settings.getCurrentPupil().getProtein()+food.getProtein());
-        Settings.getCurrentPupil().setCarbs(Settings.getCurrentPupil().getCarbs()+food.getCarbs());
-        Settings.getCurrentPupil().setFat(Settings.getCurrentPupil().getFat()+food.getFat());
+        Settings.getCurrentPupil().addMeal(new Meal(food.getName(),food.getCalories(),food.getProtein(),food.getCarbs(),
+        food.getFat(),typeOfMeal,System.currentTimeMillis()));
+        fb.updateDatabase();
+
+
     }
 }

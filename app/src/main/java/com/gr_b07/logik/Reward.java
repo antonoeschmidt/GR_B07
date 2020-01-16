@@ -15,6 +15,10 @@ public class Reward {
         this.redeemed = false;
     }
 
+    public Reward() {
+
+    }
+
     public String getName() {
         return name;
     }

@@ -71,10 +71,9 @@ public class BreakfastActivity extends AbstractMealActivity {
                 break;
             case R.id.addMealButton:
                 if (chosenFood != null) {
-                    eatFood(chosenFood);
+                    eatFood(chosenFood, textViewHeader.getText().toString());
                     Toast.makeText(this, "Meal added", Toast.LENGTH_SHORT).show();
                 }
-                Log.d("Cals ", "" + Settings.getCurrentPupil().getCalories());
                 break;
         }
     }
@@ -89,8 +88,8 @@ public class BreakfastActivity extends AbstractMealActivity {
     }
 
     @Override
-    public void eatFood(Food food) {
-        super.eatFood(food);
+    public void eatFood(Food food, String typeOfMeal) {
+        super.eatFood(food, typeOfMeal);
     }
 
     @Override
