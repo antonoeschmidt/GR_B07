@@ -8,6 +8,10 @@ public class Experience {
         this.xp = xp;
     }
 
+    public Experience() {
+
+    }
+
     public int getLevel() { return level; }
 
     public void setLevel(int level) { this.level = level; }

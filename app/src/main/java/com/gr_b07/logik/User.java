@@ -13,6 +13,10 @@ public abstract class User {
         this.loggedIn = loggedIn;
     }
 
+    public User() {
+
+    }
+
     public boolean isFirstTimeLoggedIn() {
         return firstTimeLoggedIn;
     }

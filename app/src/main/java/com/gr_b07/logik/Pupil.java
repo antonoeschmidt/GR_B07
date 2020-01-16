@@ -35,6 +35,10 @@ public class Pupil extends User {
         this.activityLevel = activityLevel;
         this.rewards = rewards;
     }
+
+    public Pupil() {
+
+    }
     //setBmi(Settings.getCurrentPupil().getWeight()/ (Math.pow(Settings.getCurrentPupil().getHeight() / 100, 2)));
 
     public int calculateAge(Date dateOfBirth) throws NumberFormatException, ParseException {

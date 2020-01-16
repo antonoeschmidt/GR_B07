@@ -58,7 +58,7 @@ public class FB {
 
                             Pupil newUser = new Pupil(true, email, password, false, 0, 0, 0, 0,
                                     0, 0, 0, 0, 0,
-                                    new Experience(1, 0), 0, "n", 0,new ArrayList<Reward>());
+                                    new Experience(1, 0), 0, "n", 0, new ArrayList<Reward>());
 
                             updateDatabase(newUser, user);
                             progressDialog.hide();
@@ -83,8 +83,12 @@ public class FB {
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot d) {
+                //måske bruges
+                //Settings.setCurrentUser(d.getValue(Pupil.class));
 
                 Settings.setCurrentUser(getUserFromDatabase(d));
+                Settings.getCurrentUser().setLoggedIn(true);
+
 
                 if (Settings.getCurrentUser().getClass().equals(Pupil.class)) {
                     Settings.setCurrentPupil((Pupil) Settings.getCurrentUser());
@@ -160,8 +164,12 @@ public class FB {
         });
     }
 
-    public User getUserFromDatabase(DataSnapshot d){
+    public User getUserFromDatabase(DataSnapshot d) {
+        //TODO: kan evt slettes eller laves om
+        Pupil pupil = d.getValue(Pupil.class);
 
+        return pupil;
+        /*
         String email = d.child("username").getValue(String.class);
         String password = d.child("password").getValue(String.class);
         double height = (double) (d.child("height").getValue(Long.class));
@@ -185,7 +193,12 @@ public class FB {
                 protein, carbs, fat, dateOfBirth, age,
                 new Experience(1,0), ticket, gender, activityLevel,new ArrayList<Reward>());
 
+         */
+
+
+
     }
+
 
 
     public FirebaseAuth getAuth() {
