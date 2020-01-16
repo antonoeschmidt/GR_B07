@@ -8,18 +8,6 @@ import java.util.ArrayList;
 public class Settings {
 
     private static ArrayList<User> users = new ArrayList<User>() {
-        {
-            add(new Pupil(true,"anton","1234",false,0,0,0,0,
-                    0,0,0,null,0,
-                    new Experience(1,0),0,"male",0));
-
-
-
-            add(new Pupil(true,"harald","4321",false,0,0,0,0,
-                    0,0,0,null,0,
-                    new Experience(1,0),0,"male",0));
-            // TODO : REMOVE
-        }
     };
     private static User currentUser;
 

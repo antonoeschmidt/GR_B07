@@ -2,7 +2,6 @@ package com.gr_b07;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
-import android.media.Rating;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,22 +12,20 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RatingBar;
-import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import java.util.Date;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.gr_b07.logik.FB;
-import com.gr_b07.logik.Pupil;
 import com.gr_b07.logik.Settings;
 
-import java.text.DecimalFormat;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 
 public class InputDataActivity extends AppCompatActivity implements View.OnClickListener {
     private TextView infoTextView, textViewCM, textViewKG, dateTextView, activityLevelTextView;
@@ -36,8 +33,9 @@ public class InputDataActivity extends AppCompatActivity implements View.OnClick
     protected RadioButton maleRadioButton, femaleRadioButton;
     protected EditText editTextHeight, editTextWeigth;
     private Button doneButton;
-    private Calendar calendar;
+    private Calendar c;
     private RatingBar activityLevelRatingBar;
+    private DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
     private FB fb = new FB();
 
     @Override
@@ -70,20 +68,8 @@ public class InputDataActivity extends AppCompatActivity implements View.OnClick
         doneButton.setOnClickListener(this);
 
 
-        // TODO: DELETE THIS. Only here for easier testing
-        if (((Settings.getCurrentPupil()).getGender().equals("male"))) {
-            maleRadioButton.toggle();
-        } else {
-            femaleRadioButton.toggle();
-        }
-        dateTextView.setText("01/12/1998");
-        editTextHeight.setText(Integer.toString((int) Math.round (Settings.getCurrentPupil().getHeight())));
-        editTextWeigth.setText(Integer.toString((int) Math.round (Settings.getCurrentPupil().getWeight())));
-        activityLevelRatingBar.setRating(Settings.getCurrentPupil().getActivityLevel());
-        updateActivityLevelView();
-
-
-
+        // TODO: fix code
+        getUserInfo();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -106,24 +92,22 @@ public class InputDataActivity extends AppCompatActivity implements View.OnClick
         }
     }
 
-
     public void calendarClick(){
-
-        calendar = Calendar.getInstance();
-        int day = calendar.get(Calendar.DAY_OF_MONTH);
-        int month = calendar.get(Calendar.MONTH);
-        int year = calendar.get(Calendar.YEAR) - 13;
+        final Calendar c = Calendar.getInstance();
+        int day = c.get(Calendar.DAY_OF_MONTH);
+        int month = c.get(Calendar.MONTH);
+        int year = c.get(Calendar.YEAR);
 
         DatePickerDialog datePickerDialog = new DatePickerDialog(this, android.R.style.Theme_Holo_Dialog,
                 new DatePickerDialog.OnDateSetListener() {
                     @Override
-                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        dateTextView.setText(dayOfMonth + "/" + (month + 1)  + "/" + year); //TODO: fix month
+                    public void onDateSet(DatePicker view, int year, int month, int day) {
+                        dateTextView.setText(String.format("%02d",day) + "/" + String.format("%02d", (month+1)) + "/" + String.format("%02d", year));
                     }
                 }, year, month, day);
-
         datePickerDialog.show();
     }
+
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void doneButtonClick() throws ParseException {
         // Checks if radio button is selected, if not - Toast prints "choose gender" etc.
@@ -144,51 +128,33 @@ public class InputDataActivity extends AppCompatActivity implements View.OnClick
             // else if they're both containing something - set height, weight and calculate body mass index.
             else if (!editTextWeigth.getText().toString().isEmpty() && !editTextHeight.getText().toString().isEmpty()
                     && dateTextView.getText().toString().length() <= 10 && (maleRadioButton.isChecked() || femaleRadioButton.isChecked())) {
-                Settings.getCurrentPupil().setHeight(Double.parseDouble(editTextHeight.getText().toString()));
+                Settings.getCurrentPupil().getPhysique().setHeight(Double.parseDouble(editTextHeight.getText().toString()));
                 editTextHeight.setText(editTextHeight.getText().toString());
-                Settings.getCurrentPupil().setWeight(Double.parseDouble(editTextWeigth.getText().toString()));
+                Settings.getCurrentPupil().getPhysique().setWeight(Double.parseDouble(editTextWeigth.getText().toString()));
                 editTextWeigth.setText(editTextWeigth.getText().toString());
-                Settings.getCurrentPupil().setBmi(Settings.getCurrentPupil().getWeight() /
-                        (Math.pow(Settings.getCurrentPupil().getHeight() / 100, 2)));
-                DecimalFormat df = new DecimalFormat("#.##");
 
+                Settings.getCurrentPupil().getPhysique().setActivityLevel((int) Math.round(activityLevelRatingBar.getRating()));
 
-                Settings.getCurrentPupil().setAge(calculateAge());
+                Date dateOfBirthDate = df.parse(dateTextView.getText().toString());
+                Settings.getCurrentPupil().getPersonalInfo().setDateOfBirth(dateOfBirthDate.getTime());
 
-                Settings.getCurrentPupil().setActivityLevel((int) Math.round(activityLevelRatingBar.getRating()));
-                Log.d(Integer.toString(Settings.getCurrentPupil().getActivityLevel()), "doneButtonClick: Activitylevel");
-
+                //Settings.getCurrentPupil().getPersonalInfo().getAge());
 
                 if (maleRadioButton.isChecked()){
-                    (Settings.getCurrentPupil()).setGender("male");
-                    maleRadioButton.toggle();
-                }
-                else if (femaleRadioButton.isChecked()){
-                    (Settings.getCurrentPupil()).setGender("female");
-                    femaleRadioButton.toggle();
+                    Settings.getCurrentPupil().getPersonalInfo().setGender("male");
+                } else if (femaleRadioButton.isChecked()){
+                    Settings.getCurrentPupil().getPersonalInfo().setGender("female");
                 }
 
                 Settings.getCurrentUser().setFirstTimeLoggedIn(false);
 
-                fb.updateDatabase(Settings.getCurrentPupil(),fb.getAuth().getCurrentUser());
+                fb.updateDatabase();
 
                 Intent mainMenuIntent = new Intent(this, MainMenuActivity.class);
                 startActivity(mainMenuIntent);
             }
         }
     }
-
-    public int calculateAge() throws NumberFormatException, ParseException {
-        SimpleDateFormat f1 = new SimpleDateFormat("dd/MM/yyyy");
-        Date now = new Date(System.currentTimeMillis());
-        Settings.getCurrentPupil().setDateOfBirth(f1.parse(dateTextView.getText().toString()));
-        long timeBetween = now.getTime() - Settings.getCurrentPupil().getDateOfBirth().getTime();
-        double yearsBetween = timeBetween / 3.15576e+10;
-        int age = (int) Math.floor(yearsBetween);
-        return age;
-
-    }
-
     public void updateActivityLevelView() {
         if (activityLevelRatingBar.getRating()==0){
             activityLevelRatingBar.setRating(1);
@@ -204,6 +170,43 @@ public class InputDataActivity extends AppCompatActivity implements View.OnClick
             activityLevelTextView.setText("Højt aktivitetsniveau");
         } else if (i==5) {
             activityLevelTextView.setText("Ekstremt aktivitetsniveau");
+        }
+    }
+
+    public void getUserInfo(){
+        if (Settings.getCurrentPupil().getPersonalInfo().getGender().equals("male")) {
+            maleRadioButton.toggle();
+        } else if (Settings.getCurrentPupil().getPersonalInfo().getGender().equals("female")){
+            femaleRadioButton.toggle();
+        } else  if (Settings.getCurrentPupil().getPersonalInfo().getGender().equals("n")){
+            radioGroup.clearCheck();
+        }
+
+        if ((int) Math.round(Settings.getCurrentPupil().getPhysique().getHeight()) == 0){
+            editTextHeight.setText("");
+            editTextHeight.setHint("Enter height");
+        } else if (Settings.getCurrentPupil().getPhysique().getHeight() != 0){
+            editTextHeight.setText(Integer.toString((int) Math.round(Settings.getCurrentPupil().getPhysique().getHeight())));
+        }
+
+        if ((int) Math.round(Settings.getCurrentPupil().getPhysique().getWeight()) == 0){
+            editTextWeigth.setText("");
+            editTextWeigth.setHint("Enter weight.");
+        } else if (Settings.getCurrentPupil().getPhysique().getWeight() != 0 ) {
+            editTextWeigth.setText(Integer.toString((int) Math.round(Settings.getCurrentPupil().getPhysique().getWeight())));
+        }
+
+        if (Settings.getCurrentPupil().getPersonalInfo().getDateOfBirth() == 0){
+            dateTextView.setText("Enter date of birth");
+        } else {
+            dateTextView.setText(df.format(Settings.getCurrentPupil().getPersonalInfo().getDateOfBirth()));
+        }
+
+        if (Settings.getCurrentPupil().getPhysique().getActivityLevel() == 0){
+            activityLevelRatingBar.setRating(0);
+        } else if (Settings.getCurrentPupil().getPhysique().getActivityLevel() != 0) {
+            activityLevelRatingBar.setRating(Settings.getCurrentPupil().getPhysique().getActivityLevel());
+            updateActivityLevelView();
         }
     }
 }

@@ -3,6 +3,7 @@ package com.gr_b07;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -25,9 +26,6 @@ public class SocialActivity extends AppCompatActivity implements View.OnClickLis
     boolean firsttime = true;
     private ArrayList<Pupil> pupils = new ArrayList<Pupil>();
     FB fb = new FB();
-    // Pupil pupil = Settings.getUsers().getClass().asSubclass(Pupil);
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +43,15 @@ public class SocialActivity extends AppCompatActivity implements View.OnClickLis
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.buttonIncrement:
+                /*
                 fb.getAllUsersFromDatabase();
+                for (User user : Settings.getUsers()){
+                    usersTextView.setText(usersTextView.getText().toString() + user.getUsername());
+                }
+                Log.d(Settings.getUsers().toString(), "onClick: ");
+                */
+
+
                 //for (User user : Settings.getUsers())
                   //  if (user.getClass().equals(Pupil.class)) { // SHOULD BE if (user.getClass().equals(Pupil.class && er i samme klasse/skole etc.))
                         //Pupil pupil = (Pupil) user;

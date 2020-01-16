@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:padding="8dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,4 +9,67 @@
     tools:context=".games.SlotMachineActivity"
     android:background="@drawable/gradient_rewards">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/tickets"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ticketbtn"
+        android:padding="15dp"
+        android:text="Tickets"
+        android:textColor="@color/colorFat"/>
+
+    <FrameLayout
+        android:id="@+id/slotFrame"
+        android:layout_width="330dp"
+        android:layout_height="200dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/frame">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:orientation="horizontal">
+
+            <com.gr_b07.games.ImageViewScrolling.ImageViewScrolling
+                android:id="@+id/image"
+                android:layout_width="110dp"
+                android:layout_height="match_parent" />
+
+            <com.gr_b07.games.ImageViewScrolling.ImageViewScrolling
+                android:id="@+id/image2"
+                android:layout_width="110dp"
+                android:layout_height="match_parent" />
+            <com.gr_b07.games.ImageViewScrolling.ImageViewScrolling
+                android:id="@+id/image3"
+                android:layout_width="110dp"
+                android:layout_height="match_parent"/>
+
+
+
+    </LinearLayout>
+
+</FrameLayout>
+
+    <ImageView
+        android:id="@+id/buttonUp"
+        android:layout_width="22dp"
+        android:layout_height="166dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="206dp"
+        android:layout_toEndOf="@id/slotFrame"
+        android:src="@drawable/up" />
+
+    <ImageView
+        android:id="@+id/buttonDown"
+        android:src="@drawable/down"
+        android:layout_width="18dp"
+        android:layout_height="176dp"
+        android:layout_marginTop="220dp"
+        android:layout_toEndOf="@id/slotFrame"
+        android:layout_alignParentTop="true"
+        android:visibility="gone"/>
+
+
+</RelativeLayout>

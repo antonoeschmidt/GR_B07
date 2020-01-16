@@ -5,12 +5,18 @@ import android.content.res.Resources;
 public class Reward {
     private String name;
     private int tier;
-    private String resource;
+    private int resource;
+    private boolean redeemed;
 
-    public Reward(String name, int tier, String resource){
+    public Reward(String name, int tier, int resource){
         this.name = name;
         this.tier = tier;
         this.resource = resource;
+        this.redeemed = false;
+    }
+
+    public Reward() {
+
     }
 
     public String getName() {
@@ -29,11 +35,19 @@ public class Reward {
         this.tier = tier;
     }
 
-    public String getResource() {
+    public int getResource() {
         return resource;
     }
 
-    public void setResource(String resource) {
+    public void setResource(int resource) {
         this.resource = resource;
+    }
+
+    public boolean isRedeemed() {
+        return redeemed;
+    }
+
+    public void redeem(){
+        redeemed = true;
     }
 }

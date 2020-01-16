@@ -1,100 +1,132 @@
 package com.gr_b07.logik;
 
+import android.widget.TextView;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class Pupil extends User {
 
-    private double height, weight, bmi, calories, protein, carbs, fat;
-    private Date dateOfBirth;
-    private int age, ticket, activityLevel;
+    private Physique physique;
+    private PersonalInfo personalInfo;
     private Experience experience;
-    private String gender;
 
-    public Pupil(boolean firstTimeLoggedIn, String username, String password, boolean loggedIn, double height,
-                 double weight, double bmi, double calories, double protein, double carbs, double fat,
-                 Date dateOfBirth, int age, Experience experience, int ticket, String gender, int activityLevel) {
+    //TODO: evt fjern new ArrayList
+    private List<Meal> meals = new ArrayList<>();
+    private List<String> friends = new ArrayList<>();
+    private List<String> activities = new ArrayList<>();
+    private List<Reward> rewards = new ArrayList<>();
+
+    public Pupil(boolean firstTimeLoggedIn, String username, String password, boolean loggedIn, Physique physique,
+                 PersonalInfo personalInfo, Experience experience, List<Meal> meals, List<String> friends,
+                 List<String> activities, List<Reward> rewards) {
         super(firstTimeLoggedIn, username, password, loggedIn);
-        this.height = height;
-        this.weight = weight;
-        this.bmi = bmi;
-        this.calories = calories;
-        this.protein = protein;
-        this.carbs = carbs;
-        this.fat = fat; 
-        this.dateOfBirth = dateOfBirth;
-        this.age = age;
+        this.physique = physique;
+        this.personalInfo = personalInfo;
         this.experience = experience;
-        this.ticket = ticket;
-        this.gender = gender;
-        this.activityLevel = activityLevel;
+        this.meals = meals;
+        this.friends = friends;
+        this.activities = activities;
+        this.rewards = rewards;
     }
 
-    public String getGender() {
-        return gender;
+    public Pupil() {
+        //røv vigtig
     }
 
-    public void setGender(String gender) {
-        this.gender = gender;
+    public Food getDailyIntake(long date) {
+        SimpleDateFormat f1 = new SimpleDateFormat("dd/MM/yyyy");
+        Date now = new Date(System.currentTimeMillis());
+        String dateString = f1.format(date);
+        String nowString = f1.format(now);
+        int calories = 0, protein = 0, carbs = 0, fat = 0;
+
+        for (Meal meal :
+                meals) {
+            if (nowString.equals(dateString)) {
+                calories += meal.getCalories();
+                protein += meal.getProtein();
+                carbs += meal.getCarbs();
+                fat += meal.getFat();
+            }
+        }
+
+        return new Food("dailyIntake", calories, protein, carbs, fat);
     }
 
-    public double getHeight() {
-        return height;
+    public void addMeal(Meal meal) {
+        meals.add(meal);
     }
 
-    public void setHeight(double height) {
-        this.height = height;
+    public void addReward(Reward reward) {
+        rewards.add(reward);
     }
 
-    public double getWeight() {
-        return weight;
+    public void addFriend(String pupil) { friends.add(pupil); }
+
+    public void addActivity(String activity) {
+        activities.add(activity);
     }
 
-    public void setWeight(double weight) {
-        this.weight = weight;
+
+    public Physique getPhysique() {
+        return physique;
     }
 
-    public double getBmi() {
-        return bmi;
+    public void setPhysique(Physique physique) {
+        this.physique = physique;
     }
 
-    public void setBmi(double bmi) {
-        this.bmi = bmi;
+    public PersonalInfo getPersonalInfo() {
+        return personalInfo;
     }
 
-    public double getCalories() { return calories; }
+    public void setPersonalInfo(PersonalInfo personalInfo) {
+        this.personalInfo = personalInfo;
+    }
 
-    public void setCalories(double calories) { this.calories = calories; }
+    public Experience getExperience() {
+        return experience;
+    }
 
-    public double getProtein() { return protein; }
+    public void setExperience(Experience experience) {
+        this.experience = experience;
+    }
 
-    public void setProtein(double protein) { this.protein = protein; }
+    public List<Meal> getMeals() {
+        return meals;
+    }
 
-    public double getCarbs() { return carbs; }
+    public void setMeals(List<Meal> meals) {
+        this.meals = meals;
+    }
 
-    public void setCarbs(double carbs) { this.carbs = carbs; }
+    public List<String> getFriends() {
+        return friends;
+    }
 
-    public double getFat() { return fat; }
+    public void setFriends(List<String> friends) {
+        this.friends = friends;
+    }
 
-    public void setFat(double fat) { this.fat = fat; }
+    public List<String> getActivities() {
+        return activities;
+    }
 
-    public Date getDateOfBirth() { return dateOfBirth; }
+    public void setActivities(List<String> activities) {
+        this.activities = activities;
+    }
 
-    public void setDateOfBirth(Date dateOfBirth) { this.dateOfBirth = dateOfBirth; }
+    public List<Reward> getRewards() {
+        return rewards;
+    }
 
-    public int getAge() { return age; }
+    public void setRewards(List<Reward> rewards) {
+        this.rewards = rewards;
+    }
 
-    public void setAge(int age) { this.age = age; }
-
-    public Experience getExperience() { return experience; }
-
-    public void setExperience(Experience experience) { this.experience = experience; }
-
-    public int getTicket() { return ticket; }
-
-    public void setTicket(int ticket) { this.ticket = ticket; }
-
-    public int getActivityLevel() { return activityLevel; }
-
-    public void setActivityLevel(int activityLevel) {this.activityLevel = activityLevel; }
 }
 

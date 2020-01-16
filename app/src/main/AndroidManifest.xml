@@ -12,6 +12,8 @@
         <activity android:name=".statistics.StatisticsActivity"></activity>
         <activity android:name=".SignUpActivity" />
         <activity android:name=".games.RedeemActivity" />
+        <activity android:name=".SignUpActivity"></activity>
+        <activity android:name=".games.redeemRewards.RedeemActivity" />
         <activity android:name=".games.ChanceActivity" />
         <activity android:name=".games.ChestActivity" />
         <activity android:name=".games.ScratchCardActivity" />

@@ -22,6 +22,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.text.ParseException;
 import java.util.ArrayList;
 
 public class NutritionActivity extends AppCompatActivity implements View.OnClickListener{
@@ -97,14 +98,14 @@ public class NutritionActivity extends AppCompatActivity implements View.OnClick
     }
 
     public void updateView(){
-        cRing.setProgress((int) Math.round(Settings.getCurrentPupil().getCalories()));
-        pProgress.setProgress((int) Math.round(Settings.getCurrentPupil().getProtein()));
-        cProgress.setProgress((int) Math.round(Settings.getCurrentPupil().getCarbs()));
-        fProgress.setProgress((int) Math.round(Settings.getCurrentPupil().getFat()));
-        caloriesTextView.setText("Calories: \n" + (int) Settings.getCurrentPupil().getCalories() + "  /  " + cRing.getMax());
-        proteinTextView.setText("Protein: " + (int) Settings.getCurrentPupil().getProtein() +  "  /  " + pProgress.getMax() + " g");
-        carbsTextView.setText("Carbs: "+ (int) Settings.getCurrentPupil().getCarbs() + "  /  " + cProgress.getMax() + " g");
-        fatTextView.setText("Fat: " + (int) Settings.getCurrentPupil().getFat() + "  /  " + fProgress.getMax() + " g");
+        cRing.setProgress((int) Math.round(Settings.getCurrentPupil().getDailyIntake(System.currentTimeMillis()).getCalories()));
+        pProgress.setProgress((int) Math.round(Settings.getCurrentPupil().getDailyIntake(System.currentTimeMillis()).getProtein()));
+        cProgress.setProgress((int) Math.round(Settings.getCurrentPupil().getDailyIntake(System.currentTimeMillis()).getCarbs()));
+        fProgress.setProgress((int) Math.round(Settings.getCurrentPupil().getDailyIntake(System.currentTimeMillis()).getFat()));
+        caloriesTextView.setText("Calories: \n" + (int) Settings.getCurrentPupil().getDailyIntake(System.currentTimeMillis()).getCalories() + "  /  " + cRing.getMax());
+        proteinTextView.setText("Protein: " + (int) Settings.getCurrentPupil().getDailyIntake(System.currentTimeMillis()).getProtein() +  "  /  " + pProgress.getMax() + " g");
+        carbsTextView.setText("Carbs: "+ (int) Settings.getCurrentPupil().getDailyIntake(System.currentTimeMillis()).getCarbs() + "  /  " + cProgress.getMax() + " g");
+        fatTextView.setText("Fat: " + (int) Settings.getCurrentPupil().getDailyIntake(System.currentTimeMillis()).getFat() + "  /  " + fProgress.getMax() + " g");
     }
 
     private void createDBarray() {
@@ -135,13 +136,13 @@ public class NutritionActivity extends AppCompatActivity implements View.OnClick
     }
 
     public void updateMacros() {
-        if (Settings.getCurrentPupil().getGender().equals("male")){
-            cRing.setMax((int) Math.round((10 * Settings.getCurrentPupil().getWeight()) + (6.25 * Settings.getCurrentPupil().getHeight())
-                    - (5 * Settings.getCurrentPupil().getAge()) + 5) + (Settings.getCurrentPupil().getActivityLevel() * 150));
+        if (Settings.getCurrentPupil().getPersonalInfo().getGender().equals("male")){
+            cRing.setMax((int) Math.round((10 * Settings.getCurrentPupil().getPhysique().getWeight()) + (6.25 * Settings.getCurrentPupil().getPhysique().getHeight())
+                    - (5 * Settings.getCurrentPupil().getPersonalInfo().getAge()) + 5) + (Settings.getCurrentPupil().getPhysique().getActivityLevel() * 250));
         }
-        else if (Settings.getCurrentPupil().getGender().equals("female")) {
-            cRing.setMax((int) Math.round((10 * Settings.getCurrentPupil().getWeight()) + (6.25 * Settings.getCurrentPupil().getHeight())
-                    - (5 * Settings.getCurrentPupil().getAge()) - 161) + (Settings.getCurrentPupil().getActivityLevel() * 150));
+        else if (Settings.getCurrentPupil().getPersonalInfo().getGender().equals("female")) {
+            cRing.setMax((int) Math.round((10 * Settings.getCurrentPupil().getPhysique().getWeight()) + (6.25 * Settings.getCurrentPupil().getPhysique().getHeight())
+                    - (5 * Settings.getCurrentPupil().getPersonalInfo().getAge()) - 161) + (Settings.getCurrentPupil().getPhysique().getActivityLevel() * 250));
         }
         pProgress.setMax((int) Math.round ((cRing.getMax()*0.25)/4));
         cProgress.setMax((int) Math.round ((cRing.getMax()*0.5)/4));
