@@ -1,17 +1,18 @@
 package com.gr_b07.logik;
 
 public class Experience {
-    private int level, nutritionXP, activityXP, socialXP;
+    private int level, nutritionXP, activityXP, socialXP, ticket;
 
-    public Experience(int level, int nutritionXP, int activityXP, int socialXP) {
+    public Experience(int level, int nutritionXP, int activityXP, int socialXP, int ticket) {
         this.level = level;
         this.nutritionXP = nutritionXP;
         this.activityXP = activityXP;
         this.socialXP = socialXP;
+        this.ticket = ticket;
     }
 
     public Experience() {
-
+        //røv vigtigt
     }
 
     public int getLevel() { return level; }
@@ -47,4 +48,11 @@ public class Experience {
         return totalXP;
     }
 
+    public int getTicket() {
+        return ticket;
+    }
+
+    public void setTicket(int ticket) {
+        this.ticket = ticket;
+    }
 }
