@@ -58,7 +58,7 @@ public class FB {
 
                             Pupil newUser = new Pupil(true, email, password, false, 0, 0, 0, 0,
                                     0, 0, 0, 0, 0,
-                                    new Experience(1, 0), 0, "n", 0,new ArrayList<Reward>(), new ArrayList<Pupil>(),null);
+                                    new Experience(1, 0), 0, "n", 0,new ArrayList<Reward>(), new ArrayList<Pupil>(),null,new ArrayList<String>(), "");
 
                             updateDatabase(newUser, user);
                             progressDialog.hide();
@@ -174,7 +174,7 @@ public class FB {
         //Date dateOfBirth = (Date) (d.child("dateOfBirth").getValue(Date.class));
         long dateOfBirth = (d.child("dateOfBirth").getValue(Long.class));
         int age = (d.child("height").getValue(Long.class).intValue());
-        //Experience experience = (Experience) (d.child("experience").getValue(Experience.class));
+        //Experience experience = (d.child("experience").getValue(Experience.class));
         //Log.d(experience.toString(), "getUserFromDatabase: ");
         int ticket = (d.child("ticket").getValue(Long.class).intValue());
         String gender = d.child("gender").getValue(String.class);
@@ -183,7 +183,7 @@ public class FB {
 
         return new Pupil(firstTimeLoggedIn, email, password, true, height, weight, bmi, calories,
                 protein, carbs, fat, dateOfBirth, age,
-                new Experience(1,0), ticket, gender, activityLevel,new ArrayList<Reward>(), new ArrayList<Pupil>(), null);
+                new Experience(1,0), ticket, gender, activityLevel,new ArrayList<Reward>(), new ArrayList<Pupil>(), null, new ArrayList<String>(), "");
 
     }
 

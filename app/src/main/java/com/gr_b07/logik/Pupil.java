@@ -14,15 +14,17 @@ public class Pupil extends User {
     private long dateOfBirth;
     private int age, ticket, activityLevel;
     private Experience experience;
-    private String gender;
+    private String gender, zipCode;
     private ArrayList<Reward> rewards = new ArrayList<>();
     private ArrayList<Pupil> friends;
+    private ArrayList<String> activities;
     private Resources resource;
+
 
     public Pupil(boolean firstTimeLoggedIn, String username, String password, boolean loggedIn, double height,
                  double weight, double bmi, double calories, double protein, double carbs, double fat,
                  long dateOfBirth, int age, Experience experience, int ticket, String gender, int activityLevel,
-                 ArrayList<Reward> rewards, ArrayList<Pupil> friends, Resources resource) {
+                 ArrayList<Reward> rewards, ArrayList<Pupil> friends, Resources resource, ArrayList<String> activities, String zipCode) {
         super(firstTimeLoggedIn, username, password, loggedIn);
         this.height = height;
         this.weight = weight;
@@ -40,6 +42,7 @@ public class Pupil extends User {
         this.rewards = rewards;
         this.friends = friends;
         this.resource = resource;
+        this.zipCode = zipCode;
     }
     //setBmi(Settings.getCurrentPupil().getWeight()/ (Math.pow(Settings.getCurrentPupil().getHeight() / 100, 2)));
 
@@ -141,5 +144,15 @@ public class Pupil extends User {
     public Resources getResource() { return resource; }
 
     public void setResource(Resources resource) { this.resource = resource; }
+
+    public ArrayList<String> getActivities() { return activities; }
+
+    public void addActivity(String activity) {activities.add(activity); }
+
+    public void setActivities(ArrayList<String> activities) { this.activities = activities;}
+
+    public String getZipCode() { return zipCode; }
+
+    public void setZipCode(String zipCode) { this.zipCode = zipCode; }
 }
 

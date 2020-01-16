@@ -28,9 +28,11 @@ public class SocialActivity extends AppCompatActivity implements SocialRecyclerV
     boolean firsttime = true;
     private ArrayList<Pupil> pupils = new ArrayList<Pupil>();
     FB fb = new FB();
-    private SocialRecyclerViewAdapter adapter;
-    ArrayList<String> usernames = new ArrayList<>();
-    ArrayList<Integer> imageViewAccount = new ArrayList<>();
+    private SocialRecyclerViewAdapter friendsAdapter, suggestedAdapter;
+    ArrayList<String> friendsUsername = new ArrayList<>();
+    ArrayList<String> suggestedUsername = new ArrayList<>();
+    ArrayList<Integer> friendsAccountImageView = new ArrayList<>();
+    ArrayList<Integer> suggestedAccountImageView = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,17 +48,27 @@ public class SocialActivity extends AppCompatActivity implements SocialRecyclerV
 
         classmatesTextView = findViewById(R.id.classmatesTextView);
 
-        recyclerViewUpdate();
+        friendsRecyclerViewUpdate();
 
         Settings.getUsers().clear();
 
         fb.getAllUsersFromDatabase();
 
+        for (User user : Settings.getUsers())
+            if (user.getClass() == Pupil.class){
+                Pupil pupil = (Pupil) user;
+                if (Settings.getCurrentPupil().getZipCode().equals(pupil.getZipCode())|| Settings.getCurrentPupil().getActivities().equals(pupil.getActivities())){
+                suggestedAccountImageView.add(R.drawable.friend_nophoto);
+                suggestedUsername.add(pupil.getUsername());
+
+                }
+        }
+
     }
 
     @Override
     public void onItemClick(View view, int position) {
-        Toast.makeText(this, "You clicked " + adapter.getItem(position) + " on item position " + position, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "You clicked " + friendsAdapter.getItem(position) + " on item position " + position, Toast.LENGTH_SHORT).show();
     }
 
 
@@ -74,16 +86,18 @@ public class SocialActivity extends AppCompatActivity implements SocialRecyclerV
                 for (User user : Settings.getUsers())
                     if (user.getClass().equals(Pupil.class) && !user.getUsername().equals(Settings.getCurrentPupil().getUsername())){
                         Settings.getCurrentPupil().addFriend((Pupil) user);
-                        usernames.add(user.getUsername());
+                        friendsUsername.add(user.getUsername());
                         if (((Pupil) user).getResource() == null){
-                            imageViewAccount.add(R.drawable.friend_nophoto);
+                            friendsAccountImageView.add(R.drawable.friend_nophoto);
                         } else if (((Pupil) user).getResource() != null){
-                            imageViewAccount.add(Color.BLUE);
+                            friendsAccountImageView.add(Color.BLUE);
                             // TODO: Save resource and get it out again lol
-                            //imageViewAccount.add(Resources.(((Pupil) user).getResource()));
-                            //imageViewAccount.add(((Pupil) user).getResource());
+                            //friendsAccountImageView.add(Resources.(((Pupil) user).getResource()));
+                            //friendsAccountImageView.add(((Pupil) user).getResource());
                         }
-                        recyclerViewUpdate();
+                        friendsRecyclerViewUpdate();
+
+                        suggestedRecyclerViewUpdate();
                     }
                 updateTextViews();
                 break;
@@ -93,13 +107,22 @@ public class SocialActivity extends AppCompatActivity implements SocialRecyclerV
         friendsTextView.setText("Friends : " + Integer.toString(Settings.getCurrentPupil().getFriends().size()));
     }
 
-    public void recyclerViewUpdate(){
-        RecyclerView recyclerView = findViewById(R.id.recyclerViewFriends);
+    public void friendsRecyclerViewUpdate(){
+        RecyclerView friendsRecyclerView = findViewById(R.id.friendsRecyclerView);
         LinearLayoutManager horizontalLayoutManager
                 = new LinearLayoutManager(SocialActivity.this, LinearLayoutManager.HORIZONTAL, false);
-        recyclerView.setLayoutManager(horizontalLayoutManager);
-        adapter = new SocialRecyclerViewAdapter(this, imageViewAccount, usernames);
-        adapter.setClickListener(this);
-        recyclerView.setAdapter(adapter);
+        friendsRecyclerView.setLayoutManager(horizontalLayoutManager);
+        friendsAdapter = new SocialRecyclerViewAdapter(this, friendsAccountImageView, friendsUsername);
+        friendsAdapter.setClickListener(this);
+        friendsRecyclerView.setAdapter(friendsAdapter);
+    }
+    public void suggestedRecyclerViewUpdate(){
+        RecyclerView suggestedRecyclerView = findViewById(R.id.suggestedRecyclerView);
+        LinearLayoutManager horizontalLayoutManager
+                = new LinearLayoutManager(SocialActivity.this, LinearLayoutManager.HORIZONTAL, false);
+        suggestedRecyclerView.setLayoutManager(horizontalLayoutManager);
+        suggestedAdapter = new SocialRecyclerViewAdapter(this, suggestedAccountImageView, suggestedUsername);
+        suggestedAdapter.setClickListener(this);
+        suggestedRecyclerView.setAdapter(suggestedAdapter);
     }
 }

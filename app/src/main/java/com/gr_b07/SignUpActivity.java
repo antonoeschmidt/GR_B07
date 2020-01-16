@@ -1,6 +1,7 @@
 package com.gr_b07;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -45,6 +46,12 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 final String email = usernameText.getText().toString();
                 final String password = passwordText.getText().toString();
                 fb.signUp(progressDialog,this, email,password);
+
+                /*
+                TODO: Make signup go directly to inputdata. Can't be done because nullpointer while database is loading data.
+                Intent inputDataIntent = new Intent(this, InputDataActivity.class);
+                startActivity(inputDataIntent);
+                 */
                 break;
         }
     }
