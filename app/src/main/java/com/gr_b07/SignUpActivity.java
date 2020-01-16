@@ -11,6 +11,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.gr_b07.logik.FB;
 
+import java.time.LocalDateTime;
+
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener {
     private EditText usernameText;
     private EditText passwordText;
