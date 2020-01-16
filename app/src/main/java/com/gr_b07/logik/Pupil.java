@@ -41,7 +41,13 @@ public class Pupil extends User {
         for (Meal meal :
                 meals) {
 
-            if (date = today) {
+
+            Date datedate = new Date(date);
+            Date now = new Date (System.currentTimeMillis());
+            SimpleDateFormat f1 = new SimpleDateFormat("dd/MM/yyyy");
+            String datedateString = f1.format(date);
+            String nowString = f1.format(now);
+            if (nowString.equals(datedateString) ) {
 
             }
 

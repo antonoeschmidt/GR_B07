@@ -18,11 +18,11 @@ public class PersonalInfo {
     }
 
 
-    public int getAge(Date dateOfBirth) throws NumberFormatException, ParseException {
+    public int getAge(Long dateOfBirth) throws NumberFormatException, ParseException {
         SimpleDateFormat f1 = new SimpleDateFormat("dd/MM/yyyy");
         Date now = new Date(System.currentTimeMillis());
 
-        long timeBetween = now.getTime() - Settings.getCurrentPupil().getDateOfBirth();
+        long timeBetween = now.getTime() - dateOfBirth;
         double yearsBetween = timeBetween / 3.15576e+10;
         int age = (int) Math.floor(yearsBetween);
         return age;
