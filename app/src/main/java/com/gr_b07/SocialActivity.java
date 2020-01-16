@@ -26,9 +26,6 @@ public class SocialActivity extends AppCompatActivity implements View.OnClickLis
     boolean firsttime = true;
     private ArrayList<Pupil> pupils = new ArrayList<Pupil>();
     FB fb = new FB();
-    // Pupil pupil = Settings.getUsers().getClass().asSubclass(Pupil);
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -17,9 +17,12 @@ public class PersonalInfo {
         this.zipCode = zipCode;
     }
 
+    public PersonalInfo() {
 
-    public int getAge(Long dateOfBirth) throws NumberFormatException, ParseException {
-        SimpleDateFormat f1 = new SimpleDateFormat("dd/MM/yyyy");
+    }
+
+
+    public int getAge() throws NumberFormatException {
         Date now = new Date(System.currentTimeMillis());
 
         long timeBetween = now.getTime() - dateOfBirth;

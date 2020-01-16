@@ -10,6 +10,10 @@ public class Meal extends Food {
         this.date = date;
     }
 
+    public Meal() {
+
+    }
+
     public String getTypeOfMeal() {
         return typeOfMeal;
     }

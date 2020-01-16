@@ -108,7 +108,7 @@ public class RewardsActivity extends AppCompatActivity implements View.OnClickLi
             circularProgressBar.setProgress(Settings.getCurrentPupil().getExperience().getTotalXP());
      */
             Settings.getCurrentPupil().getExperience().setLevel(Settings.getCurrentPupil().getExperience().getLevel()+1);
-            Settings.getCurrentPupil().setTicket(Settings.getCurrentPupil().getTicket()+1);
+            Settings.getCurrentPupil().getExperience().setTicket(Settings.getCurrentPupil().getExperience().getTicket()+1);
             circularProgressBar.setProgressMax((Settings.getCurrentPupil().getExperience().getLevel()*5+10));
         }
     }
