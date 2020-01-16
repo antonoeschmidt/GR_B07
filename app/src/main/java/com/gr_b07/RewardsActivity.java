@@ -13,7 +13,7 @@ import com.mikhaellopez.circularprogressbar.CircularProgressBar;
 
 public class RewardsActivity extends AppCompatActivity implements View.OnClickListener{
    // private ProgressBar rProgress;
-    private TextView levelTextView, xpTextView, totalXPtext, totalNutritionXPtextView, totalActivityXPtextView, totalSocialXPtextView;
+    private TextView levelTextView, totalXPtext, totalNutritionXPtextView, totalActivityXPtextView, totalSocialXPtextView;
     private Button rewardButton, rewardTestButtonNutrition, rewardTestButtonActivity, rewardTestButtonSocial;
     private CircularProgressBar circularProgressBar;
     int xpType;
@@ -25,7 +25,6 @@ public class RewardsActivity extends AppCompatActivity implements View.OnClickLi
 
         circularProgressBar = findViewById(R.id.circularProgressBar);
         levelTextView = findViewById(R.id.textViewLevel);
-        xpTextView = findViewById(R.id.textViewXpProgress);
         totalNutritionXPtextView = findViewById(R.id.totalNutritionXPText);
         totalActivityXPtextView = findViewById(R.id.totalActivityXPText);
         totalSocialXPtextView = findViewById(R.id.totalSocialXPText);
@@ -116,8 +115,7 @@ public class RewardsActivity extends AppCompatActivity implements View.OnClickLi
 
     public void updateTextViews() {
         levelTextView.setText("Level: " + Settings.getCurrentPupil().getExperience().getLevel());
-        xpTextView.setText("Progress: \n " + Settings.getCurrentPupil().getExperience().getTotalXP() + " / " + (Settings.getCurrentPupil().getExperience().getLevel() * 5 + 10));
-        totalXPtext.setText("Total XP\n" + Settings.getCurrentPupil().getExperience().getTotalXP()+ " / " + (Settings.getCurrentPupil().getExperience().getLevel() * 5 + 10));
+        totalXPtext.setText("Total XP\n " + Settings.getCurrentPupil().getExperience().getTotalXP()+ " / " + (Settings.getCurrentPupil().getExperience().getLevel() * 5 + 10));
         totalNutritionXPtextView.setText("Nutrition Points: " + Settings.getCurrentPupil().getExperience().getNutritionXP());
         totalActivityXPtextView.setText("Activity Points: " + Settings.getCurrentPupil().getExperience().getActivityXP());
         totalSocialXPtextView.setText("Social Points: " + Settings.getCurrentPupil().getExperience().getSocialXP());
