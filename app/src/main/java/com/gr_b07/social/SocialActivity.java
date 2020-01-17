@@ -43,6 +43,8 @@ public class SocialActivity extends AppCompatActivity implements SocialRecyclerV
         friendsTextView = findViewById(R.id.friendsTextView);
         buttonIncrement.setOnClickListener(this);
 
+
+
         // set up the RecyclerView
 
 
@@ -53,17 +55,6 @@ public class SocialActivity extends AppCompatActivity implements SocialRecyclerV
         Settings.getUsers().clear();
 
         fb.getAllUsersFromDatabase();
-
-        for (User user : Settings.getUsers())
-            if (user.getClass() == Pupil.class){
-                Pupil pupil = (Pupil) user;
-                if (Settings.getCurrentPupil().getZipCode().equals(pupil.getZipCode())|| Settings.getCurrentPupil().getActivities().equals(pupil.getActivities())){
-                suggestedAccountImageView.add(R.drawable.friend_nophoto);
-                suggestedUsername.add(pupil.getUsername());
-
-                }
-        }
-
     }
 
     @Override
@@ -83,31 +74,23 @@ public class SocialActivity extends AppCompatActivity implements SocialRecyclerV
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.buttonIncrement:
-                for (User user : Settings.getUsers())
-                    if (user.getClass().equals(Pupil.class) && !user.getUsername().equals(Settings.getCurrentPupil().getUsername())){
-                        Settings.getCurrentPupil().addFriend((Pupil) user);
-                        friendsUsername.add(user.getUsername());
-                        if (((Pupil) user).getResource() == null){
-                            friendsAccountImageView.add(R.drawable.friend_nophoto);
-                        } else if (((Pupil) user).getResource() != null){
-                            friendsAccountImageView.add(Color.BLUE);
-                            // TODO: Save resource and get it out again lol
-                            //friendsAccountImageView.add(Resources.(((Pupil) user).getResource()));
-                            //friendsAccountImageView.add(((Pupil) user).getResource());
-                        }
-                        friendsRecyclerViewUpdate();
-
-                        suggestedRecyclerViewUpdate();
-                    }
+                for (User user : Settings.getUsers()) {
+                    addFriends(user);
+                    addSuggestedFriends(user);
+                }
+                friendsRecyclerViewUpdate();
+                suggestedRecyclerViewUpdate();
                 updateTextViews();
                 break;
         }
     }
+
     public void updateTextViews(){
         friendsTextView.setText("Friends : " + Integer.toString(Settings.getCurrentPupil().getFriends().size()));
     }
 
     public void friendsRecyclerViewUpdate(){
+
         RecyclerView friendsRecyclerView = findViewById(R.id.friendsRecyclerView);
         LinearLayoutManager horizontalLayoutManager
                 = new LinearLayoutManager(SocialActivity.this, LinearLayoutManager.HORIZONTAL, false);
@@ -124,5 +107,31 @@ public class SocialActivity extends AppCompatActivity implements SocialRecyclerV
         suggestedAdapter = new SocialRecyclerViewAdapter(this, suggestedAccountImageView, suggestedUsername);
         suggestedAdapter.setClickListener(this);
         suggestedRecyclerView.setAdapter(suggestedAdapter);
+    }
+
+    public void addSuggestedFriends(User user){
+        if (user.getClass().equals(Pupil.class)){
+            Pupil pupil = (Pupil) user;
+            if (Settings.getCurrentPupil().getPersonalInfo().getZipCode() == (pupil.getPersonalInfo().getZipCode())|| Settings.getCurrentPupil().getActivities().equals(pupil.getActivities())
+                    && !user.getUsername().equals(Settings.getCurrentPupil().getUsername())){
+                suggestedAccountImageView.add(R.drawable.friend_nophoto);
+                if (user.getUsername().length() > 12) {
+                    suggestedUsername.add(user.getUsername().substring(0,12) + "...");
+                } else suggestedUsername.add(user.getUsername());
+            }
+        }
+    }
+    public void addFriends(User user){
+        if (user.getClass().equals(Pupil.class) && !user.getUsername().equals(Settings.getCurrentPupil().getUsername()) &&
+        !Settings.getCurrentPupil().getFriends().contains(user.getUsername())) {
+            Settings.getCurrentPupil().addFriend(user.getUsername());
+            if (user.getUsername().length() > 12) {
+                friendsUsername.add(user.getUsername().substring(0,12) + "...");
+            } else friendsUsername.add(user.getUsername());
+            friendsAccountImageView.add(R.drawable.friend_nophoto);
+            // TODO: Save resource and get it out again lol
+            //friendsAccountImageView.add(Resources.(((Pupil) user).getResource()));
+            //friendsAccountImageView.add(((Pupil) user).getResource());
+        }
     }
 }
