@@ -24,7 +24,7 @@ public class ScratchCardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scratch_card);
         scratchCardTextView = findViewById(R.id.scratchCardText);
-        scratchImageView = new ScratchImageView(this);
+        scratchCardTextView.setText("0% Revealed");
         scratchImageView = findViewById(R.id.scratchCardView);
         scratchImageView.setRevealListener(new ScratchImageView.IRevealListener() {
             @Override
@@ -33,8 +33,7 @@ public class ScratchCardActivity extends AppCompatActivity {
             }
             @Override
             public void onRevealPercentChangedListener(ScratchImageView siv, float percent) {
-                Toast.makeText(ScratchCardActivity.this, "you win lol", Toast.LENGTH_SHORT).show();
-            scratchCardTextView.setText(percent + "% Revealed");
+            scratchCardTextView.setText(Math.round(percent * 100) + "% Revealed");
             }
         });
     }
