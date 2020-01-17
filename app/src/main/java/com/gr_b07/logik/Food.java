@@ -11,6 +11,10 @@ public class Food {
         this.fat = fat;
     }
 
+    public Food() {
+
+    }
+
     public String getName() {
         return name;
     }

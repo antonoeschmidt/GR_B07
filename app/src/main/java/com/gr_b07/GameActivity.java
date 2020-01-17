@@ -47,11 +47,11 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.buttonUseTicket:
-                if (Settings.getCurrentPupil().getTicket() >= 1){
+                if (Settings.getCurrentPupil().getExperience().getTicket() >= 1){
                     // TODO: Implementér hvad der skal ske ved brug af én ticket. evt flere muligheder.
-                    Settings.getCurrentPupil().setTicket(Settings.getCurrentPupil().getTicket()-1);
+                    Settings.getCurrentPupil().getExperience().setTicket(Settings.getCurrentPupil().getExperience().getTicket()-1);
                 }
-                else if (Settings.getCurrentPupil().getTicket() == 0){
+                else if (Settings.getCurrentPupil().getExperience().getTicket() == 0){
                     Toast.makeText(this, "You aint got the tickets hombre", Toast.LENGTH_SHORT).show();
                 }
                 updateTextView();
@@ -83,6 +83,6 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
     public void updateTextView(){
-        ticketTextView.setText("Tickets: " + Settings.getCurrentPupil().getTicket());
+        ticketTextView.setText("Tickets: " + Settings.getCurrentPupil().getExperience().getTicket());
     }
 }

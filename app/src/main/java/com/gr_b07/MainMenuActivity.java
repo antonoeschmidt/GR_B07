@@ -69,13 +69,13 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
     }
     public void updateMainMenu() {
         levelTextView.setText(Integer.toString(Settings.getCurrentPupil().getExperience().getLevel()).toString());
-        xpTextView.setText((Integer.toString(Settings.getCurrentPupil().getExperience().getXp())) + " / " + Integer.toString(Settings.getCurrentPupil().getExperience().getLevel()*5+10));
+        xpTextView.setText((Integer.toString(Settings.getCurrentPupil().getExperience().getTotalXP())) + " / " + Integer.toString(Settings.getCurrentPupil().getExperience().getLevel()*5+10));
         xpProgressBar.setMax(Settings.getCurrentPupil().getExperience().getLevel()*5+10);
-        xpProgressBar.setProgress(Settings.getCurrentPupil().getExperience().getXp());
-        if (Settings.getCurrentPupil().getTicket() >= 1){
+        xpProgressBar.setProgress(Settings.getCurrentPupil().getExperience().getTotalXP());
+        if (Settings.getCurrentPupil().getExperience().getTicket() >= 1){
             ticketView.setVisibility(View.VISIBLE);
         }
-        else if (Settings.getCurrentPupil().getTicket()==0){
+        else if (Settings.getCurrentPupil().getExperience().getTicket()==0){
             ticketView.setVisibility(View.INVISIBLE);
         }
     }

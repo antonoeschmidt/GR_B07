@@ -3,9 +3,48 @@ package com.gr_b07.logik;
 import java.util.Date;
 
 public class Physique {
-    private String gender;
     private double  height, weight;
-    private Date dateOfBirth;
-    private int age, activityLevel;
+    private int activityLevel;
+
+    public Physique(double height, double weight, int activityLevel) {
+        this.height = height;
+        this.weight = weight;
+        this.activityLevel = activityLevel;
+    }
+
+    public Physique() {
+
+    }
+
+    public double getHeight() {
+        return height;
+    }
+
+    public void setHeight(double height) {
+        this.height = height;
+    }
+
+    public double getWeight() {
+        return weight;
+    }
+
+    public void setWeight(double weight) {
+        this.weight = weight;
+    }
+
+    public int getActivityLevel() {
+        return activityLevel;
+    }
+
+    public void setActivityLevel(int activityLevel) {
+        this.activityLevel = activityLevel;
+    }
+
+    /* TODO: FIND BETTER SOLUTION. CRASHES ON SIGNUP IF IMPLEMENTED HERE
+    public double getBMI() {
+        System.out.println(weight/Math.pow(height/100,2));
+        return weight/Math.pow(height/100,2);
+    }
+     */
 
 }
