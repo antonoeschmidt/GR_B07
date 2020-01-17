@@ -7,13 +7,47 @@
     tools:context=".games.ScratchCardActivity"
     android:background="@drawable/gradient_rewards">
 
-    <com.cooltechworks.views.ScratchImageView
-        android:id="@+id/scratchCardView"
-        android:layout_width="200dp"
+
+
+
+    <FrameLayout
+        android:id="@+id/slotFrame"
+        android:layout_width="330dp"
         android:layout_height="200dp"
         android:layout_centerInParent="true"
-        android:background="@color/colorPrimaryDark"
-        android:src="@drawable/groceries"/>
+        android:background="@drawable/frame">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:orientation="horizontal">
+
+            <com.cooltechworks.views.ScratchImageView
+                android:id="@+id/scratchCardView"
+                android:layout_width="110dp"
+                android:layout_height="match_parent"
+                android:background="@color/colorBlack"
+                android:src="@drawable/groceries"/>
+
+            <com.cooltechworks.views.ScratchImageView
+                android:id="@+id/scratchCardView2"
+                android:layout_width="110dp"
+                android:layout_height="match_parent"
+                android:background="@color/colorBlack"
+                android:src="@drawable/groceries"/>
+
+            <com.cooltechworks.views.ScratchImageView
+                android:id="@+id/scratchCardView3"
+                android:layout_width="110dp"
+                android:layout_height="match_parent"
+                android:background="@color/colorBlack"
+                android:src="@drawable/groceries"/>
+
+
+        </LinearLayout>
+
+    </FrameLayout>
 
 
     <TextView
@@ -23,8 +57,7 @@
         android:layout_above="@+id/scratchCardView"
         android:layout_alignBaseline="@+id/scratchCardView"
         android:layout_marginStart="200dp"
-        android:textSize="24dp"
-        android:text="penis"/>
+        android:textSize="24dp"/>
 
 
 </RelativeLayout>

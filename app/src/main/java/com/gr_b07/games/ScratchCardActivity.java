@@ -16,7 +16,7 @@ import com.gr_b07.R;
 
 public class ScratchCardActivity extends AppCompatActivity {
 
-    ScratchImageView scratchImageView;
+    ScratchImageView scratchImageView, scratchImageView2, scratchImageView3;
     TextView scratchCardTextView;
 
     @Override
@@ -26,6 +26,9 @@ public class ScratchCardActivity extends AppCompatActivity {
         scratchCardTextView = findViewById(R.id.scratchCardText);
         scratchCardTextView.setText("0% Revealed");
         scratchImageView = findViewById(R.id.scratchCardView);
+        scratchImageView2 = findViewById(R.id.scratchCardView2);
+        scratchImageView3 = findViewById(R.id.scratchCardView3);
+        //Image1 callback
         scratchImageView.setRevealListener(new ScratchImageView.IRevealListener() {
             @Override
             public void onRevealed(ScratchImageView iv) {
@@ -36,5 +39,31 @@ public class ScratchCardActivity extends AppCompatActivity {
             scratchCardTextView.setText(Math.round(percent * 100) + "% Revealed");
             }
         });
+        //Image2 Call back
+        scratchImageView2.setRevealListener(new ScratchImageView.IRevealListener() {
+            @Override
+            public void onRevealed(ScratchImageView iv) {
+
+            }
+
+            @Override
+            public void onRevealPercentChangedListener(ScratchImageView siv, float percent) {
+
+            }
+        });
+        //Image 3 call back
+        scratchImageView3.setRevealListener(new ScratchImageView.IRevealListener() {
+            @Override
+            public void onRevealed(ScratchImageView iv) {
+
+            }
+
+            @Override
+            public void onRevealPercentChangedListener(ScratchImageView siv, float percent) {
+
+            }
+        });
+
+
     }
 }
