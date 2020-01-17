@@ -1,9 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".games.ScratchCardActivity">
+    tools:context=".games.ScratchCardActivity"
+    android:background="@drawable/gradient_rewards">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <com.cooltechworks.views.ScratchImageView
+        android:id="@+id/scratchCardView"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_centerInParent="true"
+        android:background="@color/colorPrimaryDark"
+        android:src="@drawable/groceries"/>
+
+
+    <TextView
+        android:id="@+id/scratchCardText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/scratchCardView"
+        android:layout_alignBaseline="@+id/scratchCardView"
+        android:layout_marginStart="200dp"
+        android:textSize="24dp"
+        android:text="penis"/>
+
+
+</RelativeLayout>
