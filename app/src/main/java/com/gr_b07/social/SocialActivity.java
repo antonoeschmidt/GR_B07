@@ -60,6 +60,9 @@ public class SocialActivity extends AppCompatActivity implements SocialRecyclerV
     @Override
     public void onItemClick(View view, int position) {
         Toast.makeText(this, "You clicked " + friendsAdapter.getItem(position) + " on item position " + position, Toast.LENGTH_SHORT).show();
+
+        // TODO: Implement fragment for individual friend/suggested friend - options for friend : remove / invite / *close dialog* options for suggested : add / *close dialog*
+        // side note : probably better to implement with UID from firebase instead of going through every user.
     }
 
 
@@ -81,6 +84,8 @@ public class SocialActivity extends AppCompatActivity implements SocialRecyclerV
                 friendsRecyclerViewUpdate();
                 suggestedRecyclerViewUpdate();
                 updateTextViews();
+
+                System.out.println(Settings.getCurrentPupil().getFriends().toString());
                 break;
         }
     }
