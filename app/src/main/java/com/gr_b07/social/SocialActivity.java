@@ -112,11 +112,13 @@ public class SocialActivity extends AppCompatActivity implements SocialRecyclerV
     public void addSuggestedFriends(User user){
         if (user.getClass().equals(Pupil.class)){
             Pupil pupil = (Pupil) user;
-            if (Settings.getCurrentPupil().getPersonalInfo().getZipCode() == (pupil.getPersonalInfo().getZipCode())|| Settings.getCurrentPupil().getActivities().equals(pupil.getActivities())
-                    && !user.getUsername().equals(Settings.getCurrentPupil().getUsername())){
+            if ((Settings.getCurrentPupil().getPersonalInfo().getZipCode() == (pupil.getPersonalInfo().getZipCode())
+                    || Settings.getCurrentPupil().getActivities().equals(pupil.getActivities()))
+                    && !user.getUsername().equals(Settings.getCurrentPupil().getUsername())
+                    && !suggestedUsername.contains(user.getUsername()) && !suggestedUsername.contains(shortenUsername(user))){
                 suggestedAccountImageView.add(R.drawable.friend_nophoto);
                 if (user.getUsername().length() > 12) {
-                    suggestedUsername.add(user.getUsername().substring(0,12) + "...");
+                    suggestedUsername.add(shortenUsername(user));
                 } else suggestedUsername.add(user.getUsername());
             }
         }
@@ -126,12 +128,15 @@ public class SocialActivity extends AppCompatActivity implements SocialRecyclerV
         !Settings.getCurrentPupil().getFriends().contains(user.getUsername())) {
             Settings.getCurrentPupil().addFriend(user.getUsername());
             if (user.getUsername().length() > 12) {
-                friendsUsername.add(user.getUsername().substring(0,12) + "...");
+                friendsUsername.add(shortenUsername(user));
             } else friendsUsername.add(user.getUsername());
             friendsAccountImageView.add(R.drawable.friend_nophoto);
             // TODO: Save resource and get it out again lol
             //friendsAccountImageView.add(Resources.(((Pupil) user).getResource()));
             //friendsAccountImageView.add(((Pupil) user).getResource());
         }
+    }
+    public String shortenUsername(User user){
+        return user.getUsername().substring(0,12) + "...";
     }
 }
