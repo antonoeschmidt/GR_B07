@@ -1,3 +1,8 @@
+/**
+ * Scratchcard repo and logics taken from/inspired by
+ * https://www.youtube.com/watch?v=_C4mD5jmEgQ
+ */
+
 package com.gr_b07.games;
 
 import androidx.appcompat.app.AppCompatActivity;
