@@ -1,8 +1,3 @@
-/**
- * Pop up window logics taken from/inspired by Filip Vujovic:
- * https://www.youtube.com/watch?v=fn5OlqQuOCk
- */
-
 package com.gr_b07.games.redeemRewards;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +10,11 @@ import android.widget.ImageView;
 import com.gr_b07.R;
 
 import net.glxn.qrgen.android.QRCode;
+
+/**
+ * Pop up window logics taken from/inspired by Filip Vujovic:
+ * https://www.youtube.com/watch?v=fn5OlqQuOCk
+ */
 
 public class rewardsPopUpActivity extends AppCompatActivity {
 
@@ -35,7 +35,11 @@ public class rewardsPopUpActivity extends AppCompatActivity {
 
         getWindow().setLayout((int) (width * 0.8),(int) (height * 0.8));
 
-        Bitmap QRtest = QRCode.from("www.goodle.com").bitmap();
+        rewardQRcode.getLayoutParams().width = (int) (width * 0.5);
+        rewardQRcode.getLayoutParams().height = (int) (height * 0.5);
+
+
+        Bitmap QRtest = QRCode.from("www.google.com").bitmap();
         rewardQRcode.setImageBitmap(QRtest);
 
     }

@@ -7,56 +7,31 @@
     tools:context=".games.ScratchCardActivity"
     android:background="@drawable/gradient_rewards">
 
-
-
-
-    <FrameLayout
-        android:id="@+id/slotFrame"
-        android:layout_width="330dp"
-        android:layout_height="200dp"
+    <com.cooltechworks.views.ScratchImageView
+        android:id="@+id/scratchCardView"
+        android:layout_width="300dp"
+        android:layout_height="110dp"
+        android:background="@color/colorBlack"
+        android:src="@drawable/scratch_card_image_lose"
         android:layout_centerInParent="true"
-        android:background="@drawable/frame">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal|center_vertical"
-            android:orientation="horizontal">
-
-            <com.cooltechworks.views.ScratchImageView
-                android:id="@+id/scratchCardView"
-                android:layout_width="110dp"
-                android:layout_height="match_parent"
-                android:background="@color/colorBlack"
-                android:src="@drawable/groceries"/>
-
-            <com.cooltechworks.views.ScratchImageView
-                android:id="@+id/scratchCardView2"
-                android:layout_width="110dp"
-                android:layout_height="match_parent"
-                android:background="@color/colorBlack"
-                android:src="@drawable/groceries"/>
-
-            <com.cooltechworks.views.ScratchImageView
-                android:id="@+id/scratchCardView3"
-                android:layout_width="110dp"
-                android:layout_height="match_parent"
-                android:background="@color/colorBlack"
-                android:src="@drawable/groceries"/>
-
-
-        </LinearLayout>
-
-    </FrameLayout>
+        android:visibility="invisible"/>
 
     <TextView
         android:id="@+id/scratchCardText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/scratchCardView"
-        android:layout_alignBaseline="@+id/scratchCardView"
         android:layout_marginStart="200dp"
-        android:textSize="24dp"/>
+        android:textSize="24dp"
+        android:padding="20dp"
+        android:layout_centerHorizontal="true"/>
+
+    <Button
+        android:id="@+id/redeemButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Redeem"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/scratchCardView"/>
 
 
 </RelativeLayout>

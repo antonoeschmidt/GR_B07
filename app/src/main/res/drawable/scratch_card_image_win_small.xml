@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/aubergine" android:left="1000dp" />
+    <item android:drawable="@drawable/salad" android:right="1000dp"  />
+    <item android:drawable="@drawable/aubergine" android:right="500dp" android:left="500dp" />
+</layer-list>
