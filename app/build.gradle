@@ -43,4 +43,7 @@ dependencies {
     //scratchcard
     implementation 'com.github.cooltechworks:ScratchView:v1.1'
 
+    //QR generator
+    implementation 'com.github.kenglxn.QRGen:android:2.6.0'
+
 }
