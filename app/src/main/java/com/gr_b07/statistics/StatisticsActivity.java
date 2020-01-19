@@ -8,10 +8,12 @@ import android.os.Bundle;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.LimitLine;
+import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.gr_b07.R;
 import com.gr_b07.logik.Meal;
 import com.gr_b07.logik.Settings;
@@ -25,7 +27,9 @@ import java.util.List;
 public class StatisticsActivity extends AppCompatActivity {
     private LineChart lineChart;
     private DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-    private ArrayList<Double> month = new ArrayList<>();
+    private ArrayList<Double> data = new ArrayList<>();
+    private ArrayList<Point> dataPoint = new ArrayList<>();
+    private int labelCount = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,20 +37,11 @@ public class StatisticsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_statistics);
 
         lineChart = findViewById(R.id.lineChart);
+
+        lineChart.setDragEnabled(true);
+        populateDateArray();
         addData();
 
-
-    }
-    public void createDateArray() {
-        for (int i = 0; i < 31; i++) {
-            month.add(0.0);
-        }
-    }
-
-
-
-    public void addDataToArray(int date, double cals) {
-        month.set(date, month.get(date) + cals);
 
     }
 
@@ -58,58 +53,74 @@ public class StatisticsActivity extends AppCompatActivity {
         return x;
     }
 
-
-
     public void addData() {
-        ArrayList<Point> mealsForTheDay = new ArrayList<Point>();
-        for (Meal meal :
-                Settings.getCurrentPupil().getMeals() ) {
-            addDataToArray(longToIntDate(meal.getDate()),meal.getCalories());
-        }
+        mealsToData();
 
-        int y = 0;
-        int x = 0;
-
-        Date now = new Date(System.currentTimeMillis());
-
-        for (Point point :
-                mealsForTheDay) {
-            if (point.x == )
-            y += point.y;
-            x = point.x;
-        }
-        new Point(x,y);
-
-
-        //Point[] dataObjects = {new Point(1,3), new Point(2, 4), new Point(3, 7), new Point(4, 8)};
-        List<Entry> entries = new ArrayList<Entry>();
-        for (Point data : mealsForTheDay) {
+        List<Entry> entries = new ArrayList<>();
+        for (Point data : dataPoint) {
             // turn your data into Entry objects
-            entries.add(new Entry(data.x, data.y));
-
+            if (data.y != 0) {
+                entries.add(new Entry(data.x, data.y));
+                labelCount++;
+            }
         }
 
         LineDataSet dataSet = new LineDataSet(entries, "Label"); // add entries to dataset
-        dataSet.setColor(Color.BLUE);
+        dataSet.setColor(Color.MAGENTA);
+        //TODO: healthy color her
         dataSet.setFillAlpha(110);
         dataSet.setLineWidth(3f);
-        dataSet.setValueTextSize(10f);
+        dataSet.setValueTextSize(15f);
         //dataSet.setValueTextColor();
 
-        LimitLine upperLimit = new LimitLine(7, "Daily");
+        LimitLine upperLimit = new LimitLine(800, "Daily");
         upperLimit.setLineWidth(4f);
         upperLimit.enableDashedLine(10f, 10f, 0);
         upperLimit.setLabelPosition(LimitLine.LimitLabelPosition.LEFT_TOP);
         upperLimit.setTextSize(15f);
 
-        YAxis yAxis = lineChart.getAxisLeft();
-        yAxis.addLimitLine(upperLimit);
-        yAxis.enableGridDashedLine(10f, 10f, 0);
+        YAxis yAxisLeft = lineChart.getAxisLeft();
+        yAxisLeft.addLimitLine(upperLimit);
+        yAxisLeft.enableGridDashedLine(10f, 10f, 0);
+        yAxisLeft.setTextSize(15f);
 
+        YAxis yAxisRight = lineChart.getAxisRight();
+        yAxisRight.setEnabled(false);
+
+
+        XAxis xAxis = lineChart.getXAxis();
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xAxis.setTextSize(15f);
+        xAxis.setValueFormatter(new ValueFormatter() {
+            @Override
+            public String getFormattedValue(float value) {
+                return String.valueOf((int) Math.round(value));
+            }
+        });
+        xAxis.setLabelCount(labelCount,true);
 
         LineData lineData = new LineData(dataSet);
         lineChart.setData(lineData);
         lineChart.invalidate();
 
+    }
+
+    private void mealsToData() {
+        for (Meal meal :
+                Settings.getCurrentPupil().getMeals() ) {
+            for (Point point :
+                    dataPoint) {
+                if (longToIntDate(meal.getDate()) == point.x) {
+                    point.y += (int)Math.round(meal.getCalories());
+                }
+            }
+        }
+    }
+
+    public void populateDateArray() {
+        dataPoint.clear();
+        for (int i = 1; i <= 31; i++) {
+            dataPoint.add(new Point(i,0));
+        }
     }
 }
