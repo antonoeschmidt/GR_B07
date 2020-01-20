@@ -81,7 +81,11 @@
             android:background="@drawable/mainmenu_reward_button"
             android:gravity="center"
             android:textAllCaps="false"
-            android:drawableLeft="@drawable/reward_image"/>
+            android:drawableLeft="@drawable/reward_image"
+            android:drawablePadding="-45dip"
+            android:paddingLeft="30dip"
+            android:paddingRight="26dip"/>
+
 
     </LinearLayout>
 
