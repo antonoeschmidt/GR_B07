@@ -12,4 +12,9 @@
         <item name="android:progressDrawable">@drawable/running_man</item>
     </style>
 
+    <style name="AppTheme.popUpTheme">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowCloseOnTouchOutside">true</item>
+    </style>
+
 </resources>

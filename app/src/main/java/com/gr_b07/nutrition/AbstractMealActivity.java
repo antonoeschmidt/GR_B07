@@ -53,7 +53,7 @@ public abstract class AbstractMealActivity extends AppCompatActivity implements 
     }
 
     public void eatFood(Food food, String typeOfMeal){
-        //TODO: flyt denne metode til pupil og implementer rewards
+        //TODO: flyt evt denne metode til pupil
         Settings.getCurrentPupil().addMeal(new Meal(food.getName(),food.getCalories(),food.getProtein(),food.getCarbs(),
         food.getFat(),typeOfMeal,System.currentTimeMillis()));
         fb.updateDatabase();

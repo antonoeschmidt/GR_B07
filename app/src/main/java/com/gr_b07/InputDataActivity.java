@@ -140,6 +140,7 @@ public class InputDataActivity extends AppCompatActivity implements View.OnClick
 
                 //Settings.getCurrentPupil().getPersonalInfo().getAge());
 
+
                 if (maleRadioButton.isChecked()){
                     Settings.getCurrentPupil().getPersonalInfo().setGender("male");
                 } else if (femaleRadioButton.isChecked()){

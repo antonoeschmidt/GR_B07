@@ -17,6 +17,7 @@ import com.gr_b07.nutrition.BreakfastActivity;
 import com.gr_b07.nutrition.DinnerActivity;
 import com.gr_b07.nutrition.LunchActivity;
 import com.gr_b07.nutrition.SnacksActivity;
+import com.gr_b07.statistics.StatisticsActivity;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -28,7 +29,7 @@ import java.util.ArrayList;
 public class NutritionActivity extends AppCompatActivity implements View.OnClickListener{
     private ProgressBar pProgress, cProgress, fProgress, cRing;
     private TextView caloriesTextView, proteinTextView, carbsTextView, fatTextView;
-    private Button breakfastButton, lunchButton, dinnerButton, snacksButton;
+    private Button breakfastButton, lunchButton, dinnerButton, snacksButton, statsButton;
     private InputStream inputStream;
     private String[] data;
     protected static ArrayList<Food> foodDB = new ArrayList<>();
@@ -53,11 +54,13 @@ public class NutritionActivity extends AppCompatActivity implements View.OnClick
         lunchButton = findViewById(R.id.lunchButton);
         dinnerButton = findViewById(R.id.dinnerButton);
         snacksButton = findViewById(R.id.snackButton);
+        statsButton = findViewById(R.id.statsButton);
 
         breakfastButton.setOnClickListener(this);
         lunchButton.setOnClickListener(this);
         dinnerButton.setOnClickListener(this);
         snacksButton.setOnClickListener(this);
+        statsButton.setOnClickListener(this);
 
         // TODO: IIFYM-formel mangler at ændre sig ud fra aktivitetsniveau.
 
@@ -90,6 +93,8 @@ public class NutritionActivity extends AppCompatActivity implements View.OnClick
             case R.id.snackButton:
                 Intent snacksIntent = new Intent(this, SnacksActivity.class); startActivity(snacksIntent);
                 break;
+            case R.id.statsButton:
+                Intent statsIntent = new Intent(this, StatisticsActivity.class); startActivity(statsIntent);
         }
     }
 

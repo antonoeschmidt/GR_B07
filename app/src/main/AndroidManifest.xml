@@ -9,8 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SignUpActivity"></activity>
-        <activity android:name=".games.redeemRewards.RedeemActivity" />
+        <activity android:name=".statistics.StatisticsActivity"></activity>
+        <activity android:name=".SignUpActivity" />
+        <activity android:name=".games.redeemRewards.RedeemActivity"/>
+        <activity android:name=".games.redeemRewards.rewardsPopUpActivity"
+            android:theme="@style/AppTheme.popUpTheme">
+        </activity>
         <activity android:name=".games.ChanceActivity" />
         <activity android:name=".games.ChestActivity" />
         <activity android:name=".games.ScratchCardActivity" />

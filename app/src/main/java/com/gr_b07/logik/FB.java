@@ -162,6 +162,7 @@ public class FB {
                     for (DataSnapshot d : dataSnapshot.getChildren()) {
                         Settings.addUser(getUserFromDatabase(d));
                         Log.d(getUserFromDatabase(d).toString(), "getUsersFromDatabase : Hvilke users?");
+
                     }
                 }
             }//onDataChange
@@ -175,9 +176,8 @@ public class FB {
 
     public User getUserFromDatabase(DataSnapshot d) {
         //TODO: kan evt slettes eller laves om
-        Pupil pupil = d.getValue(Pupil.class);
 
-        return pupil;
+        return d.getValue(Pupil.class);
     }
 
     public FirebaseAuth getAuth() {

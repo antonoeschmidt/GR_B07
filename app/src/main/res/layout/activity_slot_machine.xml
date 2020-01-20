@@ -20,31 +20,31 @@
         android:textColor="@color/colorFat"/>
 
     <FrameLayout
-        android:id="@+id/slotFrame"
-        android:layout_width="330dp"
-        android:layout_height="200dp"
-        android:layout_centerInParent="true"
-        android:background="@drawable/frame">
+    android:id="@+id/slotFrame"
+    android:layout_width="330dp"
+    android:layout_height="200dp"
+    android:layout_centerInParent="true"
+    android:background="@drawable/frame">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal|center_vertical"
-            android:orientation="horizontal">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:orientation="horizontal">
 
-            <com.gr_b07.games.ImageViewScrolling.ImageViewScrolling
-                android:id="@+id/image"
-                android:layout_width="110dp"
-                android:layout_height="match_parent" />
+        <com.gr_b07.games.ImageViewScrolling.ImageViewScrolling
+            android:id="@+id/image"
+            android:layout_width="110dp"
+            android:layout_height="match_parent" />
 
-            <com.gr_b07.games.ImageViewScrolling.ImageViewScrolling
-                android:id="@+id/image2"
-                android:layout_width="110dp"
-                android:layout_height="match_parent" />
-            <com.gr_b07.games.ImageViewScrolling.ImageViewScrolling
-                android:id="@+id/image3"
-                android:layout_width="110dp"
-                android:layout_height="match_parent"/>
+        <com.gr_b07.games.ImageViewScrolling.ImageViewScrolling
+            android:id="@+id/image2"
+            android:layout_width="110dp"
+            android:layout_height="match_parent" />
+        <com.gr_b07.games.ImageViewScrolling.ImageViewScrolling
+            android:id="@+id/image3"
+            android:layout_width="110dp"
+            android:layout_height="match_parent"/>
 
 
 

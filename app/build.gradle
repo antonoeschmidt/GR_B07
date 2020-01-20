@@ -20,6 +20,10 @@ android {
     }
 }
 
+repositories {
+    maven { url 'https://jitpack.io' }
+}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.appcompat:appcompat:1.1.0'
@@ -32,6 +36,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-firestore:21.3.1'
     implementation 'com.google.android.gms:play-services-auth:17.0.0'
     implementation 'com.google.firebase:firebase-database:19.2.0'
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+
 
     //recyclerView
     //noinspection GradleCompatible,GradleCompatible
@@ -40,5 +46,11 @@ dependencies {
 
     //CircularProgressBar
     implementation 'com.mikhaellopez:circularprogressbar:3.0.3'
+
+    //scratchcard
+    implementation 'com.github.cooltechworks:ScratchView:v1.1'
+
+    //QR generator
+    implementation 'com.github.kenglxn.QRGen:android:2.6.0'
 
 }
