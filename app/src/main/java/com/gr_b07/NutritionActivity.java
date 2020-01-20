@@ -55,6 +55,7 @@ public class NutritionActivity extends AppCompatActivity implements View.OnClick
         dinnerButton = findViewById(R.id.dinnerButton);
         snacksButton = findViewById(R.id.snackButton);
         statsButton = findViewById(R.id.statsButton);
+        //TODO: find nyt billede til denne knap
         seeMealsButton = findViewById(R.id.seeMealsButton);
 
         breakfastButton.setOnClickListener(this);

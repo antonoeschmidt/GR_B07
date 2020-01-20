@@ -44,6 +44,7 @@ public class RecyclerViewAdapterMeals extends RecyclerView.Adapter<RecyclerViewA
         holder.mealname.setText(meals.get(position).getName());
 
         //holder.mealImage.setImageResource(mealImages.get(position));
+        //TODO: put new images
         if (meals.get(position).getTypeOfMeal().equals("Breakfast")) {
             holder.mealImage.setImageResource(R.drawable.apple);
 
@@ -58,6 +59,7 @@ public class RecyclerViewAdapterMeals extends RecyclerView.Adapter<RecyclerViewA
         holder.parentLayoutMeals.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //TODO: implement this
                 //Toast.makeText(mContext, mealnames.get(position),Toast.LENGTH_SHORT).show();
                 //Intent intent = new Intent(mContext, rewardsPopUpActivity.class);
                 //mContext.startActivity(intent);
