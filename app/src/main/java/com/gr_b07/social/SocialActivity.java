@@ -1,6 +1,7 @@
 package com.gr_b07.social;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -63,6 +64,7 @@ public class SocialActivity extends AppCompatActivity implements SocialRecyclerV
 
         // TODO: Implement fragment for individual friend/suggested friend - options for friend : remove / invite / *close dialog* options for suggested : add / *close dialog*
         // side note : probably better to implement with UID from firebase instead of going through every user.
+        FragmentActivity
     }
 
 
