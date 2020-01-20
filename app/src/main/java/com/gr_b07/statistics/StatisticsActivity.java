@@ -42,7 +42,6 @@ public class StatisticsActivity extends AppCompatActivity {
         populateDateArray();
         addData();
 
-
     }
 
     public int longToIntDate(long time){
@@ -118,6 +117,7 @@ public class StatisticsActivity extends AppCompatActivity {
     }
 
     public void populateDateArray() {
+        //TODO: lav generisk, så det passer med månederne
         dataPoint.clear();
         for (int i = 1; i <= 31; i++) {
             dataPoint.add(new Point(i,0));
