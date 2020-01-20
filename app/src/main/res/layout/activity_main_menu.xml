@@ -69,7 +69,10 @@
             android:gravity="center"
             android:textAllCaps="false"
             android:layout_marginBottom="0dp"
-            android:drawableLeft="@drawable/social_image"/>
+            android:drawableLeft="@drawable/social_image"
+            android:drawablePadding="-45dip"
+            android:paddingLeft="30dip"
+            android:paddingRight="26dip"/>
 
         <Button
             android:id="@+id/mainmenu_button4"
