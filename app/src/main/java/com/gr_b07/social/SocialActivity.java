@@ -45,10 +45,12 @@ public class SocialActivity extends AppCompatActivity implements FriendsRecycler
 
     @Override
     public void onItemClick(View view, int position) {
-        Toast.makeText(this, "You clicked " + friendsAdapter.getItemId(position) + " on item position " + position, Toast.LENGTH_SHORT).show();
-        Log.d("onItemClick", "click");
+        if (view.equals(friendsAdapter.getItemViewType(position))){
+            Toast.makeText(this, "You clicked " + friendsAdapter.getItemId(position) + " on item position " + position, Toast.LENGTH_SHORT).show();
+        } else if (view.equals(suggestedAdapter.getItemViewType(position))){
+            Toast.makeText(this, "You clicked " + suggestedAdapter.getItemId(position) + " on item position " + position, Toast.LENGTH_SHORT).show();
+        }
         // TODO: Implement fragment for individual friend/suggested friend - options for friend : remove / invite / *close dialog* options for suggested : add / *close dialog*
-        // side note : probably better to implement with UID from firebase instead of going through every user.
     }
 
     @Override
