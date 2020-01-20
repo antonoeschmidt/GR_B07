@@ -1,8 +1,11 @@
 package com.gr_b07.nutrition;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -56,7 +59,10 @@ public abstract class AbstractMealActivity extends AppCompatActivity implements 
         //TODO: flyt evt denne metode til pupil
         Settings.getCurrentPupil().addMeal(new Meal(food.getName(),food.getCalories(),food.getProtein(),food.getCarbs(),
         food.getFat(),typeOfMeal,System.currentTimeMillis()));
+
         fb.updateDatabase();
+
+
 
 
     }
