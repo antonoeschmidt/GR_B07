@@ -3,14 +3,15 @@ package com.gr_b07.logik;
 import java.util.Date;
 
 public abstract class User {
-    private String username, password;
+    private String username, password, UID;
     private boolean loggedIn, firstTimeLoggedIn;
 
-    public User(boolean firstTimeLoggedIn, String username, String password, boolean loggedIn) {
+    public User(boolean firstTimeLoggedIn, String username, String password, boolean loggedIn, String UID) {
         this.firstTimeLoggedIn = firstTimeLoggedIn;
         this.username = username;
         this.password = password;
         this.loggedIn = loggedIn;
+        this.UID = UID;
     }
 
     public User() {
@@ -40,6 +41,15 @@ public abstract class User {
     public void setLoggedIn(boolean loggedIn) {
         this.loggedIn = loggedIn;
     }
+
+    public String getUID() {
+        return UID;
+    }
+
+    public void setUID(String UID) {
+        this.UID = UID;
+    }
+
     //TODO: abstrakte metoder slettes
 
      }

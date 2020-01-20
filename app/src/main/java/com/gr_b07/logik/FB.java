@@ -56,11 +56,10 @@ public class FB {
 
                             FirebaseUser user = auth.getCurrentUser();
 
-                            Pupil newUser = new Pupil(true,email,password,false, new Physique(0,0,0),
+                            Pupil newUser = new Pupil(true,email,password,false, auth.getUid(), new Physique(0,0,0),
                                     new PersonalInfo("", "", "n", 0, 0),
                                     new Experience(1,0,0,0,0),
-                                    new ArrayList<Meal>(),new ArrayList<String>(), new ArrayList<String>(), new ArrayList<Reward>()
-                                    );
+                                    new ArrayList<Meal>(),new ArrayList<String>(), new ArrayList<String>(), new ArrayList<Reward>());
 
                             /*
                             newUser.addMeal(new Meal("ot", 123,123,123,123,"123",123123));

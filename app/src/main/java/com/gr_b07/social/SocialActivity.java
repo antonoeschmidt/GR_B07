@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -61,10 +62,10 @@ public class SocialActivity extends AppCompatActivity implements SocialRecyclerV
     @Override
     public void onItemClick(View view, int position) {
         Toast.makeText(this, "You clicked " + friendsAdapter.getItem(position) + " on item position " + position, Toast.LENGTH_SHORT).show();
-
+        Log.d("onItemClick", "click");
         // TODO: Implement fragment for individual friend/suggested friend - options for friend : remove / invite / *close dialog* options for suggested : add / *close dialog*
         // side note : probably better to implement with UID from firebase instead of going through every user.
-        FragmentActivity
+        //FragmentActivity
     }
 
 
@@ -103,7 +104,6 @@ public class SocialActivity extends AppCompatActivity implements SocialRecyclerV
                 = new LinearLayoutManager(SocialActivity.this, LinearLayoutManager.HORIZONTAL, false);
         friendsRecyclerView.setLayoutManager(horizontalLayoutManager);
         friendsAdapter = new SocialRecyclerViewAdapter(this, friendsAccountImageView, friendsUsername);
-        friendsAdapter.setClickListener(this);
         friendsRecyclerView.setAdapter(friendsAdapter);
     }
     public void suggestedRecyclerViewUpdate(){
@@ -112,17 +112,17 @@ public class SocialActivity extends AppCompatActivity implements SocialRecyclerV
                 = new LinearLayoutManager(SocialActivity.this, LinearLayoutManager.HORIZONTAL, false);
         suggestedRecyclerView.setLayoutManager(horizontalLayoutManager);
         suggestedAdapter = new SocialRecyclerViewAdapter(this, suggestedAccountImageView, suggestedUsername);
-        suggestedAdapter.setClickListener(this);
         suggestedRecyclerView.setAdapter(suggestedAdapter);
     }
 
-    public void addSuggestedFriends(User user){
-        if (user.getClass().equals(Pupil.class)){
+    public void addSuggestedFriends(User user) {
+        if (user.getClass().equals(Pupil.class)) {
             Pupil pupil = (Pupil) user;
             if ((Settings.getCurrentPupil().getPersonalInfo().getZipCode() == (pupil.getPersonalInfo().getZipCode())
                     || Settings.getCurrentPupil().getActivities().equals(pupil.getActivities()))
-                    && !user.getUsername().equals(Settings.getCurrentPupil().getUsername())
-                    && !suggestedUsername.contains(user.getUsername()) && !suggestedUsername.contains(shortenUsername(user))){
+                    && Settings.getCurrentPupil().getUID() != user.getUID()
+                    && !suggestedUsername.contains(user.getUsername())
+                    && !suggestedUsername.contains(shortenUsername(user))) {
                 suggestedAccountImageView.add(R.drawable.friend_nophoto);
                 if (user.getUsername().length() > 12) {
                     suggestedUsername.add(shortenUsername(user));
@@ -130,20 +130,24 @@ public class SocialActivity extends AppCompatActivity implements SocialRecyclerV
             }
         }
     }
-    public void addFriends(User user){
-        if (user.getClass().equals(Pupil.class) && !user.getUsername().equals(Settings.getCurrentPupil().getUsername()) &&
-        !Settings.getCurrentPupil().getFriends().contains(user.getUsername())) {
-            Settings.getCurrentPupil().addFriend(user.getUsername());
+
+    public void addFriends(User user) {
+        if (user.getClass().equals(Pupil.class)
+                && Settings.getCurrentPupil().getUID() != user.getUID()
+                && !Settings.getCurrentPupil().getFriends().contains(user.getUID())
+                && !friendsUsername.contains(user.getUsername())
+                && !friendsUsername.contains(shortenUsername(user))) {
+            friendsAccountImageView.add(R.drawable.friend_nophoto);
+            Settings.getCurrentPupil().addFriend(user.getUID());
             if (user.getUsername().length() > 12) {
                 friendsUsername.add(shortenUsername(user));
             } else friendsUsername.add(user.getUsername());
-            friendsAccountImageView.add(R.drawable.friend_nophoto);
-            // TODO: Save resource and get it out again lol
-            //friendsAccountImageView.add(Resources.(((Pupil) user).getResource()));
-            //friendsAccountImageView.add(((Pupil) user).getResource());
+
         }
     }
-    public String shortenUsername(User user){
-        return user.getUsername().substring(0,12) + "...";
+
+    public String shortenUsername(User user) {
+        return user.getUsername().substring(0, 12) + "...";
     }
+
 }

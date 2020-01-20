@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,13 +18,14 @@ public class SocialRecyclerViewAdapter extends RecyclerView.Adapter<SocialRecycl
     private List<Integer> imageViewAccount;
     private List<String> username;
     private LayoutInflater inflater;
-    private ItemClickListener clickListener;
+    private String name;
 
     // data is passed into the constructor
     SocialRecyclerViewAdapter(Context context, List<Integer> imageViewAccount, List<String> username) {
         this.inflater = LayoutInflater.from(context);
         this.imageViewAccount = imageViewAccount;
         this.username = username;
+        this.name = name;
     }
 
     // inflates the row layout from xml when needed
@@ -36,11 +38,12 @@ public class SocialRecyclerViewAdapter extends RecyclerView.Adapter<SocialRecycl
 
     // binds the data to the view and textview in each row
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         int resource = imageViewAccount.get(position);
         String username = this.username.get(position);
-        holder.accountPhotoTextView.setBackgroundResource(resource);
+        holder.accountPhotoTextView.setBackgroundResource(R.drawable.friend_nophoto);
         holder.usernameTextView.setText(username);
+
     }
 
     // total number of rows
@@ -62,8 +65,7 @@ public class SocialRecyclerViewAdapter extends RecyclerView.Adapter<SocialRecycl
         }
 
         @Override
-        public void onClick(View view) {
-            if (clickListener != null) clickListener.onItemClick(view, getAdapterPosition());
+        public void onClick(View v) {
         }
     }
 
@@ -72,15 +74,19 @@ public class SocialRecyclerViewAdapter extends RecyclerView.Adapter<SocialRecycl
         return username.get(id);
     }
 
-    // allows clicks events to be caught
-    public void setClickListener(ItemClickListener itemClickListener) {
-        this.clickListener = itemClickListener;
-    }
 
     // parent activity will implement this method to respond to click events
     public interface ItemClickListener {
-        void onClick(View v);
-
         void onItemClick(View view, int position);
+
+        void onClick(View v);
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
