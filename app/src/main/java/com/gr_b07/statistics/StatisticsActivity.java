@@ -73,6 +73,7 @@ public class StatisticsActivity extends AppCompatActivity {
 
         //TODO: virker getDailyIntake her?
         LimitLine upperLimit = new LimitLine((int)Settings.getCurrentPupil().getDailyIntake(System.currentTimeMillis()).getCalories(), "Foreslåede indtag");
+        //LimitLine upperLimit = new LimitLine(1200, "Foreslåede indtag");
         upperLimit.setLineWidth(4f);
         upperLimit.enableDashedLine(10f, 10f, 0);
         upperLimit.setLabelPosition(LimitLine.LimitLabelPosition.LEFT_TOP);

@@ -161,5 +161,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
+    <Button
+        android:id="@+id/seeMealsButton"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:background="@drawable/ic_insert_chart_black_24dp"
+        android:fontFamily="@font/raleway"
+        android:textAlignment="viewStart"
+        android:textAllCaps="false"
+        android:textSize="28dp"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintVertical_bias="0.05"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>

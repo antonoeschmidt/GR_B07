@@ -15,6 +15,7 @@ import com.gr_b07.logik.Settings;
 import com.gr_b07.nutrition.BreakfastActivity;
 import com.gr_b07.nutrition.DinnerActivity;
 import com.gr_b07.nutrition.LunchActivity;
+import com.gr_b07.nutrition.MealsActivity;
 import com.gr_b07.nutrition.SnacksActivity;
 import com.gr_b07.statistics.StatisticsActivity;
 
@@ -28,7 +29,7 @@ import java.util.ArrayList;
 public class NutritionActivity extends AppCompatActivity implements View.OnClickListener{
     private ProgressBar pProgress, cProgress, fProgress, cRing;
     private TextView caloriesTextView, proteinTextView, carbsTextView, fatTextView;
-    private Button breakfastButton, lunchButton, dinnerButton, snacksButton, statsButton;
+    private Button breakfastButton, lunchButton, dinnerButton, snacksButton, statsButton, seeMealsButton;
     private InputStream inputStream;
     private String[] data;
     protected static ArrayList<Food> foodDB = new ArrayList<>();
@@ -54,12 +55,14 @@ public class NutritionActivity extends AppCompatActivity implements View.OnClick
         dinnerButton = findViewById(R.id.dinnerButton);
         snacksButton = findViewById(R.id.snackButton);
         statsButton = findViewById(R.id.statsButton);
+        seeMealsButton = findViewById(R.id.seeMealsButton);
 
         breakfastButton.setOnClickListener(this);
         lunchButton.setOnClickListener(this);
         dinnerButton.setOnClickListener(this);
         snacksButton.setOnClickListener(this);
         statsButton.setOnClickListener(this);
+        seeMealsButton.setOnClickListener(this);
 
         // TODO: IIFYM-formel mangler at ændre sig ud fra aktivitetsniveau.
 
@@ -94,6 +97,9 @@ public class NutritionActivity extends AppCompatActivity implements View.OnClick
                 break;
             case R.id.statsButton:
                 Intent statsIntent = new Intent(this, StatisticsActivity.class); startActivity(statsIntent);
+                break;
+            case R.id.seeMealsButton:
+                Intent seeMealsIntent = new Intent(this, MealsActivity.class); startActivity(seeMealsIntent);
         }
     }
 
