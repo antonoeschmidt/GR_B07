@@ -40,7 +40,6 @@ public abstract class User {
     public void setLoggedIn(boolean loggedIn) {
         this.loggedIn = loggedIn;
     }
-    //TODO: abstrakte metoder slettes
 
      }
 

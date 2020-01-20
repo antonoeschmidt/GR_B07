@@ -176,9 +176,8 @@ public class FB {
 
     public User getUserFromDatabase(DataSnapshot d) {
         //TODO: kan evt slettes eller laves om
-        Pupil pupil = d.getValue(Pupil.class);
 
-        return pupil;
+        return d.getValue(Pupil.class);
     }
 
     public FirebaseAuth getAuth() {
