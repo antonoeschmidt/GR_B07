@@ -23,7 +23,7 @@
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="1704px"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -35,12 +35,14 @@
             android:id="@+id/mainmenu_button1"
             android:layout_width="match_parent"
             android:layout_height="430px"
-            android:text="Nutrition"
-            android:textSize="28dp"
-            android:fontFamily="@font/raleway"
+            android:layout_marginBottom="0dp"
             android:background="@drawable/mainmenu_nutrition_button"
+            android:fontFamily="@font/raleway"
             android:gravity="center"
-            android:textAllCaps="false" />
+            android:text="Nutrition"
+            android:textAllCaps="false"
+            android:textSize="28dp"
+            android:drawableLeft="@drawable/nutrition_image"/>
 
         <Button
             android:id="@+id/mainmenu_button2"
@@ -51,7 +53,8 @@
             android:fontFamily="@font/raleway"
             android:background="@drawable/mainmenu_activity_button"
             android:gravity="center"
-            android:textAllCaps="false" />
+            android:textAllCaps="false"
+            android:layout_marginBottom="0dp"/>
 
 
         <Button
@@ -63,7 +66,8 @@
             android:fontFamily="@font/raleway"
             android:background="@drawable/mainmenu_social_button"
             android:gravity="center"
-            android:textAllCaps="false" />
+            android:textAllCaps="false"
+            android:layout_marginBottom="0dp"/>
 
         <Button
             android:id="@+id/mainmenu_button4"
@@ -88,7 +92,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintHorizontal_bias="0.1"
-        app:layout_constraintVertical_bias="0.11"/>
+        app:layout_constraintVertical_bias="0.14"/>
 
 
 

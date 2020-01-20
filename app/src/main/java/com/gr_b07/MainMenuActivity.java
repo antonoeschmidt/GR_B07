@@ -2,13 +2,17 @@ package com.gr_b07;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,6 +45,19 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
         xpTextView = findViewById(R.id.mainmenu_xpTextView);
         xpProgressBar = findViewById(R.id.progressBarXP);
         ticketView = findViewById(R.id.ticketImageView);
+
+        DisplayMetrics dm = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(dm);
+
+        int width = dm.widthPixels;
+        int height = dm.heightPixels;
+
+        LinearLayout.LayoutParams buttonLayout = new LinearLayout.LayoutParams(width,(int) (height * 0.25));
+
+        mainButton1.setLayoutParams(buttonLayout);
+        mainButton2.setLayoutParams(buttonLayout);
+        mainButton3.setLayoutParams(buttonLayout);
+        mainButton4.setLayoutParams(buttonLayout);
 
 
     }
