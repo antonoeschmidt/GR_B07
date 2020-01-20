@@ -1,6 +1,7 @@
 package com.gr_b07.social;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -43,6 +44,8 @@ public class SocialActivity extends AppCompatActivity implements SocialRecyclerV
         friendsTextView = findViewById(R.id.friendsTextView);
         buttonIncrement.setOnClickListener(this);
 
+
+
         // set up the RecyclerView
 
 
@@ -53,22 +56,15 @@ public class SocialActivity extends AppCompatActivity implements SocialRecyclerV
         Settings.getUsers().clear();
 
         fb.getAllUsersFromDatabase();
-
-        for (User user : Settings.getUsers())
-            if (user.getClass() == Pupil.class){
-                Pupil pupil = (Pupil) user;
-                if (Settings.getCurrentPupil().getZipCode().equals(pupil.getZipCode())|| Settings.getCurrentPupil().getActivities().equals(pupil.getActivities())){
-                suggestedAccountImageView.add(R.drawable.friend_nophoto);
-                suggestedUsername.add(pupil.getUsername());
-
-                }
-        }
-
     }
 
     @Override
     public void onItemClick(View view, int position) {
         Toast.makeText(this, "You clicked " + friendsAdapter.getItem(position) + " on item position " + position, Toast.LENGTH_SHORT).show();
+
+        // TODO: Implement fragment for individual friend/suggested friend - options for friend : remove / invite / *close dialog* options for suggested : add / *close dialog*
+        // side note : probably better to implement with UID from firebase instead of going through every user.
+        FragmentActivity
     }
 
 
@@ -83,31 +79,25 @@ public class SocialActivity extends AppCompatActivity implements SocialRecyclerV
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.buttonIncrement:
-                for (User user : Settings.getUsers())
-                    if (user.getClass().equals(Pupil.class) && !user.getUsername().equals(Settings.getCurrentPupil().getUsername())){
-                        Settings.getCurrentPupil().addFriend((Pupil) user);
-                        friendsUsername.add(user.getUsername());
-                        if (((Pupil) user).getResource() == null){
-                            friendsAccountImageView.add(R.drawable.friend_nophoto);
-                        } else if (((Pupil) user).getResource() != null){
-                            friendsAccountImageView.add(Color.BLUE);
-                            // TODO: Save resource and get it out again lol
-                            //friendsAccountImageView.add(Resources.(((Pupil) user).getResource()));
-                            //friendsAccountImageView.add(((Pupil) user).getResource());
-                        }
-                        friendsRecyclerViewUpdate();
-
-                        suggestedRecyclerViewUpdate();
-                    }
+                for (User user : Settings.getUsers()) {
+                    addFriends(user);
+                    addSuggestedFriends(user);
+                }
+                friendsRecyclerViewUpdate();
+                suggestedRecyclerViewUpdate();
                 updateTextViews();
+
+                System.out.println(Settings.getCurrentPupil().getFriends().toString());
                 break;
         }
     }
+
     public void updateTextViews(){
         friendsTextView.setText("Friends : " + Integer.toString(Settings.getCurrentPupil().getFriends().size()));
     }
 
     public void friendsRecyclerViewUpdate(){
+
         RecyclerView friendsRecyclerView = findViewById(R.id.friendsRecyclerView);
         LinearLayoutManager horizontalLayoutManager
                 = new LinearLayoutManager(SocialActivity.this, LinearLayoutManager.HORIZONTAL, false);
@@ -124,5 +114,36 @@ public class SocialActivity extends AppCompatActivity implements SocialRecyclerV
         suggestedAdapter = new SocialRecyclerViewAdapter(this, suggestedAccountImageView, suggestedUsername);
         suggestedAdapter.setClickListener(this);
         suggestedRecyclerView.setAdapter(suggestedAdapter);
+    }
+
+    public void addSuggestedFriends(User user){
+        if (user.getClass().equals(Pupil.class)){
+            Pupil pupil = (Pupil) user;
+            if ((Settings.getCurrentPupil().getPersonalInfo().getZipCode() == (pupil.getPersonalInfo().getZipCode())
+                    || Settings.getCurrentPupil().getActivities().equals(pupil.getActivities()))
+                    && !user.getUsername().equals(Settings.getCurrentPupil().getUsername())
+                    && !suggestedUsername.contains(user.getUsername()) && !suggestedUsername.contains(shortenUsername(user))){
+                suggestedAccountImageView.add(R.drawable.friend_nophoto);
+                if (user.getUsername().length() > 12) {
+                    suggestedUsername.add(shortenUsername(user));
+                } else suggestedUsername.add(user.getUsername());
+            }
+        }
+    }
+    public void addFriends(User user){
+        if (user.getClass().equals(Pupil.class) && !user.getUsername().equals(Settings.getCurrentPupil().getUsername()) &&
+        !Settings.getCurrentPupil().getFriends().contains(user.getUsername())) {
+            Settings.getCurrentPupil().addFriend(user.getUsername());
+            if (user.getUsername().length() > 12) {
+                friendsUsername.add(shortenUsername(user));
+            } else friendsUsername.add(user.getUsername());
+            friendsAccountImageView.add(R.drawable.friend_nophoto);
+            // TODO: Save resource and get it out again lol
+            //friendsAccountImageView.add(Resources.(((Pupil) user).getResource()));
+            //friendsAccountImageView.add(((Pupil) user).getResource());
+        }
+    }
+    public String shortenUsername(User user){
+        return user.getUsername().substring(0,12) + "...";
     }
 }
