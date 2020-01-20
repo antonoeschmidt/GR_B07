@@ -54,7 +54,8 @@
             android:background="@drawable/mainmenu_activity_button"
             android:gravity="center"
             android:textAllCaps="false"
-            android:layout_marginBottom="0dp"/>
+            android:layout_marginBottom="0dp"
+            android:drawableLeft="@drawable/activity_image"/>
 
 
         <Button
@@ -67,7 +68,8 @@
             android:background="@drawable/mainmenu_social_button"
             android:gravity="center"
             android:textAllCaps="false"
-            android:layout_marginBottom="0dp"/>
+            android:layout_marginBottom="0dp"
+            android:drawableLeft="@drawable/social_image"/>
 
         <Button
             android:id="@+id/mainmenu_button4"
