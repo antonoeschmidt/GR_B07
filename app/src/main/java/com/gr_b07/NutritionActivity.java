@@ -2,9 +2,11 @@ package com.gr_b07;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -60,6 +62,36 @@ public class NutritionActivity extends AppCompatActivity implements View.OnClick
         dinnerButton.setOnClickListener(this);
         snacksButton.setOnClickListener(this);
         statsButton.setOnClickListener(this);
+
+        DisplayMetrics dm = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(dm);
+
+        int width = dm.widthPixels;
+        int height = dm.heightPixels;
+
+        LinearLayout.LayoutParams ringLayout = new LinearLayout.LayoutParams(width, (int) (height * 0.22));
+        LinearLayout.LayoutParams progressLayout = new LinearLayout.LayoutParams(width, (int) (height * 0.03));
+        LinearLayout.LayoutParams buttonLayout = new LinearLayout.LayoutParams(width,(int) (height * 0.12));
+        //LinearLayout.LayoutParams textLayout = new LinearLayout.LayoutParams(width, (int) (height * 0.33));
+
+
+
+        cRing.setLayoutParams(ringLayout);
+
+        pProgress.setLayoutParams(progressLayout);
+        cProgress.setLayoutParams(progressLayout);
+        fProgress.setLayoutParams(progressLayout);
+
+        breakfastButton.setLayoutParams(buttonLayout);
+        lunchButton.setLayoutParams(buttonLayout);
+        dinnerButton.setLayoutParams(buttonLayout);
+        snacksButton.setLayoutParams(buttonLayout);
+
+        /*caloriesTextView.setLayoutParams(textLayout);
+        caloriesTextView.setLayoutParams(textLayout);
+        caloriesTextView.setLayoutParams(textLayout);
+        caloriesTextView.setLayoutParams(textLayout);*/
+        
 
         // TODO: IIFYM-formel mangler at ændre sig ud fra aktivitetsniveau.
 
