@@ -5,9 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.text.Layout;
-import android.widget.Button;
-import android.widget.LinearLayout;
+import android.widget.FrameLayout;
 
 import com.gr_b07.R;
 import com.gr_b07.logik.Reward;
@@ -17,6 +15,7 @@ import java.util.ArrayList;
 
 public class RedeemActivity extends AppCompatActivity {
 
+    FrameLayout layout_redeem;
     RecyclerView recyclerView;
     private ArrayList<String> prizeNames = new ArrayList<>();
     private ArrayList<Integer> prizeImages = new ArrayList<>();
@@ -26,6 +25,8 @@ public class RedeemActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_redeem);
         initPrizes();
+        layout_redeem = findViewById(R.id.frameLayoutRedeem);
+        layout_redeem.getForeground().setAlpha(0);
     }
 
     private void initPrizes(){
@@ -43,15 +44,15 @@ public class RedeemActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        layout_redeem.getForeground().setAlpha(220);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        layout_redeem.getForeground().setAlpha(0);
+    }
 }
-
-
-
-/* for(Reward reward: Settings.getCurrentPupil().getRewards()) {
-            LinearLayout layout = (LinearLayout) findViewById(R.id.linearLayoutRedeem);
-            Button reward1 = new Button(this);
-            reward1.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-            reward1.setText("Prize");
-            layout.addView(reward1);
-        }
-*/

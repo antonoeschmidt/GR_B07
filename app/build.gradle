@@ -46,4 +46,10 @@ dependencies {
     //CircularProgressBar
     implementation 'com.mikhaellopez:circularprogressbar:3.0.3'
 
+    //scratchcard
+    implementation 'com.github.cooltechworks:ScratchView:v1.1'
+
+    //QR generator
+    implementation 'com.github.kenglxn.QRGen:android:2.6.0'
+
 }
