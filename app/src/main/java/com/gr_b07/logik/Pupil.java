@@ -20,10 +20,10 @@ public class Pupil extends User {
     private List<String> activities = new ArrayList<>();
     private List<Reward> rewards = new ArrayList<>();
 
-    public Pupil(boolean firstTimeLoggedIn, String username, String password, boolean loggedIn, Physique physique,
+    public Pupil(boolean firstTimeLoggedIn, String username, String password, Physique physique,
                  PersonalInfo personalInfo, Experience experience, List<Meal> meals, List<String> friends,
                  List<String> activities, List<Reward> rewards) {
-        super(firstTimeLoggedIn, username, password, loggedIn);
+        super(firstTimeLoggedIn, username, password);
         this.physique = physique;
         this.personalInfo = personalInfo;
         this.experience = experience;
