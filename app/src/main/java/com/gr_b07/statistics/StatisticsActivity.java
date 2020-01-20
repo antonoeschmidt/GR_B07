@@ -66,8 +66,7 @@ public class StatisticsActivity extends AppCompatActivity {
         }
 
         LineDataSet dataSet = new LineDataSet(entries, "Label"); // add entries to dataset
-        dataSet.setColor(Color.MAGENTA);
-        //TODO: healthy color her
+        dataSet.setColor(Color.parseColor("#1FBBA6"));
         dataSet.setFillAlpha(110);
         dataSet.setLineWidth(3f);
         dataSet.setValueTextSize(15f);
