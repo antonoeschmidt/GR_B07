@@ -42,7 +42,10 @@
             android:text="Nutrition"
             android:textAllCaps="false"
             android:textSize="28dp"
-            android:drawableLeft="@drawable/nutrition_image"/>
+            android:drawableLeft="@drawable/nutrition_image"
+            android:drawablePadding="-45dip"
+            android:paddingLeft="30dip"
+            android:paddingRight="26dip"/>
 
         <Button
             android:id="@+id/mainmenu_button2"
