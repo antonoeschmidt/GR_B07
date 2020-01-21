@@ -9,7 +9,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.gr_b07.R;
@@ -17,6 +19,8 @@ import com.gr_b07.logik.FB;
 import com.gr_b07.logik.Pupil;
 import com.gr_b07.logik.Settings;
 import com.gr_b07.logik.User;
+
+import org.intellij.lang.annotations.JdkConstants;
 
 import java.util.ArrayList;
 
