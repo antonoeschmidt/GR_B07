@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".social.SeeQRCodePopUpActivity"></activity>
+        <activity android:name=".social.ScanQRPopUpActivity"></activity>
+        <activity android:name=".social.SeeQRCodePopUpActivity" />
         <activity android:name=".social.AddActivityPopUpActivity" />
         <activity android:name=".nutrition.MealsActivity" />
         <activity android:name=".statistics.StatisticsActivity" />

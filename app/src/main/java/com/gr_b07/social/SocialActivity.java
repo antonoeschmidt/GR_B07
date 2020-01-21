@@ -13,6 +13,7 @@ import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.gr_b07.R;
 import com.gr_b07.logik.FB;
@@ -28,7 +29,7 @@ public class SocialActivity extends AppCompatActivity implements View.OnClickLis
 
     FB fb = new FB();
     private ImageView imageViewAccountPhoto;
-    private Button buttonGetFriends, buttonAddActivity, buttonSeeQRcode;
+    private Button buttonGetFriends, buttonAddActivity, buttonSeeQRcode, buttonScanQRcode;
     private TextView friendsTextView, suggestedFriendsTextView;
 
 
@@ -45,6 +46,10 @@ public class SocialActivity extends AppCompatActivity implements View.OnClickLis
 
         buttonSeeQRcode = findViewById(R.id.buttonSeeQRcode);
         buttonSeeQRcode.setOnClickListener(this);
+
+        buttonScanQRcode = findViewById(R.id.buttonScanQRcode);
+        buttonScanQRcode.setOnClickListener(this);
+
         imageViewAccountPhoto = findViewById(R.id.imageViewAccountPhoto);
         buttonAddActivity = findViewById(R.id.buttonAddActivity);
         buttonAddActivity.setOnClickListener(this);
@@ -74,12 +79,15 @@ public class SocialActivity extends AppCompatActivity implements View.OnClickLis
                 startActivity(seeQRcodeIntent);
                 break;
             case R.id.buttonAddActivity:
-                Intent addActivityIntent = new Intent(this,AddActivityPopUpActivity.class);
+                Intent addActivityIntent = new Intent(this, AddActivityPopUpActivity.class);
                 startActivity(addActivityIntent);
                 break;
             case R.id.buttonGetFriends:
                 initFriends();
                 break;
+            case R.id.buttonScanQRcode:
+                Intent scanQRIntent = new Intent(this, ScanQRPopUpActivity.class);
+                startActivity(scanQRIntent);
         }
 
     }
