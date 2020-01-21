@@ -25,7 +25,7 @@ import org.intellij.lang.annotations.JdkConstants;
 
 import java.util.ArrayList;
 
-public class SocialActivity extends AppCompatActivity implements View.OnClickListener {
+public class SocialActivity extends AppCompatActivity implements RecyclerViewAdapterSocial.ItemClickListener, View.OnClickListener {
 
     FB fb = new FB();
     private ImageView imageViewAccountPhoto;
@@ -34,6 +34,7 @@ public class SocialActivity extends AppCompatActivity implements View.OnClickLis
 
 
     private RecyclerView friendsRecyclerView;
+    private RecyclerViewAdapterSocial adapter;
     private ArrayList<String> usernames = new ArrayList<>();
     private ArrayList<Integer> userPhotos = new ArrayList<>();
 
@@ -56,11 +57,19 @@ public class SocialActivity extends AppCompatActivity implements View.OnClickLis
         friendsTextView = findViewById(R.id.friendsTextView);
         suggestedFriendsTextView = findViewById(R.id.suggestedFriendsTextView);
 
-        LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(SocialActivity.this, LinearLayoutManager.HORIZONTAL, false);
         friendsRecyclerView = findViewById(R.id.friendsRecyclerView);
-        friendsRecyclerView.setLayoutManager(horizontalLayoutManager);
-        //suggestedFriendsRecyclerView = findViewById(R.id.suggestedFriendsRecyclerView);
+        LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(SocialActivity.this, LinearLayoutManager.HORIZONTAL, false);
 
+        friendsRecyclerView.setLayoutManager(horizontalLayoutManager);
+
+        Log.d(friendsRecyclerView.getLayoutManager().toString(), "onCreate: ");
+
+        adapter = new RecyclerViewAdapterSocial(this, usernames, userPhotos);
+        adapter.setClickListener(this);
+        friendsRecyclerView.setAdapter(adapter);
+
+
+        //suggestedFriendsRecyclerView = findViewById(R.id.suggestedFriendsRecyclerView);
 
 
         buttonGetFriends = findViewById(R.id.buttonGetFriends);//TODO: Delet
@@ -73,7 +82,7 @@ public class SocialActivity extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.buttonSeeQRcode:
                 Intent seeQRcodeIntent = new Intent(this, SeeQRCodePopUpActivity.class);
                 startActivity(seeQRcodeIntent);
@@ -92,8 +101,8 @@ public class SocialActivity extends AppCompatActivity implements View.OnClickLis
 
     }
 
-    public void initFriends(){
-        for (User user: Settings.getUsers()) {
+    public void initFriends() {
+        for (User user : Settings.getUsers()) {
             if (user.getClass().equals(Pupil.class)
                     && !Settings.getCurrentPupil().getUID().equals(user.getUID())
                     && !Settings.getCurrentPupil().getFriends().contains(user.getUID())
@@ -105,12 +114,29 @@ public class SocialActivity extends AppCompatActivity implements View.OnClickLis
         }
     }
 
-    public void initializeRecyclerView(){
+    public void initializeRecyclerView() {
         friendsRecyclerView = findViewById(R.id.friendsRecyclerView);
-        RecyclerViewAdapterSocial adapter = new RecyclerViewAdapterSocial(usernames, userPhotos, this);
+        friendsRecyclerView.setLayoutManager(new LinearLayoutManager(SocialActivity.this, LinearLayoutManager.HORIZONTAL, false));
+        Log.d(friendsRecyclerView.getLayoutManager().toString(), "onCreate: ");
+        adapter = new RecyclerViewAdapterSocial(this, usernames, userPhotos);
+        adapter.setClickListener(this);
         friendsRecyclerView.setAdapter(adapter);
-        friendsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
 
+    @Override
+    public void onItemClick(View view, int position) {
+        Log.d(Integer.toString(friendsRecyclerView.getLayoutManager().getItemViewType(view)), "onItemClick: ");
+        Toast.makeText(this, "You clicked " + adapter.getItem(position) + " on item position " + position, Toast.LENGTH_SHORT).show();
+
+            /*
+            case friendsRecyclerView.getLayoutManager().getItemViewType(view):
+                Toast.makeText(this, "You clicked " + adapter.getItem(position) + " on item position " + position, Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.suggestedFriendsRecyclerView:
+
+                break;
+
+             */
+    }
 }

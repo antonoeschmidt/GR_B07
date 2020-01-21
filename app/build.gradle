@@ -52,12 +52,12 @@ dependencies {
 
     //QR generator
     implementation 'com.github.kenglxn.QRGen:android:2.6.0'
-    //noinspection GradleCompatible
-    implementation 'com.android.support:appcompat-v7:28.0.0'
-    //noinspection GradleCompatible
-    implementation 'com.android.support:recyclerview-v7:28.0.0'
+    // QR SCAN
     implementation 'com.google.zxing:core:3.4.0'
     implementation 'com.journeyapps:zxing-android-embedded:3.5.0'
+    // Recyclerboi
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.android.support:recyclerview-v7:28.0.0'
 
 
 }

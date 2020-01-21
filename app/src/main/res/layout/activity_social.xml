@@ -50,12 +50,11 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/friendsRecyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@id/friendsTextView"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal" />
+        android:layout_marginTop="10dp" />
 
     <TextView
         android:id="@+id/suggestedFriendsTextView"
@@ -71,8 +70,7 @@
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_below="@id/suggestedFriendsTextView"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal" />
+        android:layout_marginTop="10dp" />
 
 
     <Button
