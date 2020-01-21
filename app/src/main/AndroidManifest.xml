@@ -9,13 +9,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".nutrition.MealsActivity"></activity>
+        <activity android:name=".social.SeeQRCodePopUpActivity"></activity>
+        <activity android:name=".social.AddActivityPopUpActivity" />
+        <activity android:name=".nutrition.MealsActivity" />
         <activity android:name=".statistics.StatisticsActivity" />
         <activity android:name=".SignUpActivity" />
         <activity android:name=".games.redeemRewards.RedeemActivity" />
         <activity
             android:name=".games.redeemRewards.rewardsPopUpActivity"
-            android:theme="@style/AppTheme.popUpTheme"></activity>
+            android:theme="@style/AppTheme.popUpTheme" />
         <activity android:name=".games.ChanceActivity" />
         <activity android:name=".games.ChestActivity" />
         <activity android:name=".games.ScratchCardActivity" />
