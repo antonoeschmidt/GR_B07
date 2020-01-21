@@ -91,7 +91,7 @@ public class NutritionActivity extends AppCompatActivity implements View.OnClick
         caloriesTextView.setLayoutParams(textLayout);
         caloriesTextView.setLayoutParams(textLayout);
         caloriesTextView.setLayoutParams(textLayout);*/
-        
+
 
         // TODO: IIFYM-formel mangler at ændre sig ud fra aktivitetsniveau.
 
