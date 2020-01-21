@@ -1,113 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/socialParent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient_social"
-    app:layoutManager="android.support.v7.widget.LinearLayoutManager"
     tools:context=".social.SocialActivity">
 
     <ImageView
         android:id="@+id/imageViewAccountPhoto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.05"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
         app:srcCompat="@drawable/account_nophoto" />
 
     <Button
         android:id="@+id/buttonSeeQRcode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="QR"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.95"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.05" />
+        android:layout_toEndOf="@+id/imageViewAccountPhoto"
+        android:text="QR" />
+
+    <Button
+        android:id="@+id/buttonScanQRcode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/buttonSeeQRcode"
+        android:layout_toEndOf="@+id/imageViewAccountPhoto"
+        android:text="SCAN" />
 
     <Button
         android:id="@+id/buttonAddActivity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Tilføj fritidsaktivitet +"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.15"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.35" />
+        android:layout_below="@id/imageViewAccountPhoto"
+        android:layout_centerHorizontal="true"
+        android:text="Tilføj fritidsaktivitet +" />
 
 
     <TextView
         android:id="@+id/friendsTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/buttonAddActivity"
         android:gravity="start"
-        android:text="Friends: "
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.15"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.45" />
+        android:text="Friends: " />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/friendsRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.575" />
+        android:layout_below="@id/friendsTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal" />
 
     <TextView
         android:id="@+id/suggestedFriendsTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/friendsRecyclerView"
+        android:layout_marginTop="10dp"
         android:gravity="start"
-        android:text="Suggested: "
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.15"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.675" />
+        android:text="Suggested: " />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/suggestedFriendsRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.825" />
+        android:layout_below="@id/suggestedFriendsTextView"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal" />
 
 
     <Button
         android:id="@+id/buttonGetFriends"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/suggestedFriendsRecyclerView"
+        android:layout_centerHorizontal="true"
         android:text="get friends ( lets get the bread)"
-        android:textAllCaps="false"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.925" />
+        android:textAllCaps="false" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>
