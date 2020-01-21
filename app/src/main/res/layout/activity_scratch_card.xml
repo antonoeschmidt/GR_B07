@@ -7,6 +7,14 @@
     tools:context=".games.ScratchCardActivity"
     android:background="@drawable/gradient_rewards">
 
+    <TextView
+        android:id="@+id/ticketsScratchCard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ticketbtn"
+        android:padding="15dp"
+        android:textColor="@color/colorFat"/>
+
     <com.cooltechworks.views.ScratchImageView
         android:id="@+id/scratchCardView"
         android:layout_width="300dp"
@@ -23,7 +31,8 @@
         android:layout_marginStart="200dp"
         android:textSize="24dp"
         android:padding="20dp"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"/>
 
     <Button
         android:id="@+id/redeemButton"

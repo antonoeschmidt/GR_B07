@@ -38,7 +38,8 @@ public class SlotMachineActivity extends AppCompatActivity implements IEventEnd 
         image2 = findViewById(R.id.image2);
         image3 = findViewById(R.id.image3);
 
-        tickets = findViewById(R.id.tickets);
+        tickets = findViewById(R.id.ticketsSlotMachine);
+        tickets.setText("Tickets: " + Settings.getCurrentPupil().getExperience().getTicket());
 
         image.setEventEnd(SlotMachineActivity.this);
         image2.setEventEnd(SlotMachineActivity.this);
@@ -47,7 +48,7 @@ public class SlotMachineActivity extends AppCompatActivity implements IEventEnd 
         buttonUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(SlotMachineLogic.tickets >= 1){
+                if(Settings.getCurrentPupil().getExperience().getTicket() >= 1){
                     buttonUp.setVisibility(View.GONE);
                     buttonDown.setVisibility(View.VISIBLE);
 
@@ -55,9 +56,9 @@ public class SlotMachineActivity extends AppCompatActivity implements IEventEnd 
                     image2.setValueRandom(new Random().nextInt(6),new Random().nextInt((15-5)+1)+5);
                     image3.setValueRandom(new Random().nextInt(6),new Random().nextInt((15-5)+1)+5);
 
-                    SlotMachineLogic.tickets -= 1;
+                    Settings.getCurrentPupil().getExperience().setTicket(Settings.getCurrentPupil().getExperience().getTicket()-1);
 
-                    tickets.setText(String.valueOf(SlotMachineLogic.tickets));
+                    tickets.setText("Tickets: " + Settings.getCurrentPupil().getExperience().getTicket());
 
                 } else {
                     Toast.makeText(SlotMachineActivity.this,"Du har ikke nogen tickets :/", Toast.LENGTH_SHORT).show();
@@ -77,15 +78,13 @@ public class SlotMachineActivity extends AppCompatActivity implements IEventEnd 
                 countDone = 0;
                 if(image.getValue() == image2.getValue() && image2.getValue() == image3.getValue()){
                     Toast.makeText(SlotMachineActivity.this,"Stor pris", Toast.LENGTH_SHORT).show();
-                    SlotMachineLogic.tickets += 5;
+                    //SlotMachineLogic.tickets += 5;
                     Settings.getCurrentPupil().addReward(rewardItems.bigPrize);
-                    tickets.setText(String.valueOf(SlotMachineLogic.tickets));
                 } else if(image.getValue() == image2.getValue() || image2.getValue() == image3.getValue() || image.getValue() == image3.getValue()) {
                     Toast.makeText(SlotMachineActivity.this, "Lille pris", Toast.LENGTH_SHORT).show();
-                    SlotMachineLogic.tickets += 2;
+                    //SlotMachineLogic.tickets += 2;
                     Settings.getCurrentPupil().addReward(rewardItems.smallPrize);
 
-                    tickets.setText(String.valueOf(SlotMachineLogic.tickets));
                 } else {
                     Toast.makeText(SlotMachineActivity.this, "Du taber", Toast.LENGTH_SHORT).show();
                 }

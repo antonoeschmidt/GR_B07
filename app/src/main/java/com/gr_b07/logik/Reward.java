@@ -50,4 +50,5 @@ public class Reward {
     public void redeem(){
         redeemed = true;
     }
+
 }

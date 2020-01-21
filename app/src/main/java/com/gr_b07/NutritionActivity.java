@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -25,7 +26,7 @@ import java.io.InputStreamReader;
 import java.text.ParseException;
 import java.util.ArrayList;
 
-public class NutritionActivity extends AppCompatActivity implements View.OnClickListener{
+public class NutritionActivity extends AppCompatActivity implements View.OnClickListener {
     private ProgressBar pProgress, cProgress, fProgress, cRing;
     private TextView caloriesTextView, proteinTextView, carbsTextView, fatTextView;
     private Button breakfastButton, lunchButton, dinnerButton, snacksButton, statsButton;
@@ -33,6 +34,8 @@ public class NutritionActivity extends AppCompatActivity implements View.OnClick
     private String[] data;
     protected static ArrayList<Food> foodDB = new ArrayList<>();
     public static String[] foodAutoText;
+    boolean XPForCalories, XPForProtein, XPForCarbs, XPForFat;
+    ArrayList<Boolean> XPBooleans = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,31 +84,60 @@ public class NutritionActivity extends AppCompatActivity implements View.OnClick
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.breakfastButton:
-                Intent breakfastIntent = new Intent(this, BreakfastActivity.class); startActivity(breakfastIntent);
+                Intent breakfastIntent = new Intent(this, BreakfastActivity.class);
+                startActivity(breakfastIntent);
                 break;
             case R.id.lunchButton:
-                Intent lunchIntent = new Intent(this, LunchActivity.class); startActivity(lunchIntent);
+                Intent lunchIntent = new Intent(this, LunchActivity.class);
+                startActivity(lunchIntent);
                 break;
             case R.id.dinnerButton:
-                Intent dinnerIntent = new Intent(this, DinnerActivity.class); startActivity(dinnerIntent);
+                Intent dinnerIntent = new Intent(this, DinnerActivity.class);
+                startActivity(dinnerIntent);
                 break;
             case R.id.snackButton:
-                Intent snacksIntent = new Intent(this, SnacksActivity.class); startActivity(snacksIntent);
+                Intent snacksIntent = new Intent(this, SnacksActivity.class);
+                startActivity(snacksIntent);
                 break;
             case R.id.statsButton:
-                Intent statsIntent = new Intent(this, StatisticsActivity.class); startActivity(statsIntent);
+                Intent statsIntent = new Intent(this, StatisticsActivity.class);
+                startActivity(statsIntent);
         }
     }
 
-    public void updateView(){
+    public void updateView() {
         cRing.setProgress((int) Math.round(Settings.getCurrentPupil().getDailyIntake(System.currentTimeMillis()).getCalories()));
         pProgress.setProgress((int) Math.round(Settings.getCurrentPupil().getDailyIntake(System.currentTimeMillis()).getProtein()));
         cProgress.setProgress((int) Math.round(Settings.getCurrentPupil().getDailyIntake(System.currentTimeMillis()).getCarbs()));
         fProgress.setProgress((int) Math.round(Settings.getCurrentPupil().getDailyIntake(System.currentTimeMillis()).getFat()));
         caloriesTextView.setText("Calories: \n" + (int) Settings.getCurrentPupil().getDailyIntake(System.currentTimeMillis()).getCalories() + "  /  " + cRing.getMax());
-        proteinTextView.setText("Protein: " + (int) Settings.getCurrentPupil().getDailyIntake(System.currentTimeMillis()).getProtein() +  "  /  " + pProgress.getMax() + " g");
-        carbsTextView.setText("Carbs: "+ (int) Settings.getCurrentPupil().getDailyIntake(System.currentTimeMillis()).getCarbs() + "  /  " + cProgress.getMax() + " g");
+        proteinTextView.setText("Protein: " + (int) Settings.getCurrentPupil().getDailyIntake(System.currentTimeMillis()).getProtein() + "  /  " + pProgress.getMax() + " g");
+        carbsTextView.setText("Carbs: " + (int) Settings.getCurrentPupil().getDailyIntake(System.currentTimeMillis()).getCarbs() + "  /  " + cProgress.getMax() + " g");
         fatTextView.setText("Fat: " + (int) Settings.getCurrentPupil().getDailyIntake(System.currentTimeMillis()).getFat() + "  /  " + fProgress.getMax() + " g");
+        giveXPIfUnlocked();
+    }
+
+    private void giveXPIfUnlocked() {
+        if ((int) Settings.getCurrentPupil().getDailyIntake(System.currentTimeMillis()).getCalories() >= cRing.getMax() && !XPForCalories) {
+            Settings.getCurrentPupil().getExperience().setNutritionXP(Settings.getCurrentPupil().getExperience().getNutritionXP() + 5);
+            XPForCalories = true;
+            Toast.makeText(this, "Cal + 5", Toast.LENGTH_SHORT).show();
+        }
+        if ((int) Settings.getCurrentPupil().getDailyIntake(System.currentTimeMillis()).getProtein() >= pProgress.getMax() && !XPForProtein) {
+            Settings.getCurrentPupil().getExperience().setNutritionXP(Settings.getCurrentPupil().getExperience().getNutritionXP() + 5);
+            XPForProtein = true;
+            Toast.makeText(this, "Protein + 5", Toast.LENGTH_SHORT).show();
+        }
+        if ((int) Settings.getCurrentPupil().getDailyIntake(System.currentTimeMillis()).getCarbs() >= cProgress.getMax() && !XPForCarbs) {
+            Settings.getCurrentPupil().getExperience().setNutritionXP(Settings.getCurrentPupil().getExperience().getNutritionXP() + 5);
+            XPForCarbs = true;
+            Toast.makeText(this, "Carbs + 5", Toast.LENGTH_SHORT).show();
+        }
+        if ((int) Settings.getCurrentPupil().getDailyIntake(System.currentTimeMillis()).getFat() >= fProgress.getMax() && !XPForFat) {
+            Settings.getCurrentPupil().getExperience().setNutritionXP(Settings.getCurrentPupil().getExperience().getNutritionXP() + 5);
+            XPForFat = true;
+            Toast.makeText(this, "Fat + 5", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void createDBarray() {
@@ -116,8 +148,8 @@ public class NutritionActivity extends AppCompatActivity implements View.OnClick
             String csvLine;
             while ((csvLine = reader.readLine()) != null) {
                 data = csvLine.split(";");
-                foodDB.add(new Food(data[0], Double.parseDouble(data[1]),Double.parseDouble(data[2]),
-                            Double.parseDouble(data[3]),Double.parseDouble(data[4])));
+                foodDB.add(new Food(data[0], Double.parseDouble(data[1]), Double.parseDouble(data[2]),
+                        Double.parseDouble(data[3]), Double.parseDouble(data[4])));
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -136,17 +168,16 @@ public class NutritionActivity extends AppCompatActivity implements View.OnClick
     }
 
     public void updateMacros() {
-        if (Settings.getCurrentPupil().getPersonalInfo().getGender().equals("male")){
+        if (Settings.getCurrentPupil().getPersonalInfo().getGender().equals("male")) {
             cRing.setMax((int) Math.round((10 * Settings.getCurrentPupil().getPhysique().getWeight()) + (6.25 * Settings.getCurrentPupil().getPhysique().getHeight())
                     - (5 * Settings.getCurrentPupil().getPersonalInfo().getAge()) + 5) + (Settings.getCurrentPupil().getPhysique().getActivityLevel() * 250));
-        }
-        else if (Settings.getCurrentPupil().getPersonalInfo().getGender().equals("female")) {
+        } else if (Settings.getCurrentPupil().getPersonalInfo().getGender().equals("female")) {
             cRing.setMax((int) Math.round((10 * Settings.getCurrentPupil().getPhysique().getWeight()) + (6.25 * Settings.getCurrentPupil().getPhysique().getHeight())
                     - (5 * Settings.getCurrentPupil().getPersonalInfo().getAge()) - 161) + (Settings.getCurrentPupil().getPhysique().getActivityLevel() * 250));
         }
-        pProgress.setMax((int) Math.round ((cRing.getMax()*0.25)/4));
-        cProgress.setMax((int) Math.round ((cRing.getMax()*0.5)/4));
-        fProgress.setMax((int) Math.round ((cRing.getMax()*0.25)/9));
+        pProgress.setMax((int) Math.round((cRing.getMax() * 0.25) / 4));
+        cProgress.setMax((int) Math.round((cRing.getMax() * 0.5) / 4));
+        fProgress.setMax((int) Math.round((cRing.getMax() * 0.25) / 9));
         Log.d(Settings.getUsers().toString(), "updateMacros: Users");
     }
 

@@ -13,7 +13,7 @@ import com.mikhaellopez.circularprogressbar.CircularProgressBar;
 
 public class RewardsActivity extends AppCompatActivity implements View.OnClickListener{
    // private ProgressBar rProgress;
-    private TextView levelTextView, totalXPtext, totalNutritionXPtextView, totalActivityXPtextView, totalSocialXPtextView;
+    private TextView levelTextView, totalXPtext, totalNutritionXPtextView, totalActivityXPtextView, totalSocialXPtextView, ticketTextView;
     private Button rewardButton, rewardTestButtonNutrition, rewardTestButtonActivity, rewardTestButtonSocial;
     private CircularProgressBar circularProgressBar;
     int xpType;
@@ -29,6 +29,7 @@ public class RewardsActivity extends AppCompatActivity implements View.OnClickLi
         totalActivityXPtextView = findViewById(R.id.totalActivityXPText);
         totalSocialXPtextView = findViewById(R.id.totalSocialXPText);
         totalXPtext = findViewById(R.id.totalXPText);
+        ticketTextView = findViewById(R.id.ticketTextView);
 
         rewardTestButtonNutrition = findViewById(R.id.buttonRewardTestNutrition);
         rewardTestButtonActivity = findViewById(R.id.buttonRewardTestActivity);
@@ -45,6 +46,7 @@ public class RewardsActivity extends AppCompatActivity implements View.OnClickLi
         circularProgressBar.setProgress(0);
 
         levelTextView.setText("Level: " + Integer.toString(Settings.getCurrentPupil().getExperience().getLevel()));
+        ticketTextView.setText("Tickets: " + Settings.getCurrentPupil().getExperience().getTicket());
 
 
     }
@@ -73,8 +75,8 @@ public class RewardsActivity extends AppCompatActivity implements View.OnClickLi
             Intent gameIntent = new Intent(this, GameActivity.class);
             startActivity(gameIntent);
         }
-        checkLevel();
         updateTextViews();
+        circularProgressBar.setProgressMax((Settings.getCurrentPupil().getExperience().getLevel()*5+10));
         circularProgressBar.setProgress(Settings.getCurrentPupil().getExperience().getTotalXP());
         levelTextView.setText("Level: " + Settings.getCurrentPupil().getExperience().getLevel());
     }
@@ -96,20 +98,9 @@ public class RewardsActivity extends AppCompatActivity implements View.OnClickLi
                 Settings.getCurrentPupil().getExperience().setNutritionXP(0);
                 Settings.getCurrentPupil().getExperience().setActivityXP(0);
             }
-
-            /*
-
-            Settings.getCurrentPupil().getExperience().setNutritionXP(Settings.getCurrentPupil().getExperience().getNutritionXP()%(int) Math.round(circularProgressBar.getProgressMax()));
-            Settings.getCurrentPupil().getExperience().setActivityXP(Settings.getCurrentPupil().getExperience().getActivityXP()%(int) Math.round(circularProgressBar.getProgressMax()));
-            Settings.getCurrentPupil().getExperience().setSocialXP(Settings.getCurrentPupil().getExperience().getSocialXP()%(int) Math.round(circularProgressBar.getProgressMax()));
-
-(int) Math.round(circularProgressBar.getProgressMax()))
-
-            circularProgressBar.setProgress(Settings.getCurrentPupil().getExperience().getTotalXP());
-     */
             Settings.getCurrentPupil().getExperience().setLevel(Settings.getCurrentPupil().getExperience().getLevel()+1);
             Settings.getCurrentPupil().getExperience().setTicket(Settings.getCurrentPupil().getExperience().getTicket()+1);
-            circularProgressBar.setProgressMax((Settings.getCurrentPupil().getExperience().getLevel()*5+10));
+
         }
     }
 
@@ -120,5 +111,6 @@ public class RewardsActivity extends AppCompatActivity implements View.OnClickLi
         totalActivityXPtextView.setText("Activity Points: " + Settings.getCurrentPupil().getExperience().getActivityXP());
         totalSocialXPtextView.setText("Social Points: " + Settings.getCurrentPupil().getExperience().getSocialXP());
         circularProgressBar.setProgress(Settings.getCurrentPupil().getExperience().getTotalXP());
+        ticketTextView.setText("Tickets: " + Settings.getCurrentPupil().getExperience().getTicket());
     }
 }
