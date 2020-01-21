@@ -3,20 +3,17 @@ package com.gr_b07;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.gr_b07.logik.Settings;
 
 public class MainMenuActivity extends AppCompatActivity implements View.OnClickListener{
-    private Button mainButton1, mainButton2, mainButton3, mainButton4, mainButton5;
+    private Button nutritionButton, activityButton, mainButton3, mainButton4, mainButton5;
     private TextView levelTextView, xpTextView;
     private ProgressBar xpProgressBar;
     private ImageView ticketView;
@@ -26,10 +23,10 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
 
-        mainButton1 = findViewById(R.id.mainmenu_button1);
-        mainButton1.setOnClickListener(this);
-        mainButton2 = findViewById(R.id.mainmenu_button2);
-        mainButton2.setOnClickListener(this);
+        nutritionButton = findViewById(R.id.mainmenu_nutrition);
+        nutritionButton.setOnClickListener(this);
+        activityButton = findViewById(R.id.mainmenu_activity);
+        activityButton.setOnClickListener(this);
         mainButton3 = findViewById(R.id.mainmenu_button3);
         mainButton3.setOnClickListener(this);
         mainButton4 = findViewById(R.id.mainmenu_button4);
@@ -54,9 +51,9 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.mainmenu_button1:
+            case R.id.mainmenu_nutrition:
             Intent nutritionIntent = new Intent(this, NutritionActivity.class); startActivity(nutritionIntent); break;
-            case R.id.mainmenu_button2:
+            case R.id.mainmenu_activity:
             Intent activityIntent = new Intent(this, ActivityActivity.class); startActivity(activityIntent); break;
             case R.id.mainmenu_button3:
             Intent socialIntent = new Intent(this, SocialActivity.class); startActivity(socialIntent); break;

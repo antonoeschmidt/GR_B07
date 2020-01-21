@@ -32,7 +32,7 @@
 
 
         <Button
-            android:id="@+id/mainmenu_button1"
+            android:id="@+id/mainmenu_nutrition"
             android:layout_width="match_parent"
             android:layout_height="430px"
             android:text="Nutrition"
@@ -43,7 +43,7 @@
             android:textAllCaps="false" />
 
         <Button
-            android:id="@+id/mainmenu_button2"
+            android:id="@+id/mainmenu_activity"
             android:layout_width="match_parent"
             android:layout_height="430px"
             android:text="Activity"
