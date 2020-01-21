@@ -13,7 +13,7 @@ import android.widget.TextView;
 import com.gr_b07.logik.Settings;
 
 public class MainMenuActivity extends AppCompatActivity implements View.OnClickListener{
-    private Button nutritionButton, activityButton, mainButton3, mainButton4, mainButton5;
+    private Button nutritionButton, activityButton, socialButton, rewardButton, mainButton5;
     private TextView levelTextView, xpTextView;
     private ProgressBar xpProgressBar;
     private ImageView ticketView;
@@ -27,10 +27,10 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
         nutritionButton.setOnClickListener(this);
         activityButton = findViewById(R.id.mainmenu_activity);
         activityButton.setOnClickListener(this);
-        mainButton3 = findViewById(R.id.mainmenu_button3);
-        mainButton3.setOnClickListener(this);
-        mainButton4 = findViewById(R.id.mainmenu_button4);
-        mainButton4.setOnClickListener(this);
+        socialButton = findViewById(R.id.mainmenu_social);
+        socialButton.setOnClickListener(this);
+        rewardButton = findViewById(R.id.mainmenu_reward);
+        rewardButton.setOnClickListener(this);
         mainButton5 = findViewById(R.id.mainmenu_button5);
         mainButton5.setOnClickListener(this);
 
@@ -55,9 +55,9 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
             Intent nutritionIntent = new Intent(this, NutritionActivity.class); startActivity(nutritionIntent); break;
             case R.id.mainmenu_activity:
             Intent activityIntent = new Intent(this, ActivityActivity.class); startActivity(activityIntent); break;
-            case R.id.mainmenu_button3:
+            case R.id.mainmenu_social:
             Intent socialIntent = new Intent(this, SocialActivity.class); startActivity(socialIntent); break;
-            case R.id.mainmenu_button4:
+            case R.id.mainmenu_reward:
                 Intent rewardsIntent = new Intent(this, RewardsActivity.class); startActivity(rewardsIntent); break;
             case R.id.mainmenu_button5:
                 Intent inputDataIntent = new Intent(this, InputDataActivity.class); startActivity(inputDataIntent);

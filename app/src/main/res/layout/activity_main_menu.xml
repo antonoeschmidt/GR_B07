@@ -55,7 +55,7 @@
 
 
         <Button
-            android:id="@+id/mainmenu_button3"
+            android:id="@+id/mainmenu_social"
             android:layout_width="match_parent"
             android:layout_height="430px"
             android:text="Social"
@@ -66,7 +66,7 @@
             android:textAllCaps="false" />
 
         <Button
-            android:id="@+id/mainmenu_button4"
+            android:id="@+id/mainmenu_reward"
             android:layout_width="match_parent"
             android:layout_height="430px"
             android:text="Reward"
