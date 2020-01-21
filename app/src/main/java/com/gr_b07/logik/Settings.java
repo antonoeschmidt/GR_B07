@@ -7,6 +7,8 @@ import java.util.ArrayList;
 
 public class Settings {
 
+    public static boolean logginIn;
+
     private static ArrayList<User> users = new ArrayList<User>() {
     };
     private static User currentUser;

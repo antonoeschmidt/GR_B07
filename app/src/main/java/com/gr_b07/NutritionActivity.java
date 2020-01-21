@@ -16,6 +16,7 @@ import com.gr_b07.logik.Settings;
 import com.gr_b07.nutrition.BreakfastActivity;
 import com.gr_b07.nutrition.DinnerActivity;
 import com.gr_b07.nutrition.LunchActivity;
+import com.gr_b07.nutrition.MealsActivity;
 import com.gr_b07.nutrition.SnacksActivity;
 import com.gr_b07.statistics.StatisticsActivity;
 
@@ -29,7 +30,7 @@ import java.util.ArrayList;
 public class NutritionActivity extends AppCompatActivity implements View.OnClickListener {
     private ProgressBar pProgress, cProgress, fProgress, cRing;
     private TextView caloriesTextView, proteinTextView, carbsTextView, fatTextView;
-    private Button breakfastButton, lunchButton, dinnerButton, snacksButton, statsButton;
+    private Button breakfastButton, lunchButton, dinnerButton, snacksButton, statsButton, seeMealsButton;
     private InputStream inputStream;
     private String[] data;
     protected static ArrayList<Food> foodDB = new ArrayList<>();
@@ -57,12 +58,15 @@ public class NutritionActivity extends AppCompatActivity implements View.OnClick
         dinnerButton = findViewById(R.id.dinnerButton);
         snacksButton = findViewById(R.id.snackButton);
         statsButton = findViewById(R.id.statsButton);
+        //TODO: find nyt billede til denne knap
+        seeMealsButton = findViewById(R.id.seeMealsButton);
 
         breakfastButton.setOnClickListener(this);
         lunchButton.setOnClickListener(this);
         dinnerButton.setOnClickListener(this);
         snacksButton.setOnClickListener(this);
         statsButton.setOnClickListener(this);
+        seeMealsButton.setOnClickListener(this);
 
         // TODO: IIFYM-formel mangler at ændre sig ud fra aktivitetsniveau.
 
@@ -84,24 +88,22 @@ public class NutritionActivity extends AppCompatActivity implements View.OnClick
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.breakfastButton:
-                Intent breakfastIntent = new Intent(this, BreakfastActivity.class);
-                startActivity(breakfastIntent);
+                Intent breakfastIntent = new Intent(this, BreakfastActivity.class); startActivity(breakfastIntent);
                 break;
             case R.id.lunchButton:
-                Intent lunchIntent = new Intent(this, LunchActivity.class);
-                startActivity(lunchIntent);
+                Intent lunchIntent = new Intent(this, LunchActivity.class); startActivity(lunchIntent);
                 break;
             case R.id.dinnerButton:
-                Intent dinnerIntent = new Intent(this, DinnerActivity.class);
-                startActivity(dinnerIntent);
+                Intent dinnerIntent = new Intent(this, DinnerActivity.class); startActivity(dinnerIntent);
                 break;
             case R.id.snackButton:
-                Intent snacksIntent = new Intent(this, SnacksActivity.class);
-                startActivity(snacksIntent);
+                Intent snacksIntent = new Intent(this, SnacksActivity.class); startActivity(snacksIntent);
                 break;
             case R.id.statsButton:
-                Intent statsIntent = new Intent(this, StatisticsActivity.class);
-                startActivity(statsIntent);
+                Intent statsIntent = new Intent(this, StatisticsActivity.class); startActivity(statsIntent);
+                break;
+            case R.id.seeMealsButton:
+                Intent seeMealsIntent = new Intent(this, MealsActivity.class); startActivity(seeMealsIntent);
         }
     }
 
@@ -111,8 +113,8 @@ public class NutritionActivity extends AppCompatActivity implements View.OnClick
         cProgress.setProgress((int) Math.round(Settings.getCurrentPupil().getDailyIntake(System.currentTimeMillis()).getCarbs()));
         fProgress.setProgress((int) Math.round(Settings.getCurrentPupil().getDailyIntake(System.currentTimeMillis()).getFat()));
         caloriesTextView.setText("Calories: \n" + (int) Settings.getCurrentPupil().getDailyIntake(System.currentTimeMillis()).getCalories() + "  /  " + cRing.getMax());
-        proteinTextView.setText("Protein: " + (int) Settings.getCurrentPupil().getDailyIntake(System.currentTimeMillis()).getProtein() + "  /  " + pProgress.getMax() + " g");
-        carbsTextView.setText("Carbs: " + (int) Settings.getCurrentPupil().getDailyIntake(System.currentTimeMillis()).getCarbs() + "  /  " + cProgress.getMax() + " g");
+        proteinTextView.setText("Protein: " + (int) Settings.getCurrentPupil().getDailyIntake(System.currentTimeMillis()).getProtein() +  "  /  " + pProgress.getMax() + " g");
+        carbsTextView.setText("Carbs: "+ (int) Settings.getCurrentPupil().getDailyIntake(System.currentTimeMillis()).getCarbs() + "  /  " + cProgress.getMax() + " g");
         fatTextView.setText("Fat: " + (int) Settings.getCurrentPupil().getDailyIntake(System.currentTimeMillis()).getFat() + "  /  " + fProgress.getMax() + " g");
         giveXPIfUnlocked();
     }
@@ -175,7 +177,8 @@ public class NutritionActivity extends AppCompatActivity implements View.OnClick
         if (Settings.getCurrentPupil().getPersonalInfo().getGender().equals("male")) {
             cRing.setMax((int) Math.round((10 * Settings.getCurrentPupil().getPhysique().getWeight()) + (6.25 * Settings.getCurrentPupil().getPhysique().getHeight())
                     - (5 * Settings.getCurrentPupil().getPersonalInfo().getAge()) + 5) + (Settings.getCurrentPupil().getPhysique().getActivityLevel() * 250));
-        } else if (Settings.getCurrentPupil().getPersonalInfo().getGender().equals("female")) {
+        }
+        else if (Settings.getCurrentPupil().getPersonalInfo().getGender().equals("female")) {
             cRing.setMax((int) Math.round((10 * Settings.getCurrentPupil().getPhysique().getWeight()) + (6.25 * Settings.getCurrentPupil().getPhysique().getHeight())
                     - (5 * Settings.getCurrentPupil().getPersonalInfo().getAge()) - 161) + (Settings.getCurrentPupil().getPhysique().getActivityLevel() * 250));
         }

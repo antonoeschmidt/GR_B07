@@ -1,16 +1,13 @@
 package com.gr_b07.logik;
 
-import java.util.Date;
-
 public abstract class User {
     private String username, password;
-    private boolean loggedIn, firstTimeLoggedIn;
+    private boolean firstTimeLoggedIn;
 
-    public User(boolean firstTimeLoggedIn, String username, String password, boolean loggedIn) {
+    public User(boolean firstTimeLoggedIn, String username, String password) {
         this.firstTimeLoggedIn = firstTimeLoggedIn;
         this.username = username;
         this.password = password;
-        this.loggedIn = loggedIn;
     }
 
     public User() {
@@ -33,13 +30,5 @@ public abstract class User {
         return password;
     }
 
-    public boolean isLoggedIn() {
-        return loggedIn;
-    }
-
-    public void setLoggedIn(boolean loggedIn) {
-        this.loggedIn = loggedIn;
-    }
-
-     }
+}
 
