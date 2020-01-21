@@ -19,10 +19,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.gr_b07.InputDataActivity;
+import com.gr_b07.LoginActivity;
 import com.gr_b07.MainMenuActivity;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 public class FB {
     private FirebaseAuth auth;
@@ -54,19 +54,11 @@ public class FB {
                             Log.d("createUser", "createUserWithEmail:success");
                             Toast.makeText(activity, "Sign Up Success", Toast.LENGTH_SHORT).show();
 
-                            FirebaseUser user = auth.getCurrentUser();
-
-                            Pupil newUser = new Pupil(true,email,password,false, auth.getUid(), new Physique(0,0,0),
+                            Pupil newUser = new Pupil(true,email,password,new Physique(0,0,0),
                                     new PersonalInfo("", "", "n", 0, 0),
                                     new Experience(1,0,0,0,0),
-                                    new ArrayList<Meal>(),new ArrayList<String>(), new ArrayList<String>(), new ArrayList<Reward>());
-
-                            /*
-                            newUser.addMeal(new Meal("ot", 123,123,123,123,"123",123123));
-                            newUser.addFriend("he");
-                            newUser.addActivity("fod");
-                            newUser.addReward(rewardItems.bigPrize);
-                             */
+                                    new ArrayList<Meal>(),new ArrayList<String>(), new ArrayList<String>(), new ArrayList<Reward>()
+                                    );
 
                             Settings.setCurrentPupil(newUser);
                             updateDatabase();
@@ -96,7 +88,6 @@ public class FB {
                 //Settings.setCurrentUser(d.getValue(Pupil.class));
 
                 Settings.setCurrentUser(getUserFromDatabase(d));
-                Settings.getCurrentUser().setLoggedIn(true);
 
 
                 if (Settings.getCurrentUser().getClass().equals(Pupil.class)) {
@@ -105,12 +96,15 @@ public class FB {
                 //TODO: denne kode burde ikke være i denne metode, men det virkede kun sådan her
                 //pga async netværkskommunikation - burde være i SignIn/Login
 
-                if (Settings.getCurrentUser().isLoggedIn() && Settings.getCurrentUser().isFirstTimeLoggedIn()) {
+
+                if (auth != null && Settings.getCurrentUser().isFirstTimeLoggedIn()) {
                     Intent inputDataIntent = new Intent(activity, InputDataActivity.class);
                     activity.startActivity(inputDataIntent);
-                } else if (Settings.getCurrentUser().isLoggedIn()) {
+                } else if (Settings.logginIn){
                     Intent mainMenuIntent = new Intent(activity, MainMenuActivity.class);
                     activity.startActivity(mainMenuIntent);
+                    Settings.logginIn = false;
+                    activity.finish();
                 }
             }
 
@@ -132,9 +126,15 @@ public class FB {
                             Log.d("loginFire", "signInWithEmail:success");
                             Toast.makeText(activity, "Logged In Success", Toast.LENGTH_SHORT).show();
 
+
                             FirebaseUser firebaseUser = auth.getCurrentUser();
-                            if (firebaseUser != null)
+                            if (firebaseUser != null) {
+                                Settings.logginIn = true;
                                 checkFirstTimeLoggedInFromDatabase(activity, firebaseUser.getUid());
+
+                            }
+
+
 
                             if (Settings.getCurrentUser() != null) {
                                 if (Settings.getCurrentUser().getClass().equals(Pupil.class)) {

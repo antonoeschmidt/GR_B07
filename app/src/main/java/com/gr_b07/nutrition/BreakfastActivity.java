@@ -1,5 +1,6 @@
 package com.gr_b07.nutrition;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -58,6 +59,8 @@ public class BreakfastActivity extends AbstractMealActivity {
             }
         });
         textViewHeader.setText("Breakfast");
+        //addFoodButton.setFadingEdgeLength(15);
+        //addFoodButton.setDrawingCacheEnabled(true);
     }
 
     @Override
@@ -71,9 +74,12 @@ public class BreakfastActivity extends AbstractMealActivity {
                 break;
             case R.id.addMealButton:
                 if (chosenFood != null) {
+                    //v.setFadingEdgeLength(2);
                     eatFood(chosenFood, textViewHeader.getText().toString());
                     Toast.makeText(this, "Meal added", Toast.LENGTH_SHORT).show();
+                    finish();
                 }
+
                 break;
         }
     }
