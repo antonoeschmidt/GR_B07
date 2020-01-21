@@ -54,7 +54,7 @@ public class FB {
                             Log.d("createUser", "createUserWithEmail:success");
                             Toast.makeText(activity, "Sign Up Success", Toast.LENGTH_SHORT).show();
 
-                            Pupil newUser = new Pupil(true,email,password,new Physique(0,0,0),
+                            Pupil newUser = new Pupil(true, email, password, auth.getUid(), new Physique(0,0,0),
                                     new PersonalInfo("", "", "n", 0, 0),
                                     new Experience(1,0,0,0,0),
                                     new ArrayList<Meal>(),new ArrayList<String>(), new ArrayList<String>(), new ArrayList<Reward>()

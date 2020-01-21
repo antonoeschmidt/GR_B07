@@ -9,13 +9,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".nutrition.MealsActivity"></activity>
+        <activity android:name=".social.SeeQRCodePopUpActivity"></activity>
+        <activity android:name=".social.AddActivityPopUpActivity" />
+        <activity android:name=".nutrition.MealsActivity" />
         <activity android:name=".statistics.StatisticsActivity" />
         <activity android:name=".SignUpActivity" />
         <activity android:name=".games.redeemRewards.RedeemActivity" />
         <activity
             android:name=".games.redeemRewards.rewardsPopUpActivity"
-            android:theme="@style/AppTheme.popUpTheme"></activity>
+            android:theme="@style/AppTheme.popUpTheme" />
         <activity android:name=".games.ChanceActivity" />
         <activity android:name=".games.ChestActivity" />
         <activity android:name=".games.ScratchCardActivity" />
@@ -28,9 +30,9 @@
         <activity android:name=".nutrition.BreakfastActivity" />
         <activity android:name=".InputDataActivity" />
         <activity android:name=".RewardsActivity" />
-        <activity android:name=".SocialActivity" />
+        <activity android:name=".social.SocialActivity" />
         <activity android:name=".ActivityActivity" />
-        <activity android:name=".NutritionActivity" />
+        <activity android:name=".nutrition.NutritionActivity" />
         <activity android:name=".MainMenuActivity" />
         <activity android:name=".LoginActivity">
             <intent-filter>

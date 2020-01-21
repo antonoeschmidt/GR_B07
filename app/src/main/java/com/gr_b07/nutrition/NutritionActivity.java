@@ -1,4 +1,4 @@
-package com.gr_b07;
+package com.gr_b07.nutrition;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.gr_b07.R;
 import com.gr_b07.logik.Food;
 import com.gr_b07.logik.Settings;
 import com.gr_b07.nutrition.BreakfastActivity;
