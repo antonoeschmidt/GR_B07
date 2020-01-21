@@ -1,9 +1,12 @@
 package com.gr_b07.social;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -12,25 +15,39 @@ import android.widget.TextView;
 import com.gr_b07.R;
 import com.gr_b07.logik.FB;
 import com.gr_b07.logik.Settings;
+import com.gr_b07.logik.User;
+
+import java.util.ArrayList;
 
 public class SocialActivity extends AppCompatActivity implements View.OnClickListener {
 
+    FB fb = new FB();
     private ImageView imageViewAccountPhoto;
     private Button buttonGetFriends, buttonAddActivity, buttonSeeQRcode;
     private TextView friendsTextView, suggestedFriendsTextView;
-    FB fb = new FB();
+
+
+    private RecyclerView friendsRecyclerView;
+    private ArrayList<String> usernames = new ArrayList<>();
+    private ArrayList<Integer> userPhotos = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_social);
+
+
         buttonSeeQRcode = findViewById(R.id.buttonSeeQRcode);
         buttonSeeQRcode.setOnClickListener(this);
         imageViewAccountPhoto = findViewById(R.id.imageViewAccountPhoto);
         buttonAddActivity = findViewById(R.id.buttonAddActivity);
         buttonAddActivity.setOnClickListener(this);
         friendsTextView = findViewById(R.id.friendsTextView);
-        suggestedFriendsTextView = findViewById(R.id.friendsTextView);
+        suggestedFriendsTextView = findViewById(R.id.suggestedFriendsTextView);
+
+        friendsRecyclerView = findViewById(R.id.friendsRecyclerView);
+        //suggestedFriendsRecyclerView = findViewById(R.id.suggestedFriendsRecyclerView);
 
 
 
@@ -38,8 +55,8 @@ public class SocialActivity extends AppCompatActivity implements View.OnClickLis
         buttonGetFriends.setOnClickListener(this);
 
 
-        Settings.getUsers().clear();
         fb.getAllUsersFromDatabase();
+        Log.d(Settings.getUsers().toString(), "onCreate: ");
     }
 
     @Override
@@ -53,7 +70,27 @@ public class SocialActivity extends AppCompatActivity implements View.OnClickLis
                 Intent addActivityIntent = new Intent(this,AddActivityPopUpActivity.class);
                 startActivity(addActivityIntent);
                 break;
+            case R.id.buttonGetFriends:
+                initFriends();
+                break;
         }
 
     }
+
+    public void initFriends(){
+        for (User user: Settings.getUsers()) {
+            usernames.add(user.getUsername());
+            userPhotos.add(R.drawable.friend_nophoto);
+            initializeRecyclerView();
+        }
+    }
+
+    public void initializeRecyclerView(){
+        friendsRecyclerView = findViewById(R.id.friendsRecyclerView);
+        RecyclerViewAdapterSocial adapter = new RecyclerViewAdapterSocial(usernames, userPhotos, this);
+        friendsRecyclerView.setAdapter(adapter);
+        friendsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+
 }
