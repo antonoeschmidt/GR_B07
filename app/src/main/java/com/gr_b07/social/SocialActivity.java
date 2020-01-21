@@ -45,11 +45,9 @@ public class SocialActivity extends AppCompatActivity implements FriendsRecycler
 
     @Override
     public void onItemClick(View view, int position) {
-        if (view.equals(friendsAdapter.getItemViewType(position))){
-            Toast.makeText(this, "You clicked " + friendsAdapter.getItemId(position) + " on item position " + position, Toast.LENGTH_SHORT).show();
-        } else if (view.equals(suggestedAdapter.getItemViewType(position))){
-            Toast.makeText(this, "You clicked " + suggestedAdapter.getItemId(position) + " on item position " + position, Toast.LENGTH_SHORT).show();
-        }
+
+        Toast.makeText(this, "You clicked " + friendsAdapter.getItemId(position) + " on item position " + position, Toast.LENGTH_SHORT).show();
+
         // TODO: Implement fragment for individual friend/suggested friend - options for friend : remove / invite / *close dialog* options for suggested : add / *close dialog*
     }
 
@@ -74,16 +72,16 @@ public class SocialActivity extends AppCompatActivity implements FriendsRecycler
         }
     }
 
-    public void updateTextViews(){
+    public void updateTextViews() {
         friendsTextView.setText("Friends : " + Integer.toString(Settings.getCurrentPupil().getFriends().size()));
     }
 
-    public void friendsRecyclerViewUpdate(){
+    public void friendsRecyclerViewUpdate() {
         RecyclerView friendsRecyclerView = findViewById(R.id.friendsRecyclerView);
         LinearLayoutManager horizontalLayoutManager
                 = new LinearLayoutManager(SocialActivity.this, LinearLayoutManager.HORIZONTAL, false);
         friendsRecyclerView.setLayoutManager(horizontalLayoutManager);
-        friendsAdapter = new FriendsRecyclerViewAdapter(this, friendsAccountImageView, friendsUsername);
+        friendsAdapter = new FriendsRecyclerViewAdapter(friendsUsername, friendsAccountImageView, this);
         friendsAdapter.setClickListener(this);
         friendsRecyclerView.setAdapter(friendsAdapter);
     }
@@ -104,12 +102,9 @@ public class SocialActivity extends AppCompatActivity implements FriendsRecycler
             if ((Settings.getCurrentPupil().getPersonalInfo().getZipCode() == (pupil.getPersonalInfo().getZipCode())
                     || Settings.getCurrentPupil().getActivities().equals(pupil.getActivities()))
                     && !Settings.getCurrentPupil().getUID().equals(user.getUID())
-                    && !suggestedUsername.contains(user.getUsername())
-                    && !suggestedUsername.contains(shortenUsername(user))) {
+                    && !suggestedUsername.contains(user.getUsername())) {
                 suggestedAccountImageView.add(R.drawable.friend_nophoto);
-                if (user.getUsername().length() > 12) {
-                    suggestedUsername.add(shortenUsername(user));
-                } else suggestedUsername.add(user.getUsername());
+                suggestedUsername.add(user.getUsername());
             }
         }
     }
@@ -118,18 +113,11 @@ public class SocialActivity extends AppCompatActivity implements FriendsRecycler
         if (user.getClass().equals(Pupil.class)
                 && !Settings.getCurrentPupil().getUID().equals(user.getUID())
                 && !Settings.getCurrentPupil().getFriends().contains(user.getUID())
-                && !friendsUsername.contains(user.getUsername())
-                && !friendsUsername.contains(shortenUsername(user))) {
+                && !friendsUsername.contains(user.getUsername())) {
             friendsAccountImageView.add(R.drawable.friend_nophoto);
             Settings.getCurrentPupil().addFriend(user.getUID());
-            if (user.getUsername().length() > 12) {
-                friendsUsername.add(shortenUsername(user));
-            } else friendsUsername.add(user.getUsername());
+            friendsUsername.add(user.getUsername());
 
         }
-    }
-
-    public String shortenUsername(User user) {
-        return user.getUsername().substring(0, 12) + "...";
     }
 }

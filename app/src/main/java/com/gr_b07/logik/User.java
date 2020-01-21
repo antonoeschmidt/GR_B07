@@ -33,5 +33,12 @@ public abstract class User {
         return password;
     }
 
+    public String getUID() {
+        return UID;
+    }
+
+    public void setUID(String UID) {
+        this.UID = UID;
+    }
 }
 
