@@ -4,6 +4,7 @@ import java.util.Set;
 
 public class Experience {
     private int level, nutritionXP, activityXP, socialXP, ticket;
+    boolean  XPForCalories, XPForProtein, XPForCarbs, XPForFat;
 
     public Experience(int level, int nutritionXP, int activityXP, int socialXP, int ticket) {
         this.level = level;
@@ -11,6 +12,10 @@ public class Experience {
         this.activityXP = activityXP;
         this.socialXP = socialXP;
         this.ticket = ticket;
+        XPForCalories = false;
+        XPForProtein = false;
+        XPForCarbs = false;
+        XPForFat = false;
     }
 
     public Experience() {
@@ -69,6 +74,38 @@ public class Experience {
 
     public void setTicket(int ticket) {
         this.ticket = ticket;
+    }
+
+    public boolean isXPForCalories() {
+        return XPForCalories;
+    }
+
+    public void setXPForCalories(boolean XPForCalories) {
+        this.XPForCalories = XPForCalories;
+    }
+
+    public boolean isXPForProtein() {
+        return XPForProtein;
+    }
+
+    public void setXPForProtein(boolean XPForProtein) {
+        this.XPForProtein = XPForProtein;
+    }
+
+    public boolean isXPForCarbs() {
+        return XPForCarbs;
+    }
+
+    public void setXPForCarbs(boolean XPForCarbs) {
+        this.XPForCarbs = XPForCarbs;
+    }
+
+    public boolean isXPForFat() {
+        return XPForFat;
+    }
+
+    public void setXPForFat(boolean XPForFat) {
+        this.XPForFat = XPForFat;
     }
 
     public void checkUpdatedX(int xpType) {

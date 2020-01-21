@@ -118,24 +118,28 @@ public class NutritionActivity extends AppCompatActivity implements View.OnClick
     }
 
     private void giveXPIfUnlocked() {
-        if ((int) Settings.getCurrentPupil().getDailyIntake(System.currentTimeMillis()).getCalories() >= cRing.getMax() && !XPForCalories) {
+        if ((int) Settings.getCurrentPupil().getDailyIntake(System.currentTimeMillis()).getCalories() >= cRing.getMax()
+                && !Settings.getCurrentPupil().getExperience().isXPForCalories()) {
             Settings.getCurrentPupil().getExperience().setNutritionXP(Settings.getCurrentPupil().getExperience().getNutritionXP() + 5);
-            XPForCalories = true;
+            Settings.getCurrentPupil().getExperience().setXPForCalories(true);
             Toast.makeText(this, "Cal + 5", Toast.LENGTH_SHORT).show();
         }
-        if ((int) Settings.getCurrentPupil().getDailyIntake(System.currentTimeMillis()).getProtein() >= pProgress.getMax() && !XPForProtein) {
+        if ((int) Settings.getCurrentPupil().getDailyIntake(System.currentTimeMillis()).getProtein() >= pProgress.getMax()
+                && !Settings.getCurrentPupil().getExperience().isXPForProtein()) {
             Settings.getCurrentPupil().getExperience().setNutritionXP(Settings.getCurrentPupil().getExperience().getNutritionXP() + 5);
-            XPForProtein = true;
+            Settings.getCurrentPupil().getExperience().setXPForProtein(true);
             Toast.makeText(this, "Protein + 5", Toast.LENGTH_SHORT).show();
         }
-        if ((int) Settings.getCurrentPupil().getDailyIntake(System.currentTimeMillis()).getCarbs() >= cProgress.getMax() && !XPForCarbs) {
+        if ((int) Settings.getCurrentPupil().getDailyIntake(System.currentTimeMillis()).getCarbs() >= cProgress.getMax()
+                && !Settings.getCurrentPupil().getExperience().isXPForCarbs()) {
             Settings.getCurrentPupil().getExperience().setNutritionXP(Settings.getCurrentPupil().getExperience().getNutritionXP() + 5);
-            XPForCarbs = true;
+            Settings.getCurrentPupil().getExperience().setXPForCarbs(true);
             Toast.makeText(this, "Carbs + 5", Toast.LENGTH_SHORT).show();
         }
-        if ((int) Settings.getCurrentPupil().getDailyIntake(System.currentTimeMillis()).getFat() >= fProgress.getMax() && !XPForFat) {
+        if ((int) Settings.getCurrentPupil().getDailyIntake(System.currentTimeMillis()).getFat() >= fProgress.getMax() &&
+                !Settings.getCurrentPupil().getExperience().isXPForFat()) {
             Settings.getCurrentPupil().getExperience().setNutritionXP(Settings.getCurrentPupil().getExperience().getNutritionXP() + 5);
-            XPForFat = true;
+            Settings.getCurrentPupil().getExperience().setXPForFat(true);
             Toast.makeText(this, "Fat + 5", Toast.LENGTH_SHORT).show();
         }
     }
