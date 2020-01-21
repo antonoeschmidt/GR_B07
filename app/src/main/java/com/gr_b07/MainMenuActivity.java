@@ -13,7 +13,7 @@ import android.widget.TextView;
 import com.gr_b07.logik.Settings;
 
 public class MainMenuActivity extends AppCompatActivity implements View.OnClickListener{
-    private Button nutritionButton, activityButton, socialButton, rewardButton, mainButton5;
+    private Button nutritionButton, activityButton, socialButton, rewardButton, settingsButton;
     private TextView levelTextView, xpTextView;
     private ProgressBar xpProgressBar;
     private ImageView ticketView;
@@ -31,8 +31,8 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
         socialButton.setOnClickListener(this);
         rewardButton = findViewById(R.id.mainmenu_reward);
         rewardButton.setOnClickListener(this);
-        mainButton5 = findViewById(R.id.mainmenu_button5);
-        mainButton5.setOnClickListener(this);
+        settingsButton = findViewById(R.id.mainmenu_settings);
+        settingsButton.setOnClickListener(this);
 
         levelTextView = findViewById(R.id.mainmenu_levelTextView);
         xpTextView = findViewById(R.id.mainmenu_xpTextView);
@@ -59,7 +59,7 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
             Intent socialIntent = new Intent(this, SocialActivity.class); startActivity(socialIntent); break;
             case R.id.mainmenu_reward:
                 Intent rewardsIntent = new Intent(this, RewardsActivity.class); startActivity(rewardsIntent); break;
-            case R.id.mainmenu_button5:
+            case R.id.mainmenu_settings:
                 Intent inputDataIntent = new Intent(this, InputDataActivity.class); startActivity(inputDataIntent);
                 break;
         }
