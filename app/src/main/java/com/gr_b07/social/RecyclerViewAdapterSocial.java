@@ -66,6 +66,7 @@ public class RecyclerViewAdapterSocial extends RecyclerView.Adapter<RecyclerView
             textViewFriend = itemView.findViewById(R.id.textViewFriend);
             imageViewFriend = itemView.findViewById(R.id.imageViewFriend);
             itemView.setOnClickListener(this);
+            itemView.setTag((int) usernames.size()); // TODO: SLET HVIS IKKE VIRKER
         }
 
         @Override
@@ -74,8 +75,8 @@ public class RecyclerViewAdapterSocial extends RecyclerView.Adapter<RecyclerView
         }
     }
     // convenience method for getting data at click position
-    public String getItem(int id) {
-        return usernames.get(id);
+    public String getItem( int id) {
+            return usernames.get(id);
     }
 
     // allows clicks events to be caught
