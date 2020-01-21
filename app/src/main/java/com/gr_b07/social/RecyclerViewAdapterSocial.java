@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.gr_b07.R;
@@ -25,6 +26,7 @@ public class RecyclerViewAdapterSocial extends RecyclerView.Adapter<RecyclerView
     private ArrayList<String> usernames = new ArrayList<>();
     private ArrayList<Integer> userPhotos = new ArrayList<>();
     private Context context;
+
 
     public RecyclerViewAdapterSocial(ArrayList<String> usernames, ArrayList<Integer> userPhotos, Context context) {
         this.usernames = usernames;
@@ -44,7 +46,6 @@ public class RecyclerViewAdapterSocial extends RecyclerView.Adapter<RecyclerView
         Log.d(TAG, "onBindViewHolder:called");
         holder.textViewFriend.setText(usernames.get(position));
         holder.imageViewFriend.setImageResource(userPhotos.get(position));
-
         holder.socialRecyclerParentView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -59,7 +60,6 @@ public class RecyclerViewAdapterSocial extends RecyclerView.Adapter<RecyclerView
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-
         TextView textViewFriend;
         ImageView imageViewFriend;
         RelativeLayout socialRecyclerParentView;

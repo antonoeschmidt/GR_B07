@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.gr_b07.R;
 import com.gr_b07.logik.FB;
+import com.gr_b07.logik.Pupil;
 import com.gr_b07.logik.Settings;
 import com.gr_b07.logik.User;
 
@@ -46,7 +47,9 @@ public class SocialActivity extends AppCompatActivity implements View.OnClickLis
         friendsTextView = findViewById(R.id.friendsTextView);
         suggestedFriendsTextView = findViewById(R.id.suggestedFriendsTextView);
 
+        LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(SocialActivity.this, LinearLayoutManager.HORIZONTAL, false);
         friendsRecyclerView = findViewById(R.id.friendsRecyclerView);
+        friendsRecyclerView.setLayoutManager(horizontalLayoutManager);
         //suggestedFriendsRecyclerView = findViewById(R.id.suggestedFriendsRecyclerView);
 
 
@@ -79,9 +82,14 @@ public class SocialActivity extends AppCompatActivity implements View.OnClickLis
 
     public void initFriends(){
         for (User user: Settings.getUsers()) {
-            usernames.add(user.getUsername());
-            userPhotos.add(R.drawable.friend_nophoto);
-            initializeRecyclerView();
+            if (user.getClass().equals(Pupil.class)
+                    && !Settings.getCurrentPupil().getUID().equals(user.getUID())
+                    && !Settings.getCurrentPupil().getFriends().contains(user.getUID())
+                    && !usernames.contains(user.getUsername())) {
+                usernames.add(user.getUsername());
+                userPhotos.add(R.drawable.friend_nophoto);
+                initializeRecyclerView();
+            }
         }
     }
 
