@@ -56,7 +56,7 @@ public class FB {
 
                             Pupil newUser = new Pupil(true, email, password, auth.getUid(), new Physique(0,0,0),
                                     new PersonalInfo("", "", "n", 0, 0),
-                                    new Experience(1,0,0,0,0),
+                                    new Experience(1,0,0,0,0,false,false,false,false),
                                     new ArrayList<Meal>(),new ArrayList<String>(), new ArrayList<String>(), new ArrayList<Reward>()
                                     );
 

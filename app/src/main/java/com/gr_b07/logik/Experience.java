@@ -1,21 +1,25 @@
 package com.gr_b07.logik;
 
+import java.sql.Time;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Set;
 
 public class Experience {
     private int level, nutritionXP, activityXP, socialXP, ticket;
     boolean  XPForCalories, XPForProtein, XPForCarbs, XPForFat;
 
-    public Experience(int level, int nutritionXP, int activityXP, int socialXP, int ticket) {
+    public Experience(int level, int nutritionXP, int activityXP, int socialXP, int ticket, boolean XPForCalories,
+                      boolean XPForProtein, boolean XPForCarbs, boolean XPForFat) {
         this.level = level;
         this.nutritionXP = nutritionXP;
         this.activityXP = activityXP;
         this.socialXP = socialXP;
         this.ticket = ticket;
-        XPForCalories = false;
-        XPForProtein = false;
-        XPForCarbs = false;
-        XPForFat = false;
+        this.XPForCalories = XPForCalories;
+        this.XPForProtein = XPForProtein;
+        this.XPForCarbs = XPForCarbs;
+        this.XPForFat = XPForFat;
     }
 
     public Experience() {
@@ -128,6 +132,9 @@ public class Experience {
             Settings.getCurrentPupil().getExperience().setLevel(Settings.getCurrentPupil().getExperience().getLevel() + 1);
             Settings.getCurrentPupil().getExperience().setTicket(Settings.getCurrentPupil().getExperience().getTicket() + 1);
         }
+    }
+
+    public void ResetBooleans(){
     }
 }
 
