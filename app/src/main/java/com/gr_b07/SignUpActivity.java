@@ -41,7 +41,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
         // TODO: DELETE THIS
 
-        usernameText.setText("healthy1@gmail.com");
+        usernameText.setText("healthy2@gmail.com");
         passwordText.setText("123123");
     }
 

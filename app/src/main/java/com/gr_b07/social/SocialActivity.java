@@ -69,6 +69,7 @@ public class SocialActivity extends AppCompatActivity implements RecyclerViewAda
 
 
         fb.getAllUsersFromDatabase();
+
         Log.d(Settings.getUsers().toString(), "onCreate: ");
 
         Handler handler = new Handler();
@@ -77,7 +78,9 @@ public class SocialActivity extends AppCompatActivity implements RecyclerViewAda
                 initializeFriends();
                 initializeSuggestedFriends();
             }
-        }, 250);
+        }, 500);
+
+
     }
 
     @Override
