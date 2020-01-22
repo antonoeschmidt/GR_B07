@@ -18,16 +18,13 @@ import com.gr_b07.logik.Settings;
 
 public class GameActivity extends AppCompatActivity implements View.OnClickListener {
     private TextView ticketTextView;
-    private Button useTicketButton, slotMachineButton, scratchCardButton, gameChestButton, gameChanceButton, redeemButton;
+    private Button slotMachineButton, scratchCardButton, gameChestButton, gameChanceButton, redeemButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         ticketTextView = findViewById(R.id.textViewTickets);
-
-        useTicketButton = findViewById(R.id.buttonUseTicket);
-        useTicketButton.setOnClickListener(this);
 
         slotMachineButton = findViewById(R.id.buttonGameSlotmachine);
         slotMachineButton.setOnClickListener(this);
@@ -46,16 +43,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.buttonUseTicket:
-                if (Settings.getCurrentPupil().getExperience().getTicket() >= 1){
-                    // TODO: Implementér hvad der skal ske ved brug af én ticket. evt flere muligheder.
-                    Settings.getCurrentPupil().getExperience().setTicket(Settings.getCurrentPupil().getExperience().getTicket()-1);
-                }
-                else if (Settings.getCurrentPupil().getExperience().getTicket() == 0){
-                    Toast.makeText(this, "You aint got the tickets hombre", Toast.LENGTH_SHORT).show();
-                }
-                updateTextView();
-                break;
+
             case R.id.buttonGameSlotmachine:
                 Intent slotMachineIntent = new Intent(this, SlotMachineActivity.class);
                 startActivity(slotMachineIntent);
