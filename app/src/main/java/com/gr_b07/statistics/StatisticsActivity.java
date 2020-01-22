@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.Color;
 import android.graphics.Point;
+import android.os.Build;
 import android.os.Bundle;
 
 import com.github.mikephil.charting.charts.LineChart;
@@ -106,9 +107,12 @@ public class StatisticsActivity extends AppCompatActivity {
     }
 
     public void populateDateArray() {
-        //TODO: lav generisk, så det passer med månederne
+        int month = 31;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            month = Settings.longToIntMonth(System.currentTimeMillis()));
+        }
         dataPoint.clear();
-        for (int i = 1; i <= 31; i++) {
+        for (int i = 1; i <= month; i++) {
             dataPoint.add(new Point(i,0));
         }
     }

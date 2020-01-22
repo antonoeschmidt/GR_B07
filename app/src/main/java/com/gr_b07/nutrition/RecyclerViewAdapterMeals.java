@@ -46,8 +46,6 @@ public class RecyclerViewAdapterMeals extends RecyclerView.Adapter<RecyclerViewA
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         holder.mealname.setText(meals.get(position).getName());
 
-        //holder.mealImage.setImageResource(mealImages.get(position));
-        //TODO: put new images
         if (meals.get(position).getTypeOfMeal().equals("Breakfast")) {
             holder.mealImage.setImageResource(R.drawable.ic_breakfast);
 
