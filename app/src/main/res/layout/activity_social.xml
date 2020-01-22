@@ -45,12 +45,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/buttonAddActivity"
+        android:layout_marginStart="10dp"
         android:gravity="start"
         android:text="Friends: " />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/friendsRecyclerView"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/friendsTextView"
         android:layout_centerHorizontal="true"
@@ -62,12 +63,13 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/friendsRecyclerView"
         android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
         android:gravity="start"
         android:text="Suggested: " />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/suggestedFriendsRecyclerView"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/suggestedFriendsTextView"
         android:layout_centerHorizontal="true"

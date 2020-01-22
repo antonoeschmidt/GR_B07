@@ -8,40 +8,34 @@ import android.os.Bundle;
 import android.widget.FrameLayout;
 
 import com.gr_b07.R;
+import com.gr_b07.logik.FB;
 import com.gr_b07.logik.Meal;
 import com.gr_b07.logik.Settings;
 
 import java.util.ArrayList;
 
-public class MealsActivity extends AppCompatActivity {
+public class MealsActivity extends AppCompatActivity implements MealDialog.DialogFragmentUpdateListener {
 
     private FrameLayout layout_meals;
     private RecyclerView recyclerView;
-    private ArrayList<Meal> meals = new ArrayList<>();
+    private RecyclerViewAdapterMeals adapter;
     private ArrayList<Integer> mealImages = new ArrayList<>();
+    private FB fb = new FB();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_meals);
-        initMeals();
+        initRecylcerView();
         layout_meals = findViewById(R.id.frameLayoutMeals);
         layout_meals.getForeground().setAlpha(0);
 
 
     }
 
-    private void initMeals(){
-        for(Meal meal: Settings.getCurrentPupil().getMeals()) {
-            meals.add(meal);
-            //prizeImages.add(reward.getResource());
-            initRecylcerView();
-        }
-    }
-
-    private void initRecylcerView(){
+    private void initRecylcerView() {
         recyclerView = findViewById(R.id.recyclerViewMeals);
-        RecyclerViewAdapterMeals adapter = new RecyclerViewAdapterMeals(meals, mealImages,this);
+        adapter = new RecyclerViewAdapterMeals((ArrayList)Settings.getCurrentPupil().getMeals(), mealImages, this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
@@ -58,5 +52,10 @@ public class MealsActivity extends AppCompatActivity {
         super.onResume();
         layout_meals.getForeground().setAlpha(0);
     }
-    
+
+    @Override
+    public void updateMeals() {
+        adapter.notifyDataSetChanged();
+        fb.updateDatabase();
+    }
 }

@@ -23,10 +23,10 @@ import java.util.Random;
  */
 
 
-public class ScratchCardActivity extends AppCompatActivity implements View.OnClickListener{
+public class ScratchCardActivity extends AppCompatActivity implements View.OnClickListener {
 
     ScratchImageView scratchImageView;
-    TextView scratchCardTextView;
+    TextView scratchCardTextView, tickets;
     float revealedPercent;
     Button redeemButton;
     Random random = new Random();
@@ -37,15 +37,24 @@ public class ScratchCardActivity extends AppCompatActivity implements View.OnCli
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scratch_card);
         scratchCardTextView = findViewById(R.id.scratchCardText);
+        tickets = findViewById(R.id.ticketsScratchCard);
         scratchCardTextView.setText("0% Revealed");
+        tickets.setText("Tickets: " + Settings.getCurrentPupil().getExperience().getTicket());
         redeemButton = findViewById(R.id.redeemButton);
         redeemButton.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
-        redeemButton.setVisibility(View.INVISIBLE);
-        initScratchCard();
+        if (Settings.getCurrentPupil().getExperience().getTicket() > 0) {
+            Settings.getCurrentPupil().getExperience().setTicket(Settings.getCurrentPupil().getExperience().getTicket() - 1);
+            redeemButton.setVisibility(View.INVISIBLE);
+            updateTextView();
+            initScratchCard();
+        } else {
+            Toast.makeText(this, "Du har ikke nok tickets.", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     private void initScratchCard() {
@@ -56,24 +65,24 @@ public class ScratchCardActivity extends AppCompatActivity implements View.OnCli
         scratchImageView.setRevealListener(new ScratchImageView.IRevealListener() {
             @Override
             public void onRevealed(ScratchImageView iv) {
-                if(chosenCard == R.drawable.scratch_card_image_lose){
-                    Toast.makeText(ScratchCardActivity.this,"Ingen gevinst",Toast.LENGTH_SHORT).show();
+                if (chosenCard == R.drawable.scratch_card_image_lose) {
+                    Toast.makeText(ScratchCardActivity.this, "Ingen gevinst", Toast.LENGTH_SHORT).show();
                 }
-                if(chosenCard == R.drawable.scratch_card_image_win_small){
-                    Toast.makeText(ScratchCardActivity.this,"You win a kombucha lol",Toast.LENGTH_SHORT).show();
+                if (chosenCard == R.drawable.scratch_card_image_win_small) {
+                    Toast.makeText(ScratchCardActivity.this, "You win a kombucha lol", Toast.LENGTH_SHORT).show();
                     Settings.getCurrentPupil().addReward(rewardItems.smallPrize);
                 }
-                if(chosenCard == R.drawable.scratch_card_image_win_big){
-                    Toast.makeText(ScratchCardActivity.this,"You win a cykel lol",Toast.LENGTH_SHORT).show();
+                if (chosenCard == R.drawable.scratch_card_image_win_big) {
+                    Toast.makeText(ScratchCardActivity.this, "You win a cykel lol", Toast.LENGTH_SHORT).show();
                     Settings.getCurrentPupil().addReward(rewardItems.bigPrize);
                 }
             }
 
             @Override
             public void onRevealPercentChangedListener(ScratchImageView siv, float percent) {
-               if(percent > 0.5){
-                   scratchImageView.clear();
-               }
+                if (percent > 0.5) {
+                    scratchImageView.clear();
+                }
                 revealedPercent = percent;
                 updateTextView();
             }
@@ -82,9 +91,10 @@ public class ScratchCardActivity extends AppCompatActivity implements View.OnCli
 
     private void updateTextView() {
         scratchCardTextView.setText(Math.round(revealedPercent * 100) + "% Revealed");
+        tickets.setText("Tickets: " + Settings.getCurrentPupil().getExperience().getTicket());
     }
 
-    private int chooseScratchCard(){
+    private int chooseScratchCard() {
         ArrayList<Integer> chanceNumbers = new ArrayList<>();
         chanceNumbers.add(R.drawable.scratch_card_image_lose);
         chanceNumbers.add(R.drawable.scratch_card_image_lose);

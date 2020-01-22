@@ -1,5 +1,6 @@
 package com.gr_b07.nutrition;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -11,10 +12,13 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.gr_b07.R;
 import com.gr_b07.logik.Meal;
+import com.gr_b07.logik.Settings;
 
 import java.util.ArrayList;
 
@@ -40,7 +44,6 @@ public class RecyclerViewAdapterMeals extends RecyclerView.Adapter<RecyclerViewA
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
-        Log.d("hej", "onBindViewHolder:called");
         holder.mealname.setText(meals.get(position).getName());
 
         //holder.mealImage.setImageResource(mealImages.get(position));
@@ -60,11 +63,16 @@ public class RecyclerViewAdapterMeals extends RecyclerView.Adapter<RecyclerViewA
             @Override
             public void onClick(View view) {
                 //TODO: implement this
-                //Toast.makeText(mContext, mealnames.get(position),Toast.LENGTH_SHORT).show();
-                //Intent intent = new Intent(mContext, rewardsPopUpActivity.class);
-                //mContext.startActivity(intent);
+                openDialog(position);
             }
         });
+    }
+
+    private void openDialog(int position) {
+        Meal meal = Settings.getCurrentPupil().getMeals().get(position);
+        MealDialog mealDialog = new MealDialog(meal);
+        FragmentManager manager = ((AppCompatActivity)mContext).getSupportFragmentManager();
+        mealDialog.show(manager,"meal dialog");
     }
 
 
