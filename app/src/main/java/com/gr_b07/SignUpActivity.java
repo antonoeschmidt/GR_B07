@@ -3,6 +3,7 @@ package com.gr_b07;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,12 +18,12 @@ import java.time.LocalDateTime;
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener {
     private EditText usernameText;
     private EditText passwordText;
-    private ImageView imageViewUser;
-    private ImageView imageViewPass;
     private Button signUpButton;
     private ProgressDialog progressDialog;
 
     private FB fb = new FB();
+    Intent inputDataIntent;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,13 +32,13 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
         usernameText = findViewById(R.id.usernameText);
         passwordText = findViewById(R.id.passwordText);
-        imageViewUser = findViewById(R.id.imageViewLogin);
-        imageViewPass = findViewById(R.id.imageViewPassword);
         signUpButton = findViewById(R.id.signUpButton);
         signUpButton.setOnClickListener(this);
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Opretter bruger");
+        inputDataIntent = new Intent(this, InputDataActivity.class);
+
 
         // TODO: DELETE THIS
 
@@ -53,12 +54,9 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 final String email = usernameText.getText().toString();
                 final String password = passwordText.getText().toString();
                 fb.signUp(progressDialog,this, email,password);
+                //TODO: Make signup go directly to inputdata. Can't be done because nullpointer while database is loading data.
+                //startActivity(inputDataIntent)
 
-                /*
-                TODO: Make signup go directly to inputdata. Can't be done because nullpointer while database is loading data.
-                Intent inputDataIntent = new Intent(this, InputDataActivity.class);
-                startActivity(inputDataIntent);
-                 */
                 break;
         }
     }
