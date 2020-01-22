@@ -48,20 +48,6 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
         xpProgressBar = findViewById(R.id.progressBarXP);
         ticketView = findViewById(R.id.ticketImageView);
 
-        DisplayMetrics dm = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(dm);
-
-        int width = dm.widthPixels;
-        int height = dm.heightPixels;
-
-        LinearLayout.LayoutParams buttonLayout = new LinearLayout.LayoutParams(width,(int) (height * 0.25));
-
-        mainButton1.setLayoutParams(buttonLayout);
-        mainButton2.setLayoutParams(buttonLayout);
-        mainButton3.setLayoutParams(buttonLayout);
-        mainButton4.setLayoutParams(buttonLayout);
-
-
     }
 
     @Override
