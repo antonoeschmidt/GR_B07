@@ -86,17 +86,13 @@ public class SocialActivity extends AppCompatActivity implements RecyclerViewAda
                 initializeFriends();
                 initializeSuggestedFriends();
 
-                friendsUsernames.add("din far");
-                friendsUserPhotos.add(R.drawable.friend_nophoto);
+                for (int i = 0; i < 1000; i++) {
+                    friendsUsernames.add("din far");
+                    if(i % 2 == 0){
+                        suggestedFriendsUsernames.add("din mor");
+                    }
+                }
 
-                suggestedFriendsUsernames.add("din mor");
-                suggestedFriendsUserPhotos.add(R.drawable.apple);
-
-                suggestedFriendsUsernames.add("din mor");
-                suggestedFriendsUserPhotos.add(R.drawable.apple);
-
-                suggestedFriendsUsernames.add("din mor");
-                suggestedFriendsUserPhotos.add(R.drawable.apple);
 
 
                 break;
@@ -145,6 +141,7 @@ public class SocialActivity extends AppCompatActivity implements RecyclerViewAda
 
     public void initializeSuggestedFriendsRecyclerView() {
         suggestedFriendsRecyclerView.setLayoutManager(new LinearLayoutManager(SocialActivity.this, LinearLayoutManager.HORIZONTAL, false));
+        // True reverselayout kunne være en mulighed
         Log.d(suggestedFriendsRecyclerView.getLayoutManager().toString(), "onCreate: ");
         suggestedAdapter = new RecyclerViewAdapterSocial(this, suggestedFriendsUsernames, suggestedFriendsUserPhotos);
         suggestedAdapter.setClickListener(this);
