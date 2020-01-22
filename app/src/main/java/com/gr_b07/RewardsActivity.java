@@ -79,7 +79,7 @@ public class RewardsActivity extends AppCompatActivity implements View.OnClickLi
         updateTextViews();
         circularProgressBar.setProgressMax((Settings.getCurrentPupil().getExperience().getLevel()*5+10));
         circularProgressBar.setProgress(Settings.getCurrentPupil().getExperience().getTotalXP());
-        levelTextView.setText("Level: " + Settings.getCurrentPupil().getExperience().getLevel());
+        levelTextView.setText("Level " + Settings.getCurrentPupil().getExperience().getLevel());
     }
         public void checkLevel(){
             circularProgressBar.setProgress(Settings.getCurrentPupil().getExperience().getTotalXP());
@@ -106,7 +106,7 @@ public class RewardsActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     public void updateTextViews() {
-        levelTextView.setText("Level: " + Settings.getCurrentPupil().getExperience().getLevel());
+        levelTextView.setText("Level " + Settings.getCurrentPupil().getExperience().getLevel());
         totalXPtext.setText("Total XP\n " + Settings.getCurrentPupil().getExperience().getTotalXP()+ " / " + (Settings.getCurrentPupil().getExperience().getLevel() * 5 + 10));
         totalNutritionXPtextView.setText("Nutrition Points: " + Settings.getCurrentPupil().getExperience().getNutritionXP());
         totalActivityXPtextView.setText("Activity Points: " + Settings.getCurrentPupil().getExperience().getActivityXP());

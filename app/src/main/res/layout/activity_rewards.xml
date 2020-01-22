@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -10,85 +10,91 @@
     <com.mikhaellopez.circularprogressbar.CircularProgressBar
         android:id="@+id/circularProgressBar"
         android:layout_centerInParent="true"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_stroke_width"
         app:cpb_background_progressbar_color="#b6bbd8"
         app:cpb_background_progressbar_width="5dp"
         app:cpb_progress_direction="to_right"
         app:cpb_progressbar_color="#3f51b5"
-        app:cpb_progressbar_width="10dp"
-        app:cpb_round_border="false"/>
+        app:cpb_progressbar_width="15dp"
+        app:cpb_round_border="true"
+        app:cpb_progress="60"/>
 
     <TextView
         android:id="@+id/textViewLevel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAlignment="center"
-        android:textSize="36dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.102"/>
+        android:elegantTextHeight="true"
+        android:textSize="36sp"
+        android:layout_above="@+id/ticketTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="@dimen/default_stroke_width"
+        android:fontFamily="@font/roboto"
+        android:textColor="@color/colorBlack"
+        android:textAllCaps="true"
+        android:text="Level"/>
 
     <TextView
         android:id="@+id/ticketTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/textViewLevel"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.195"
-        android:textSize="20dp"/>
+        android:layout_above="@+id/circularProgressBar"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="@dimen/default_stroke_width"
+        android:textAlignment="center"
+        android:text="Tickets"
+        android:textSize="20sp"
+        android:textColor="@color/colorBlack"/>
 
     <TextView
         android:id="@+id/totalXPText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.358" />
+        android:layout_above="@+id/totalNutritionXPText"
+        android:layout_centerHorizontal="true"
+        android:text="Total\nXP"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textColor="@color/colorBlack"
+        android:textStyle="bold"
+        android:layout_marginBottom="20dp"/>
 
     <TextView
         android:id="@+id/totalNutritionXPText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/totalXPText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        android:padding="10dp"/>
+        android:layout_centerInParent="true"
+        android:textAlignment="center"
+        android:text="Nutrition points"
+        android:textSize="20sp"
+        android:layout_margin="@dimen/default_stroke_width"
+        android:textColor="@color/colorBlack"/>
 
     <TextView
         android:id="@+id/totalActivityXPText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/totalNutritionXPText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        android:padding="10dp"/>
+        android:layout_below="@+id/totalNutritionXPText"
+        android:layout_centerHorizontal="true"
+        android:textAlignment="center"
+        android:text="Activity Points"
+        android:textSize="20sp"
+        android:layout_margin="@dimen/default_stroke_width"
+        android:textColor="@color/colorBlack"/>
 
     <TextView
         android:id="@+id/totalSocialXPText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/totalActivityXPText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        android:padding="10dp"/>
+        android:layout_below="@+id/totalActivityXPText"
+        android:layout_centerHorizontal="true"
+        android:textAlignment="center"
+        android:text="Social Points"
+        android:textSize="20sp"
+        android:layout_margin="@dimen/default_stroke_width"
+        android:textColor="@color/colorBlack"/>
 
 
 
@@ -97,14 +103,14 @@
         android:id="@+id/buttonRewardTestNutrition"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Test Nutrition (+2)"
+        android:text="TN(+2)"
         app:layout_constraintTop_toBottomOf="@+id/circularProgressBar"/>
 
     <Button
         android:id="@+id/buttonRewardTestActivity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Test Activity (+2)"
+        android:text="TA(+2)"
         app:layout_constraintTop_toBottomOf="@+id/buttonRewardTestNutrition"
         app:layout_constraintRight_toRightOf="@+id/buttonRewardTestNutrition"/>
 
@@ -112,7 +118,7 @@
         android:id="@+id/buttonRewardTestSocial"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Test Social (+2)"
+        android:text="TS(+2)"
         app:layout_constraintTop_toBottomOf="@+id/buttonRewardTestActivity"
         app:layout_constraintRight_toRightOf="@+id/buttonRewardTestActivity" />
 
@@ -121,8 +127,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="REWARDS"
-        app:layout_constraintLeft_toRightOf="@+id/buttonRewardTestActivity"
-        app:layout_constraintBottom_toBottomOf="@+id/buttonRewardTestActivity"/>
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/circularProgressBar"
+        android:layout_margin="@dimen/default_stroke_width"
+        android:background="@drawable/mainmenu_reward_button"/>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>
