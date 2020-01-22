@@ -44,7 +44,7 @@ public class MealDialog extends AppCompatDialogFragment {
 
                     }
                 })
-                .setPositiveButton("Remove", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Remove Meal", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         System.out.println(Settings.getCurrentPupil().getMeals().toString());
