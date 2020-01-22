@@ -91,6 +91,7 @@ public class ScratchCardActivity extends AppCompatActivity implements View.OnCli
                 }
 
             }
+
             @Override
             public void onRevealPercentChangedListener(ScratchImageView siv, float percent) {
                 if (percent > 0.5) {

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.gr_b07">
 
     <application
@@ -8,37 +9,87 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".social.ScanQRPopUpActivity"
-            android:theme="@style/AppTheme.popUpTheme"></activity>
-        <activity android:name=".social.SeeQRCodePopUpActivity"
-            android:theme="@style/AppTheme.popUpTheme"/>
-        <activity android:name=".social.AddActivityPopUpActivity"
-            android:theme="@style/AppTheme.popUpTheme"/>
-        <activity android:name=".nutrition.MealsActivity" />
-        <activity android:name=".statistics.StatisticsActivity" />
-        <activity android:name=".SignUpActivity" />
-        <activity android:name=".games.redeemRewards.RedeemActivity" />
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
+        <activity
+            android:name=".social.ScanQRPopUpActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.popUpTheme" />
+        <activity
+            android:name=".social.SeeQRCodePopUpActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.popUpTheme" />
+        <activity
+            android:name=".social.AddActivityPopUpActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.popUpTheme" />
+        <activity
+            android:name=".nutrition.MealsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".statistics.StatisticsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".SignUpActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".games.redeemRewards.RedeemActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".games.redeemRewards.RewardsPopUpActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.popUpTheme" />
-        <activity android:name=".games.ChanceActivity" />
-        <activity android:name=".games.ChestActivity" />
-        <activity android:name=".games.ScratchCardActivity" />
-        <activity android:name=".games.SlotMachineActivity" />
-        <activity android:name=".games.GameActivity" />
-        <activity android:name=".nutrition.AbstractMealActivity" />
-        <activity android:name=".nutrition.SnacksActivity" />
-        <activity android:name=".nutrition.DinnerActivity" />
-        <activity android:name=".nutrition.LunchActivity" />
-        <activity android:name=".nutrition.BreakfastActivity" />
-        <activity android:name=".InputDataActivity" />
-        <activity android:name=".RewardsActivity" />
-        <activity android:name=".social.SocialActivity" />
-        <activity android:name=".ActivityActivity" />
-        <activity android:name=".nutrition.NutritionActivity" />
-        <activity android:name=".MainMenuActivity" />
-        <activity android:name=".LoginActivity">
+        <activity
+            android:name=".games.ChanceActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".games.ChestActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".games.ScratchCardActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".games.SlotMachineActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".games.GameActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".nutrition.AbstractMealActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".nutrition.SnacksActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".nutrition.DinnerActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".nutrition.LunchActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".nutrition.BreakfastActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".InputDataActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".RewardsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".social.SocialActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ActivityActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".nutrition.NutritionActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MainMenuActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".LoginActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

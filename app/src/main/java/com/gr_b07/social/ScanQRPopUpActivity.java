@@ -16,6 +16,7 @@ import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
 import com.gr_b07.R;
+import com.gr_b07.logik.Settings;
 
 public class ScanQRPopUpActivity extends AppCompatActivity {
 
@@ -45,6 +46,7 @@ public class ScanQRPopUpActivity extends AppCompatActivity {
             }
             else {
                 Toast.makeText(this, result.getContents(),Toast.LENGTH_LONG).show();
+                Settings.getCurrentPupil().getFriends().add(result.getContents().toString());
             }
         }
         else {
