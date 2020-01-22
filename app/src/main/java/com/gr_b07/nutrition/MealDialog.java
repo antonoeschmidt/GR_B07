@@ -66,7 +66,7 @@ public class MealDialog extends AppCompatDialogFragment {
         proteinTextView.setText(meal.getProtein() + " grams of protein");
         carbsTextView.setText(meal.getCarbs() + " grams of carbs");
         fatTextView.setText(meal.getFat() + " grams of fat");
-        dateTextView.setText("Eaten on " + meal.getDate());
+        dateTextView.setText("Eaten on " + Settings.longToStringDate(meal.getDate()));
 
         return builder.create();
     }

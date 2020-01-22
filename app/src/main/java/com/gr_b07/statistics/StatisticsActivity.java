@@ -44,14 +44,6 @@ public class StatisticsActivity extends AppCompatActivity {
 
     }
 
-    public int longToIntDate(long time){
-        Date date = new Date(time);
-        String dateString = df.format(date);
-        System.out.println(dateString);
-        int x = Integer.parseInt(dateString.substring(0,2));
-        return x;
-    }
-
     public void addData() {
         mealsToData();
 
@@ -110,7 +102,7 @@ public class StatisticsActivity extends AppCompatActivity {
                 Settings.getCurrentPupil().getMeals() ) {
             for (Point point :
                     dataPoint) {
-                if (longToIntDate(meal.getDate()) == point.x) {
+                if (Settings.longToIntDate(meal.getDate()) == point.x) {
                     point.y += (int)Math.round(meal.getCalories());
                 }
             }
