@@ -23,7 +23,7 @@
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="1704px"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -35,12 +35,16 @@
             android:id="@+id/mainmenu_button1"
             android:layout_width="match_parent"
             android:layout_height="430px"
-            android:text="Nutrition"
-            android:textSize="28dp"
-            android:fontFamily="@font/raleway"
             android:background="@drawable/mainmenu_nutrition_button"
+            android:fontFamily="@font/raleway"
             android:gravity="center"
-            android:textAllCaps="false" />
+            android:text="Nutrition"
+            android:textAllCaps="false"
+            android:textSize="28dp"
+            android:drawableLeft="@drawable/nutrition_image"
+            android:drawablePadding="-45dip"
+            android:paddingLeft="30dip"
+            android:paddingRight="26dip"/>
 
         <Button
             android:id="@+id/mainmenu_button2"
@@ -51,7 +55,11 @@
             android:fontFamily="@font/raleway"
             android:background="@drawable/mainmenu_activity_button"
             android:gravity="center"
-            android:textAllCaps="false" />
+            android:textAllCaps="false"
+            android:drawableLeft="@drawable/activity_image"
+            android:drawablePadding="-45dip"
+            android:paddingLeft="30dip"
+            android:paddingRight="26dip"/>
 
 
         <Button
@@ -63,7 +71,11 @@
             android:fontFamily="@font/raleway"
             android:background="@drawable/mainmenu_social_button"
             android:gravity="center"
-            android:textAllCaps="false" />
+            android:textAllCaps="false"
+            android:drawableLeft="@drawable/social_image"
+            android:drawablePadding="-45dip"
+            android:paddingLeft="30dip"
+            android:paddingRight="26dip"/>
 
         <Button
             android:id="@+id/mainmenu_button4"
@@ -74,59 +86,16 @@
             android:fontFamily="@font/raleway"
             android:background="@drawable/mainmenu_reward_button"
             android:gravity="center"
-            android:textAllCaps="false" />
+            android:textAllCaps="false"
+            android:drawableLeft="@drawable/reward_image"
+            android:drawablePadding="-45dip"
+            android:paddingLeft="30dip"
+            android:paddingRight="26dip"/>
+
 
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/nutrition_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/nutrition_image"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHorizontal_bias="0.1"
-        app:layout_constraintVertical_bias="0.11"/>
 
-
-
-    <ImageView
-        android:id="@+id/activity_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/activity_image"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHorizontal_bias="0.1"
-        app:layout_constraintVertical_bias="0.38"/>
-
-    <ImageView
-        android:id="@+id/social_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/social_image"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHorizontal_bias="0.1"
-        app:layout_constraintVertical_bias="0.64"/>
-
-    <ImageView
-        android:id="@+id/reward_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/reward_image"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHorizontal_bias="0.1"
-        app:layout_constraintVertical_bias="0.90"/>
 
     <TextView
         android:id="@+id/mainmenu_levelTextView"
@@ -141,7 +110,7 @@
         app:layout_constraintHorizontal_bias="0.925"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.94" />
+        app:layout_constraintVertical_bias="0.95" />
 
     <TextView
         android:id="@+id/mainmenu_xpTextView"
@@ -168,7 +137,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.94" />
+        app:layout_constraintVertical_bias="0.95" />
 
     <ImageView
         android:id="@+id/ticketImageView"
@@ -184,7 +153,7 @@
         app:layout_constraintHorizontal_bias="0.14"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.85"
+        app:layout_constraintVertical_bias="0.88"
         app:srcCompat="@drawable/reward_ticket" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
