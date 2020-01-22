@@ -1,5 +1,6 @@
 package com.gr_b07.nutrition;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -9,6 +10,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,12 +23,10 @@ import com.gr_b07.logik.Settings;
 public class MealDialog extends AppCompatDialogFragment {
     private TextView caloriesTextView, proteinTextView, carbsTextView, fatTextView, dateTextView;
     private Meal meal;
-    private RecyclerViewAdapterMeals recyclerViewAdapterMeals;
     private DialogFragmentUpdateListener listener;
 
-    public MealDialog(Meal meal, RecyclerViewAdapterMeals recyclerViewAdapterMeals) {
+    public MealDialog(Meal meal) {
         this.meal = meal;
-        this.recyclerViewAdapterMeals = recyclerViewAdapterMeals;
     }
 
     @NonNull
@@ -50,8 +50,8 @@ public class MealDialog extends AppCompatDialogFragment {
                         System.out.println(Settings.getCurrentPupil().getMeals().toString());
                         Settings.getCurrentPupil().getMeals().remove(meal);
                         System.out.println(Settings.getCurrentPupil().getMeals().toString());
-                        //recyclerViewAdapterMeals.notifyDataSetChanged();
                         listener.updateMeals();
+                        Toast.makeText(getContext(), "Meal removed", Toast.LENGTH_SHORT).show();
 
                     }
                 });
@@ -62,11 +62,11 @@ public class MealDialog extends AppCompatDialogFragment {
         fatTextView = view.findViewById(R.id.fatTextView);
         dateTextView = view.findViewById(R.id.dateTextView);
 
-        caloriesTextView.setText("" + meal.getCalories());
-        proteinTextView.setText(" ");
-        carbsTextView.setText(" ");
-        fatTextView.setText(" ");
-        dateTextView.setText(" ");
+        caloriesTextView.setText(meal.getCalories() + " calories");
+        proteinTextView.setText(meal.getProtein() + " grams of protein");
+        carbsTextView.setText(meal.getCarbs() + " grams of carbs");
+        fatTextView.setText(meal.getFat() + " grams of fat");
+        dateTextView.setText("Eaten on " + meal.getDate());
 
         return builder.create();
     }

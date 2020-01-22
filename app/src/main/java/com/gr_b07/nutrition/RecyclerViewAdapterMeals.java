@@ -70,7 +70,7 @@ public class RecyclerViewAdapterMeals extends RecyclerView.Adapter<RecyclerViewA
 
     private void openDialog(int position) {
         Meal meal = Settings.getCurrentPupil().getMeals().get(position);
-        MealDialog mealDialog = new MealDialog(meal, this);
+        MealDialog mealDialog = new MealDialog(meal);
         FragmentManager manager = ((AppCompatActivity)mContext).getSupportFragmentManager();
         mealDialog.show(manager,"meal dialog");
     }
