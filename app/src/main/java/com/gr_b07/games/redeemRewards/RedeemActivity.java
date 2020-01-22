@@ -39,7 +39,7 @@ public class RedeemActivity extends AppCompatActivity {
 
     private void initRecylcerView(){
         recyclerView = findViewById(R.id.recyclerView);
-        recyclerViewAdapterRedeem adapter = new recyclerViewAdapterRedeem(prizeNames,prizeImages,this);
+        RecyclerViewAdapterRedeem adapter = new RecyclerViewAdapterRedeem(prizeNames,prizeImages,this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }

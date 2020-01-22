@@ -59,8 +59,6 @@ public class BreakfastActivity extends AbstractMealActivity {
             }
         });
         textViewHeader.setText("Breakfast");
-        //addFoodButton.setFadingEdgeLength(15);
-        //addFoodButton.setDrawingCacheEnabled(true);
     }
 
     @Override

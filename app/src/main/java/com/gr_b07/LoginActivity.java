@@ -39,7 +39,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private ImageView imageViewPass;
     private Button loginButton, signUpButton;
     private ProgressDialog progressDialog;
-
     private FB fb = new FB();
 
     @Override

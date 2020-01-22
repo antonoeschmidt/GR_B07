@@ -29,8 +29,6 @@ public class MealsActivity extends AppCompatActivity implements MealDialog.Dialo
         initRecylcerView();
         layout_meals = findViewById(R.id.frameLayoutMeals);
         layout_meals.getForeground().setAlpha(0);
-
-
     }
 
     private void initRecylcerView() {

@@ -16,9 +16,9 @@ import net.glxn.qrgen.android.QRCode;
  * https://www.youtube.com/watch?v=fn5OlqQuOCk
  */
 
-public class rewardsPopUpActivity extends AppCompatActivity {
+public class RewardsPopUpActivity extends AppCompatActivity {
 
-    ImageView rewardQRcode;
+    protected ImageView rewardQRcode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

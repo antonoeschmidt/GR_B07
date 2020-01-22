@@ -61,7 +61,6 @@ public class NutritionActivity extends AppCompatActivity implements View.OnClick
         dinnerButton = findViewById(R.id.dinnerButton);
         snacksButton = findViewById(R.id.snackButton);
         statsButton = findViewById(R.id.statsButton);
-        //TODO: find nyt billede til denne knap
         seeMealsButton = findViewById(R.id.seeMealsButton);
 
         breakfastButton.setOnClickListener(this);
@@ -70,8 +69,6 @@ public class NutritionActivity extends AppCompatActivity implements View.OnClick
         snacksButton.setOnClickListener(this);
         statsButton.setOnClickListener(this);
         seeMealsButton.setOnClickListener(this);
-
-        // TODO: IIFYM-formel mangler at ændre sig ud fra aktivitetsniveau.
 
         updateMacros();
         updateView();
@@ -191,46 +188,6 @@ public class NutritionActivity extends AppCompatActivity implements View.OnClick
         fProgress.setMax((int) Math.round((cRing.getMax() * 0.25) / 9));
         Log.d(Settings.getUsers().toString(), "updateMacros: Users");
     }
-
-    //TODO: kan slettes evt
-    /*
-    public void eatFood(String food){
-        Food foodToEat = accessDatabase(food);
-        Settings.getCurrentPupil().setCalories(Settings.getCurrentPupil().getCalories() + foodToEat.getCalories());
-        Settings.getCurrentPupil().setProtein(Settings.getCurrentPupil().getProtein() + foodToEat.getProtein());
-        Settings.getCurrentPupil().setCarbs(Settings.getCurrentPupil().getCarbs() + foodToEat.getCarbs());
-        Settings.getCurrentPupil().setFat(Settings.getCurrentPupil().getFat() + foodToEat.getFat());
-        cRing.setProgress((int) Math.round(Settings.getCurrentPupil().getCalories()));
-        pProgress.setProgress((int) Math.round(Settings.getCurrentPupil().getProtein()));
-        cProgress.setProgress((int) Math.round(Settings.getCurrentPupil().getCarbs()));
-        fProgress.setProgress((int) Math.round(Settings.getCurrentPupil().getFat()));
-    }
-     */
-
-    //TODO: kan slettes evt
-    /*
-    private Food accessDatabase(String food) {
-        inputStream = getResources().openRawResource(R.raw.mad);
-        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-        try {
-            String csvLine;
-            while ((csvLine = reader.readLine()) != null) {
-                data = csvLine.split(";");
-                if (data[0].equalsIgnoreCase(food)) {
-                    return new Food(data[0], Double.parseDouble(data[1]),Double.parseDouble(data[2]),
-                            Double.parseDouble(data[3]),Double.parseDouble(data[4]));
-                }
-
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-            Log.d("Error ", "Cannot read file");
-        }
-        return null;
-    }
-
-     */
-
 
     @Override
     protected void onDestroy() {

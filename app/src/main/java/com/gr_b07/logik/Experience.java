@@ -7,7 +7,7 @@ import java.util.Set;
 
 public class Experience {
     private int level, nutritionXP, activityXP, socialXP, ticket;
-    boolean  XPForCalories, XPForProtein, XPForCarbs, XPForFat;
+    private boolean  XPForCalories, XPForProtein, XPForCarbs, XPForFat;
 
     public Experience(int level, int nutritionXP, int activityXP, int socialXP, int ticket, boolean XPForCalories,
                       boolean XPForProtein, boolean XPForCarbs, boolean XPForFat) {

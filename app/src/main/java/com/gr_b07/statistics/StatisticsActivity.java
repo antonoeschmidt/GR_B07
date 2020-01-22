@@ -26,8 +26,6 @@ import java.util.List;
 
 public class StatisticsActivity extends AppCompatActivity {
     private LineChart lineChart;
-    private DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-    private ArrayList<Double> data = new ArrayList<>();
     private ArrayList<Point> dataPoint = new ArrayList<>();
     private int labelCount = 0;
 
@@ -61,9 +59,7 @@ public class StatisticsActivity extends AppCompatActivity {
         dataSet.setFillAlpha(110);
         dataSet.setLineWidth(3f);
         dataSet.setValueTextSize(15f);
-        //dataSet.setValueTextColor();
 
-        //TODO: virker getDailyIntake her?
         LimitLine upperLimit = new LimitLine((int)Settings.getCurrentPupil().getDailyIntake(System.currentTimeMillis()).getCalories(), "Foreslåede indtag");
         //LimitLine upperLimit = new LimitLine(1200, "Foreslåede indtag");
         upperLimit.setLineWidth(4f);

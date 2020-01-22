@@ -67,7 +67,6 @@ public class InputDataActivity extends AppCompatActivity implements View.OnClick
         doneButton = findViewById(R.id.doneButton);
         doneButton.setOnClickListener(this);
 
-
         // TODO: fix code
         getUserInfo();
     }
@@ -89,6 +88,7 @@ public class InputDataActivity extends AppCompatActivity implements View.OnClick
             case R.id.activityLevelRatingBar:
                 updateActivityLevelView();
                 Log.d(Integer.toString(activityLevelRatingBar.getProgress()), "onClick: Hey");
+                break;
         }
     }
 

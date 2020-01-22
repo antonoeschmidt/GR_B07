@@ -40,11 +40,4 @@ public class Physique {
         this.activityLevel = activityLevel;
     }
 
-    /* TODO: FIND BETTER SOLUTION. CRASHES ON SIGNUP IF IMPLEMENTED HERE
-    public double getBMI() {
-        System.out.println(weight/Math.pow(height/100,2));
-        return weight/Math.pow(height/100,2);
-    }
-     */
-
 }

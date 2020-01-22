@@ -13,18 +13,16 @@ import com.gr_b07.R;
 import com.gr_b07.games.ImageViewScrolling.IEventEnd;
 import com.gr_b07.games.ImageViewScrolling.ImageViewScrolling;
 import com.gr_b07.logik.Settings;
-import com.gr_b07.logik.rewardItems;
+import com.gr_b07.logik.RewardItems;
 
 import java.util.Random;
 
 public class SlotMachineActivity extends AppCompatActivity implements IEventEnd {
 
-    ImageView buttonUp, buttonDown;
-    ImageViewScrolling image, image2, image3;
-    TextView tickets;
-
-    int countDone = 0;
-
+    protected ImageView buttonUp, buttonDown;
+    protected ImageViewScrolling image, image2, image3;
+    protected TextView tickets;
+    protected int countDone = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,11 +77,11 @@ public class SlotMachineActivity extends AppCompatActivity implements IEventEnd 
                 if(image.getValue() == image2.getValue() && image2.getValue() == image3.getValue()){
                     Toast.makeText(SlotMachineActivity.this,"Stor pris", Toast.LENGTH_SHORT).show();
                     //SlotMachineLogic.tickets += 5;
-                    Settings.getCurrentPupil().addReward(rewardItems.bigPrize);
+                    Settings.getCurrentPupil().addReward(RewardItems.bigPrize);
                 } else if(image.getValue() == image2.getValue() || image2.getValue() == image3.getValue() || image.getValue() == image3.getValue()) {
                     Toast.makeText(SlotMachineActivity.this, "Lille pris", Toast.LENGTH_SHORT).show();
                     //SlotMachineLogic.tickets += 2;
-                    Settings.getCurrentPupil().addReward(rewardItems.smallPrize);
+                    Settings.getCurrentPupil().addReward(RewardItems.smallPrize);
 
                 } else {
                     Toast.makeText(SlotMachineActivity.this, "Du taber", Toast.LENGTH_SHORT).show();

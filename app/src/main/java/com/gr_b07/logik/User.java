@@ -1,7 +1,5 @@
 package com.gr_b07.logik;
 
-import java.util.Date;
-
 public abstract class User {
     private String username, password, UID;
     private boolean firstTimeLoggedIn;

@@ -2,7 +2,6 @@ package com.gr_b07.games;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,7 +11,7 @@ import android.widget.Toast;
 import com.cooltechworks.views.ScratchImageView;
 import com.gr_b07.R;
 import com.gr_b07.logik.Settings;
-import com.gr_b07.logik.rewardItems;
+import com.gr_b07.logik.RewardItems;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -25,12 +24,12 @@ import java.util.Random;
 
 public class ScratchCardActivity extends AppCompatActivity implements View.OnClickListener {
 
-    ScratchImageView scratchImageView;
-    TextView scratchCardTextView, tickets;
-    float revealedPercent;
-    Button redeemButton;
-    Random random = new Random();
-    int chosenCard;
+    protected ScratchImageView scratchImageView;
+    protected TextView scratchCardTextView, tickets;
+    protected float revealedPercent;
+    protected Button redeemButton;
+    protected Random random = new Random();
+    protected int chosenCard;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,11 +69,11 @@ public class ScratchCardActivity extends AppCompatActivity implements View.OnCli
                 }
                 if (chosenCard == R.drawable.scratch_card_image_win_small) {
                     Toast.makeText(ScratchCardActivity.this, "You win a kombucha lol", Toast.LENGTH_SHORT).show();
-                    Settings.getCurrentPupil().addReward(rewardItems.smallPrize);
+                    Settings.getCurrentPupil().addReward(RewardItems.smallPrize);
                 }
                 if (chosenCard == R.drawable.scratch_card_image_win_big) {
                     Toast.makeText(ScratchCardActivity.this, "You win a cykel lol", Toast.LENGTH_SHORT).show();
-                    Settings.getCurrentPupil().addReward(rewardItems.bigPrize);
+                    Settings.getCurrentPupil().addReward(RewardItems.bigPrize);
                 }
             }
 

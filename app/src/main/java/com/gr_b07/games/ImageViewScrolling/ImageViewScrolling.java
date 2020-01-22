@@ -22,12 +22,10 @@ import com.gr_b07.R;
 
 public class ImageViewScrolling extends FrameLayout {
 
-    int animationDuration = 150;
-    ImageView currentImage, nextImage;
-    int lastResult = 0, oldValue = 0, i = 0;
-
-
-    IEventEnd eventEnd;
+    protected int animationDuration = 150;
+    protected ImageView currentImage, nextImage;
+    protected int lastResult = 0, oldValue = 0, i = 0;
+    protected IEventEnd eventEnd;
 
     public void setEventEnd(IEventEnd eventEnd) {
         this.eventEnd = eventEnd;

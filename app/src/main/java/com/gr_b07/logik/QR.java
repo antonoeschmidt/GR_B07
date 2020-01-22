@@ -18,6 +18,7 @@ import com.gr_b07.R;
 
 public class QR extends AppCompatActivity {
     private Button buttonScan;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,15 +61,13 @@ public class QR extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-        if(result != null){
-            if(result.getContents()==null){
+        if (result != null) {
+            if (result.getContents() == null) {
                 Toast.makeText(this, "You cancelled the scanning", Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();
             }
-            else {
-                Toast.makeText(this, result.getContents(),Toast.LENGTH_LONG).show();
-            }
-        }
-        else {
+        } else {
             super.onActivityResult(requestCode, resultCode, data);
         }
     }

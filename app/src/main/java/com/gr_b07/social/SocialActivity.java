@@ -24,7 +24,7 @@ import java.util.ArrayList;
 
 public class SocialActivity extends AppCompatActivity implements RecyclerViewAdapterSocial.ItemClickListener, View.OnClickListener {
 
-    FB fb = new FB();
+    private FB fb = new FB();
     private ImageView imageViewAccountPhoto;
     private Button buttonGetFriends, buttonAddActivity, buttonSeeQRcode, buttonScanQRcode;
     private TextView friendsTextView, suggestedFriendsTextView;

@@ -62,7 +62,6 @@ public class RecyclerViewAdapterMeals extends RecyclerView.Adapter<RecyclerViewA
         holder.parentLayoutMeals.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO: implement this
                 openDialog(position);
             }
         });

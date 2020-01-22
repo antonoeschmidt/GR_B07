@@ -78,6 +78,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.buttonRedeem:
                 Intent redeemIntent = new Intent(this, RedeemActivity.class);
                 startActivity(redeemIntent);
+                break;
 
 
         }

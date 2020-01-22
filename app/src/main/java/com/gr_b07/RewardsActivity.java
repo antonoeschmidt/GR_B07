@@ -11,12 +11,12 @@ import android.widget.TextView;
 import com.gr_b07.logik.Settings;
 import com.mikhaellopez.circularprogressbar.CircularProgressBar;
 
-public class RewardsActivity extends AppCompatActivity implements View.OnClickListener{
-   // private ProgressBar rProgress;
+public class RewardsActivity extends AppCompatActivity implements View.OnClickListener {
+    // private ProgressBar rProgress;
     private TextView levelTextView, totalXPtext, totalNutritionXPtextView, totalActivityXPtextView, totalSocialXPtextView, ticketTextView;
     private Button rewardButton, rewardTestButtonNutrition, rewardTestButtonActivity, rewardTestButtonSocial;
     private CircularProgressBar circularProgressBar;
-    int xpType;
+    private int xpType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,14 +40,11 @@ public class RewardsActivity extends AppCompatActivity implements View.OnClickLi
         rewardTestButtonSocial.setOnClickListener(this);
         rewardButton.setOnClickListener(this);
 
-
-
-        circularProgressBar.setProgressMax(Settings.getCurrentPupil().getExperience().getLevel()*5+10);
+        circularProgressBar.setProgressMax(Settings.getCurrentPupil().getExperience().getLevel() * 5 + 10);
         circularProgressBar.setProgress(0);
 
         levelTextView.setText("Level: " + Integer.toString(Settings.getCurrentPupil().getExperience().getLevel()));
         ticketTextView.setText("Tickets: " + Settings.getCurrentPupil().getExperience().getTicket());
-
 
     }
 
@@ -63,11 +60,11 @@ public class RewardsActivity extends AppCompatActivity implements View.OnClickLi
             Settings.getCurrentPupil().getExperience().setNutritionXP(Settings.getCurrentPupil().getExperience().getNutritionXP() + 2);
             xpType = 0;
         }
-        if(v == rewardTestButtonActivity){
+        if (v == rewardTestButtonActivity) {
             Settings.getCurrentPupil().getExperience().setActivityXP(Settings.getCurrentPupil().getExperience().getActivityXP() + 2);
             xpType = 1;
         }
-        if(v == rewardTestButtonSocial){
+        if (v == rewardTestButtonSocial) {
             Settings.getCurrentPupil().getExperience().setSocialXP(Settings.getCurrentPupil().getExperience().getSocialXP() + 2);
             xpType = 2;
         }
@@ -76,37 +73,38 @@ public class RewardsActivity extends AppCompatActivity implements View.OnClickLi
             startActivity(gameIntent);
         }
         updateTextViews();
-        circularProgressBar.setProgressMax((Settings.getCurrentPupil().getExperience().getLevel()*5+10));
+        circularProgressBar.setProgressMax((Settings.getCurrentPupil().getExperience().getLevel() * 5 + 10));
         circularProgressBar.setProgress(Settings.getCurrentPupil().getExperience().getTotalXP());
         levelTextView.setText("Level: " + Settings.getCurrentPupil().getExperience().getLevel());
     }
-        public void checkLevel(){
-            circularProgressBar.setProgress(Settings.getCurrentPupil().getExperience().getTotalXP());
-        if (circularProgressBar.getProgress() >= circularProgressBar.getProgressMax()){
-            if(xpType == 0){
-                Settings.getCurrentPupil().getExperience().setNutritionXP(Settings.getCurrentPupil().getExperience().getTotalXP() % (Settings.getCurrentPupil().getExperience().getLevel()*5+10));
+
+    public void checkLevel() {
+        circularProgressBar.setProgress(Settings.getCurrentPupil().getExperience().getTotalXP());
+        if (circularProgressBar.getProgress() >= circularProgressBar.getProgressMax()) {
+            if (xpType == 0) {
+                Settings.getCurrentPupil().getExperience().setNutritionXP(Settings.getCurrentPupil().getExperience().getTotalXP() % (Settings.getCurrentPupil().getExperience().getLevel() * 5 + 10));
                 Settings.getCurrentPupil().getExperience().setActivityXP(0);
                 Settings.getCurrentPupil().getExperience().setSocialXP(0);
             }
-            if(xpType == 1){
-                Settings.getCurrentPupil().getExperience().setActivityXP(Settings.getCurrentPupil().getExperience().getTotalXP() % (Settings.getCurrentPupil().getExperience().getLevel()*5+10));
+            if (xpType == 1) {
+                Settings.getCurrentPupil().getExperience().setActivityXP(Settings.getCurrentPupil().getExperience().getTotalXP() % (Settings.getCurrentPupil().getExperience().getLevel() * 5 + 10));
                 Settings.getCurrentPupil().getExperience().setNutritionXP(0);
                 Settings.getCurrentPupil().getExperience().setSocialXP(0);
             }
-            if(xpType == 2){
-                Settings.getCurrentPupil().getExperience().setSocialXP(Settings.getCurrentPupil().getExperience().getTotalXP() % (Settings.getCurrentPupil().getExperience().getLevel()*5+10));
+            if (xpType == 2) {
+                Settings.getCurrentPupil().getExperience().setSocialXP(Settings.getCurrentPupil().getExperience().getTotalXP() % (Settings.getCurrentPupil().getExperience().getLevel() * 5 + 10));
                 Settings.getCurrentPupil().getExperience().setNutritionXP(0);
                 Settings.getCurrentPupil().getExperience().setActivityXP(0);
             }
-            Settings.getCurrentPupil().getExperience().setLevel(Settings.getCurrentPupil().getExperience().getLevel()+1);
-            Settings.getCurrentPupil().getExperience().setTicket(Settings.getCurrentPupil().getExperience().getTicket()+1);
+            Settings.getCurrentPupil().getExperience().setLevel(Settings.getCurrentPupil().getExperience().getLevel() + 1);
+            Settings.getCurrentPupil().getExperience().setTicket(Settings.getCurrentPupil().getExperience().getTicket() + 1);
 
         }
     }
 
     public void updateTextViews() {
         levelTextView.setText("Level: " + Settings.getCurrentPupil().getExperience().getLevel());
-        totalXPtext.setText("Total XP\n " + Settings.getCurrentPupil().getExperience().getTotalXP()+ " / " + (Settings.getCurrentPupil().getExperience().getLevel() * 5 + 10));
+        totalXPtext.setText("Total XP\n " + Settings.getCurrentPupil().getExperience().getTotalXP() + " / " + (Settings.getCurrentPupil().getExperience().getLevel() * 5 + 10));
         totalNutritionXPtextView.setText("Nutrition Points: " + Settings.getCurrentPupil().getExperience().getNutritionXP());
         totalActivityXPtextView.setText("Activity Points: " + Settings.getCurrentPupil().getExperience().getActivityXP());
         totalSocialXPtextView.setText("Social Points: " + Settings.getCurrentPupil().getExperience().getSocialXP());
