@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.widget.FrameLayout;
 
 import com.gr_b07.R;
+import com.gr_b07.logik.FB;
 import com.gr_b07.logik.Meal;
 import com.gr_b07.logik.Settings;
 
@@ -18,8 +19,8 @@ public class MealsActivity extends AppCompatActivity implements MealDialog.Dialo
     private FrameLayout layout_meals;
     private RecyclerView recyclerView;
     private RecyclerViewAdapterMeals adapter;
-    private ArrayList<Meal> meals = new ArrayList<>();
     private ArrayList<Integer> mealImages = new ArrayList<>();
+    private FB fb = new FB();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,5 +56,6 @@ public class MealsActivity extends AppCompatActivity implements MealDialog.Dialo
     @Override
     public void updateMeals() {
         adapter.notifyDataSetChanged();
+        fb.updateDatabase();
     }
 }
