@@ -3,9 +3,11 @@ package com.gr_b07.games;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +31,7 @@ public class ScratchCardActivity extends AppCompatActivity implements View.OnCli
     TextView scratchCardTextView, tickets;
     float revealedPercent;
     Button redeemButton;
+    ImageView scratchCover;
     Random random = new Random();
     int chosenCard;
 
@@ -36,6 +39,7 @@ public class ScratchCardActivity extends AppCompatActivity implements View.OnCli
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scratch_card);
+        scratchCover = findViewById(R.id.scratchCover);
         scratchCardTextView = findViewById(R.id.scratchCardText);
         tickets = findViewById(R.id.ticketsScratchCard);
         scratchCardTextView.setText("0% Revealed");
@@ -59,6 +63,7 @@ public class ScratchCardActivity extends AppCompatActivity implements View.OnCli
 
     private void initScratchCard() {
         scratchImageView = findViewById(R.id.scratchCardView);
+        scratchCover.setVisibility(View.INVISIBLE);
         scratchImageView.setVisibility(View.VISIBLE);
         scratchImageView.setImageResource(chooseScratchCard());
         //Image1 callback

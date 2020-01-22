@@ -44,8 +44,7 @@ public class SlotMachineActivity extends AppCompatActivity implements ImageViewS
         image2.setEventEnd(SlotMachineActivity.this);
         image3.setEventEnd(SlotMachineActivity.this);
 
-        buttonU
-    p.setOnClickListener(new View.OnClickListener() {
+        buttonUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(Settings.getCurrentPupil().getExperience().getTicket() >= 1){

@@ -26,7 +26,7 @@
         <activity android:name=".games.ChestActivity" />
         <activity android:name=".games.ScratchCardActivity" />
         <activity android:name=".games.SlotMachineActivity" />
-        <activity android:name=".GameActivity" />
+        <activity android:name=".games.GameActivity" />
         <activity android:name=".nutrition.AbstractMealActivity" />
         <activity android:name=".nutrition.SnacksActivity" />
         <activity android:name=".nutrition.DinnerActivity" />

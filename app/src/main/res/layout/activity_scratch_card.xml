@@ -15,6 +15,14 @@
         android:padding="15dp"
         android:textColor="@color/colorFat"/>
 
+    <ImageView
+        android:id="@+id/scratchCover"
+        android:layout_width="300dp"
+        android:layout_height="110dp"
+        android:layout_centerInParent="true"
+        android:layout_margin="@dimen/default_stroke_width"
+        android:background="@drawable/healthy_logo"/>
+
     <com.cooltechworks.views.ScratchImageView
         android:id="@+id/scratchCardView"
         android:layout_width="300dp"
@@ -22,6 +30,7 @@
         android:background="@color/colorBlack"
         android:src="@drawable/scratch_card_image_lose"
         android:layout_centerInParent="true"
+        android:layout_margin="@dimen/default_stroke_width"
         android:visibility="invisible"/>
 
     <TextView
@@ -32,6 +41,7 @@
         android:textSize="24dp"
         android:padding="20dp"
         android:layout_centerHorizontal="true"
+        android:layout_margin="@dimen/default_stroke_width"
         android:layout_marginTop="100dp"/>
 
     <Button
@@ -39,8 +49,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Redeem"
+        android:textSize="48dp"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/scratchCardView"/>
+        android:layout_below="@id/scratchCardView"
+        android:layout_margin="@dimen/default_stroke_width"
+        android:background="@drawable/mainmenu_reward_button"/>
 
 
 </RelativeLayout>

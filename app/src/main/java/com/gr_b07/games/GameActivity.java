@@ -1,4 +1,4 @@
-package com.gr_b07;
+package com.gr_b07.games;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.gr_b07.R;
 import com.gr_b07.games.ChanceActivity;
 import com.gr_b07.games.ChestActivity;
 import com.gr_b07.games.redeemRewards.RedeemActivity;
@@ -19,6 +20,7 @@ import com.gr_b07.logik.Settings;
 public class GameActivity extends AppCompatActivity implements View.OnClickListener {
     private TextView ticketTextView;
     private Button slotMachineButton, scratchCardButton, gameChestButton, gameChanceButton, redeemButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,4 +75,12 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     public void updateTextView(){
         ticketTextView.setText("Tickets: " + Settings.getCurrentPupil().getExperience().getTicket());
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateTextView();
+    }
+
+
 }
