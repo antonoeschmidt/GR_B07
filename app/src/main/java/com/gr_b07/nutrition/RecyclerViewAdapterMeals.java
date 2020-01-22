@@ -49,14 +49,14 @@ public class RecyclerViewAdapterMeals extends RecyclerView.Adapter<RecyclerViewA
         //holder.mealImage.setImageResource(mealImages.get(position));
         //TODO: put new images
         if (meals.get(position).getTypeOfMeal().equals("Breakfast")) {
-            holder.mealImage.setImageResource(R.drawable.apple);
+            holder.mealImage.setImageResource(R.drawable.ic_breakfast);
 
         } else if (meals.get(position).getTypeOfMeal().equals("Lunch")) {
-            holder.mealImage.setImageResource(R.drawable.aubergine);
+            holder.mealImage.setImageResource(R.drawable.ic_sandwich);
         } else if (meals.get(position).getTypeOfMeal().equals("Dinner")) {
-            holder.mealImage.setImageResource(R.drawable.carrot);
+            holder.mealImage.setImageResource(R.drawable.ic_local_dining_black_24dp);
         } else {
-            holder.mealImage.setImageResource(R.drawable.common_google_signin_btn_text_dark_focused);
+            holder.mealImage.setImageResource(R.drawable.ic_fruit);
         }
 
         holder.parentLayoutMeals.setOnClickListener(new View.OnClickListener() {

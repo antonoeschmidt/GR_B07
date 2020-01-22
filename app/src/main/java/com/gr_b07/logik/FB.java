@@ -85,18 +85,13 @@ public class FB {
             @Override
             public void onDataChange(DataSnapshot d) {
                 //måske bruges
-                //Settings.setCurrentUser(d.getValue(Pupil.class));
-
-                Settings.setCurrentUser(getUserFromDatabase(d));
-
+                Settings.setCurrentUser(d.getValue(Pupil.class));
 
                 if (Settings.getCurrentUser().getClass().equals(Pupil.class)) {
                     Settings.setCurrentPupil((Pupil) Settings.getCurrentUser());
                 }
-                //TODO: denne kode burde ikke være i denne metode, men det virkede kun sådan her
+                //nedenstående kode burde ikke være i denne metode, men det virkede kun sådan her
                 //pga async netværkskommunikation - burde være i SignIn/Login
-
-
                 if (auth != null && Settings.getCurrentUser().isFirstTimeLoggedIn()) {
                     Intent inputDataIntent = new Intent(activity, InputDataActivity.class);
                     activity.startActivity(inputDataIntent);
@@ -160,24 +155,18 @@ public class FB {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     for (DataSnapshot d : dataSnapshot.getChildren()) {
-                        Settings.addUser(getUserFromDatabase(d));
-                        Log.d(getUserFromDatabase(d).toString(), "getUsersFromDatabase : Hvilke users?");
+                        Settings.addUser(d.getValue(Pupil.class));
+                        Log.d(d.getValue(Pupil.class).toString(), "getUsersFromDatabase : Hvilke users?");
 
                     }
                 }
-            }//onDataChange
+            }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
         });
-    }
-
-    public User getUserFromDatabase(DataSnapshot d) {
-        //TODO: kan evt slettes eller laves om
-
-        return d.getValue(Pupil.class);
     }
 
     public FirebaseAuth getAuth() {

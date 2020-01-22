@@ -35,7 +35,7 @@ public class MealDialog extends AppCompatDialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.meal_dialog, null);
-        builder.setView(view).setTitle("Meal")
+        builder.setView(view).setTitle(meal.getTypeOfMeal())
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

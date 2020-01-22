@@ -15,7 +15,7 @@ public class Pupil extends User {
     private Experience experience;
     private String UID;
 
-    //TODO: evt fjern new ArrayList
+    //TODO: List eller ArrayList
     private List<Meal> meals = new ArrayList<>();
     private List<String> friends = new ArrayList<>();
     private List<String> activities = new ArrayList<>();
