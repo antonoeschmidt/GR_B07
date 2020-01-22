@@ -11,7 +11,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.gr_b07.NutritionActivity;
 import com.gr_b07.R;
 import com.gr_b07.logik.Food;
 import com.gr_b07.logik.Settings;

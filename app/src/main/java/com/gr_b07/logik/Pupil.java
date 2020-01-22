@@ -13,6 +13,7 @@ public class Pupil extends User {
     private Physique physique;
     private PersonalInfo personalInfo;
     private Experience experience;
+    private String UID;
 
     //TODO: evt fjern new ArrayList
     private List<Meal> meals = new ArrayList<>();
@@ -20,10 +21,10 @@ public class Pupil extends User {
     private List<String> activities = new ArrayList<>();
     private List<Reward> rewards = new ArrayList<>();
 
-    public Pupil(boolean firstTimeLoggedIn, String username, String password, Physique physique,
+    public Pupil(boolean firstTimeLoggedIn, String username, String password, String UID, Physique physique,
                  PersonalInfo personalInfo, Experience experience, List<Meal> meals, List<String> friends,
                  List<String> activities, List<Reward> rewards) {
-        super(firstTimeLoggedIn, username, password);
+        super(firstTimeLoggedIn, username, password, UID);
         this.physique = physique;
         this.personalInfo = personalInfo;
         this.experience = experience;
@@ -31,6 +32,8 @@ public class Pupil extends User {
         this.friends = friends;
         this.activities = activities;
         this.rewards = rewards;
+        this.UID = UID;
+
     }
 
     public Pupil() {
@@ -65,7 +68,7 @@ public class Pupil extends User {
         rewards.add(reward);
     }
 
-    public void addFriend(String pupil) { friends.add(pupil); }
+    public void addFriend(String UID) { friends.add(UID); }
 
     public void addActivity(String activity) {
         activities.add(activity);
@@ -127,6 +130,5 @@ public class Pupil extends User {
     public void setRewards(List<Reward> rewards) {
         this.rewards = rewards;
     }
-
 }
 
