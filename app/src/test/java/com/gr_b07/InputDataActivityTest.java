@@ -56,6 +56,9 @@ public class InputDataActivityTest {
         assertEquals(50, (int) Settings.getCurrentPupil().getMeals().get(0).getCarbs());
         assertEquals(25, (int) Settings.getCurrentPupil().getMeals().get(0).getFat());
         assertEquals("Breakfast", Settings.getCurrentPupil().getMeals().get(0).getTypeOfMeal());
-
+        assertEquals("Fodbold", Settings.getCurrentPupil().getActivities().get(0));
+        assertEquals("Æble", Settings.getCurrentPupil().getRewards().get(0).getName());
+        assertEquals(1, Settings.getCurrentPupil().getRewards().get(0).getTier());
+        assertEquals(R.drawable.apple, Settings.getCurrentPupil().getRewards().get(0).getResource());
     }
 }
