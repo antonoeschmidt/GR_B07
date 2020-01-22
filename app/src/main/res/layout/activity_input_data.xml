@@ -131,8 +131,7 @@
         android:textColor="#1C2C06"
         android:textSize="18sp"
         android:layout_below="@id/activityLevelTextView"
-        android:layout_centerHorizontal="true"
-        android:layout_margin="@dimen/default_stroke_width"/>
+        android:layout_centerHorizontal="true"/>
 
 
 </RelativeLayout>

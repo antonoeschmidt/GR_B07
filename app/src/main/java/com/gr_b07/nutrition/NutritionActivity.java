@@ -23,6 +23,7 @@ import com.gr_b07.nutrition.LunchActivity;
 import com.gr_b07.nutrition.MealsActivity;
 import com.gr_b07.nutrition.SnacksActivity;
 import com.gr_b07.statistics.StatisticsActivity;
+import com.mikhaellopez.circularprogressbar.CircularProgressBar;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -32,8 +33,10 @@ import java.text.ParseException;
 import java.util.ArrayList;
 
 public class NutritionActivity extends AppCompatActivity implements View.OnClickListener {
-    private ProgressBar pProgress, cProgress, fProgress, cRing;
-    private TextView caloriesTextView, proteinTextView, carbsTextView, fatTextView;
+
+    private CircularProgressBar cRing;
+    private ProgressBar pProgress, cProgress, fProgress;
+    private TextView caloriesTextView, proteinTextView, carbsTextView, fatTextView, proteinProgressTextView, carbsProgressTextView, fatProgressTextView;
     private Button breakfastButton, lunchButton, dinnerButton, snacksButton, statsButton, seeMealsButton;
     private InputStream inputStream;
     private String[] data;
@@ -58,6 +61,10 @@ public class NutritionActivity extends AppCompatActivity implements View.OnClick
         carbsTextView = findViewById(R.id.carbsTextView);
         fatTextView = findViewById(R.id.fatTextView);
 
+        proteinProgressTextView = findViewById(R.id.proteinProgressTextView);
+        carbsProgressTextView = findViewById(R.id.carbsProgressTextView);
+        fatProgressTextView = findViewById(R.id.fatProgressTextView);
+
         breakfastButton = findViewById(R.id.breakfastButton);
         lunchButton = findViewById(R.id.lunchButton);
         dinnerButton = findViewById(R.id.dinnerButton);
@@ -72,36 +79,6 @@ public class NutritionActivity extends AppCompatActivity implements View.OnClick
         snacksButton.setOnClickListener(this);
         statsButton.setOnClickListener(this);
         seeMealsButton.setOnClickListener(this);
-
-        DisplayMetrics dm = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(dm);
-
-        int width = dm.widthPixels;
-        int height = dm.heightPixels;
-
-        LinearLayout.LayoutParams ringLayout = new LinearLayout.LayoutParams(width, (int) (height * 0.22));
-        LinearLayout.LayoutParams progressLayout = new LinearLayout.LayoutParams(width, (int) (height * 0.03));
-        LinearLayout.LayoutParams buttonLayout = new LinearLayout.LayoutParams(width,(int) (height * 0.12));
-        //LinearLayout.LayoutParams textLayout = new LinearLayout.LayoutParams(width, (int) (height * 0.33));
-
-
-
-        cRing.setLayoutParams(ringLayout);
-
-        pProgress.setLayoutParams(progressLayout);
-        cProgress.setLayoutParams(progressLayout);
-        fProgress.setLayoutParams(progressLayout);
-
-        breakfastButton.setLayoutParams(buttonLayout);
-        lunchButton.setLayoutParams(buttonLayout);
-        dinnerButton.setLayoutParams(buttonLayout);
-        snacksButton.setLayoutParams(buttonLayout);
-
-        /*caloriesTextView.setLayoutParams(textLayout);
-        caloriesTextView.setLayoutParams(textLayout);
-        caloriesTextView.setLayoutParams(textLayout);
-        caloriesTextView.setLayoutParams(textLayout);*/
-
 
         // TODO: IIFYM-formel mangler at ændre sig ud fra aktivitetsniveau.
 
@@ -147,15 +124,15 @@ public class NutritionActivity extends AppCompatActivity implements View.OnClick
         pProgress.setProgress((int) Math.round(Settings.getCurrentPupil().getDailyIntake(System.currentTimeMillis()).getProtein()));
         cProgress.setProgress((int) Math.round(Settings.getCurrentPupil().getDailyIntake(System.currentTimeMillis()).getCarbs()));
         fProgress.setProgress((int) Math.round(Settings.getCurrentPupil().getDailyIntake(System.currentTimeMillis()).getFat()));
-        caloriesTextView.setText("Calories: \n" + (int) Settings.getCurrentPupil().getDailyIntake(System.currentTimeMillis()).getCalories() + "  /  " + cRing.getMax());
-        proteinTextView.setText("Protein: " + (int) Settings.getCurrentPupil().getDailyIntake(System.currentTimeMillis()).getProtein() +  "  /  " + pProgress.getMax() + " g");
-        carbsTextView.setText("Carbs: "+ (int) Settings.getCurrentPupil().getDailyIntake(System.currentTimeMillis()).getCarbs() + "  /  " + cProgress.getMax() + " g");
-        fatTextView.setText("Fat: " + (int) Settings.getCurrentPupil().getDailyIntake(System.currentTimeMillis()).getFat() + "  /  " + fProgress.getMax() + " g");
+        caloriesTextView.setText("Calories" + "\n" + (int) Settings.getCurrentPupil().getDailyIntake(System.currentTimeMillis()).getCalories() + "  /  " + (int) cRing.getProgressMax());
+        proteinProgressTextView.setText((int) Settings.getCurrentPupil().getDailyIntake(System.currentTimeMillis()).getProtein() +  "  /  " + pProgress.getMax() + " g");
+        carbsProgressTextView.setText((int) Settings.getCurrentPupil().getDailyIntake(System.currentTimeMillis()).getCarbs() + "  /  " + cProgress.getMax() + " g");
+        fatProgressTextView.setText((int) Settings.getCurrentPupil().getDailyIntake(System.currentTimeMillis()).getFat() + "  /  " + fProgress.getMax() + " g");
         giveXPIfUnlocked();
     }
 
     private void giveXPIfUnlocked() {
-        if ((int) Settings.getCurrentPupil().getDailyIntake(System.currentTimeMillis()).getCalories() >= cRing.getMax()
+        if ((int) Settings.getCurrentPupil().getDailyIntake(System.currentTimeMillis()).getCalories() >= cRing.getProgressMax()
                 && !Settings.getCurrentPupil().getExperience().isXPForCalories()) {
             Settings.getCurrentPupil().getExperience().setNutritionXP(Settings.getCurrentPupil().getExperience().getNutritionXP() + 5);
             Settings.getCurrentPupil().getExperience().setXPForCalories(true);
@@ -211,16 +188,16 @@ public class NutritionActivity extends AppCompatActivity implements View.OnClick
 
     public void updateMacros() {
         if (Settings.getCurrentPupil().getPersonalInfo().getGender().equals("male")) {
-            cRing.setMax((int) Math.round((10 * Settings.getCurrentPupil().getPhysique().getWeight()) + (6.25 * Settings.getCurrentPupil().getPhysique().getHeight())
+            cRing.setProgressMax((int) Math.round((10 * Settings.getCurrentPupil().getPhysique().getWeight()) + (6.25 * Settings.getCurrentPupil().getPhysique().getHeight())
                     - (5 * Settings.getCurrentPupil().getPersonalInfo().getAge()) + 5) + (Settings.getCurrentPupil().getPhysique().getActivityLevel() * 250));
         }
         else if (Settings.getCurrentPupil().getPersonalInfo().getGender().equals("female")) {
-            cRing.setMax((int) Math.round((10 * Settings.getCurrentPupil().getPhysique().getWeight()) + (6.25 * Settings.getCurrentPupil().getPhysique().getHeight())
+            cRing.setProgressMax((int) Math.round((10 * Settings.getCurrentPupil().getPhysique().getWeight()) + (6.25 * Settings.getCurrentPupil().getPhysique().getHeight())
                     - (5 * Settings.getCurrentPupil().getPersonalInfo().getAge()) - 161) + (Settings.getCurrentPupil().getPhysique().getActivityLevel() * 250));
         }
-        pProgress.setMax((int) Math.round((cRing.getMax() * 0.25) / 4));
-        cProgress.setMax((int) Math.round((cRing.getMax() * 0.5) / 4));
-        fProgress.setMax((int) Math.round((cRing.getMax() * 0.25) / 9));
+        pProgress.setMax((int) Math.round((cRing.getProgressMax() * 0.25) / 4));
+        cProgress.setMax((int) Math.round((cRing.getProgressMax() * 0.5) / 4));
+        fProgress.setMax((int) Math.round((cRing.getProgressMax() * 0.25) / 9));
         Log.d(Settings.getUsers().toString(), "updateMacros: Users");
     }
 

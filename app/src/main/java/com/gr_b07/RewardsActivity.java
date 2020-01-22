@@ -14,6 +14,7 @@ import com.mikhaellopez.circularprogressbar.CircularProgressBar;
 public class RewardsActivity extends AppCompatActivity implements View.OnClickListener{
    // private ProgressBar rProgress;
     private TextView levelTextView, totalXPtext, totalNutritionXPtextView, totalActivityXPtextView, totalSocialXPtextView, ticketTextView;
+
     private Button rewardButton, rewardTestButtonNutrition, rewardTestButtonActivity, rewardTestButtonSocial;
     private CircularProgressBar circularProgressBar;
     int xpType;
