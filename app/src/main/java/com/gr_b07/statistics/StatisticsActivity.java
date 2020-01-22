@@ -109,7 +109,7 @@ public class StatisticsActivity extends AppCompatActivity {
     public void populateDateArray() {
         int month = 31;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            month = Settings.longToIntMonth(System.currentTimeMillis()));
+            month = Settings.longToIntMonth(System.currentTimeMillis());
         }
         dataPoint.clear();
         for (int i = 1; i <= month; i++) {
