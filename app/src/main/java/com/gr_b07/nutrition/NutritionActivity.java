@@ -7,10 +7,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.gr_b07.R;
+import com.gr_b07.logik.FB;
 import com.gr_b07.logik.Food;
 import com.gr_b07.logik.Settings;
 import com.gr_b07.nutrition.BreakfastActivity;
@@ -27,7 +29,7 @@ import java.io.InputStreamReader;
 import java.text.ParseException;
 import java.util.ArrayList;
 
-public class NutritionActivity extends AppCompatActivity implements View.OnClickListener{
+public class NutritionActivity extends AppCompatActivity implements View.OnClickListener {
     private ProgressBar pProgress, cProgress, fProgress, cRing;
     private TextView caloriesTextView, proteinTextView, carbsTextView, fatTextView;
     private Button breakfastButton, lunchButton, dinnerButton, snacksButton, statsButton, seeMealsButton;
@@ -35,6 +37,9 @@ public class NutritionActivity extends AppCompatActivity implements View.OnClick
     private String[] data;
     protected static ArrayList<Food> foodDB = new ArrayList<>();
     public static String[] foodAutoText;
+    boolean XPForCalories, XPForProtein, XPForCarbs, XPForFat;
+    ArrayList<Boolean> XPBooleans = new ArrayList<>();
+    private FB fb = new FB();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,7 +110,7 @@ public class NutritionActivity extends AppCompatActivity implements View.OnClick
         }
     }
 
-    public void updateView(){
+    public void updateView() {
         cRing.setProgress((int) Math.round(Settings.getCurrentPupil().getDailyIntake(System.currentTimeMillis()).getCalories()));
         pProgress.setProgress((int) Math.round(Settings.getCurrentPupil().getDailyIntake(System.currentTimeMillis()).getProtein()));
         cProgress.setProgress((int) Math.round(Settings.getCurrentPupil().getDailyIntake(System.currentTimeMillis()).getCarbs()));
@@ -114,6 +119,35 @@ public class NutritionActivity extends AppCompatActivity implements View.OnClick
         proteinTextView.setText("Protein: " + (int) Settings.getCurrentPupil().getDailyIntake(System.currentTimeMillis()).getProtein() +  "  /  " + pProgress.getMax() + " g");
         carbsTextView.setText("Carbs: "+ (int) Settings.getCurrentPupil().getDailyIntake(System.currentTimeMillis()).getCarbs() + "  /  " + cProgress.getMax() + " g");
         fatTextView.setText("Fat: " + (int) Settings.getCurrentPupil().getDailyIntake(System.currentTimeMillis()).getFat() + "  /  " + fProgress.getMax() + " g");
+        giveXPIfUnlocked();
+    }
+
+    private void giveXPIfUnlocked() {
+        if ((int) Settings.getCurrentPupil().getDailyIntake(System.currentTimeMillis()).getCalories() >= cRing.getMax()
+                && !Settings.getCurrentPupil().getExperience().isXPForCalories()) {
+            Settings.getCurrentPupil().getExperience().setNutritionXP(Settings.getCurrentPupil().getExperience().getNutritionXP() + 5);
+            Settings.getCurrentPupil().getExperience().setXPForCalories(true);
+            Toast.makeText(this, "Cal + 5", Toast.LENGTH_SHORT).show();
+        }
+        if ((int) Settings.getCurrentPupil().getDailyIntake(System.currentTimeMillis()).getProtein() >= pProgress.getMax()
+                && !Settings.getCurrentPupil().getExperience().isXPForProtein()) {
+            Settings.getCurrentPupil().getExperience().setNutritionXP(Settings.getCurrentPupil().getExperience().getNutritionXP() + 5);
+            Settings.getCurrentPupil().getExperience().setXPForProtein(true);
+            Toast.makeText(this, "Protein + 5", Toast.LENGTH_SHORT).show();
+        }
+        if ((int) Settings.getCurrentPupil().getDailyIntake(System.currentTimeMillis()).getCarbs() >= cProgress.getMax()
+                && !Settings.getCurrentPupil().getExperience().isXPForCarbs()) {
+            Settings.getCurrentPupil().getExperience().setNutritionXP(Settings.getCurrentPupil().getExperience().getNutritionXP() + 5);
+            Settings.getCurrentPupil().getExperience().setXPForCarbs(true);
+            Toast.makeText(this, "Carbs + 5", Toast.LENGTH_SHORT).show();
+        }
+        if ((int) Settings.getCurrentPupil().getDailyIntake(System.currentTimeMillis()).getFat() >= fProgress.getMax() &&
+                !Settings.getCurrentPupil().getExperience().isXPForFat()) {
+            Settings.getCurrentPupil().getExperience().setNutritionXP(Settings.getCurrentPupil().getExperience().getNutritionXP() + 5);
+            Settings.getCurrentPupil().getExperience().setXPForFat(true);
+            Toast.makeText(this, "Fat + 5", Toast.LENGTH_SHORT).show();
+        }
+        fb.updateDatabase();
     }
 
     private void createDBarray() {
@@ -124,8 +158,8 @@ public class NutritionActivity extends AppCompatActivity implements View.OnClick
             String csvLine;
             while ((csvLine = reader.readLine()) != null) {
                 data = csvLine.split(";");
-                foodDB.add(new Food(data[0], Double.parseDouble(data[1]),Double.parseDouble(data[2]),
-                            Double.parseDouble(data[3]),Double.parseDouble(data[4])));
+                foodDB.add(new Food(data[0], Double.parseDouble(data[1]), Double.parseDouble(data[2]),
+                        Double.parseDouble(data[3]), Double.parseDouble(data[4])));
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -144,7 +178,7 @@ public class NutritionActivity extends AppCompatActivity implements View.OnClick
     }
 
     public void updateMacros() {
-        if (Settings.getCurrentPupil().getPersonalInfo().getGender().equals("male")){
+        if (Settings.getCurrentPupil().getPersonalInfo().getGender().equals("male")) {
             cRing.setMax((int) Math.round((10 * Settings.getCurrentPupil().getPhysique().getWeight()) + (6.25 * Settings.getCurrentPupil().getPhysique().getHeight())
                     - (5 * Settings.getCurrentPupil().getPersonalInfo().getAge()) + 5) + (Settings.getCurrentPupil().getPhysique().getActivityLevel() * 250));
         }
@@ -152,9 +186,9 @@ public class NutritionActivity extends AppCompatActivity implements View.OnClick
             cRing.setMax((int) Math.round((10 * Settings.getCurrentPupil().getPhysique().getWeight()) + (6.25 * Settings.getCurrentPupil().getPhysique().getHeight())
                     - (5 * Settings.getCurrentPupil().getPersonalInfo().getAge()) - 161) + (Settings.getCurrentPupil().getPhysique().getActivityLevel() * 250));
         }
-        pProgress.setMax((int) Math.round ((cRing.getMax()*0.25)/4));
-        cProgress.setMax((int) Math.round ((cRing.getMax()*0.5)/4));
-        fProgress.setMax((int) Math.round ((cRing.getMax()*0.25)/9));
+        pProgress.setMax((int) Math.round((cRing.getMax() * 0.25) / 4));
+        cProgress.setMax((int) Math.round((cRing.getMax() * 0.5) / 4));
+        fProgress.setMax((int) Math.round((cRing.getMax() * 0.25) / 9));
         Log.d(Settings.getUsers().toString(), "updateMacros: Users");
     }
 
