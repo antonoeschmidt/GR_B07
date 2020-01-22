@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -69,6 +70,14 @@ public class SocialActivity extends AppCompatActivity implements RecyclerViewAda
 
         fb.getAllUsersFromDatabase();
         Log.d(Settings.getUsers().toString(), "onCreate: ");
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                initializeFriends();
+                initializeSuggestedFriends();
+            }
+        }, 250);
     }
 
     @Override
