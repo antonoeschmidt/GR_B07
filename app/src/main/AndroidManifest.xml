@@ -20,7 +20,7 @@
         <activity android:name=".SignUpActivity" />
         <activity android:name=".games.redeemRewards.RedeemActivity" />
         <activity
-            android:name=".games.redeemRewards.rewardsPopUpActivity"
+            android:name=".games.redeemRewards.RewardsPopUpActivity"
             android:theme="@style/AppTheme.popUpTheme" />
         <activity android:name=".games.ChanceActivity" />
         <activity android:name=".games.ChestActivity" />

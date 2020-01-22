@@ -61,9 +61,5 @@ public abstract class AbstractMealActivity extends AppCompatActivity implements 
         food.getFat(),typeOfMeal,System.currentTimeMillis()));
 
         fb.updateDatabase();
-
-
-
-
     }
 }

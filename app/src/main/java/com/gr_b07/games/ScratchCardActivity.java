@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.cooltechworks.views.ScratchImageView;
 import com.gr_b07.R;
+import com.gr_b07.logik.FB;
 import com.gr_b07.logik.Settings;
 import com.gr_b07.logik.rewardItems;
 
@@ -34,6 +35,7 @@ public class ScratchCardActivity extends AppCompatActivity implements View.OnCli
     ImageView scratchCover;
     Random random = new Random();
     int chosenCard;
+    FB fb = new FB();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +54,7 @@ public class ScratchCardActivity extends AppCompatActivity implements View.OnCli
     public void onClick(View v) {
         if (Settings.getCurrentPupil().getExperience().getTicket() > 0) {
             Settings.getCurrentPupil().getExperience().setTicket(Settings.getCurrentPupil().getExperience().getTicket() - 1);
+            fb.updateDatabase();
             redeemButton.setVisibility(View.INVISIBLE);
             updateTextView();
             initScratchCard();
@@ -66,6 +69,13 @@ public class ScratchCardActivity extends AppCompatActivity implements View.OnCli
         scratchCover.setVisibility(View.INVISIBLE);
         scratchImageView.setVisibility(View.VISIBLE);
         scratchImageView.setImageResource(chooseScratchCard());
+        if (chosenCard == R.drawable.scratch_card_image_win_small) {
+            Settings.getCurrentPupil().addReward(rewardItems.smallPrize);
+        }
+        if (chosenCard == R.drawable.scratch_card_image_win_big) {
+            Settings.getCurrentPupil().addReward(rewardItems.bigPrize);
+        }
+        fb.updateDatabase();
         //Image1 callback
         scratchImageView.setRevealListener(new ScratchImageView.IRevealListener() {
             @Override
@@ -75,14 +85,12 @@ public class ScratchCardActivity extends AppCompatActivity implements View.OnCli
                 }
                 if (chosenCard == R.drawable.scratch_card_image_win_small) {
                     Toast.makeText(ScratchCardActivity.this, "You win a kombucha lol", Toast.LENGTH_SHORT).show();
-                    Settings.getCurrentPupil().addReward(rewardItems.smallPrize);
                 }
                 if (chosenCard == R.drawable.scratch_card_image_win_big) {
                     Toast.makeText(ScratchCardActivity.this, "You win a cykel lol", Toast.LENGTH_SHORT).show();
-                    Settings.getCurrentPupil().addReward(rewardItems.bigPrize);
                 }
-            }
 
+            }
             @Override
             public void onRevealPercentChangedListener(ScratchImageView siv, float percent) {
                 if (percent > 0.5) {

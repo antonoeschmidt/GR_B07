@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,13 +22,13 @@ import java.util.ArrayList;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
-public class recyclerViewAdapterRedeem extends RecyclerView.Adapter<recyclerViewAdapterRedeem.ViewHolder> {
+public class RecyclerViewAdapterRedeem extends RecyclerView.Adapter<RecyclerViewAdapterRedeem.ViewHolder> {
 
     private ArrayList<String> prizeNames = new ArrayList<>();
     private ArrayList<Integer> prizeImages = new ArrayList<>();
     private Context mContext;
 
-    public recyclerViewAdapterRedeem(ArrayList<String> prizeNames, ArrayList<Integer> prizeImages, Context mContext) {
+    public RecyclerViewAdapterRedeem(ArrayList<String> prizeNames, ArrayList<Integer> prizeImages, Context mContext) {
         this.prizeNames = prizeNames;
         this.prizeImages = prizeImages;
         this.mContext = mContext;
@@ -52,7 +51,7 @@ public class recyclerViewAdapterRedeem extends RecyclerView.Adapter<recyclerView
             @Override
             public void onClick(View view) {
                 //Toast.makeText(mContext, prizeNames.get(position),Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(mContext,rewardsPopUpActivity.class);
+                Intent intent = new Intent(mContext, RewardsPopUpActivity.class);
                 mContext.startActivity(intent);
             }
         });
