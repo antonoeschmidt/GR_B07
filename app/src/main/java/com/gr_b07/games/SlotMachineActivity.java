@@ -10,14 +10,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gr_b07.R;
-import com.gr_b07.games.ImageViewScrolling.IEventEnd;
 import com.gr_b07.games.ImageViewScrolling.ImageViewScrolling;
 import com.gr_b07.logik.Settings;
 import com.gr_b07.logik.rewardItems;
 
 import java.util.Random;
 
-public class SlotMachineActivity extends AppCompatActivity implements IEventEnd {
+public class SlotMachineActivity extends AppCompatActivity implements ImageViewScrolling.IEventEnd {
 
     ImageView buttonUp, buttonDown;
     ImageViewScrolling image, image2, image3;
