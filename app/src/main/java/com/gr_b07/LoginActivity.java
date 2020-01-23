@@ -46,6 +46,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        if (fb.getAuth().getCurrentUser() != null) {
+            fb.getAuth().signOut();
+        }
+
         usernameText = findViewById(R.id.usernameText);
         passwordText = findViewById(R.id.passwordText);
         loginButton = findViewById(R.id.loginButton);
@@ -78,6 +82,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 Intent signUpIntent = new Intent(this, SignUpActivity.class);
                 startActivity(signUpIntent);
                 break;
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if (fb.getAuth().getCurrentUser() != null) {
+            usernameText.setText(Settings.getCurrentPupil().getUsername());
+            passwordText.setText(Settings.getCurrentPupil().getPassword());
         }
     }
 }

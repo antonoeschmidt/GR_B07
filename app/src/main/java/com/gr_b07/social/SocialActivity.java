@@ -114,11 +114,6 @@ public class SocialActivity extends AppCompatActivity implements RecyclerViewAda
 
                 break;
             case R.id.buttonScanQRcode:
-                /*
-                Intent scanQRIntent = new Intent(this, ScanQRPopUpActivity.class);
-                startActivity(scanQRIntent);
-
-                 */
                 scan(this);
         }
 
@@ -136,19 +131,7 @@ public class SocialActivity extends AppCompatActivity implements RecyclerViewAda
             }
 
         }
-        /*
-        for (User user : Settings.getUsers()) {
-            if (user.getClass().equals(Pupil.class)
-                    && !Settings.getCurrentPupil().getUID().equals(user.getUID())
-                    && !Settings.getCurrentPupil().getFriends().contains(user.getUID())
-                    && !friendsUsernames.contains(user.getUsername())) {
-                friendsUsernames.add(user.getUsername());
-                friendsUserPhotos.add(R.drawable.friend_nophoto);
-                initializeFriendsRecyclerView();
-            }
-        }
 
-         */
     }
 
     public void initializeFriendsRecyclerView() {

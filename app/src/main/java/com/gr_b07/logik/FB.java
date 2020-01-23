@@ -63,6 +63,7 @@ public class FB {
                             Settings.setCurrentPupil(newUser);
                             updateDatabase();
                             progressDialog.hide();
+                            activity.finish();
                         } else {
                             Log.d("createUser", "createUserWithEmail:failure", task.getException());
                             Toast.makeText(activity, "Bruger kunne ikke oprettes", Toast.LENGTH_SHORT).show();
