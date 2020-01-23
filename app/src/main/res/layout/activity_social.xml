@@ -47,7 +47,7 @@
         android:layout_below="@id/buttonAddActivity"
         android:layout_marginStart="10dp"
         android:gravity="start"
-        android:text="Friends: " />
+        android:text="Venner: " />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/friendsRecyclerView"
@@ -65,7 +65,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginStart="10dp"
         android:gravity="start"
-        android:text="Suggested: " />
+        android:text="Foreslået: " />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/suggestedFriendsRecyclerView"
@@ -82,7 +82,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/suggestedFriendsRecyclerView"
         android:layout_centerHorizontal="true"
-        android:text="get friends ( lets get the bread)"
+        android:text="Find venner"
         android:textAllCaps="false" />
 
 
