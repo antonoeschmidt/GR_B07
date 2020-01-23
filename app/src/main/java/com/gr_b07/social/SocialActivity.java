@@ -67,7 +67,7 @@ public class SocialActivity extends AppCompatActivity implements RecyclerViewAda
         initializeFriendsRecyclerView();
         initializeSuggestedFriendsRecyclerView();
 
-        buttonGetFriends = findViewById(R.id.buttonGetFriends);//TODO: Delet
+        buttonGetFriends = findViewById(R.id.buttonGetFriends);
         buttonGetFriends.setOnClickListener(this);
         buttonGetFriends.setVisibility(View.INVISIBLE);
 
