@@ -118,7 +118,7 @@
         android:id="@+id/autoTextView"
         android:layout_width="241dp"
         android:layout_height="42dp"
-        android:hint="Søg efter din mad"
+        android:hint="Søg efter madvare"
         android:inputType="text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
