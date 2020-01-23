@@ -113,18 +113,18 @@ public class InputDataActivity extends AppCompatActivity implements View.OnClick
     public void doneButtonClick() throws ParseException {
         // Checks if radio button is selected, if not - Toast prints "choose gender" etc.
         if (!maleRadioButton.isChecked() && !femaleRadioButton.isChecked()) {
-            Toast.makeText(this, "Choose gender please.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Vælg dit køn", Toast.LENGTH_SHORT).show();
         }
         // If one the radio buttons is selected, jump into next loop
         else if (maleRadioButton.isChecked() || femaleRadioButton.isChecked()) {
             // If date of birth is more than 10 characters long (xx/xx/xxxx), that must mean its still the
             // original text in the box (alternative method but it works)
             if (dateTextView.getText().toString().length() > 10) {
-                Toast.makeText(this, "Enter date of birth, please.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Indtast venligst din fødselsdag", Toast.LENGTH_SHORT).show();
             } else if (editTextWeigth.getText().toString().isEmpty() || editTextHeight.getText().toString().isEmpty()) {
-                Toast.makeText(this, "Enter height and weight, please.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Indtast vægt og højde", Toast.LENGTH_SHORT).show();
             } else if (activityLevelRatingBar.getRating() == 0) {
-                Toast.makeText(this, "Enter activity-level please.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Vælg dit aktivitetsniveau", Toast.LENGTH_SHORT).show();
             }
             // else if they're both containing something - set height, weight and calculate body mass index.
             else if (!editTextWeigth.getText().toString().isEmpty() && !editTextHeight.getText().toString().isEmpty()
@@ -189,20 +189,20 @@ public class InputDataActivity extends AppCompatActivity implements View.OnClick
 
             if ((int) Math.round(Settings.getCurrentPupil().getPhysique().getHeight()) == 0) {
                 editTextHeight.setText("");
-                editTextHeight.setHint("Enter height");
+                editTextHeight.setHint("Indtast højde");
             } else if (Settings.getCurrentPupil().getPhysique().getHeight() != 0) {
                 editTextHeight.setText(Integer.toString((int) Math.round(Settings.getCurrentPupil().getPhysique().getHeight())));
             }
 
             if ((int) Math.round(Settings.getCurrentPupil().getPhysique().getWeight()) == 0) {
                 editTextWeigth.setText("");
-                editTextWeigth.setHint("Enter weight");
+                editTextWeigth.setHint("Indtast vægt");
             } else if (Settings.getCurrentPupil().getPhysique().getWeight() != 0) {
                 editTextWeigth.setText(Integer.toString((int) Math.round(Settings.getCurrentPupil().getPhysique().getWeight())));
             }
 
             if (Settings.getCurrentPupil().getPersonalInfo().getDateOfBirth() == 0) {
-                dateTextView.setText("Enter date of birth");
+                dateTextView.setText("Indtast fødselsdag");
             } else {
                 dateTextView.setText(df.format(Settings.getCurrentPupil().getPersonalInfo().getDateOfBirth()));
             }
@@ -216,10 +216,10 @@ public class InputDataActivity extends AppCompatActivity implements View.OnClick
         } else if (Settings.getCurrentPupil().isFirstTimeLoggedIn()){
             radioGroup.clearCheck();
             editTextHeight.setText("");
-            editTextHeight.setHint("Enter height");
+            editTextHeight.setHint("Indtast højde");
             editTextWeigth.setText("");
-            editTextWeigth.setHint("Enter weight");
-            dateTextView.setText("Enter date of birth");
+            editTextWeigth.setHint("Indtast vægt");
+            dateTextView.setText("Indtast fødselsdag");
             activityLevelRatingBar.setRating(0);
         }
 
