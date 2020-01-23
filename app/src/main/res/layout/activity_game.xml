@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="100dp"
-        android:text="Lodder: 10"
+        android:text="Mine lodder: 10"
         android:textAlignment="center"
         android:textColor="@color/colorBlack"
         android:textSize="36dp" />
@@ -35,7 +35,7 @@
         android:layout_toStartOf="@+id/layoutTextView"
         android:background="#0000"
         android:drawableTop="@drawable/ic_jackpot_machine"
-        android:text="Spilleautomaten" />
+        android:text="Kasino" />
 
     <Button
         android:id="@+id/buttonGameScratchCard"
