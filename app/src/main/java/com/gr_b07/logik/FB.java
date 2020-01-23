@@ -54,11 +54,11 @@ public class FB {
                             Log.d("createUser", "createUserWithEmail:success");
                             Toast.makeText(activity, "Sign Up Success", Toast.LENGTH_SHORT).show();
 
-                            Pupil newUser = new Pupil(true, email, password, auth.getUid(), new Physique(0,0,0),
+                            Pupil newUser = new Pupil(true, email, password, auth.getUid(), new Physique(0, 0, 0),
                                     new PersonalInfo("", "", "n", 0, 0),
-                                    new Experience(1,0,0,0,0,false,false,false,false),
-                                    new ArrayList<Meal>(),new ArrayList<String>(), new ArrayList<String>(), new ArrayList<Reward>()
-                                    );
+                                    new Experience(1, 0, 0, 0, 0, false, false, false, false),
+                                    new ArrayList<Meal>(), new ArrayList<String>(), new ArrayList<String>(), new ArrayList<Reward>()
+                            );
 
                             Settings.setCurrentPupil(newUser);
                             updateDatabase();
@@ -78,7 +78,7 @@ public class FB {
         myRef.setValue(Settings.getCurrentPupil());
     }
 
-    public void updateDatabaseFromUID(Pupil pupil){
+    public void updateDatabaseFromUID(Pupil pupil) {
         DatabaseReference uidRef = db.getReference(pupil.getUID());
         uidRef.setValue(pupil);
     }
@@ -101,7 +101,7 @@ public class FB {
                 if (auth != null && Settings.getCurrentUser().isFirstTimeLoggedIn()) {
                     Intent inputDataIntent = new Intent(activity, InputDataActivity.class);
                     activity.startActivity(inputDataIntent);
-                } else if (Settings.logginIn){
+                } else if (Settings.logginIn) {
                     Intent mainMenuIntent = new Intent(activity, MainMenuActivity.class);
                     activity.startActivity(mainMenuIntent);
                     Settings.logginIn = false;
@@ -134,7 +134,6 @@ public class FB {
                                 checkFirstTimeLoggedInFromDatabase(activity, firebaseUser.getUid());
 
                             }
-
 
 
                             if (Settings.getCurrentUser() != null) {
@@ -186,7 +185,6 @@ public class FB {
     public FirebaseAuth.AuthStateListener getAuthStateListener() {
         return authStateListener;
     }
-
 
 
 }

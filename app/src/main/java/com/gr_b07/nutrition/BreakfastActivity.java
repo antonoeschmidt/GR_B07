@@ -59,6 +59,8 @@ public class BreakfastActivity extends AbstractMealActivity {
             }
         });
         textViewHeader.setText("Morgenmad");
+        autoTextView.requestFocus();
+
     }
 
     @Override
