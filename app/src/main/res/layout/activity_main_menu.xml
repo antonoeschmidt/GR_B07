@@ -13,7 +13,8 @@
         android:layout_height="38dp"
         android:background="@drawable/mainmenu_settings_button"
         android:layout_margin="@dimen/default_stroke_width"
-        android:layout_alignParentRight="true"/>
+        android:layout_alignParentRight="true"
+        />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -36,7 +37,8 @@
             android:drawableLeft="@drawable/nutrition_image"
             android:drawablePadding="-45dip"
             android:paddingLeft="30dip"
-            android:paddingRight="26dip" />
+            android:paddingRight="26dip"
+            />
 
         <Button
             android:id="@+id/mainmenu_button2"

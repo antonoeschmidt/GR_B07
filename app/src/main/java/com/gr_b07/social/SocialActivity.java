@@ -67,9 +67,9 @@ public class SocialActivity extends AppCompatActivity implements RecyclerViewAda
         initializeFriendsRecyclerView();
         initializeSuggestedFriendsRecyclerView();
 
-
         buttonGetFriends = findViewById(R.id.buttonGetFriends);//TODO: Delet
         buttonGetFriends.setOnClickListener(this);
+        buttonGetFriends.setVisibility(View.INVISIBLE);
 
 
         fb.getAllUsersFromDatabase();
@@ -168,7 +168,6 @@ public class SocialActivity extends AppCompatActivity implements RecyclerViewAda
 
     @Override
     public void onItemClick(View view, int position) {
-        // TODO : GENNEMGÅ
         Log.d(Integer.toString(view.getId()), "onItemClick: ");
         if ((int) view.getTag() == friendsUsernames.size()) {
             Toast.makeText(this, "You clicked " + friendsAdapter.getItem(position) + " on item position " + position, Toast.LENGTH_SHORT).show();

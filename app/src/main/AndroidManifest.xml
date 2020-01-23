@@ -13,62 +13,101 @@
         tools:ignore="GoogleAppIndexingWarning">
         <activity
             android:name=".social.SeeQRCodePopUpActivity"
-            android:theme="@style/AppTheme.popUpTheme" />
+            android:theme="@style/AppTheme.popUpTheme"
+            android:launchMode = "singleTop"/>
         <activity
             android:name=".social.AddActivityPopUpActivity"
-            android:theme="@style/AppTheme.popUpTheme" />
+            android:theme="@style/AppTheme.popUpTheme"
+            android:launchMode = "singleTop"/>
         <activity
             android:name=".nutrition.MealsActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:launchMode = "singleTop"/>
         <activity
             android:name=".statistics.StatisticsActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:launchMode = "singleTop"/>
         <activity
             android:name=".SignUpActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:launchMode = "singleTop"/>
         <activity
             android:name=".games.redeemRewards.RedeemActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:launchMode = "singleTop"/>
         <activity
             android:name=".games.redeemRewards.RewardsPopUpActivity"
-            android:theme="@style/AppTheme.popUpTheme"/>
-        <activity android:name=".games.ChanceActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".games.ChestActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".games.ScratchCardActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".games.SlotMachineActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".games.GameActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".nutrition.AbstractMealActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".nutrition.SnacksActivity"
+            android:theme="@style/AppTheme.popUpTheme"
+            android:launchMode = "singleTop"/>
+        <activity
+            android:name=".games.ChanceActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateVisible"/>
-        <activity android:name=".nutrition.DinnerActivity"
+            android:launchMode = "singleTop"/>
+        <activity
+            android:name=".games.ChestActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateVisible"/>
-        <activity android:name=".nutrition.LunchActivity"
+            android:launchMode = "singleTop"/>
+        <activity
+            android:name=".games.ScratchCardActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateVisible"/>
-        <activity android:name=".nutrition.BreakfastActivity"
+            android:launchMode = "singleTop"/>
+        <activity
+            android:name=".games.SlotMachineActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateVisible"/>
-        <activity android:name=".InputDataActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".RewardsActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".social.SocialActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ActivityActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".nutrition.NutritionActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".MainMenuActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".LoginActivity"
+            android:launchMode = "singleTop"/>
+        <activity
+            android:name=".games.GameActivity"
+            android:screenOrientation="portrait"
+            android:launchMode = "singleTop"/>
+        <activity
+            android:name=".nutrition.AbstractMealActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".nutrition.SnacksActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateVisible"
+            android:launchMode = "singleTop"/>
+        <activity
+            android:name=".nutrition.DinnerActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateVisible"
+            android:launchMode = "singleTop"/>
+        <activity
+            android:name=".nutrition.LunchActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateVisible"
+            android:launchMode = "singleTop"/>
+        <activity
+            android:name=".nutrition.BreakfastActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateVisible"
+            android:launchMode = "singleTop"/>
+        <activity
+            android:name=".InputDataActivity"
+            android:screenOrientation="portrait"
+            android:launchMode = "singleTop"/>
+        <activity
+            android:name=".RewardsActivity"
+            android:screenOrientation="portrait"
+            android:launchMode = "singleTop"/>
+        <activity
+            android:name=".social.SocialActivity"
+            android:screenOrientation="portrait"
+            android:launchMode = "singleTop" />
+        <activity
+            android:name=".ActivityActivity"
+            android:screenOrientation="portrait"
+            android:launchMode = "singleTop"/>
+        <activity
+            android:name=".nutrition.NutritionActivity"
+            android:screenOrientation="portrait"
+            android:launchMode = "singleTop"/>
+        <activity
+            android:name=".MainMenuActivity"
+            android:screenOrientation="portrait"
+            android:launchMode = "singleTop"/>
+        <activity
+            android:name=".LoginActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -47,6 +47,7 @@ public class ScratchCardActivity extends AppCompatActivity implements View.OnCli
         setContentView(R.layout.activity_scratch_card);
         scratchCover = findViewById(R.id.scratchCover);
         scratchCardTextView = findViewById(R.id.scratchCardText);
+        scratchCardTextView.setVisibility(View.INVISIBLE);
         tickets = findViewById(R.id.ticketsScratchCard);
         scratchCardTextView.setText("0% afsløret");
         tickets.setText("Lodder: " + Settings.getCurrentPupil().getExperience().getTicket());
@@ -100,7 +101,7 @@ public class ScratchCardActivity extends AppCompatActivity implements View.OnCli
 
             @Override
             public void onRevealPercentChangedListener(ScratchImageView siv, float percent) {
-                if (percent > 0.5) {
+                if (percent > 0.6) {
                     scratchImageView.clear();
                 }
                 revealedPercent = percent;
