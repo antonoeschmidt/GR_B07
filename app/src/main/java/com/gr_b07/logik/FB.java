@@ -52,7 +52,7 @@ public class FB {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             Log.d("createUser", "createUserWithEmail:success");
-                            Toast.makeText(activity, "Sign Up Success", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(activity, "Bruger oprettet", Toast.LENGTH_SHORT).show();
 
                             Pupil newUser = new Pupil(true, email, password, auth.getUid(), new Physique(0, 0, 0),
                                     new PersonalInfo("", "", "n", 0, 0),
@@ -65,7 +65,7 @@ public class FB {
                             progressDialog.hide();
                         } else {
                             Log.d("createUser", "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(activity, "Sign Up Failed", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(activity, "Bruger kunne ikke oprettes", Toast.LENGTH_SHORT).show();
                             progressDialog.hide();
 
                         }
@@ -119,8 +119,7 @@ public class FB {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             Log.d("loginFire", "signInWithEmail:success");
-                            Toast.makeText(activity, "Logged In Success", Toast.LENGTH_SHORT).show();
-
+                            //Toast.makeText(activity, "Logged In Success", Toast.LENGTH_SHORT).show();
 
                             FirebaseUser firebaseUser = auth.getCurrentUser();
                             if (firebaseUser != null) {
@@ -140,7 +139,7 @@ public class FB {
 
                         } else {
                             Log.d("loginFire", "signInWithEmail:failure", task.getException());
-                            Toast.makeText(activity, "Logged In Failed", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(activity, "Login fejlede", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

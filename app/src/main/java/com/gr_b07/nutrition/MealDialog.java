@@ -36,20 +36,20 @@ public class MealDialog extends AppCompatDialogFragment {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.meal_dialog, null);
         builder.setView(view).setTitle(meal.getTypeOfMeal())
-                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                .setNegativeButton("Annuller", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
                     }
                 })
-                .setPositiveButton("Remove Meal", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Fjern måltid", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         System.out.println(Settings.getCurrentPupil().getMeals().toString());
                         Settings.getCurrentPupil().getMeals().remove(meal);
                         System.out.println(Settings.getCurrentPupil().getMeals().toString());
                         listener.updateMeals();
-                        Toast.makeText(getContext(), "Meal removed", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Måltid fjernet", Toast.LENGTH_SHORT).show();
 
                     }
                 });
@@ -60,11 +60,11 @@ public class MealDialog extends AppCompatDialogFragment {
         fatTextView = view.findViewById(R.id.fatTextView);
         dateTextView = view.findViewById(R.id.dateTextView);
 
-        caloriesTextView.setText(meal.getCalories() + " calories");
-        proteinTextView.setText(meal.getProtein() + " grams of protein");
-        carbsTextView.setText(meal.getCarbs() + " grams of carbs");
-        fatTextView.setText(meal.getFat() + " grams of fat");
-        dateTextView.setText("Eaten on " + Settings.longToStringDate(meal.getDate()));
+        caloriesTextView.setText(meal.getCalories() + " kalorier");
+        proteinTextView.setText(meal.getProtein() + " gram protein");
+        carbsTextView.setText(meal.getCarbs() + " gram kulhydrater");
+        fatTextView.setText(meal.getFat() + " gram fedt");
+        dateTextView.setText("Spist d. " + Settings.longToStringDate(meal.getDate()));
 
         return builder.create();
     }
