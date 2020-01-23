@@ -37,6 +37,7 @@ public class ScratchCardActivity extends AppCompatActivity implements View.OnCli
     ImageView scratchCover;
     Random random = new Random();
     int chosenCard;
+    RewardItems rewardItems = new RewardItems();
     FB fb = new FB();
 
 
@@ -74,10 +75,10 @@ public class ScratchCardActivity extends AppCompatActivity implements View.OnCli
         scratchImageView.setVisibility(View.VISIBLE);
         scratchImageView.setImageResource(chooseScratchCard());
         if (chosenCard == R.drawable.scratch_card_image_win_small) {
-            Settings.getCurrentPupil().addReward(RewardItems.drinkBottle);
+            Settings.getCurrentPupil().addReward(rewardItems.getTierOneReward());
         }
         if (chosenCard == R.drawable.scratch_card_image_win_big) {
-            Settings.getCurrentPupil().addReward(RewardItems.drinkBottle);
+            Settings.getCurrentPupil().addReward(rewardItems.getTierTwoReward());
         }
         fb.updateDatabase();
         //Image1 callback
