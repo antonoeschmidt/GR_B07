@@ -108,7 +108,7 @@ public class ScratchCardActivity extends AppCompatActivity implements View.OnCli
     }
 
     private void updateTextView() {
-        scratchCardTextView.setText(Math.round(revealedPercent * 100) + "% aflsøret");
+        scratchCardTextView.setText(Math.round(revealedPercent * 100) + "% afsløret");
         tickets.setText("Lodder: " + Settings.getCurrentPupil().getExperience().getTicket());
     }
 
