@@ -17,7 +17,7 @@ public class RewardsActivity extends AppCompatActivity implements View.OnClickLi
     private TextView levelTextView, totalXPtext, totalNutritionXPtextView, totalActivityXPtextView, totalSocialXPtextView, ticketTextView;
 
     private Button rewardButton, rewardTestButtonNutrition, rewardTestButtonActivity, rewardTestButtonSocial;
-    private CircularProgressBar circularProgressBar;
+    private CircularProgressBar circularProgressBarNutrition, circularProgressBarActivity, circularProgressBarSocial;
     private int xpType;
 
     @Override
@@ -25,7 +25,10 @@ public class RewardsActivity extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rewards);
 
-        circularProgressBar = findViewById(R.id.circularProgressBar);
+        circularProgressBarNutrition = findViewById(R.id.circularProgressBarNutrition);
+        circularProgressBarActivity = findViewById(R.id.circularProgressBarActivity);
+        circularProgressBarSocial = findViewById(R.id.circularProgressBarSocial);
+
         levelTextView = findViewById(R.id.textViewLevel);
         totalNutritionXPtextView = findViewById(R.id.totalNutritionXPText);
         totalActivityXPtextView = findViewById(R.id.totalActivityXPText);
@@ -41,12 +44,15 @@ public class RewardsActivity extends AppCompatActivity implements View.OnClickLi
         rewardTestButtonActivity.setOnClickListener(this);
         rewardTestButtonSocial.setOnClickListener(this);
         rewardButton.setOnClickListener(this);
-
-        circularProgressBar.setProgressMax(Settings.getCurrentPupil().getExperience().getLevel() * 5 + 10);
-        circularProgressBar.setProgress(0);
+        updateTextViews();
+        updateCircleBars();
 
         levelTextView.setText("Niveau: " + Integer.toString(Settings.getCurrentPupil().getExperience().getLevel()));
         ticketTextView.setText("Lodder: " + Settings.getCurrentPupil().getExperience().getTicket());
+
+        rewardTestButtonActivity.setVisibility(View.INVISIBLE);
+        rewardTestButtonNutrition.setVisibility(View.INVISIBLE);
+        rewardTestButtonSocial.setVisibility(View.INVISIBLE);
 
     }
 
@@ -75,42 +81,38 @@ public class RewardsActivity extends AppCompatActivity implements View.OnClickLi
             startActivity(gameIntent);
         }
         updateTextViews();
-        circularProgressBar.setProgressMax((Settings.getCurrentPupil().getExperience().getLevel() * 5 + 10));
-        circularProgressBar.setProgress(Settings.getCurrentPupil().getExperience().getTotalXP());
-        levelTextView.setText("Niveau " + Settings.getCurrentPupil().getExperience().getLevel());
-    }
-
-    public void checkLevel() {
-        circularProgressBar.setProgress(Settings.getCurrentPupil().getExperience().getTotalXP());
-        if (circularProgressBar.getProgress() >= circularProgressBar.getProgressMax()) {
-            if (xpType == 0) {
-                Settings.getCurrentPupil().getExperience().setNutritionXP(Settings.getCurrentPupil().getExperience().getTotalXP() % (Settings.getCurrentPupil().getExperience().getLevel() * 5 + 10));
-                Settings.getCurrentPupil().getExperience().setActivityXP(0);
-                Settings.getCurrentPupil().getExperience().setSocialXP(0);
-            }
-            if (xpType == 1) {
-                Settings.getCurrentPupil().getExperience().setActivityXP(Settings.getCurrentPupil().getExperience().getTotalXP() % (Settings.getCurrentPupil().getExperience().getLevel() * 5 + 10));
-                Settings.getCurrentPupil().getExperience().setNutritionXP(0);
-                Settings.getCurrentPupil().getExperience().setSocialXP(0);
-            }
-            if (xpType == 2) {
-                Settings.getCurrentPupil().getExperience().setSocialXP(Settings.getCurrentPupil().getExperience().getTotalXP() % (Settings.getCurrentPupil().getExperience().getLevel() * 5 + 10));
-                Settings.getCurrentPupil().getExperience().setNutritionXP(0);
-                Settings.getCurrentPupil().getExperience().setActivityXP(0);
-            }
-            Settings.getCurrentPupil().getExperience().setLevel(Settings.getCurrentPupil().getExperience().getLevel() + 1);
-            Settings.getCurrentPupil().getExperience().setTicket(Settings.getCurrentPupil().getExperience().getTicket() + 1);
-
-        }
+        updateCircleBars();
     }
 
     public void updateTextViews() {
-        levelTextView.setText("Niveau " + Settings.getCurrentPupil().getExperience().getLevel());
-        totalXPtext.setText("Total XP\n " + Settings.getCurrentPupil().getExperience().getTotalXP()+ " / " + (Settings.getCurrentPupil().getExperience().getLevel() * 5 + 10));
+        levelTextView.setText("Level " + Settings.getCurrentPupil().getExperience().getLevel());
+        totalXPtext.setText("Total XP\n " + Settings.getCurrentPupil().getExperience().getTotalXP() + " / " + (Settings.getCurrentPupil().getExperience().getLevel() * 5 + 10));
         totalNutritionXPtextView.setText("Ernæringspoint: " + Settings.getCurrentPupil().getExperience().getNutritionXP());
         totalActivityXPtextView.setText("Aktivitetspoint: " + Settings.getCurrentPupil().getExperience().getActivityXP());
         totalSocialXPtextView.setText("Venskabspoint: " + Settings.getCurrentPupil().getExperience().getSocialXP());
-        circularProgressBar.setProgress(Settings.getCurrentPupil().getExperience().getTotalXP());
         ticketTextView.setText("Lodder: " + Settings.getCurrentPupil().getExperience().getTicket());
     }
+
+    public void updateCircleBars() {
+        circularProgressBarNutrition.setProgressMax((Settings.getCurrentPupil().getExperience().getLevel() * 5 + 10));
+        circularProgressBarActivity.setProgressMax((Settings.getCurrentPupil().getExperience().getLevel() * 5 + 10));
+        circularProgressBarSocial.setProgressMax((Settings.getCurrentPupil().getExperience().getLevel() * 5 + 10));
+        circularProgressBarNutrition.setProgress(Settings.getCurrentPupil().getExperience().getNutritionXP());
+        circularProgressBarActivity.setProgress(Settings.getCurrentPupil().getExperience().getActivityXP());
+        circularProgressBarSocial.setProgress(Settings.getCurrentPupil().getExperience().getSocialXP());
+        if (Settings.getCurrentPupil().getExperience().getNutritionXP() == 0) {
+            circularProgressBarActivity.setStartAngle(0);
+        } else {
+            circularProgressBarActivity.setStartAngle(360 / (circularProgressBarNutrition.getProgressMax()
+                    / Settings.getCurrentPupil().getExperience().getNutritionXP()));
+        }
+        if (Settings.getCurrentPupil().getExperience().getActivityXP() + Settings.getCurrentPupil().getExperience().getNutritionXP() == 0) {
+            circularProgressBarSocial.setStartAngle(0);
+        } else {
+            circularProgressBarSocial.setStartAngle(360 / (circularProgressBarNutrition.getProgressMax()
+                    / (Settings.getCurrentPupil().getExperience().getActivityXP() + Settings.getCurrentPupil().getExperience().getNutritionXP())));
+        }
+
+    }
+
 }

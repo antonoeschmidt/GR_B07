@@ -52,20 +52,20 @@ public class FB {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             Log.d("createUser", "createUserWithEmail:success");
-                            Toast.makeText(activity, "Sign Up Success", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(activity, "Bruger oprettet", Toast.LENGTH_SHORT).show();
 
-                            Pupil newUser = new Pupil(true, email, password, auth.getUid(), new Physique(0,0,0),
+                            Pupil newUser = new Pupil(true, email, password, auth.getUid(), new Physique(0, 0, 0),
                                     new PersonalInfo("", "", "n", 0, 0),
-                                    new Experience(1,0,0,0,0,false,false,false,false),
-                                    new ArrayList<Meal>(),new ArrayList<String>(), new ArrayList<String>(), new ArrayList<Reward>()
-                                    );
+                                    new Experience(1, 0, 0, 0, 0, false, false, false, false),
+                                    new ArrayList<Meal>(), new ArrayList<String>(), new ArrayList<String>(), new ArrayList<Reward>()
+                            );
 
                             Settings.setCurrentPupil(newUser);
                             updateDatabase();
                             progressDialog.hide();
                         } else {
                             Log.d("createUser", "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(activity, "Sign Up Failed", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(activity, "Bruger kunne ikke oprettes", Toast.LENGTH_SHORT).show();
                             progressDialog.hide();
 
                         }
@@ -95,7 +95,7 @@ public class FB {
                 if (auth != null && Settings.getCurrentUser().isFirstTimeLoggedIn()) {
                     Intent inputDataIntent = new Intent(activity, InputDataActivity.class);
                     activity.startActivity(inputDataIntent);
-                } else if (Settings.logginIn){
+                } else if (Settings.logginIn) {
                     Intent mainMenuIntent = new Intent(activity, MainMenuActivity.class);
                     activity.startActivity(mainMenuIntent);
                     Settings.logginIn = false;
@@ -119,8 +119,7 @@ public class FB {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             Log.d("loginFire", "signInWithEmail:success");
-                            Toast.makeText(activity, "Logged In Success", Toast.LENGTH_SHORT).show();
-
+                            //Toast.makeText(activity, "Logged In Success", Toast.LENGTH_SHORT).show();
 
                             FirebaseUser firebaseUser = auth.getCurrentUser();
                             if (firebaseUser != null) {
@@ -128,7 +127,6 @@ public class FB {
                                 checkFirstTimeLoggedInFromDatabase(activity, firebaseUser.getUid());
 
                             }
-
 
 
                             if (Settings.getCurrentUser() != null) {
@@ -141,7 +139,7 @@ public class FB {
 
                         } else {
                             Log.d("loginFire", "signInWithEmail:failure", task.getException());
-                            Toast.makeText(activity, "Logged In Failed", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(activity, "Login fejlede", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -180,7 +178,6 @@ public class FB {
     public FirebaseAuth.AuthStateListener getAuthStateListener() {
         return authStateListener;
     }
-
 
 
 }

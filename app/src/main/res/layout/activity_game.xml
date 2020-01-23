@@ -46,7 +46,7 @@
         android:layout_toEndOf="@+id/layoutTextView"
         android:background="#0000"
         android:drawableTop="@drawable/ic_scratch"
-        android:text="Skab og vind" />
+        android:text="Skrab og vind" />
 
     <Button
         android:id="@+id/buttonGameChest"

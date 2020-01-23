@@ -6,6 +6,7 @@ public class DinnerActivity extends BreakfastActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        autoTextView.requestFocus();
         textViewHeader.setText("Aftensmad");
     }
 }
