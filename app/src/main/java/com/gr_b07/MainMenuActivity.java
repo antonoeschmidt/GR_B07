@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ActionBar;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -21,6 +22,9 @@ import com.gr_b07.logik.Settings;
 import com.gr_b07.nutrition.NutritionActivity;
 import com.gr_b07.social.SocialActivity;
 
+import io.sentry.Sentry;
+import io.sentry.android.AndroidSentryClientFactory;
+
 public class MainMenuActivity extends AppCompatActivity implements View.OnClickListener{
     private Button mainButton1, mainButton2, mainButton3, mainButton4, mainButton5;
     private TextView levelTextView, xpTextView;
@@ -30,6 +34,12 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
+
+        boolean EMULATOR = Build.PRODUCT.contains("sdk") || Build.MODEL.contains("Emulator");
+        if (!EMULATOR) {
+            Sentry.init("https://ae47774e314c4b79a5b3eff0ec2dbecb@sentry.io/1895656", new AndroidSentryClientFactory(this));
+            Sentry.capture(this.getClass().getSimpleName());
+        }
 
         mainButton1 = findViewById(R.id.mainmenu_button1);
         mainButton1.setOnClickListener(this);

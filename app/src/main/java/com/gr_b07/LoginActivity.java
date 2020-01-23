@@ -2,6 +2,7 @@ package com.gr_b07;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Message;
 import android.util.Log;
@@ -32,6 +33,9 @@ import com.gr_b07.logik.User;
 
 import java.util.Date;
 
+import io.sentry.Sentry;
+import io.sentry.android.AndroidSentryClientFactory;
+
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     private EditText usernameText;
     private EditText passwordText;
@@ -48,6 +52,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         if (fb.getAuth().getCurrentUser() != null) {
             fb.getAuth().signOut();
+        }
+
+        boolean EMULATOR = Build.PRODUCT.contains("sdk") || Build.MODEL.contains("Emulator");
+        if (!EMULATOR) {
+            Sentry.init("https://ae47774e314c4b79a5b3eff0ec2dbecb@sentry.io/1895656", new AndroidSentryClientFactory(this));
+            Sentry.capture(this.getClass().getSimpleName());
         }
 
         usernameText = findViewById(R.id.usernameText);
