@@ -141,6 +141,7 @@ public class FB {
                         } else {
                             Log.d("loginFire", "signInWithEmail:failure", task.getException());
                             Toast.makeText(activity, "Login fejlede", Toast.LENGTH_SHORT).show();
+                            progressDialog.hide();
                         }
                     }
                 });

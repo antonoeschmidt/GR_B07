@@ -38,10 +38,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Opretter bruger");
 
-        // TODO: DELETE THIS
-
-        usernameText.setText("healthy2@gmail.com");
-        passwordText.setText("123123");
     }
 
     @Override

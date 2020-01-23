@@ -69,11 +69,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Logger ind");
-
-        // TODO: DELETE THIS
-
-        usernameText.setText("healthy14@gmail.com");
-        passwordText.setText("123123");
     }
 
     @Override
@@ -81,11 +76,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         switch (v.getId()) {
             case R.id.loginButton:
                 //der kommer android.view.WindowLeak her, men det har ingen betydning for appen og den crasher ikke
-                progressDialog.show();
+
                 if (usernameText.getText().toString().equals("admin") && passwordText.getText().toString().equals("admin")) {
                     //adminlogin
                 } else {
-                    fb.firebaseSignIn(progressDialog,this,usernameText.getText().toString(),passwordText.getText().toString());
+                    if (!usernameText.getText().toString().isEmpty() && !passwordText.getText().toString().isEmpty()) {
+                        progressDialog.show();
+                        fb.firebaseSignIn(progressDialog,this,usernameText.getText().toString(),passwordText.getText().toString());
+                    }
+                    Toast.makeText(this, "Indtast din e-mail og kode", Toast.LENGTH_SHORT).show();
+                    
                 }
                 break;
 
