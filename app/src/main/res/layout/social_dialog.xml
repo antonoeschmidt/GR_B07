@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/friendsNameTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="34dp"
+        android:text="Kalorier"/>
+
+    <TextView
+        android:id="@+id/friendsUsernameTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="24dp"
+        android:layout_below="@+id/friendsNameTextView"
+        android:text="Protein"/>
+
+    <TextView
+        android:id="@+id/friendsActivityTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="24dp"
+        android:layout_below="@id/friendsUsernameTextView"
+        android:text="Fedt" />
+
+
+</RelativeLayout>

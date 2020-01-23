@@ -1,6 +1,7 @@
 package com.gr_b07.social;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,10 +23,11 @@ import com.gr_b07.logik.FB;
 import com.gr_b07.logik.Pupil;
 import com.gr_b07.logik.Settings;
 import com.gr_b07.logik.User;
+import com.gr_b07.nutrition.MealDialog;
 
 import java.util.ArrayList;
 
-public class SocialActivity extends AppCompatActivity implements RecyclerViewAdapterSocial.ItemClickListener, View.OnClickListener {
+public class SocialActivity extends AppCompatActivity implements RecyclerViewAdapterSocial.ItemClickListener, View.OnClickListener, SocialDialog.DialogFragmentUpdateListener {
 
     private FB fb = new FB();
     private ImageView imageViewAccountPhoto;
@@ -123,13 +125,16 @@ public class SocialActivity extends AppCompatActivity implements RecyclerViewAda
     }
 
     public void initializeFriends() {
+        friendsUsernames.clear();
         for (String friend : Settings.getCurrentPupil().getFriends()) {
-            if (friendsUsernames.contains(friend)) {
+            Pupil pupil = (Pupil) getFriendFromUID(friend);
+            if (friendsUsernames.contains(pupil.getUID())) {
             } else if (!friendsUsernames.contains(friend)) {
-                friendsUsernames.add(friend);
+                friendsUsernames.add(pupil.getUID());
                 friendsUserPhotos.add(R.drawable.friend_nophoto);
                 initializeFriendsRecyclerView();
             }
+
         }
         /*
         for (User user : Settings.getUsers()) {
@@ -184,11 +189,18 @@ public class SocialActivity extends AppCompatActivity implements RecyclerViewAda
         Log.d(Integer.toString(view.getId()), "onItemClick: ");
         if ((int) view.getTag() == friendsUsernames.size()) {
             Toast.makeText(this, "You clicked " + friendsAdapter.getItem(position) + " on item position " + position, Toast.LENGTH_SHORT).show();
+            openDialog(position);
         } else if ((int) view.getTag() == suggestedFriendsUsernames.size()) {
             Toast.makeText(this, "You clicked " + suggestedAdapter.getItem(position) + " on item position " + position, Toast.LENGTH_SHORT).show();
         }
 
 
+    }
+
+    private void openDialog(int position) {
+        SocialDialog socialDialog = new SocialDialog((Pupil) getFriendFromUID(friendsUsernames.get(position)));
+        FragmentManager manager = (getSupportFragmentManager());
+        socialDialog.show(manager,"meal dialog");
     }
 
     public void checkArraySizes() {
@@ -238,10 +250,29 @@ public class SocialActivity extends AppCompatActivity implements RecyclerViewAda
                 } else if (!Settings.getCurrentPupil().getFriends().contains(resultFromScan)) {
                     Settings.getCurrentPupil().getFriends().add(resultFromScan);
                     Toast.makeText(this, "Du har tilføjet \n" + resultFromScan, Toast.LENGTH_SHORT).show();
+                    fb.updateDatabase();
                 }
             }
             initializeFriends();
         }
     }
 
+    public User getFriendFromUID(String UID){
+        for (User user : Settings.getUsers()) {
+            if (user.getClass().equals(Pupil.class)){
+                if (user.getUID().equals(UID)){
+                    return user;
+                }
+            }
+        }
+        return null;
+
+    }
+
+    @Override
+    public void updateFriends() {
+        initializeFriends();
+        friendsAdapter.notifyDataSetChanged();
+        fb.updateDatabase();
+    }
 }

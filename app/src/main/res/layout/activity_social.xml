@@ -45,35 +45,34 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/buttonAddActivity"
-        android:layout_marginStart="10dp"
+        android:layout_margin="@dimen/default_background_stroke_width"
         android:gravity="start"
         android:text="Venner: " />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/friendsRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         android:layout_below="@id/friendsTextView"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp" />
+        android:layout_margin="@dimen/default_background_stroke_width" />
 
     <TextView
         android:id="@+id/suggestedFriendsTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/friendsRecyclerView"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="10dp"
+        android:layout_margin="@dimen/default_background_stroke_width"
         android:gravity="start"
         android:text="Foreslået: " />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/suggestedFriendsRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         android:layout_below="@id/suggestedFriendsTextView"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp" />
+        android:layout_margin="@dimen/default_background_stroke_width" />
 
 
     <Button
