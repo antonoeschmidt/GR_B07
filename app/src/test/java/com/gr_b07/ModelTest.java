@@ -9,6 +9,7 @@ import com.gr_b07.logik.Reward;
 import com.gr_b07.logik.Settings;
 import com.gr_b07.logik.User;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -23,7 +24,8 @@ public class ModelTest {
     private List<String> activities = new ArrayList<>();
     private List<Reward> rewards = new ArrayList<>();
 
-    public void initializePupilObject() {
+    @Before
+    public void setUp() {
         meals.add(new Meal("Jordbær", 200,100,50,25,"Breakfast", 1579695267));
         friends.add("Jørgen");
         activities.add("Fodbold");
@@ -31,16 +33,16 @@ public class ModelTest {
 
         Pupil pupil = new Pupil
                 (true, "pupil@dtu.dk", "123123", "pupilUID",
-                new Physique(195,81,3),
-                new PersonalInfo("Ole", "Olesen", "male", 912470400, 2450),
-                new Experience(5, 2, 4, 8, 3, false, false, false, false),
-                meals, friends, activities, rewards);
+                        new Physique(195,81,3),
+                        new PersonalInfo("Ole", "Olesen", "male", 912470400, 2450),
+                        new Experience(5, 2, 4, 8, 3, false, false, false, false),
+                        meals, friends, activities, rewards);
         Settings.setCurrentPupil(pupil);
     }
 
+
     @Test
     public void testPupilObject() {
-        initializePupilObject();
         assertEquals(true, Settings.getCurrentPupil().isFirstTimeLoggedIn());
         assertEquals("pupil@dtu.dk", Settings.getCurrentPupil().getUsername());
         assertEquals("123123", Settings.getCurrentPupil().getPassword());
@@ -73,5 +75,19 @@ public class ModelTest {
         assertEquals("Æble", Settings.getCurrentPupil().getRewards().get(0).getName());
         assertEquals(1, Settings.getCurrentPupil().getRewards().get(0).getTier());
         assertEquals(R.drawable.apple, Settings.getCurrentPupil().getRewards().get(0).getResource());
+    }
+
+    @Test
+    public void testFriends() {
+        setUp();
+        assertEquals("Jørgen", Settings.getCurrentPupil().getFriends().get(0));
+    }
+
+    @Test
+    public void testFriendsSize() {
+        System.out.println(Settings.getCurrentPupil().getFriends().toString());
+        assertEquals(1, Settings.getCurrentPupil().getFriends().size());
+        friends.add("Dinmor");
+        assertEquals(2, Settings.getCurrentPupil().getFriends().size());
     }
 }
