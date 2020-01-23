@@ -19,6 +19,8 @@ import com.gr_b07.logik.Pupil;
 import com.gr_b07.logik.Settings;
 import com.gr_b07.nutrition.MealDialog;
 
+/** Inspiration taget fra https://www.youtube.com/watch?v=ARezg1D9Zd0&t=22s **/
+
 public class SocialDialog extends AppCompatDialogFragment {
     private Pupil pupil;
     private DialogFragmentUpdateListener listener;

@@ -20,6 +20,8 @@ import com.gr_b07.R;
 import com.gr_b07.logik.Meal;
 import com.gr_b07.logik.Settings;
 
+/** Inspiration taget fra https://www.youtube.com/watch?v=ARezg1D9Zd0&t=22s **/
+
 public class MealDialog extends AppCompatDialogFragment {
     private TextView caloriesTextView, proteinTextView, carbsTextView, fatTextView, dateTextView;
     private Meal meal;
