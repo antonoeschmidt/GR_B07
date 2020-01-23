@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,6 +23,7 @@ import java.util.Set;
 
 public class SlotMachineActivity extends AppCompatActivity implements ImageViewScrolling.IEventEnd {
 
+    Button startSlotButton;
     ImageView buttonUp, buttonDown;
     ImageViewScrolling image, image2, image3;
     TextView tickets;
@@ -34,6 +36,8 @@ public class SlotMachineActivity extends AppCompatActivity implements ImageViewS
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_slot_machine);
+
+        startSlotButton = findViewById(R.id.startSlotButton);
 
         buttonUp = findViewById(R.id.buttonUp);
         buttonDown = findViewById(R.id.buttonDown);
@@ -49,7 +53,7 @@ public class SlotMachineActivity extends AppCompatActivity implements ImageViewS
         image2.setEventEnd(SlotMachineActivity.this);
         image3.setEventEnd(SlotMachineActivity.this);
 
-        buttonUp.setOnClickListener(new View.OnClickListener() {
+        startSlotButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(Settings.getCurrentPupil().getExperience().getTicket() >= 1){
