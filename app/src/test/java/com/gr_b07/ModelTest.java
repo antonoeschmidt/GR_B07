@@ -7,6 +7,7 @@ import com.gr_b07.logik.Physique;
 import com.gr_b07.logik.Pupil;
 import com.gr_b07.logik.Reward;
 import com.gr_b07.logik.Settings;
+import com.gr_b07.logik.User;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -16,7 +17,7 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
-public class InputDataActivityTest {
+public class ModelTest {
 
     private List<Meal> meals = new ArrayList<>();
     private List<String> friends = new ArrayList<>();
@@ -30,20 +31,22 @@ public class InputDataActivityTest {
         activities.add("Fodbold");
         rewards.add(new Reward("Æble", 1, R.drawable.apple));
 
-        Pupil pupil = new Pupil(true, "test@dtu.dk", "123123", "zajhdsakgfas", new Physique(195,81,3),
-                new PersonalInfo("Ole", "Olesen", "male", 912470400, 2450),
-                new Experience(5, 2, 4, 8, 3, false, false, false, false),
-                meals, friends, activities, rewards);
+        Pupil pupil = new Pupil
+                (true, "pupil@dtu.dk", "123123", "pupilUID",
+                        new Physique(195,81,3),
+                        new PersonalInfo("Ole", "Olesen", "male", 912470400, 2450),
+                        new Experience(5, 2, 4, 8, 3, false, false, false, false),
+                        meals, friends, activities, rewards);
         Settings.setCurrentPupil(pupil);
     }
 
+
     @Test
     public void testPupilObject() {
-        setUp();
         assertEquals(true, Settings.getCurrentPupil().isFirstTimeLoggedIn());
-        assertEquals("test@dtu.dk", Settings.getCurrentPupil().getUsername());
+        assertEquals("pupil@dtu.dk", Settings.getCurrentPupil().getUsername());
         assertEquals("123123", Settings.getCurrentPupil().getPassword());
-        assertEquals("zajhdsakgfas", Settings.getCurrentPupil().getUID());
+        assertEquals("pupilUID", Settings.getCurrentPupil().getUID());
         assertEquals(195, (int) Settings.getCurrentPupil().getPhysique().getHeight());
         assertEquals(81, (int) Settings.getCurrentPupil().getPhysique().getWeight());
         assertEquals(3, Settings.getCurrentPupil().getPhysique().getActivityLevel());
@@ -75,11 +78,16 @@ public class InputDataActivityTest {
     }
 
     @Test
-    public void addMealTest() {
-        assertEquals(meals.size(), 1);
-        meals.add(new Meal("Banan", 200,100,50,25,"Breakfast", 1579695267));
-        assertEquals(meals.size(), 2);
+    public void testFriends() {
+        setUp();
+        assertEquals("Jørgen", Settings.getCurrentPupil().getFriends().get(0));
     }
 
-
+    @Test
+    public void testFriendsSize() {
+        System.out.println(Settings.getCurrentPupil().getFriends().toString());
+        assertEquals(1, Settings.getCurrentPupil().getFriends().size());
+        friends.add("Dinmor");
+        assertEquals(2, Settings.getCurrentPupil().getFriends().size());
+    }
 }

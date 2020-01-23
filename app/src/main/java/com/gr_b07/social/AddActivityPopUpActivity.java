@@ -55,7 +55,7 @@ public class AddActivityPopUpActivity extends AppCompatActivity implements View.
         int width = dm.widthPixels;
         int height = dm.heightPixels;
 
-        getWindow().setLayout((int) (width * 0.8),(int) (height * 0.8));
+        getWindow().setLayout((int) (width * 0.8), (int) (height * 0.8));
 
         createDBarray();
         System.out.println(activities.toString());
@@ -127,4 +127,5 @@ public class AddActivityPopUpActivity extends AppCompatActivity implements View.
         }
 
     }
+
 }

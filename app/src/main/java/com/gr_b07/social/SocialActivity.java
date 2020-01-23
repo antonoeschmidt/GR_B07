@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -26,6 +27,9 @@ import com.gr_b07.logik.User;
 import com.gr_b07.nutrition.MealDialog;
 
 import java.util.ArrayList;
+
+import io.sentry.Sentry;
+import io.sentry.android.AndroidSentryClientFactory;
 
 public class SocialActivity extends AppCompatActivity implements RecyclerViewAdapterSocial.ItemClickListener, View.OnClickListener, SocialDialog.DialogFragmentUpdateListener {
 
@@ -48,6 +52,12 @@ public class SocialActivity extends AppCompatActivity implements RecyclerViewAda
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_social);
+
+        boolean EMULATOR = Build.PRODUCT.contains("sdk") || Build.MODEL.contains("Emulator");
+        if (!EMULATOR) {
+            Sentry.init("https://ae47774e314c4b79a5b3eff0ec2dbecb@sentry.io/1895656", new AndroidSentryClientFactory(this));
+            Sentry.capture(this.getClass().getSimpleName());
+        }
 
 
         buttonSeeQRcode = findViewById(R.id.buttonSeeQRcode);
