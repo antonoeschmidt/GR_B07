@@ -123,10 +123,13 @@ public class SocialActivity extends AppCompatActivity implements RecyclerViewAda
     }
 
     public void initializeFriends() {
-        for (String friend: Settings.getCurrentPupil().getFriends()){
-            friendsUsernames.add(friend);
-            friendsUserPhotos.add(R.drawable.friend_nophoto);
-            initializeFriendsRecyclerView();
+        for (String friend : Settings.getCurrentPupil().getFriends()) {
+            if (friendsUsernames.contains(friend)) {
+            } else if (!friendsUsernames.contains(friend)) {
+                friendsUsernames.add(friend);
+                friendsUserPhotos.add(R.drawable.friend_nophoto);
+                initializeFriendsRecyclerView();
+            }
         }
         /*
         for (User user : Settings.getUsers()) {
@@ -207,7 +210,7 @@ public class SocialActivity extends AppCompatActivity implements RecyclerViewAda
             if (result.getContents() == null) {
 
             } else {
-                resultFromScan = result.getContents().toString();
+                resultFromScan = result.getContents();
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data);
@@ -225,14 +228,14 @@ public class SocialActivity extends AppCompatActivity implements RecyclerViewAda
         integrator.initiateScan();
     }
 
-    public void returnFromScan(){
-        if (resultFromScan.isEmpty()){
+    public void returnFromScan() {
+        if (resultFromScan.isEmpty()) {
             Toast.makeText(this, "Du annulerede scanningen", Toast.LENGTH_SHORT).show();
         } else if (!resultFromScan.isEmpty()) {
-            if (resultFromScan.length() == 28){
-                if (Settings.getCurrentPupil().getFriends().contains(resultFromScan)){
+            if (resultFromScan.length() == 28) {
+                if (Settings.getCurrentPupil().getFriends().contains(resultFromScan)) {
                     Toast.makeText(this, "I er allerede venner.", Toast.LENGTH_SHORT).show();
-                } else if (!Settings.getCurrentPupil().getFriends().contains(resultFromScan)){
+                } else if (!Settings.getCurrentPupil().getFriends().contains(resultFromScan)) {
                     Settings.getCurrentPupil().getFriends().add(resultFromScan);
                     Toast.makeText(this, "Du har tilføjet \n" + resultFromScan, Toast.LENGTH_SHORT).show();
                 }
