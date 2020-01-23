@@ -70,8 +70,6 @@ public class SlotMachineActivity extends AppCompatActivity implements ImageViewS
             }
         });
 
-        Settings.getCurrentPupil().getExperience().setTicket(100);
-
     }
 
     @Override

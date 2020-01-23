@@ -13,15 +13,12 @@
         tools:ignore="GoogleAppIndexingWarning">
         <activity
             android:name=".social.ScanQRPopUpActivity"
-            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.popUpTheme" />
         <activity
             android:name=".social.SeeQRCodePopUpActivity"
-            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.popUpTheme" />
         <activity
             android:name=".social.AddActivityPopUpActivity"
-            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.popUpTheme" />
         <activity
             android:name=".nutrition.MealsActivity"
@@ -37,8 +34,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".games.redeemRewards.RewardsPopUpActivity"
-            android:theme="@style/AppTheme.popUpTheme"
-            android:screenOrientation="portrait"/>
+            android:theme="@style/AppTheme.popUpTheme"/>
         <activity android:name=".games.ChanceActivity"
             android:screenOrientation="portrait"/>
         <activity android:name=".games.ChestActivity"
