@@ -10,5 +10,6 @@
     <color name="colorBlack">#000000</color>
     <color name="rewardBronze">#cd7f32</color>
     <color name="rewardGold">#FFD700</color>
+    <color name="transparent">#80000000</color>
 
 </resources>
