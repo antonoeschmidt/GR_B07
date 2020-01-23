@@ -12,9 +12,6 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name=".social.ScanQRPopUpActivity"
-            android:theme="@style/AppTheme.popUpTheme" />
-        <activity
             android:name=".social.SeeQRCodePopUpActivity"
             android:theme="@style/AppTheme.popUpTheme" />
         <activity

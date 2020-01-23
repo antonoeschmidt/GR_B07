@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -14,6 +15,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 import com.gr_b07.R;
 import com.gr_b07.logik.FB;
 import com.gr_b07.logik.Pupil;
@@ -36,6 +39,7 @@ public class SocialActivity extends AppCompatActivity implements RecyclerViewAda
     private ArrayList<Integer> friendsUserPhotos = new ArrayList<>();
     private ArrayList<String> suggestedFriendsUsernames = new ArrayList<>();
     private ArrayList<Integer> suggestedFriendsUserPhotos = new ArrayList<>();
+    private String resultFromScan = "";
 
 
     @Override
@@ -108,13 +112,26 @@ public class SocialActivity extends AppCompatActivity implements RecyclerViewAda
 
                 break;
             case R.id.buttonScanQRcode:
+                /*
                 Intent scanQRIntent = new Intent(this, ScanQRPopUpActivity.class);
                 startActivity(scanQRIntent);
+
+                 */
+                scan(this);
         }
 
     }
 
     public void initializeFriends() {
+        for (String friend : Settings.getCurrentPupil().getFriends()) {
+            if (friendsUsernames.contains(friend)) {
+            } else if (!friendsUsernames.contains(friend)) {
+                friendsUsernames.add(friend);
+                friendsUserPhotos.add(R.drawable.friend_nophoto);
+                initializeFriendsRecyclerView();
+            }
+        }
+        /*
         for (User user : Settings.getUsers()) {
             if (user.getClass().equals(Pupil.class)
                     && !Settings.getCurrentPupil().getUID().equals(user.getUID())
@@ -125,6 +142,8 @@ public class SocialActivity extends AppCompatActivity implements RecyclerViewAda
                 initializeFriendsRecyclerView();
             }
         }
+
+         */
     }
 
     public void initializeFriendsRecyclerView() {
@@ -182,6 +201,47 @@ public class SocialActivity extends AppCompatActivity implements RecyclerViewAda
     @Override
     protected void onResume() {
         super.onResume();
-        Toast.makeText(this, Settings.getCurrentPupil().getFriends().toString(), Toast.LENGTH_SHORT).show();
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+        if (result != null) {
+            if (result.getContents() == null) {
+
+            } else {
+                resultFromScan = result.getContents();
+            }
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
+        returnFromScan();
+    }
+
+    public void scan(Activity activty) {
+        IntentIntegrator integrator = new IntentIntegrator(this);
+        integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE_TYPES);
+        integrator.setPrompt("Scan");
+        integrator.setCameraId(0);
+        integrator.setBeepEnabled(false);
+        integrator.setBarcodeImageEnabled(false);
+        integrator.initiateScan();
+    }
+
+    public void returnFromScan() {
+        if (resultFromScan.isEmpty()) {
+            Toast.makeText(this, "Du annulerede scanningen", Toast.LENGTH_SHORT).show();
+        } else if (!resultFromScan.isEmpty()) {
+            if (resultFromScan.length() == 28) {
+                if (Settings.getCurrentPupil().getFriends().contains(resultFromScan)) {
+                    Toast.makeText(this, "I er allerede venner.", Toast.LENGTH_SHORT).show();
+                } else if (!Settings.getCurrentPupil().getFriends().contains(resultFromScan)) {
+                    Settings.getCurrentPupil().getFriends().add(resultFromScan);
+                    Toast.makeText(this, "Du har tilføjet \n" + resultFromScan, Toast.LENGTH_SHORT).show();
+                }
+            }
+            initializeFriends();
+        }
+    }
+
 }

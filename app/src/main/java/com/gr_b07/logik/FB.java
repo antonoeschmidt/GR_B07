@@ -78,12 +78,6 @@ public class FB {
         myRef.setValue(Settings.getCurrentPupil());
     }
 
-    public void updateDatabaseFromUID(Pupil pupil) {
-        DatabaseReference uidRef = db.getReference(pupil.getUID());
-        uidRef.setValue(pupil);
-    }
-
-
     public void checkFirstTimeLoggedInFromDatabase(final Activity activity, String UID) {
         DatabaseReference myRef = db.getReference(UID);
 
