@@ -121,7 +121,7 @@ public class NutritionActivity extends AppCompatActivity implements View.OnClick
         pProgress.setProgress((int) Math.round(Settings.getCurrentPupil().getDailyIntake(System.currentTimeMillis()).getProtein()));
         cProgress.setProgress((int) Math.round(Settings.getCurrentPupil().getDailyIntake(System.currentTimeMillis()).getCarbs()));
         fProgress.setProgress((int) Math.round(Settings.getCurrentPupil().getDailyIntake(System.currentTimeMillis()).getFat()));
-        caloriesTextView.setText("Calories" + "\n" + (int) Settings.getCurrentPupil().getDailyIntake(System.currentTimeMillis()).getCalories() + "  /  " + (int) cRing.getProgressMax());
+        caloriesTextView.setText("Kalorier" + "\n" + (int) Settings.getCurrentPupil().getDailyIntake(System.currentTimeMillis()).getCalories() + "  /  " + (int) cRing.getProgressMax());
         proteinProgressTextView.setText((int) Settings.getCurrentPupil().getDailyIntake(System.currentTimeMillis()).getProtein() +  "  /  " + pProgress.getMax() + " g");
         carbsProgressTextView.setText((int) Settings.getCurrentPupil().getDailyIntake(System.currentTimeMillis()).getCarbs() + "  /  " + cProgress.getMax() + " g");
         fatProgressTextView.setText((int) Settings.getCurrentPupil().getDailyIntake(System.currentTimeMillis()).getFat() + "  /  " + fProgress.getMax() + " g");
@@ -133,7 +133,7 @@ public class NutritionActivity extends AppCompatActivity implements View.OnClick
                 && !Settings.getCurrentPupil().getExperience().isXPForCalories()) {
             Settings.getCurrentPupil().getExperience().setNutritionXP(Settings.getCurrentPupil().getExperience().getNutritionXP() + 5);
             Settings.getCurrentPupil().getExperience().setXPForCalories(true);
-            Toast.makeText(this, "Cal + 5", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Kalorier + 5", Toast.LENGTH_SHORT).show();
         }
         if ((int) Settings.getCurrentPupil().getDailyIntake(System.currentTimeMillis()).getProtein() >= pProgress.getMax()
                 && !Settings.getCurrentPupil().getExperience().isXPForProtein()) {
@@ -145,13 +145,13 @@ public class NutritionActivity extends AppCompatActivity implements View.OnClick
                 && !Settings.getCurrentPupil().getExperience().isXPForCarbs()) {
             Settings.getCurrentPupil().getExperience().setNutritionXP(Settings.getCurrentPupil().getExperience().getNutritionXP() + 5);
             Settings.getCurrentPupil().getExperience().setXPForCarbs(true);
-            Toast.makeText(this, "Carbs + 5", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Kulhydrater + 5", Toast.LENGTH_SHORT).show();
         }
         if ((int) Settings.getCurrentPupil().getDailyIntake(System.currentTimeMillis()).getFat() >= fProgress.getMax() &&
                 !Settings.getCurrentPupil().getExperience().isXPForFat()) {
             Settings.getCurrentPupil().getExperience().setNutritionXP(Settings.getCurrentPupil().getExperience().getNutritionXP() + 5);
             Settings.getCurrentPupil().getExperience().setXPForFat(true);
-            Toast.makeText(this, "Fat + 5", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Fedt + 5", Toast.LENGTH_SHORT).show();
         }
         fb.updateDatabase();
     }

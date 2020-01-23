@@ -47,8 +47,8 @@ public class ScratchCardActivity extends AppCompatActivity implements View.OnCli
         scratchCover = findViewById(R.id.scratchCover);
         scratchCardTextView = findViewById(R.id.scratchCardText);
         tickets = findViewById(R.id.ticketsScratchCard);
-        scratchCardTextView.setText("0% Revealed");
-        tickets.setText("Tickets: " + Settings.getCurrentPupil().getExperience().getTicket());
+        scratchCardTextView.setText("0% afsløret");
+        tickets.setText("Lodder: " + Settings.getCurrentPupil().getExperience().getTicket());
         redeemButton = findViewById(R.id.redeemButton);
         redeemButton.setOnClickListener(this);
 
@@ -63,7 +63,7 @@ public class ScratchCardActivity extends AppCompatActivity implements View.OnCli
             updateTextView();
             initScratchCard();
         } else {
-            Toast.makeText(this, "Du har ikke nok tickets.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Du har ikke nok lodder.", Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -88,10 +88,10 @@ public class ScratchCardActivity extends AppCompatActivity implements View.OnCli
                     Toast.makeText(ScratchCardActivity.this, "Ingen gevinst", Toast.LENGTH_SHORT).show();
                 }
                 if (chosenCard == R.drawable.scratch_card_image_win_small) {
-                    Toast.makeText(ScratchCardActivity.this, "You win a kombucha lol", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ScratchCardActivity.this, "Du har vundet en lille præmie", Toast.LENGTH_SHORT).show();
                 }
                 if (chosenCard == R.drawable.scratch_card_image_win_big) {
-                    Toast.makeText(ScratchCardActivity.this, "You win a cykel lol", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ScratchCardActivity.this, "Du har vundet en stor præmie", Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -108,8 +108,8 @@ public class ScratchCardActivity extends AppCompatActivity implements View.OnCli
     }
 
     private void updateTextView() {
-        scratchCardTextView.setText(Math.round(revealedPercent * 100) + "% Revealed");
-        tickets.setText("Tickets: " + Settings.getCurrentPupil().getExperience().getTicket());
+        scratchCardTextView.setText(Math.round(revealedPercent * 100) + "% aflsøret");
+        tickets.setText("Lodder: " + Settings.getCurrentPupil().getExperience().getTicket());
     }
 
     private int chooseScratchCard() {
