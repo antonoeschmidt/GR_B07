@@ -29,7 +29,7 @@
         android:drawableLeft="@drawable/login_password_image"
         android:ems="10"
         android:fontFamily="@font/roboto"
-        android:hint="Kodeord"
+        android:hint="Adgangskode"
         android:inputType="textPassword" />
 
     <Button
