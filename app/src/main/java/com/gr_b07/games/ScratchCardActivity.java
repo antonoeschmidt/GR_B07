@@ -30,14 +30,15 @@ import java.util.Random;
 
 public class ScratchCardActivity extends AppCompatActivity implements View.OnClickListener {
 
-    ScratchImageView scratchImageView;
-    TextView scratchCardTextView, tickets;
-    float revealedPercent;
-    Button redeemButton;
-    ImageView scratchCover;
-    Random random = new Random();
-    int chosenCard;
-    FB fb = new FB();
+    private ScratchImageView scratchImageView;
+    private TextView scratchCardTextView, tickets;
+    private float revealedPercent;
+    private Button redeemButton;
+    private ImageView scratchCover;
+    private Random random = new Random();
+    private int chosenCard;
+    private RewardItems rewardItems = new RewardItems();
+    private FB fb = new FB();
 
 
     @Override
@@ -46,9 +47,11 @@ public class ScratchCardActivity extends AppCompatActivity implements View.OnCli
         setContentView(R.layout.activity_scratch_card);
         scratchCover = findViewById(R.id.scratchCover);
         scratchCardTextView = findViewById(R.id.scratchCardText);
+        scratchCardTextView.setVisibility(View.INVISIBLE);
         tickets = findViewById(R.id.ticketsScratchCard);
         scratchCardTextView.setText("0% afsløret");
         tickets.setText("Lodder: " + Settings.getCurrentPupil().getExperience().getTicket());
+        tickets.setVisibility(View.INVISIBLE);
         redeemButton = findViewById(R.id.redeemButton);
         redeemButton.setOnClickListener(this);
 
@@ -74,10 +77,10 @@ public class ScratchCardActivity extends AppCompatActivity implements View.OnCli
         scratchImageView.setVisibility(View.VISIBLE);
         scratchImageView.setImageResource(chooseScratchCard());
         if (chosenCard == R.drawable.scratch_card_image_win_small) {
-            Settings.getCurrentPupil().addReward(RewardItems.drinkBottle);
+            Settings.getCurrentPupil().addReward(rewardItems.getTierOneReward());
         }
         if (chosenCard == R.drawable.scratch_card_image_win_big) {
-            Settings.getCurrentPupil().addReward(RewardItems.drinkBottle);
+            Settings.getCurrentPupil().addReward(rewardItems.getTierTwoReward());
         }
         fb.updateDatabase();
         //Image1 callback
@@ -98,7 +101,7 @@ public class ScratchCardActivity extends AppCompatActivity implements View.OnCli
 
             @Override
             public void onRevealPercentChangedListener(ScratchImageView siv, float percent) {
-                if (percent > 0.5) {
+                if (percent > 0.6) {
                     scratchImageView.clear();
                 }
                 revealedPercent = percent;

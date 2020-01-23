@@ -50,6 +50,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        if (fb.getAuth().getCurrentUser() != null) {
+            fb.getAuth().signOut();
+        }
+
         boolean EMULATOR = Build.PRODUCT.contains("sdk") || Build.MODEL.contains("Emulator");
         if (!EMULATOR) {
             Sentry.init("https://ae47774e314c4b79a5b3eff0ec2dbecb@sentry.io/1895656", new AndroidSentryClientFactory(this));
@@ -66,16 +70,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Logger ind");
 
-
-
         // TODO: DELETE THIS
 
-        usernameText.setText("healthy2@gmail.com");
+        usernameText.setText("healthy14@gmail.com");
         passwordText.setText("123123");
-
-
-
-        }
+    }
 
     @Override
     public void onClick(View v) {
@@ -93,6 +92,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 Intent signUpIntent = new Intent(this, SignUpActivity.class);
                 startActivity(signUpIntent);
                 break;
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if (fb.getAuth().getCurrentUser() != null) {
+            usernameText.setText(Settings.getCurrentPupil().getUsername());
+            passwordText.setText(Settings.getCurrentPupil().getPassword());
         }
     }
 }

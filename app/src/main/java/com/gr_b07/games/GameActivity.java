@@ -57,13 +57,11 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.buttonGameChest:
-                Intent chestIntent = new Intent(this, ChestActivity.class);
-                startActivity(chestIntent);
+                Toast.makeText(this, "Kommer snart", Toast.LENGTH_SHORT).show();
                 break;
 
             case R.id.buttonGameChance:
-                Intent chanceIntent = new Intent(this, ChanceActivity.class);
-                startActivity(chanceIntent);
+                Toast.makeText(this, "Kommer snart", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.buttonRedeem:
                 Intent redeemIntent = new Intent(this, RedeemActivity.class);

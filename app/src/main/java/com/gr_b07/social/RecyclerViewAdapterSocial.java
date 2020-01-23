@@ -66,7 +66,7 @@ public class RecyclerViewAdapterSocial extends RecyclerView.Adapter<RecyclerView
             textViewFriend = itemView.findViewById(R.id.textViewFriend);
             imageViewFriend = itemView.findViewById(R.id.imageViewFriend);
             itemView.setOnClickListener(this);
-            itemView.setTag((int) usernames.size()); // TODO: SLET HVIS IKKE VIRKER
+            itemView.setTag((int) usernames.size());
         }
 
         @Override

@@ -6,6 +6,7 @@ import com.gr_b07.logik.PersonalInfo;
 import com.gr_b07.logik.Physique;
 import com.gr_b07.logik.Pupil;
 import com.gr_b07.logik.Reward;
+import com.gr_b07.logik.RewardItems;
 import com.gr_b07.logik.Settings;
 import com.gr_b07.logik.User;
 import com.gr_b07.nutrition.NutritionActivity;
@@ -20,6 +21,7 @@ import static org.junit.Assert.*;
 
 public class ModelTest {
 
+    private RewardItems rewardItems = new RewardItems();
     private List<Meal> meals = new ArrayList<>();
     private List<String> friends = new ArrayList<>();
     private List<String> activities = new ArrayList<>();
@@ -27,16 +29,16 @@ public class ModelTest {
 
     @Before
     public void setUp() {
-        meals.add(new Meal("Jordbær", 200,100,50,25,"Breakfast", 1579695267));
+        meals.add(new Meal("Jordbær", 200, 100, 50, 25, "Breakfast", 1579695267));
         friends.add("Jørgen");
         activities.add("Fodbold");
         rewards.add(new Reward("Æble", 1, R.drawable.apple));
 
         Pupil pupil = new Pupil
                 (true, "pupil@dtu.dk", "123123", "pupilUID",
-                        new Physique(195,81,3),
+                        new Physique(195, 81, 3),
                         new PersonalInfo("Ole", "Olesen", "male", 912470400, 2450),
-                        new Experience(5, 2, 4, 8, 3, false, false, false, false),
+                        new Experience(1, 2, 4, 8, 3, false, false, false, false),
                         meals, friends, activities, rewards);
         Settings.setCurrentPupil(pupil);
     }
@@ -57,7 +59,7 @@ public class ModelTest {
         assertEquals("male", Settings.getCurrentPupil().getPersonalInfo().getGender());
         assertEquals(912470400, Settings.getCurrentPupil().getPersonalInfo().getDateOfBirth());
         assertEquals(2450, Settings.getCurrentPupil().getPersonalInfo().getZipCode());
-        assertEquals(5, Settings.getCurrentPupil().getExperience().getLevel());
+        assertEquals(1, Settings.getCurrentPupil().getExperience().getLevel());
         assertEquals(2, Settings.getCurrentPupil().getExperience().getNutritionXP());
         assertEquals(4, Settings.getCurrentPupil().getExperience().getActivityXP());
         assertEquals(8, Settings.getCurrentPupil().getExperience().getSocialXP());
@@ -102,6 +104,24 @@ public class ModelTest {
 
     @Test
     public void test() {
+
+    }
+
+    @Test
+    public void testRewardType() {
+        Settings.getCurrentPupil().addReward(rewardItems.getTierOneReward());
+        assertEquals(true, Settings.getCurrentPupil().getRewards().get(Settings.getCurrentPupil().getRewards().size() - 1).getTier() == 1);
+        Settings.getCurrentPupil().addReward(rewardItems.getTierTwoReward());
+        assertEquals(true, Settings.getCurrentPupil().getRewards().get(Settings.getCurrentPupil().getRewards().size() - 1).getTier() == 2);
+    }
+
+    @Test
+    public void testLevelUp() {
+        Settings.getCurrentPupil().getExperience().setNutritionXP(Settings.getCurrentPupil().getExperience().getNutritionXP() + 2);
+        assertEquals(2,Settings.getCurrentPupil().getExperience().getLevel());
+        assertEquals(1,Settings.getCurrentPupil().getExperience().getNutritionXP());
+        assertEquals(0,Settings.getCurrentPupil().getExperience().getActivityXP());
+        assertEquals(0,Settings.getCurrentPupil().getExperience().getSocialXP());
 
     }
 }

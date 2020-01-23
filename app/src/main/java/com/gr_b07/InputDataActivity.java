@@ -68,7 +68,6 @@ public class InputDataActivity extends AppCompatActivity implements View.OnClick
         doneButton = findViewById(R.id.doneButton);
         doneButton.setOnClickListener(this);
 
-        // TODO: fix code
         getUserInfo();
     }
 
@@ -223,8 +222,5 @@ public class InputDataActivity extends AppCompatActivity implements View.OnClick
             dateTextView.setText("Indtast fødselsdag");
             activityLevelRatingBar.setRating(0);
         }
-
-
-        //}
     }
 }

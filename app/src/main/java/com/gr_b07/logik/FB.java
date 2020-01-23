@@ -63,6 +63,7 @@ public class FB {
                             Settings.setCurrentPupil(newUser);
                             updateDatabase();
                             progressDialog.hide();
+                            activity.finish();
                         } else {
                             Log.d("createUser", "createUserWithEmail:failure", task.getException());
                             Toast.makeText(activity, "Bruger kunne ikke oprettes", Toast.LENGTH_SHORT).show();
@@ -84,7 +85,6 @@ public class FB {
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot d) {
-                //måske bruges
                 Settings.setCurrentUser(d.getValue(Pupil.class));
 
                 if (Settings.getCurrentUser().getClass().equals(Pupil.class)) {

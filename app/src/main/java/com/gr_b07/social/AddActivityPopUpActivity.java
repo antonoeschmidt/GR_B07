@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.gr_b07.R;
 import com.gr_b07.logik.Food;
@@ -67,8 +68,7 @@ public class AddActivityPopUpActivity extends AppCompatActivity implements View.
         autoTextViewAddActivity.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-
+                
                 Settings.hideSoftKeyboard(AddActivityPopUpActivity.this);
             }
         });
@@ -113,6 +113,18 @@ public class AddActivityPopUpActivity extends AppCompatActivity implements View.
 
     @Override
     public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.buttonAddActivity:
+                if (!autoTextViewAddActivity.getText().toString().isEmpty()) {
+                    Settings.getCurrentPupil().addActivity(autoTextViewAddActivity.getText().toString());
+                    Toast.makeText(this, "Aktivitet tilføjet", Toast.LENGTH_SHORT).show();
+                    finish();
+
+                } else {
+                    Toast.makeText(this, "Vælg en aktivitet før du tilføjer", Toast.LENGTH_SHORT).show();
+                }
+                break;
+        }
 
     }
 

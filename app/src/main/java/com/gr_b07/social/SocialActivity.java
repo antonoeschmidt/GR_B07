@@ -77,9 +77,9 @@ public class SocialActivity extends AppCompatActivity implements RecyclerViewAda
         initializeFriendsRecyclerView();
         initializeSuggestedFriendsRecyclerView();
 
-
-        buttonGetFriends = findViewById(R.id.buttonGetFriends);//TODO: Delet
+        buttonGetFriends = findViewById(R.id.buttonGetFriends);
         buttonGetFriends.setOnClickListener(this);
+        buttonGetFriends.setVisibility(View.INVISIBLE);
 
 
         fb.getAllUsersFromDatabase();
@@ -124,11 +124,6 @@ public class SocialActivity extends AppCompatActivity implements RecyclerViewAda
 
                 break;
             case R.id.buttonScanQRcode:
-                /*
-                Intent scanQRIntent = new Intent(this, ScanQRPopUpActivity.class);
-                startActivity(scanQRIntent);
-
-                 */
                 scan(this);
         }
 
@@ -146,19 +141,7 @@ public class SocialActivity extends AppCompatActivity implements RecyclerViewAda
             }
 
         }
-        /*
-        for (User user : Settings.getUsers()) {
-            if (user.getClass().equals(Pupil.class)
-                    && !Settings.getCurrentPupil().getUID().equals(user.getUID())
-                    && !Settings.getCurrentPupil().getFriends().contains(user.getUID())
-                    && !friendsUsernames.contains(user.getUsername())) {
-                friendsUsernames.add(user.getUsername());
-                friendsUserPhotos.add(R.drawable.friend_nophoto);
-                initializeFriendsRecyclerView();
-            }
-        }
 
-         */
     }
 
     public void initializeFriendsRecyclerView() {
@@ -195,7 +178,6 @@ public class SocialActivity extends AppCompatActivity implements RecyclerViewAda
 
     @Override
     public void onItemClick(View view, int position) {
-        // TODO : GENNEMGÅ
         Log.d(Integer.toString(view.getId()), "onItemClick: ");
         if ((int) view.getTag() == friendsUsernames.size()) {
             Toast.makeText(this, "You clicked " + friendsAdapter.getItem(position) + " on item position " + position, Toast.LENGTH_SHORT).show();
@@ -260,6 +242,7 @@ public class SocialActivity extends AppCompatActivity implements RecyclerViewAda
                 } else if (!Settings.getCurrentPupil().getFriends().contains(resultFromScan)) {
                     Settings.getCurrentPupil().getFriends().add(resultFromScan);
                     Toast.makeText(this, "Du har tilføjet \n" + resultFromScan, Toast.LENGTH_SHORT).show();
+                    Settings.getCurrentPupil().getExperience().setSocialXP(Settings.getCurrentPupil().getExperience().getSocialXP() + 5);
                     fb.updateDatabase();
                 }
             }

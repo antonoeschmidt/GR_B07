@@ -17,7 +17,6 @@ import io.sentry.Sentry;
 import io.sentry.android.AndroidSentryClientFactory;
 
 public class RewardsActivity extends AppCompatActivity implements View.OnClickListener {
-    // private ProgressBar rProgress;
     private TextView levelTextView, totalXPtext, totalNutritionXPtextView, totalActivityXPtextView, totalSocialXPtextView, ticketTextView;
 
     private Button rewardButton, rewardTestButtonNutrition, rewardTestButtonActivity, rewardTestButtonSocial;
@@ -39,6 +38,10 @@ public class RewardsActivity extends AppCompatActivity implements View.OnClickLi
         circularProgressBarActivity = findViewById(R.id.circularProgressBarActivity);
         circularProgressBarSocial = findViewById(R.id.circularProgressBarSocial);
 
+        circularProgressBarNutrition.setProgress(Settings.getCurrentPupil().getExperience().getNutritionXP());
+        circularProgressBarActivity.setProgress(Settings.getCurrentPupil().getExperience().getActivityXP());
+        circularProgressBarSocial.setProgress(Settings.getCurrentPupil().getExperience().getSocialXP());
+
         levelTextView = findViewById(R.id.textViewLevel);
         totalNutritionXPtextView = findViewById(R.id.totalNutritionXPText);
         totalActivityXPtextView = findViewById(R.id.totalActivityXPText);
@@ -54,6 +57,7 @@ public class RewardsActivity extends AppCompatActivity implements View.OnClickLi
         rewardTestButtonActivity.setOnClickListener(this);
         rewardTestButtonSocial.setOnClickListener(this);
         rewardButton.setOnClickListener(this);
+
         updateTextViews();
         updateCircleBars();
 

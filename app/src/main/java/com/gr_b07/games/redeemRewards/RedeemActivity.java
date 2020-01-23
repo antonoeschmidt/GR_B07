@@ -15,8 +15,8 @@ import java.util.ArrayList;
 
 public class RedeemActivity extends AppCompatActivity {
 
-    FrameLayout layout_redeem;
-    RecyclerView recyclerView;
+    private FrameLayout layout_redeem;
+    private RecyclerView recyclerView;
     private ArrayList<String> prizeNames = new ArrayList<>();
     private ArrayList<Integer> prizeImages = new ArrayList<>();
 
