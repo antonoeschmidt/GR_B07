@@ -58,7 +58,9 @@ public class BreakfastActivity extends AbstractMealActivity {
                 Settings.hideSoftKeyboard(BreakfastActivity.this);
             }
         });
+        autoTextView.requestFocus();
         textViewHeader.setText("Breakfast");
+
     }
 
     @Override
