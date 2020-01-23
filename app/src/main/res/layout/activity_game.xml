@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="100dp"
-        android:text="Tickets: 10"
+        android:text="Lodder: 10"
         android:textAlignment="center"
         android:textColor="@color/colorBlack"
         android:textSize="36dp" />
@@ -35,7 +35,7 @@
         android:layout_toStartOf="@+id/layoutTextView"
         android:background="#0000"
         android:drawableTop="@drawable/ic_jackpot_machine"
-        android:text="Slotmachine" />
+        android:text="Spilleautomaten" />
 
     <Button
         android:id="@+id/buttonGameScratchCard"
@@ -46,7 +46,7 @@
         android:layout_toEndOf="@+id/layoutTextView"
         android:background="#0000"
         android:drawableTop="@drawable/ic_scratch"
-        android:text="Scratch" />
+        android:text="Skab og vind" />
 
     <Button
         android:id="@+id/buttonGameChest"
@@ -57,7 +57,7 @@
         android:layout_toStartOf="@+id/layoutTextView"
         android:background="#0000"
         android:drawableTop="@drawable/ic_chest"
-        android:text="Chest" />
+        android:text="Skattekiste" />
 
     <Button
         android:id="@+id/buttonGameChance"
@@ -68,7 +68,7 @@
         android:layout_toEndOf="@+id/layoutTextView"
         android:background="#0000"
         android:drawableTop="@drawable/ic_question"
-        android:text="Chancen" />
+        android:text="Tag Chancen" />
 
     <Button
         android:id="@+id/buttonRedeem"
@@ -78,5 +78,5 @@
         android:layout_centerHorizontal="true"
         android:layout_margin="@dimen/default_stroke_width"
         android:background="@drawable/mainmenu_reward_button"
-        android:text="See / Redeem rewards" />
+        android:text="Se / Indløs præmie" />
 </RelativeLayout>
