@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="34dp"
-        android:text="Cals"/>
+        android:text="Kalorier"/>
 
     <TextView
         android:id="@+id/proteinTextView"
@@ -16,14 +16,14 @@
         android:layout_height="wrap_content"
         android:textSize="24dp"
         android:layout_below="@+id/caloriesTextView"
-        android:text="Prot"/>
+        android:text="Protein"/>
     <TextView
         android:id="@+id/carbsTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="24dp"
         android:layout_below="@+id/proteinTextView"
-        android:text="Carbs"/>
+        android:text="Kulhydrater"/>
 
     <TextView
         android:id="@+id/fatTextView"
@@ -31,7 +31,7 @@
         android:layout_height="wrap_content"
         android:textSize="24dp"
         android:layout_below="@+id/carbsTextView"
-        android:text="Fat" />
+        android:text="Fedt" />
 
     <TextView
         android:id="@+id/dateTextView"
@@ -39,7 +39,7 @@
         android:layout_height="wrap_content"
         android:textSize="24dp"
         android:layout_below="@+id/fatTextView"
-        android:text="Eaten at dd/MM/yyyy" />
+        android:text="Spist den dd/MM/yyyy" />
 
 
 </RelativeLayout>
