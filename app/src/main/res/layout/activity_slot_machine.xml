@@ -22,7 +22,8 @@
         android:layout_width="300dp"
         android:layout_height="175dp"
         android:layout_centerInParent="true"
-        android:background="@drawable/frame">
+        android:background="@drawable/frame"
+        android:layout_marginBottom="@dimen/default_stroke_width">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -66,6 +67,17 @@
         android:layout_toEndOf="@id/slotFrame"
         android:layout_centerVertical="true"
         android:visibility="gone" />
+
+    <Button
+        android:id="@+id/startSlotButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/mainmenu_reward_button"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/slotFrame"
+        android:layout_margin="@dimen/default_stroke_width"
+        android:text="Spin"
+        android:textAlignment="center"/>
 
 
 </RelativeLayout>
