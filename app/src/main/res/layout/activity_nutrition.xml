@@ -18,7 +18,7 @@
             android:id="@+id/caloriesTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="CALORIES / TOTAL CALORIES"
+            android:text="KALORIER / TOTAL KALORIER"
             android:layout_centerInParent="true"
             android:textAlignment="center"
             android:textSize="20sp" />
@@ -76,7 +76,7 @@
             android:layout_height="wrap_content"
             android:layout_above="@id/progressbarCarbs"
             android:layout_centerHorizontal="true"
-            android:text="Carbs"
+            android:text="Kulhydrater"
             android:textSize="14dp" />
 
         <ProgressBar
@@ -103,7 +103,7 @@
             android:layout_height="wrap_content"
             android:layout_above="@id/progressbarCarbs"
             android:layout_toStartOf="@+id/statsButton"
-            android:text="Fat"
+            android:text="Fedt"
             android:layout_alignLeft="@id/progressbarFat"
             android:layout_alignRight="@id/progressbarFat"
             android:textAlignment="center"
@@ -176,7 +176,7 @@
             android:background="@drawable/nutrition_buttons"
             android:layout_margin="@dimen/default_stroke_width"
             android:fontFamily="@font/raleway"
-            android:text="  Breakfast"
+            android:text="  Morgenmad"
             android:textAlignment="viewStart"
             android:textAllCaps="false"
             android:textSize="28dp" />
@@ -189,7 +189,7 @@
             android:background="@drawable/nutrition_buttons"
             android:layout_margin="@dimen/default_stroke_width"
             android:fontFamily="@font/raleway"
-            android:text="  Lunch"
+            android:text="  Frokost"
             android:textAlignment="viewStart"
             android:textAllCaps="false"
             android:textSize="28dp" />
@@ -204,7 +204,7 @@
             android:background="@drawable/nutrition_buttons"
             android:layout_margin="@dimen/default_stroke_width"
             android:fontFamily="@font/raleway"
-            android:text="  Dinner"
+            android:text="  Aftensmad"
             android:textAlignment="viewStart"
             android:textAllCaps="false"
             android:textSize="28dp" />
@@ -218,7 +218,7 @@
             android:layout_margin="@dimen/default_stroke_width"
             android:background="@drawable/nutrition_buttons"
             android:fontFamily="@font/raleway"
-            android:text="  Snack"
+            android:text="  Snacks"
             android:textAlignment="viewStart"
             android:textAllCaps="false"
             android:textSize="28dp" />
