@@ -2,14 +2,20 @@ package com.gr_b07.games;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cooltechworks.views.ScratchImageView;
 import com.gr_b07.R;
+import com.gr_b07.logik.FB;
+import com.gr_b07.logik.FB;
 import com.gr_b07.logik.Settings;
 import com.gr_b07.logik.RewardItems;
 
@@ -24,17 +30,20 @@ import java.util.Random;
 
 public class ScratchCardActivity extends AppCompatActivity implements View.OnClickListener {
 
-    protected ScratchImageView scratchImageView;
-    protected TextView scratchCardTextView, tickets;
-    protected float revealedPercent;
-    protected Button redeemButton;
-    protected Random random = new Random();
-    protected int chosenCard;
+    ScratchImageView scratchImageView;
+    TextView scratchCardTextView, tickets;
+    float revealedPercent;
+    Button redeemButton;
+    ImageView scratchCover;
+    Random random = new Random();
+    int chosenCard;
+    FB fb = new FB();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scratch_card);
+        scratchCover = findViewById(R.id.scratchCover);
         scratchCardTextView = findViewById(R.id.scratchCardText);
         tickets = findViewById(R.id.ticketsScratchCard);
         scratchCardTextView.setText("0% Revealed");
@@ -47,6 +56,7 @@ public class ScratchCardActivity extends AppCompatActivity implements View.OnCli
     public void onClick(View v) {
         if (Settings.getCurrentPupil().getExperience().getTicket() > 0) {
             Settings.getCurrentPupil().getExperience().setTicket(Settings.getCurrentPupil().getExperience().getTicket() - 1);
+            fb.updateDatabase();
             redeemButton.setVisibility(View.INVISIBLE);
             updateTextView();
             initScratchCard();
@@ -58,8 +68,16 @@ public class ScratchCardActivity extends AppCompatActivity implements View.OnCli
 
     private void initScratchCard() {
         scratchImageView = findViewById(R.id.scratchCardView);
+        scratchCover.setVisibility(View.INVISIBLE);
         scratchImageView.setVisibility(View.VISIBLE);
         scratchImageView.setImageResource(chooseScratchCard());
+        if (chosenCard == R.drawable.scratch_card_image_win_small) {
+            Settings.getCurrentPupil().addReward(rewardItems.smallPrize);
+        }
+        if (chosenCard == R.drawable.scratch_card_image_win_big) {
+            Settings.getCurrentPupil().addReward(rewardItems.bigPrize);
+        }
+        fb.updateDatabase();
         //Image1 callback
         scratchImageView.setRevealListener(new ScratchImageView.IRevealListener() {
             @Override
@@ -69,12 +87,11 @@ public class ScratchCardActivity extends AppCompatActivity implements View.OnCli
                 }
                 if (chosenCard == R.drawable.scratch_card_image_win_small) {
                     Toast.makeText(ScratchCardActivity.this, "You win a kombucha lol", Toast.LENGTH_SHORT).show();
-                    Settings.getCurrentPupil().addReward(RewardItems.smallPrize);
                 }
                 if (chosenCard == R.drawable.scratch_card_image_win_big) {
                     Toast.makeText(ScratchCardActivity.this, "You win a cykel lol", Toast.LENGTH_SHORT).show();
-                    Settings.getCurrentPupil().addReward(RewardItems.bigPrize);
                 }
+
             }
 
             @Override

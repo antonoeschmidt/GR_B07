@@ -132,6 +132,7 @@ public class Experience {
             Settings.getCurrentPupil().getExperience().setLevel(Settings.getCurrentPupil().getExperience().getLevel() + 1);
             Settings.getCurrentPupil().getExperience().setTicket(Settings.getCurrentPupil().getExperience().getTicket() + 1);
         }
+
     }
 
     public void ResetBooleans(){

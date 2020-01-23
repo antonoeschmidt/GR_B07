@@ -48,8 +48,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         usernameText = findViewById(R.id.usernameText);
         passwordText = findViewById(R.id.passwordText);
-        imageViewUser = findViewById(R.id.imageViewLogin);
-        imageViewPass = findViewById(R.id.imageViewPassword);
         loginButton = findViewById(R.id.loginButton);
         loginButton.setOnClickListener(this);
         signUpButton = findViewById(R.id.signUpButton);

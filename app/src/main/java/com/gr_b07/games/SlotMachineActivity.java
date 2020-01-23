@@ -10,19 +10,23 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gr_b07.R;
-import com.gr_b07.games.ImageViewScrolling.IEventEnd;
 import com.gr_b07.games.ImageViewScrolling.ImageViewScrolling;
+import com.gr_b07.logik.FB;
+import com.gr_b07.logik.FB;
 import com.gr_b07.logik.Settings;
 import com.gr_b07.logik.RewardItems;
 
 import java.util.Random;
 
-public class SlotMachineActivity extends AppCompatActivity implements IEventEnd {
+public class SlotMachineActivity extends AppCompatActivity implements ImageViewScrolling.IEventEnd {
 
-    protected ImageView buttonUp, buttonDown;
-    protected ImageViewScrolling image, image2, image3;
-    protected TextView tickets;
-    protected int countDone = 0;
+    ImageView buttonUp, buttonDown;
+    ImageViewScrolling image, image2, image3;
+    TextView tickets;
+    FB fb = new FB();
+
+    int countDone = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +80,7 @@ public class SlotMachineActivity extends AppCompatActivity implements IEventEnd 
                 countDone = 0;
                 if(image.getValue() == image2.getValue() && image2.getValue() == image3.getValue()){
                     Toast.makeText(SlotMachineActivity.this,"Stor pris", Toast.LENGTH_SHORT).show();
+
                     //SlotMachineLogic.tickets += 5;
                     Settings.getCurrentPupil().addReward(RewardItems.bigPrize);
                 } else if(image.getValue() == image2.getValue() || image2.getValue() == image3.getValue() || image.getValue() == image3.getValue()) {
@@ -86,11 +91,13 @@ public class SlotMachineActivity extends AppCompatActivity implements IEventEnd 
                 } else {
                     Toast.makeText(SlotMachineActivity.this, "Du taber", Toast.LENGTH_SHORT).show();
                 }
+                fb.updateDatabase();
             }
             try {
                 Log.d(Settings.getCurrentPupil().getRewards().toString(), "44444");
             } catch (NullPointerException e){
                 System.out.println(e);
         }
+
     }
 }

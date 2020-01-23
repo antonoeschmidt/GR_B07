@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.gr_b07">
 
     <application
@@ -8,21 +9,32 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".social.ScanQRPopUpActivity"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name=".social.SeeQRCodePopUpActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".social.AddActivityPopUpActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".nutrition.MealsActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".statistics.StatisticsActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".SignUpActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".games.redeemRewards.RedeemActivity"
-            android:screenOrientation="portrait"/>
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
+        <activity
+            android:name=".social.ScanQRPopUpActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.popUpTheme" />
+        <activity
+            android:name=".social.SeeQRCodePopUpActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.popUpTheme" />
+        <activity
+            android:name=".social.AddActivityPopUpActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.popUpTheme" />
+        <activity
+            android:name=".nutrition.MealsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".statistics.StatisticsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".SignUpActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".games.redeemRewards.RedeemActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".games.redeemRewards.RewardsPopUpActivity"
             android:theme="@style/AppTheme.popUpTheme"

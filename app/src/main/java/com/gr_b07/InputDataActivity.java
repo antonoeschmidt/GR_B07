@@ -14,6 +14,7 @@ import android.widget.RadioGroup;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import java.util.Date;
 
 import androidx.annotation.RequiresApi;
@@ -92,7 +93,7 @@ public class InputDataActivity extends AppCompatActivity implements View.OnClick
         }
     }
 
-    public void calendarClick(){
+    public void calendarClick() {
         final Calendar c = Calendar.getInstance();
         int day = c.get(Calendar.DAY_OF_MONTH);
         int month = c.get(Calendar.MONTH);
@@ -102,7 +103,7 @@ public class InputDataActivity extends AppCompatActivity implements View.OnClick
                 new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int day) {
-                        dateTextView.setText(String.format("%02d",day) + "/" + String.format("%02d", (month+1)) + "/" + String.format("%02d", year));
+                        dateTextView.setText(String.format("%02d", day) + "/" + String.format("%02d", (month + 1)) + "/" + String.format("%02d", year));
                     }
                 }, year, month, day);
         datePickerDialog.show();
@@ -122,9 +123,9 @@ public class InputDataActivity extends AppCompatActivity implements View.OnClick
                 Toast.makeText(this, "Enter date of birth, please.", Toast.LENGTH_SHORT).show();
             } else if (editTextWeigth.getText().toString().isEmpty() || editTextHeight.getText().toString().isEmpty()) {
                 Toast.makeText(this, "Enter height and weight, please.", Toast.LENGTH_SHORT).show();
-            } else if (activityLevelRatingBar.getRating()==0){
+            } else if (activityLevelRatingBar.getRating() == 0) {
                 Toast.makeText(this, "Enter activity-level please.", Toast.LENGTH_SHORT).show();
-        }
+            }
             // else if they're both containing something - set height, weight and calculate body mass index.
             else if (!editTextWeigth.getText().toString().isEmpty() && !editTextHeight.getText().toString().isEmpty()
                     && dateTextView.getText().toString().length() <= 10 && (maleRadioButton.isChecked() || femaleRadioButton.isChecked())) {
@@ -141,9 +142,9 @@ public class InputDataActivity extends AppCompatActivity implements View.OnClick
                 //Settings.getCurrentPupil().getPersonalInfo().getAge());
 
 
-                if (maleRadioButton.isChecked()){
+                if (maleRadioButton.isChecked()) {
                     Settings.getCurrentPupil().getPersonalInfo().setGender("male");
-                } else if (femaleRadioButton.isChecked()){
+                } else if (femaleRadioButton.isChecked()) {
                     Settings.getCurrentPupil().getPersonalInfo().setGender("female");
                 }
 
@@ -156,58 +157,73 @@ public class InputDataActivity extends AppCompatActivity implements View.OnClick
             }
         }
     }
+
     public void updateActivityLevelView() {
-        if (activityLevelRatingBar.getRating()==0){
+        if (activityLevelRatingBar.getRating() == 0) {
             activityLevelRatingBar.setRating(1);
         }
         int i = (int) Math.round(activityLevelRatingBar.getRating());
-        if (i<=1) {
+        if (i <= 1) {
             activityLevelTextView.setText("Lavt aktivititetsniveau");
-        } else if (i==2) {
+        } else if (i == 2) {
             activityLevelTextView.setText("Acceptabelt aktivitetsniveau");
-        } else if (i==3) {
+        } else if (i == 3) {
             activityLevelTextView.setText("Moderat aktivitetsniveau");
-        } else if (i==4) {
+        } else if (i == 4) {
             activityLevelTextView.setText("Højt aktivitetsniveau");
-        } else if (i==5) {
+        } else if (i == 5) {
             activityLevelTextView.setText("Ekstremt aktivitetsniveau");
         }
     }
 
-    public void getUserInfo(){
-        if (Settings.getCurrentPupil().getPersonalInfo().getGender().equals("male")) {
-            maleRadioButton.toggle();
-        } else if (Settings.getCurrentPupil().getPersonalInfo().getGender().equals("female")){
-            femaleRadioButton.toggle();
-        } else  if (Settings.getCurrentPupil().getPersonalInfo().getGender().equals("n")){
-            radioGroup.clearCheck();
-        }
+    public void getUserInfo() {
+        // Did some of this trying to implement SignUp -> Input
+        if (!Settings.getCurrentPupil().isFirstTimeLoggedIn()) {
+            if (Settings.getCurrentPupil().getPersonalInfo().getGender().equals("male")) {
+                maleRadioButton.toggle();
+            } else if (Settings.getCurrentPupil().getPersonalInfo().getGender().equals("female")) {
+                femaleRadioButton.toggle();
+            } else if (Settings.getCurrentPupil().getPersonalInfo().getGender().equals("n")) {
+                radioGroup.clearCheck();
+            }
 
-        if ((int) Math.round(Settings.getCurrentPupil().getPhysique().getHeight()) == 0){
+            if ((int) Math.round(Settings.getCurrentPupil().getPhysique().getHeight()) == 0) {
+                editTextHeight.setText("");
+                editTextHeight.setHint("Enter height");
+            } else if (Settings.getCurrentPupil().getPhysique().getHeight() != 0) {
+                editTextHeight.setText(Integer.toString((int) Math.round(Settings.getCurrentPupil().getPhysique().getHeight())));
+            }
+
+            if ((int) Math.round(Settings.getCurrentPupil().getPhysique().getWeight()) == 0) {
+                editTextWeigth.setText("");
+                editTextWeigth.setHint("Enter weight");
+            } else if (Settings.getCurrentPupil().getPhysique().getWeight() != 0) {
+                editTextWeigth.setText(Integer.toString((int) Math.round(Settings.getCurrentPupil().getPhysique().getWeight())));
+            }
+
+            if (Settings.getCurrentPupil().getPersonalInfo().getDateOfBirth() == 0) {
+                dateTextView.setText("Enter date of birth");
+            } else {
+                dateTextView.setText(df.format(Settings.getCurrentPupil().getPersonalInfo().getDateOfBirth()));
+            }
+
+            if (Settings.getCurrentPupil().getPhysique().getActivityLevel() == 0) {
+                activityLevelRatingBar.setRating(0);
+            } else if (Settings.getCurrentPupil().getPhysique().getActivityLevel() != 0) {
+                activityLevelRatingBar.setRating(Settings.getCurrentPupil().getPhysique().getActivityLevel());
+                updateActivityLevelView();
+            }
+        } else if (Settings.getCurrentPupil().isFirstTimeLoggedIn()){
+            radioGroup.clearCheck();
             editTextHeight.setText("");
             editTextHeight.setHint("Enter height");
-        } else if (Settings.getCurrentPupil().getPhysique().getHeight() != 0){
-            editTextHeight.setText(Integer.toString((int) Math.round(Settings.getCurrentPupil().getPhysique().getHeight())));
-        }
-
-        if ((int) Math.round(Settings.getCurrentPupil().getPhysique().getWeight()) == 0){
             editTextWeigth.setText("");
-            editTextWeigth.setHint("Enter weight.");
-        } else if (Settings.getCurrentPupil().getPhysique().getWeight() != 0 ) {
-            editTextWeigth.setText(Integer.toString((int) Math.round(Settings.getCurrentPupil().getPhysique().getWeight())));
-        }
-
-        if (Settings.getCurrentPupil().getPersonalInfo().getDateOfBirth() == 0){
+            editTextWeigth.setHint("Enter weight");
             dateTextView.setText("Enter date of birth");
-        } else {
-            dateTextView.setText(df.format(Settings.getCurrentPupil().getPersonalInfo().getDateOfBirth()));
+            activityLevelRatingBar.setRating(0);
         }
 
-        if (Settings.getCurrentPupil().getPhysique().getActivityLevel() == 0){
-            activityLevelRatingBar.setRating(0);
-        } else if (Settings.getCurrentPupil().getPhysique().getActivityLevel() != 0) {
-            activityLevelRatingBar.setRating(Settings.getCurrentPupil().getPhysique().getActivityLevel());
-            updateActivityLevelView();
-        }
+
+        //}
     }
 }

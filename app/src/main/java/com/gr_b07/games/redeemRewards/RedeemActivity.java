@@ -24,21 +24,23 @@ public class RedeemActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_redeem);
+        recyclerView = findViewById(R.id.recyclerView);
         initPrizes();
         layout_redeem = findViewById(R.id.frameLayoutRedeem);
         layout_redeem.getForeground().setAlpha(0);
+
     }
 
     private void initPrizes(){
         for(Reward reward: Settings.getCurrentPupil().getRewards()) {
             prizeNames.add(reward.getName());
             prizeImages.add(reward.getResource());
-            initRecylcerView();
+            initRecyclerView();
         }
     }
 
-    private void initRecylcerView(){
-        recyclerView = findViewById(R.id.recyclerView);
+    private void initRecyclerView(){
+
         RecyclerViewAdapterRedeem adapter = new RecyclerViewAdapterRedeem(prizeNames,prizeImages,this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
