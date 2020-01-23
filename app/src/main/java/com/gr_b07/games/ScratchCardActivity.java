@@ -39,6 +39,7 @@ public class ScratchCardActivity extends AppCompatActivity implements View.OnCli
     int chosenCard;
     FB fb = new FB();
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +51,7 @@ public class ScratchCardActivity extends AppCompatActivity implements View.OnCli
         tickets.setText("Tickets: " + Settings.getCurrentPupil().getExperience().getTicket());
         redeemButton = findViewById(R.id.redeemButton);
         redeemButton.setOnClickListener(this);
+
     }
 
     @Override
@@ -72,10 +74,10 @@ public class ScratchCardActivity extends AppCompatActivity implements View.OnCli
         scratchImageView.setVisibility(View.VISIBLE);
         scratchImageView.setImageResource(chooseScratchCard());
         if (chosenCard == R.drawable.scratch_card_image_win_small) {
-            Settings.getCurrentPupil().addReward(rewardItems.smallPrize);
+            Settings.getCurrentPupil().addReward(RewardItems.smallPrize);
         }
         if (chosenCard == R.drawable.scratch_card_image_win_big) {
-            Settings.getCurrentPupil().addReward(rewardItems.bigPrize);
+            Settings.getCurrentPupil().addReward(RewardItems.bigPrize);
         }
         fb.updateDatabase();
         //Image1 callback
