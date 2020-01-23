@@ -22,8 +22,8 @@ public class QR extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_scan_qrpop_up);
-        buttonScan = findViewById(R.id.buttonScan);
+        setContentView(R.layout.activity_social);
+        buttonScan = findViewById(R.id.buttonScanQRcode);
         final Activity activity = this;
         buttonScan.setOnClickListener(new View.OnClickListener() {
             @Override
