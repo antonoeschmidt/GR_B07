@@ -8,6 +8,7 @@ import com.gr_b07.logik.Pupil;
 import com.gr_b07.logik.Reward;
 import com.gr_b07.logik.Settings;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -22,7 +23,8 @@ public class InputDataActivityTest {
     private List<String> activities = new ArrayList<>();
     private List<Reward> rewards = new ArrayList<>();
 
-    public void initializeTestObject () {
+    @Before
+    public void setUp() {
         meals.add(new Meal("Jordbær", 200,100,50,25,"Breakfast", 1579695267));
         friends.add("Jørgen");
         activities.add("Fodbold");
@@ -37,7 +39,7 @@ public class InputDataActivityTest {
 
     @Test
     public void testPupilObject() {
-        initializeTestObject();
+        setUp();
         assertEquals(true, Settings.getCurrentPupil().isFirstTimeLoggedIn());
         assertEquals("test@dtu.dk", Settings.getCurrentPupil().getUsername());
         assertEquals("123123", Settings.getCurrentPupil().getPassword());
@@ -71,4 +73,13 @@ public class InputDataActivityTest {
         assertEquals(1, Settings.getCurrentPupil().getRewards().get(0).getTier());
         assertEquals(R.drawable.apple, Settings.getCurrentPupil().getRewards().get(0).getResource());
     }
+
+    @Test
+    public void addMealTest() {
+        assertEquals(meals.size(), 1);
+        meals.add(new Meal("Banan", 200,100,50,25,"Breakfast", 1579695267));
+        assertEquals(meals.size(), 2);
+    }
+
+
 }
