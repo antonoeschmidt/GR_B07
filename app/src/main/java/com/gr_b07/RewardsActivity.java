@@ -45,8 +45,8 @@ public class RewardsActivity extends AppCompatActivity implements View.OnClickLi
         circularProgressBar.setProgressMax(Settings.getCurrentPupil().getExperience().getLevel() * 5 + 10);
         circularProgressBar.setProgress(0);
 
-        levelTextView.setText("Level: " + Integer.toString(Settings.getCurrentPupil().getExperience().getLevel()));
-        ticketTextView.setText("Tickets: " + Settings.getCurrentPupil().getExperience().getTicket());
+        levelTextView.setText("Niveau: " + Integer.toString(Settings.getCurrentPupil().getExperience().getLevel()));
+        ticketTextView.setText("Lodder: " + Settings.getCurrentPupil().getExperience().getTicket());
 
     }
 
@@ -77,7 +77,7 @@ public class RewardsActivity extends AppCompatActivity implements View.OnClickLi
         updateTextViews();
         circularProgressBar.setProgressMax((Settings.getCurrentPupil().getExperience().getLevel() * 5 + 10));
         circularProgressBar.setProgress(Settings.getCurrentPupil().getExperience().getTotalXP());
-        levelTextView.setText("Level " + Settings.getCurrentPupil().getExperience().getLevel());
+        levelTextView.setText("Niveau " + Settings.getCurrentPupil().getExperience().getLevel());
     }
 
     public void checkLevel() {
@@ -105,12 +105,12 @@ public class RewardsActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     public void updateTextViews() {
-        levelTextView.setText("Level " + Settings.getCurrentPupil().getExperience().getLevel());
+        levelTextView.setText("Niveau " + Settings.getCurrentPupil().getExperience().getLevel());
         totalXPtext.setText("Total XP\n " + Settings.getCurrentPupil().getExperience().getTotalXP()+ " / " + (Settings.getCurrentPupil().getExperience().getLevel() * 5 + 10));
-        totalNutritionXPtextView.setText("Nutrition Points: " + Settings.getCurrentPupil().getExperience().getNutritionXP());
-        totalActivityXPtextView.setText("Activity Points: " + Settings.getCurrentPupil().getExperience().getActivityXP());
-        totalSocialXPtextView.setText("Social Points: " + Settings.getCurrentPupil().getExperience().getSocialXP());
+        totalNutritionXPtextView.setText("Ernæringspoint: " + Settings.getCurrentPupil().getExperience().getNutritionXP());
+        totalActivityXPtextView.setText("Aktivitetspoint: " + Settings.getCurrentPupil().getExperience().getActivityXP());
+        totalSocialXPtextView.setText("Venskabspoint: " + Settings.getCurrentPupil().getExperience().getSocialXP());
         circularProgressBar.setProgress(Settings.getCurrentPupil().getExperience().getTotalXP());
-        ticketTextView.setText("Tickets: " + Settings.getCurrentPupil().getExperience().getTicket());
+        ticketTextView.setText("Lodder: " + Settings.getCurrentPupil().getExperience().getTicket());
     }
 }
