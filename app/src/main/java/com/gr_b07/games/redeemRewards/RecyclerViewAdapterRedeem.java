@@ -5,6 +5,7 @@ package com.gr_b07.games.redeemRewards; /**
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.gr_b07.R;
+import com.gr_b07.logik.Settings;
 
 import java.util.ArrayList;
 
@@ -52,6 +54,8 @@ public class RecyclerViewAdapterRedeem extends RecyclerView.Adapter<RecyclerView
             public void onClick(View view) {
                 //Toast.makeText(mContext, prizeNames.get(position),Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(mContext, RewardsPopUpActivity.class);
+                intent.putExtra("rewardName", Settings.getCurrentPupil().getRewards().get(position).getName());
+                intent.putExtra("rewardPhoto",Settings.getCurrentPupil().getRewards().get(position).getResource());
                 mContext.startActivity(intent);
             }
         });
