@@ -27,6 +27,7 @@ public class SlotMachineActivity extends AppCompatActivity implements ImageViewS
     ImageView buttonUp, buttonDown;
     ImageViewScrolling image, image2, image3;
     TextView tickets;
+    RewardItems rewardItems = new RewardItems();
     FB fb = new FB();
 
     int countDone = 0;
@@ -88,11 +89,11 @@ public class SlotMachineActivity extends AppCompatActivity implements ImageViewS
                 Toast.makeText(SlotMachineActivity.this, "Stor pris", Toast.LENGTH_SHORT).show();
 
                 //SlotMachineLogic.tickets += 5;
-                Settings.getCurrentPupil().addReward(RewardItems.fiveExperience);
+                Settings.getCurrentPupil().addReward(rewardItems.getTierTwoReward());
             } else if (image.getValue() == image2.getValue() || image2.getValue() == image3.getValue() || image.getValue() == image3.getValue()) {
                 Toast.makeText(SlotMachineActivity.this, "Lille pris", Toast.LENGTH_SHORT).show();
                 //SlotMachineLogic.tickets += 2;
-                Settings.getCurrentPupil().addReward(RewardItems.fiveExperience);
+                Settings.getCurrentPupil().addReward(rewardItems.getTierOneReward());
 
             } else {
                 Toast.makeText(SlotMachineActivity.this, "Du taber", Toast.LENGTH_SHORT).show();
