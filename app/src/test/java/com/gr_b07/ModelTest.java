@@ -8,6 +8,7 @@ import com.gr_b07.logik.Pupil;
 import com.gr_b07.logik.Reward;
 import com.gr_b07.logik.Settings;
 import com.gr_b07.logik.User;
+import com.gr_b07.nutrition.NutritionActivity;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -43,6 +44,7 @@ public class ModelTest {
 
     @Test
     public void testPupilObject() {
+        setUp();
         assertEquals(true, Settings.getCurrentPupil().isFirstTimeLoggedIn());
         assertEquals("pupil@dtu.dk", Settings.getCurrentPupil().getUsername());
         assertEquals("123123", Settings.getCurrentPupil().getPassword());
@@ -77,17 +79,29 @@ public class ModelTest {
         assertEquals(R.drawable.apple, Settings.getCurrentPupil().getRewards().get(0).getResource());
     }
 
+
     @Test
     public void testFriends() {
-        setUp();
         assertEquals("Jørgen", Settings.getCurrentPupil().getFriends().get(0));
+        Settings.getCurrentPupil().getFriends().remove(0);
+        assertEquals(true, Settings.getCurrentPupil().getFriends().isEmpty());
+        Settings.getCurrentPupil().getFriends().add("Henriette");
+        assertEquals(1, Settings.getCurrentPupil().getFriends().size());
+        Settings.getCurrentPupil().getFriends().add("Steen");
+        assertEquals(2, Settings.getCurrentPupil().getFriends().size());
     }
 
     @Test
-    public void testFriendsSize() {
-        System.out.println(Settings.getCurrentPupil().getFriends().toString());
-        assertEquals(1, Settings.getCurrentPupil().getFriends().size());
-        friends.add("Dinmor");
-        assertEquals(2, Settings.getCurrentPupil().getFriends().size());
+    public void testMeals() {
+        Settings.getCurrentPupil().getMeals().add(new Meal("Fiskeolie", 800, 5,2,94, "Breakfast",1579695267));
+        assertEquals("Fiskeolie", Settings.getCurrentPupil().getMeals().get(1).getName());
+        assertEquals(2, Settings.getCurrentPupil().getMeals().size());
+        Settings.getCurrentPupil().getMeals().clear();
+        assertEquals(true, Settings.getCurrentPupil().getMeals().isEmpty());
+    }
+
+    @Test
+    public void test() {
+
     }
 }
