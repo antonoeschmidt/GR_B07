@@ -30,7 +30,7 @@ public class InputDataActivityTest {
 
         Pupil pupil = new Pupil(true, "test@dtu.dk", "123123", "zajhdsakgfas", new Physique(195,81,3),
                 new PersonalInfo("Ole", "Olesen", "male", 912470400, 2450),
-                new Experience(5, 2, 4, 8, 3),
+                new Experience(5, 2, 4, 8, 3, false, false, false, false),
                 meals, friends, activities, rewards);
         Settings.setCurrentPupil(pupil);
     }
@@ -50,11 +50,21 @@ public class InputDataActivityTest {
         assertEquals("male", Settings.getCurrentPupil().getPersonalInfo().getGender());
         assertEquals(912470400, Settings.getCurrentPupil().getPersonalInfo().getDateOfBirth());
         assertEquals(2450, Settings.getCurrentPupil().getPersonalInfo().getZipCode());
+        assertEquals(5, Settings.getCurrentPupil().getExperience().getLevel());
+        assertEquals(2, Settings.getCurrentPupil().getExperience().getNutritionXP());
+        assertEquals(4, Settings.getCurrentPupil().getExperience().getActivityXP());
+        assertEquals(8, Settings.getCurrentPupil().getExperience().getSocialXP());
+        assertEquals(3, Settings.getCurrentPupil().getExperience().getTicket());
+        assertEquals(false, Settings.getCurrentPupil().getExperience().isXPForCalories());
+        assertEquals(false, Settings.getCurrentPupil().getExperience().isXPForProtein());
+        assertEquals(false, Settings.getCurrentPupil().getExperience().isXPForCarbs());
+        assertEquals(false, Settings.getCurrentPupil().getExperience().isXPForFat());
         assertEquals("Jordbær", Settings.getCurrentPupil().getMeals().get(0).getName());
         assertEquals(200, (int) Settings.getCurrentPupil().getMeals().get(0).getCalories());
         assertEquals(100, (int) Settings.getCurrentPupil().getMeals().get(0).getProtein());
         assertEquals(50, (int) Settings.getCurrentPupil().getMeals().get(0).getCarbs());
         assertEquals(25, (int) Settings.getCurrentPupil().getMeals().get(0).getFat());
+        assertEquals("Jørgen", Settings.getCurrentPupil().getFriends().get(0));
         assertEquals("Breakfast", Settings.getCurrentPupil().getMeals().get(0).getTypeOfMeal());
         assertEquals("Fodbold", Settings.getCurrentPupil().getActivities().get(0));
         assertEquals("Æble", Settings.getCurrentPupil().getRewards().get(0).getName());
