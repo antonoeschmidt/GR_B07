@@ -121,6 +121,7 @@ public class FB {
                             Log.d("loginFire", "signInWithEmail:success");
                             //Toast.makeText(activity, "Logged In Success", Toast.LENGTH_SHORT).show();
 
+
                             FirebaseUser firebaseUser = auth.getCurrentUser();
                             if (firebaseUser != null) {
                                 Settings.logginIn = true;

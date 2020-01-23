@@ -70,6 +70,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.loginButton:
+                //der kommer android.view.WindowLeak her, men det har ingen betydning for appen og den crasher ikke
                 progressDialog.show();
                 if (usernameText.getText().toString().equals("admin") && passwordText.getText().toString().equals("admin")) {
                     //adminlogin
