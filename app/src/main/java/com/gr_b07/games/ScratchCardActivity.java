@@ -74,10 +74,10 @@ public class ScratchCardActivity extends AppCompatActivity implements View.OnCli
         scratchImageView.setVisibility(View.VISIBLE);
         scratchImageView.setImageResource(chooseScratchCard());
         if (chosenCard == R.drawable.scratch_card_image_win_small) {
-            Settings.getCurrentPupil().addReward(RewardItems.smallPrize);
+            Settings.getCurrentPupil().addReward(RewardItems.drinkBottle);
         }
         if (chosenCard == R.drawable.scratch_card_image_win_big) {
-            Settings.getCurrentPupil().addReward(RewardItems.bigPrize);
+            Settings.getCurrentPupil().addReward(RewardItems.drinkBottle);
         }
         fb.updateDatabase();
         //Image1 callback

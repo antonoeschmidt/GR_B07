@@ -88,11 +88,11 @@ public class SlotMachineActivity extends AppCompatActivity implements ImageViewS
                 Toast.makeText(SlotMachineActivity.this, "Stor pris", Toast.LENGTH_SHORT).show();
 
                 //SlotMachineLogic.tickets += 5;
-                Settings.getCurrentPupil().addReward(RewardItems.bigPrize);
+                Settings.getCurrentPupil().addReward(RewardItems.fiveExperience);
             } else if (image.getValue() == image2.getValue() || image2.getValue() == image3.getValue() || image.getValue() == image3.getValue()) {
                 Toast.makeText(SlotMachineActivity.this, "Lille pris", Toast.LENGTH_SHORT).show();
                 //SlotMachineLogic.tickets += 2;
-                Settings.getCurrentPupil().addReward(RewardItems.smallPrize);
+                Settings.getCurrentPupil().addReward(RewardItems.fiveExperience);
 
             } else {
                 Toast.makeText(SlotMachineActivity.this, "Du taber", Toast.LENGTH_SHORT).show();

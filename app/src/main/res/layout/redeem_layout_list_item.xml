@@ -3,12 +3,14 @@
     android:id="@+id/ParentLayout"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@drawable/mainmenu_reward_button"
+    android:layout_margin="@dimen/default_stroke_width">
 
 
     <ImageView
         android:id="@+id/prizeImage"
-        android:layout_width="80dp"
+        android:layout_width="100dp"
         android:layout_height="80dp"></ImageView>
 
     <TextView
@@ -17,7 +19,9 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:text="Word"
-        android:textSize="30dp"/>
+        android:textSize="18dp"
+        android:textColor="@color/colorBlack"
+        android:textAlignment="center"/>
 
 
 </RelativeLayout>
