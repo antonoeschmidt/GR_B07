@@ -1,6 +1,7 @@
 package com.gr_b07.nutrition;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -32,6 +33,9 @@ import java.io.InputStreamReader;
 import java.text.ParseException;
 import java.util.ArrayList;
 
+import io.sentry.Sentry;
+import io.sentry.android.AndroidSentryClientFactory;
+
 public class NutritionActivity extends AppCompatActivity implements View.OnClickListener {
 
     private CircularProgressBar cRing;
@@ -50,6 +54,12 @@ public class NutritionActivity extends AppCompatActivity implements View.OnClick
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nutrition);
+
+        boolean EMULATOR = Build.PRODUCT.contains("sdk") || Build.MODEL.contains("Emulator");
+        if (!EMULATOR) {
+            Sentry.init("https://ae47774e314c4b79a5b3eff0ec2dbecb@sentry.io/1895656", new AndroidSentryClientFactory(this));
+            Sentry.capture(this.getClass().getSimpleName());
+        }
 
         cRing = findViewById(R.id.progressbarCalories);
         pProgress = findViewById(R.id.progressbarProtein);
