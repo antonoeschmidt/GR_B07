@@ -47,7 +47,7 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".games.SlotMachineActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".GameActivity"
+        <activity android:name=".games.GameActivity"
             android:screenOrientation="portrait"/>
         <activity android:name=".nutrition.AbstractMealActivity"
             android:screenOrientation="portrait"/>

@@ -13,10 +13,12 @@ import com.gr_b07.R;
 import com.gr_b07.games.ImageViewScrolling.ImageViewScrolling;
 import com.gr_b07.logik.FB;
 import com.gr_b07.logik.FB;
+import com.gr_b07.logik.Reward;
 import com.gr_b07.logik.Settings;
 import com.gr_b07.logik.RewardItems;
 
 import java.util.Random;
+import java.util.Set;
 
 public class SlotMachineActivity extends AppCompatActivity implements ImageViewScrolling.IEventEnd {
 
@@ -67,6 +69,8 @@ public class SlotMachineActivity extends AppCompatActivity implements ImageViewS
                 }
             }
         });
+
+        Settings.getCurrentPupil().getExperience().setTicket(100);
 
     }
 
