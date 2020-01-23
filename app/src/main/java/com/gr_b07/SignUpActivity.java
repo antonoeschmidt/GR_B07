@@ -23,7 +23,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     private Button signUpButton;
     private ProgressDialog progressDialog;
     private FB fb = new FB();
-    Intent inputDataIntent;
 
 
     @Override
@@ -38,8 +37,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Opretter bruger");
-        inputDataIntent = new Intent(this, InputDataActivity.class);
-
 
         // TODO: DELETE THIS
 
