@@ -25,7 +25,6 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
     private Button mainButton1, mainButton2, mainButton3, mainButton4, mainButton5;
     private TextView levelTextView, xpTextView;
     private ProgressBar xpProgressBar;
-    private ImageView ticketView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +45,6 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
         levelTextView = findViewById(R.id.mainmenu_levelTextView);
         xpTextView = findViewById(R.id.mainmenu_xpTextView);
         xpProgressBar = findViewById(R.id.progressBarXP);
-        ticketView = findViewById(R.id.ticketImageView);
 
     }
 
@@ -78,11 +76,6 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
         xpTextView.setText((Integer.toString(Settings.getCurrentPupil().getExperience().getTotalXP())) + " / " + Integer.toString(Settings.getCurrentPupil().getExperience().getLevel()*5+10));
         xpProgressBar.setMax(Settings.getCurrentPupil().getExperience().getLevel()*5+10);
         xpProgressBar.setProgress(Settings.getCurrentPupil().getExperience().getTotalXP());
-        if (Settings.getCurrentPupil().getExperience().getTicket() >= 1){
-            ticketView.setVisibility(View.VISIBLE);
-        }
-        else if (Settings.getCurrentPupil().getExperience().getTicket()==0){
-            ticketView.setVisibility(View.INVISIBLE);
-        }
+
     }
 }
