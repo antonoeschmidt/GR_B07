@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.gr_b07.R;
 import com.gr_b07.games.ImageViewScrolling.ImageViewScrolling;
+import com.gr_b07.logik.FB;
 import com.gr_b07.logik.Settings;
 import com.gr_b07.logik.rewardItems;
 
@@ -21,6 +22,7 @@ public class SlotMachineActivity extends AppCompatActivity implements ImageViewS
     ImageView buttonUp, buttonDown;
     ImageViewScrolling image, image2, image3;
     TextView tickets;
+    FB fb = new FB();
 
     int countDone = 0;
 
@@ -77,6 +79,7 @@ public class SlotMachineActivity extends AppCompatActivity implements ImageViewS
                 countDone = 0;
                 if(image.getValue() == image2.getValue() && image2.getValue() == image3.getValue()){
                     Toast.makeText(SlotMachineActivity.this,"Stor pris", Toast.LENGTH_SHORT).show();
+
                     //SlotMachineLogic.tickets += 5;
                     Settings.getCurrentPupil().addReward(rewardItems.bigPrize);
                 } else if(image.getValue() == image2.getValue() || image2.getValue() == image3.getValue() || image.getValue() == image3.getValue()) {
@@ -87,11 +90,13 @@ public class SlotMachineActivity extends AppCompatActivity implements ImageViewS
                 } else {
                     Toast.makeText(SlotMachineActivity.this, "Du taber", Toast.LENGTH_SHORT).show();
                 }
+                fb.updateDatabase();
             }
             try {
                 Log.d(Settings.getCurrentPupil().getRewards().toString(), "44444");
             } catch (NullPointerException e){
                 System.out.println(e);
         }
+
     }
 }

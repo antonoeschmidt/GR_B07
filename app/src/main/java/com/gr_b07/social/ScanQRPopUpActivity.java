@@ -16,11 +16,16 @@ import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
 import com.gr_b07.R;
+import com.gr_b07.logik.FB;
+import com.gr_b07.logik.Pupil;
+import com.gr_b07.logik.Settings;
+import com.gr_b07.logik.User;
 
 public class ScanQRPopUpActivity extends AppCompatActivity {
 
     private Button buttonScan;
     final Activity activity = this;
+    FB fb = new FB();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +33,7 @@ public class ScanQRPopUpActivity extends AppCompatActivity {
         setContentView(R.layout.activity_scan_qrpop_up);
         scan(this);
         buttonScan = findViewById(R.id.buttonScan);
+        fb.getAllUsersFromDatabase();
         buttonScan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -39,18 +45,36 @@ public class ScanQRPopUpActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-        if(result != null){
-            if(result.getContents()==null){
+        if (result != null) {
+            if (result.getContents() == null) {
                 Toast.makeText(this, "You cancelled the scanning", Toast.LENGTH_LONG).show();
+            } else {
+                if (result.getContents().length() == 28){
+                    Settings.getCurrentPupil().getFriends().add(result.getContents());
+                    Intent socialIntent = new Intent(this, SocialActivity.class);
+                    startActivity(socialIntent);
+                } else{
+
+                }
+
+                /*
+                Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();
+                System.out.println(result.getContents());
+                if (!Settings.getCurrentPupil().getFriends().isEmpty()){
+                    if (Settings.getCurrentPupil().getFriends().contains(result.getContents())){
+                        System.out.println("I er allerede venner");
+                    } else if (!Settings.getCurrentPupil().getFriends().contains(result.getContents())){
+                        Settings.getCurrentPupil().getFriends().add(result.getContents());
+                    }
+                } else if (Settings.getCurrentPupil().getFriends().isEmpty()){
+                    Settings.getCurrentPupil().getFriends().add(result.getContents());
+                }*/
             }
-            else {
-                Toast.makeText(this, result.getContents(),Toast.LENGTH_LONG).show();
-            }
-        }
-        else {
+        } else {
             super.onActivityResult(requestCode, resultCode, data);
         }
     }
+
     public void scan(Activity activty) {
         IntentIntegrator integrator = new IntentIntegrator(activity);
         integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE_TYPES);

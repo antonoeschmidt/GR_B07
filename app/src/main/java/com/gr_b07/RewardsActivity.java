@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.gr_b07.games.GameActivity;
 import com.gr_b07.logik.Settings;
 import com.mikhaellopez.circularprogressbar.CircularProgressBar;
 

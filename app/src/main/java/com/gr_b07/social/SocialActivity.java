@@ -61,8 +61,6 @@ public class SocialActivity extends AppCompatActivity implements RecyclerViewAda
         initializeFriendsRecyclerView();
         initializeSuggestedFriendsRecyclerView();
 
-        //suggestedFriendsRecyclerView = findViewById(R.id.suggestedFriendsRecyclerView);
-
 
         buttonGetFriends = findViewById(R.id.buttonGetFriends);//TODO: Delet
         buttonGetFriends.setOnClickListener(this);
@@ -77,6 +75,8 @@ public class SocialActivity extends AppCompatActivity implements RecyclerViewAda
             public void run() {
                 initializeFriends();
                 initializeSuggestedFriends();
+                checkArraySizes();
+
             }
         }, 500);
 
@@ -95,16 +95,15 @@ public class SocialActivity extends AppCompatActivity implements RecyclerViewAda
                 startActivity(addActivityIntent);
                 break;
             case R.id.buttonGetFriends:
-                initializeFriends();
-                initializeSuggestedFriends();
-
                 for (int i = 0; i < 1000; i++) {
                     friendsUsernames.add("din far");
-                    if(i % 2 == 0){
+                    if (i % 2 == 0) {
                         suggestedFriendsUsernames.add("din mor");
                     }
                 }
-
+                initializeFriends();
+                initializeSuggestedFriends();
+                checkArraySizes();
 
 
                 break;
@@ -128,6 +127,14 @@ public class SocialActivity extends AppCompatActivity implements RecyclerViewAda
         }
     }
 
+    public void initializeFriendsRecyclerView() {
+        friendsRecyclerView.setLayoutManager(new LinearLayoutManager(SocialActivity.this, LinearLayoutManager.HORIZONTAL, false));
+        Log.d(friendsRecyclerView.getLayoutManager().toString(), "onCreate: ");
+        friendsAdapter = new RecyclerViewAdapterSocial(this, friendsUsernames, friendsUserPhotos);
+        friendsAdapter.setClickListener(this);
+        friendsRecyclerView.setAdapter(friendsAdapter);
+    }
+
     public void initializeSuggestedFriends() {
         for (User user : Settings.getUsers()) {
             if (user.getClass().equals(Pupil.class)) {
@@ -143,17 +150,8 @@ public class SocialActivity extends AppCompatActivity implements RecyclerViewAda
         }
     }
 
-    public void initializeFriendsRecyclerView() {
-        friendsRecyclerView.setLayoutManager(new LinearLayoutManager(SocialActivity.this, LinearLayoutManager.HORIZONTAL, false));
-        Log.d(friendsRecyclerView.getLayoutManager().toString(), "onCreate: ");
-        friendsAdapter = new RecyclerViewAdapterSocial(this, friendsUsernames, friendsUserPhotos);
-        friendsAdapter.setClickListener(this);
-        friendsRecyclerView.setAdapter(friendsAdapter);
-    }
-
     public void initializeSuggestedFriendsRecyclerView() {
         suggestedFriendsRecyclerView.setLayoutManager(new LinearLayoutManager(SocialActivity.this, LinearLayoutManager.HORIZONTAL, false));
-        // True reverselayout kunne være en mulighed
         Log.d(suggestedFriendsRecyclerView.getLayoutManager().toString(), "onCreate: ");
         suggestedAdapter = new RecyclerViewAdapterSocial(this, suggestedFriendsUsernames, suggestedFriendsUserPhotos);
         suggestedAdapter.setClickListener(this);
@@ -163,11 +161,8 @@ public class SocialActivity extends AppCompatActivity implements RecyclerViewAda
 
     @Override
     public void onItemClick(View view, int position) {
-        // TODO: DIFFERENTIATE BETWEEN RECYCLERVIEWS=?!=!=!=!=!= HOW THE FK DO YOU DO THAT
-        // TODO: denne her metode er fucked.
-        // legede med getItem metode, fandt ud af det ikke virkede.
+        // TODO : GENNEMGÅ
         Log.d(Integer.toString(view.getId()), "onItemClick: ");
-
         if ((int) view.getTag() == friendsUsernames.size()) {
             Toast.makeText(this, "You clicked " + friendsAdapter.getItem(position) + " on item position " + position, Toast.LENGTH_SHORT).show();
         } else if ((int) view.getTag() == suggestedFriendsUsernames.size()) {
@@ -176,25 +171,17 @@ public class SocialActivity extends AppCompatActivity implements RecyclerViewAda
 
 
     }
-  /*
-        if (view.getId() == -1) {
-            Toast.makeText(this, "You clicked " + friendsAdapter.getItem(view, position) + " on item position " + position, Toast.LENGTH_SHORT).show();
-            //Log.d(view.getTag().toString(), "onItemClick: "); --- crashes nullpointer
-        } else if (view.getId() == 0) {
-            Toast.makeText(this, "You clicked " + suggestedAdapter.getItem(view, position) + " on item position " + position, Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(this, "DIDNT WORK", Toast.LENGTH_SHORT).show();
-        }
 
+    public void checkArraySizes() {
+        if (friendsUsernames.size() == suggestedFriendsUsernames.size() && friendsUsernames.size() != 0) {
+            suggestedFriendsUsernames.remove(suggestedFriendsUsernames.size() - 1);
+            suggestedFriendsUserPhotos.remove(suggestedFriendsUserPhotos.size() - 1);
+        }
     }
 
-
-            case friendsRecyclerView.getLayoutManager().getItemViewType(view):
-                Toast.makeText(this, "You clicked " + adapter.getItem(position) + " on item position " + position, Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.suggestedFriendsRecyclerView:
-
-                break;
-
-             */
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Toast.makeText(this, Settings.getCurrentPupil().getFriends().toString(), Toast.LENGTH_SHORT).show();
+    }
 }
