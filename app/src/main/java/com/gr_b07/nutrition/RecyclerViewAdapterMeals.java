@@ -46,12 +46,12 @@ public class RecyclerViewAdapterMeals extends RecyclerView.Adapter<RecyclerViewA
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         holder.mealname.setText(meals.get(position).getName());
 
-        if (meals.get(position).getTypeOfMeal().equals("Breakfast")) {
+        if (meals.get(position).getTypeOfMeal().equals("Morgenmad")) {
             holder.mealImage.setImageResource(R.drawable.ic_breakfast);
 
-        } else if (meals.get(position).getTypeOfMeal().equals("Lunch")) {
+        } else if (meals.get(position).getTypeOfMeal().equals("Frokost")) {
             holder.mealImage.setImageResource(R.drawable.ic_sandwich);
-        } else if (meals.get(position).getTypeOfMeal().equals("Dinner")) {
+        } else if (meals.get(position).getTypeOfMeal().equals("Aftensmad")) {
             holder.mealImage.setImageResource(R.drawable.ic_local_dining_black_24dp);
         } else {
             holder.mealImage.setImageResource(R.drawable.ic_fruit);

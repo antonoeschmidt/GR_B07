@@ -233,6 +233,7 @@ public class SocialActivity extends AppCompatActivity implements RecyclerViewAda
                 } else if (!Settings.getCurrentPupil().getFriends().contains(resultFromScan)) {
                     Settings.getCurrentPupil().getFriends().add(resultFromScan);
                     Toast.makeText(this, "Du har tilføjet \n" + resultFromScan, Toast.LENGTH_SHORT).show();
+                    Settings.getCurrentPupil().getExperience().setSocialXP(Settings.getCurrentPupil().getExperience().getSocialXP() + 5);
                     fb.updateDatabase();
                 }
             }

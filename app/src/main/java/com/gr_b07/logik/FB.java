@@ -85,7 +85,6 @@ public class FB {
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot d) {
-                //måske bruges
                 Settings.setCurrentUser(d.getValue(Pupil.class));
 
                 if (Settings.getCurrentUser().getClass().equals(Pupil.class)) {

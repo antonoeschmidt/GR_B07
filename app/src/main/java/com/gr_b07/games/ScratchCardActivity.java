@@ -50,6 +50,7 @@ public class ScratchCardActivity extends AppCompatActivity implements View.OnCli
         tickets = findViewById(R.id.ticketsScratchCard);
         scratchCardTextView.setText("0% afsløret");
         tickets.setText("Lodder: " + Settings.getCurrentPupil().getExperience().getTicket());
+        tickets.setVisibility(View.INVISIBLE);
         redeemButton = findViewById(R.id.redeemButton);
         redeemButton.setOnClickListener(this);
 

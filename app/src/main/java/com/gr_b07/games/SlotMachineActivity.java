@@ -23,15 +23,13 @@ import java.util.Set;
 
 public class SlotMachineActivity extends AppCompatActivity implements ImageViewScrolling.IEventEnd {
 
-    Button startSlotButton;
-    ImageView buttonUp, buttonDown;
-    ImageViewScrolling image, image2, image3;
-    TextView tickets;
-    RewardItems rewardItems = new RewardItems();
-    FB fb = new FB();
-
-    int countDone = 0;
-
+    private Button startSlotButton;
+    private ImageView buttonUp, buttonDown;
+    private ImageViewScrolling image, image2, image3;
+    private TextView tickets;
+    private RewardItems rewardItems = new RewardItems();
+    private FB fb = new FB();
+    private int countDone = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +47,7 @@ public class SlotMachineActivity extends AppCompatActivity implements ImageViewS
 
         tickets = findViewById(R.id.ticketsSlotMachine);
         tickets.setText("Lodder: " + Settings.getCurrentPupil().getExperience().getTicket());
+        tickets.setVisibility(View.INVISIBLE);
 
         image.setEventEnd(SlotMachineActivity.this);
         image2.setEventEnd(SlotMachineActivity.this);
