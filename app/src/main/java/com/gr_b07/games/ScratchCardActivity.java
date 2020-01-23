@@ -30,15 +30,15 @@ import java.util.Random;
 
 public class ScratchCardActivity extends AppCompatActivity implements View.OnClickListener {
 
-    ScratchImageView scratchImageView;
-    TextView scratchCardTextView, tickets;
-    float revealedPercent;
-    Button redeemButton;
-    ImageView scratchCover;
-    Random random = new Random();
-    int chosenCard;
-    RewardItems rewardItems = new RewardItems();
-    FB fb = new FB();
+    private ScratchImageView scratchImageView;
+    private TextView scratchCardTextView, tickets;
+    private float revealedPercent;
+    private Button redeemButton;
+    private ImageView scratchCover;
+    private Random random = new Random();
+    private int chosenCard;
+    private RewardItems rewardItems = new RewardItems();
+    private FB fb = new FB();
 
 
     @Override
