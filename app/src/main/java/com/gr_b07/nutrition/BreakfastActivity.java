@@ -58,7 +58,7 @@ public class BreakfastActivity extends AbstractMealActivity {
                 Settings.hideSoftKeyboard(BreakfastActivity.this);
             }
         });
-        textViewHeader.setText("Breakfast");
+        textViewHeader.setText("Morgenmad");
     }
 
     @Override
@@ -74,7 +74,7 @@ public class BreakfastActivity extends AbstractMealActivity {
                 if (chosenFood != null) {
                     //v.setFadingEdgeLength(2);
                     eatFood(chosenFood, textViewHeader.getText().toString());
-                    Toast.makeText(this, "Meal added", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Måltid tilføjet", Toast.LENGTH_SHORT).show();
                     finish();
                 }
 
@@ -85,10 +85,10 @@ public class BreakfastActivity extends AbstractMealActivity {
     @Override
     public void setTextViews(Food food) {
         tvFood0.setText(food.getName());
-        tvFood1.setText("Calories: "+food.getCalories());
+        tvFood1.setText("Kalorier: "+food.getCalories());
         tvFood2.setText("Protein: "+food.getProtein());
-        tvFood3.setText("Carbs: "+food.getCarbs());
-        tvFood4.setText("Fat: "+food.getFat());
+        tvFood3.setText("Kalorier: "+food.getCarbs());
+        tvFood4.setText("Fedt: "+food.getFat());
     }
 
     @Override

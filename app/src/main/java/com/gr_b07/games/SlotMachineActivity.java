@@ -43,7 +43,7 @@ public class SlotMachineActivity extends AppCompatActivity implements ImageViewS
         image3 = findViewById(R.id.image3);
 
         tickets = findViewById(R.id.ticketsSlotMachine);
-        tickets.setText("Tickets: " + Settings.getCurrentPupil().getExperience().getTicket());
+        tickets.setText("Lodder: " + Settings.getCurrentPupil().getExperience().getTicket());
 
         image.setEventEnd(SlotMachineActivity.this);
         image2.setEventEnd(SlotMachineActivity.this);
@@ -62,10 +62,10 @@ public class SlotMachineActivity extends AppCompatActivity implements ImageViewS
 
                     Settings.getCurrentPupil().getExperience().setTicket(Settings.getCurrentPupil().getExperience().getTicket()-1);
 
-                    tickets.setText("Tickets: " + Settings.getCurrentPupil().getExperience().getTicket());
+                    tickets.setText("Lodder: " + Settings.getCurrentPupil().getExperience().getTicket());
 
                 } else {
-                    Toast.makeText(SlotMachineActivity.this,"Du har ikke nogen tickets :/", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SlotMachineActivity.this,"Du har ikke nogen lodder :/", Toast.LENGTH_SHORT).show();
                 }
             }
         });

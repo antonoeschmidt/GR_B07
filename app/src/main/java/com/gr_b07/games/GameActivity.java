@@ -74,7 +74,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
     public void updateTextView(){
-        ticketTextView.setText("Tickets: " + Settings.getCurrentPupil().getExperience().getTicket());
+        ticketTextView.setText("Lodder: " + Settings.getCurrentPupil().getExperience().getTicket());
     }
 
     @Override
