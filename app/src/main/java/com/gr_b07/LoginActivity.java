@@ -83,9 +83,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     if (!usernameText.getText().toString().isEmpty() && !passwordText.getText().toString().isEmpty()) {
                         progressDialog.show();
                         fb.firebaseSignIn(progressDialog,this,usernameText.getText().toString(),passwordText.getText().toString());
+                    } else {
+                        Toast.makeText(this, "Indtast din e-mail og kode", Toast.LENGTH_SHORT).show();
                     }
-                    Toast.makeText(this, "Indtast din e-mail og kode", Toast.LENGTH_SHORT).show();
-                    
+
                 }
                 break;
 
