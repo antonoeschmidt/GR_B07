@@ -15,6 +15,7 @@
         android:ems="10"
         android:fontFamily="@font/roboto"
         android:hint="E-mail"
+        android:text="dtu@dtu.dk"
         android:inputType="textPersonName"
         android:layout_centerInParent="true"
         android:drawableLeft="@drawable/login_user_image"/>
@@ -26,6 +27,7 @@
         android:ems="10"
         android:fontFamily="@font/roboto"
         android:hint="Adgangskode"
+        android:text="123123"
         android:inputType="textPassword"
         android:layout_margin="@dimen/default_stroke_width"
         android:layout_below="@id/usernameText"

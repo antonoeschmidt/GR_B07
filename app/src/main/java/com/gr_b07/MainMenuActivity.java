@@ -82,6 +82,7 @@ public class MainMenuActivity extends AppCompatActivity implements View.OnClickL
 
     }
     public void updateMainMenu() {
+        // NullPointerException: Attempt to invoke virtual method 'com.gr_b07.logik.Experience com.gr_b07.logik.Pupil.getExperience()' on a null object reference
         levelTextView.setText(Integer.toString(Settings.getCurrentPupil().getExperience().getLevel()).toString());
         xpTextView.setText((Integer.toString(Settings.getCurrentPupil().getExperience().getTotalXP())) + " / " + Integer.toString(Settings.getCurrentPupil().getExperience().getLevel()*5+10));
         xpProgressBar.setMax(Settings.getCurrentPupil().getExperience().getLevel()*5+10);
