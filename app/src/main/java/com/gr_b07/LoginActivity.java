@@ -56,6 +56,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
+        /*
         //Trying HTTP Get with /getallusers
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = "http://35.246.214.109:8080/getallusers";
@@ -77,10 +78,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
 // Add the request to the RequestQueue.
         queue.add(stringRequest);
-
-
-
-
+*/
 
 
         super.onCreate(savedInstanceState);
@@ -112,7 +110,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         switch (v.getId()) {
             case R.id.loginButton:
                 //der kommer android.view.WindowLeak her, men det har ingen betydning for appen og den crasher ikke
+                String allUsers = "";
+                SpringClient springClient = new SpringClient(this);
+                try {
+                    allUsers = springClient.getAllUsers();
+                } catch (InterruptedException e){
+                    e.printStackTrace();
+                }
+                System.out.println("This is " + allUsers + "All users");
 
+                /*
                 if (usernameText.getText().toString().equals("admin") && passwordText.getText().toString().equals("admin")) {
                     //adminlogin
                 } else {
@@ -124,7 +131,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     }
 
                 }
-                break;
+                break;*/
 
             case R.id.signUpButton:
                 Intent signUpIntent = new Intent(this, SignUpActivity.class);
