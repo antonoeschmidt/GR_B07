@@ -38,5 +38,13 @@ public abstract class User {
     public void setUID(String UID) {
         this.UID = UID;
     }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }
 

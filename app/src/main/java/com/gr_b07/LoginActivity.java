@@ -4,42 +4,19 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Message;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.gr_b07.logik.Experience;
 import com.gr_b07.logik.FB;
 import com.gr_b07.logik.Pupil;
 import com.gr_b07.logik.Settings;
 import com.gr_b07.logik.SpringClient;
-import com.gr_b07.logik.User;
 
-import java.io.IOException;
-import java.util.Date;
 
 import io.sentry.Sentry;
 import io.sentry.android.AndroidSentryClientFactory;
@@ -52,37 +29,24 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private Button loginButton, signUpButton;
     private ProgressDialog progressDialog;
     private FB fb = new FB();
+    private SpringClient springClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        /*
-        //Trying HTTP Get with /getallusers
-        RequestQueue queue = Volley.newRequestQueue(this);
-        String url = "http://35.246.214.109:8080/getallusers";
-
-
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        // Display the first 500 characters of the response string.
-                        System.out.println("Response is: "+ response.substring(0,500));
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                System.out.println("That didn't work!");
-            }
-        });
-
-// Add the request to the RequestQueue.
-        queue.add(stringRequest);
-*/
-
+        /*String allUsers = "";
+        SpringClient springClient = new SpringClient(this);
+        try {
+            allUsers = springClient.getAllUsers();
+        } catch (InterruptedException e){
+            e.printStackTrace();
+        }
+        System.out.println("This is " + allUsers + "All users");
+         */
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        springClient = new SpringClient(this);
 
         if (fb.getAuth().getCurrentUser() != null) {
             fb.getAuth().signOut();
@@ -110,28 +74,43 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         switch (v.getId()) {
             case R.id.loginButton:
                 //der kommer android.view.WindowLeak her, men det har ingen betydning for appen og den crasher ikke
-                String allUsers = "";
-                SpringClient springClient = new SpringClient(this);
-                try {
-                    allUsers = springClient.getAllUsers();
-                } catch (InterruptedException e){
-                    e.printStackTrace();
-                }
-                System.out.println("This is " + allUsers + "All users");
-
-                /*
+                progressDialog.show();
                 if (usernameText.getText().toString().equals("admin") && passwordText.getText().toString().equals("admin")) {
                     //adminlogin
                 } else {
                     if (!usernameText.getText().toString().isEmpty() && !passwordText.getText().toString().isEmpty()) {
-                        progressDialog.show();
-                        fb.firebaseSignIn(progressDialog,this,usernameText.getText().toString(),passwordText.getText().toString());
+                        String authorisedUID = springClient.authenticateLogIn(usernameText.getText().toString(),
+                                passwordText.getText().toString());
+                        if (!authorisedUID.equals("f")) {
+                            Toast.makeText(this, "WE IN BABY", Toast.LENGTH_SHORT).show();
+                            Pupil user = springClient.getUser(authorisedUID);
+                            System.out.println(user.getPersonalInfo().getFirstName());
+
+                            Settings.setCurrentUser(user);
+                            //this will handle if someone other than pupil logs in ex. admin
+                            //this needs to be implimented
+                            if (Settings.getCurrentUser().getClass().equals(Pupil.class)) {
+                                Settings.setCurrentPupil((Pupil) Settings.getCurrentUser());
+                            }
+                            if (Settings.getCurrentUser().isFirstTimeLoggedIn()) {
+                                Intent inputDataIntent = new Intent(this, InputDataActivity.class);
+                                startActivity(inputDataIntent);
+                            } else  {
+                                Intent mainMenuIntent = new Intent(this, MainMenuActivity.class);
+                                startActivity(mainMenuIntent);
+                            }
+
+                        } else {
+                            Toast.makeText(this, "NOT", Toast.LENGTH_SHORT).show();
+
+                        }
+                        // fb.firebaseSignIn(progressDialog,this,usernameText.getText().toString(),passwordText.getText().toString());
                     } else {
                         Toast.makeText(this, "Indtast din e-mail og kode", Toast.LENGTH_SHORT).show();
                     }
-
+                    progressDialog.hide();
                 }
-                break;*/
+                break;
 
             case R.id.signUpButton:
                 Intent signUpIntent = new Intent(this, SignUpActivity.class);

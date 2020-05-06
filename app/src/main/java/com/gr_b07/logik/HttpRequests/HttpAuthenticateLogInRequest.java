@@ -10,16 +10,17 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class HttpGetAllUsersRequest extends AsyncTask<String, Void, String> {
+public class HttpAuthenticateLogInRequest extends AsyncTask<String, Void, String> {
     public static final String REQUEST_METHOD = "POST";
     public static final int READ_TIMEOUT = 15000;
     public static final int CONNECTION_TIMEOUT = 15000;
+
     @Override
     protected String doInBackground(String... params){
         String stringUrl = params[0];
+        String body = params[1];
         String result;
         String inputLine;
-        String uid = params[1];
         try {
             //Create a URL object holding our url
             URL myUrl = new URL(stringUrl);
@@ -27,18 +28,26 @@ public class HttpGetAllUsersRequest extends AsyncTask<String, Void, String> {
             HttpURLConnection connection =(HttpURLConnection)
                     myUrl.openConnection();
             //Set methods and timeouts
+
+            connection.setRequestProperty("Content-Type", "application/json");
+            connection.setRequestProperty("Accept", "application/json");
+
             connection.setRequestMethod(REQUEST_METHOD);
             connection.setReadTimeout(READ_TIMEOUT);
             connection.setConnectTimeout(CONNECTION_TIMEOUT);
+            //connection.setDoOutput(true);
 
-            if(uid.length() > 0){
-                OutputStream os = connection.getOutputStream();
-                OutputStreamWriter osw = new OutputStreamWriter(os, "UTF-8");
-                osw.write(uid);
-                osw.flush();
-                osw.close();
-                os.close();
-            }
+            connection.setRequestProperty("Content-length", body.getBytes().length + "");
+            connection.setDoInput(true);
+            connection.setDoOutput(true);
+            connection.setUseCaches(false);
+
+            OutputStream os = connection.getOutputStream();
+            //OutputStreamWriter osw = new OutputStreamWriter(os, "UTF-8");
+            os.write(body.getBytes("UTF-8"));
+            //osw.flush();
+            //osw.close();
+            os.close();
 
             //Connect to our url
             connection.connect();

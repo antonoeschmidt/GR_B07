@@ -1,53 +1,146 @@
 package com.gr_b07.logik;
 
 import android.app.Activity;
-import android.os.AsyncTask;
+import android.app.PictureInPictureParams;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
+import com.gr_b07.logik.HttpRequests.HttpAuthenticateLogInRequest;
 import com.gr_b07.logik.HttpRequests.HttpGetAllUsersRequest;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-import org.jetbrains.annotations.NotNull;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.ConcurrentModificationException;
-import java.util.List;
-import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Semaphore;
-import java.util.logging.Handler;
 
 public class SpringClient {
 
-    private String baseUrl = "http://35.246.214.109:8080", allUsersString;
+    private String baseUrl = "http://10.0.2.2:8080";
+    //private String baseUrl = "http://35.246.214.109:8080";
     private Activity activity;
 
     public SpringClient(Activity activity) {
         this.activity = activity;
     }
 
-    public String getAllUsers() throws InterruptedException {
-        //Some url endpoint that you may have
+
+    /**
+     *Gets all users
+     * @return
+     */
+    public String getAllUsers() {
+
         String myUrl = baseUrl + "/getallusers";
-        //String to place our result in
         String result = "";
-        //Instantiate new instance of our class
         HttpGetAllUsersRequest getRequest = new HttpGetAllUsersRequest();
-        //Perform the doInBackground method, passing in our url
+
         try {
-            result = getRequest.execute(myUrl).get();
-        } catch (ExecutionException e){
+            result = getRequest.execute(myUrl, "").get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.println("PENISHEAD" + result);
+
         return result;
     }
 
+    /**
+     * Authenticates user email and password
+     * @param username
+     * @param password
+     */
+    public String authenticateLogIn(String username, String password) {
+        String myUrl = baseUrl + "/androidlogin";
+        String result = "";
+        String body = "{\"user\":\"" + username + "\",\"pass\":\"" + password + "\"" + "}";
+        System.out.println(body);
+        HttpAuthenticateLogInRequest logInRequest = new HttpAuthenticateLogInRequest();
+        try {
+            result = logInRequest.execute(myUrl, body).get();
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println("before");
+        System.out.println(result);
+        System.out.println("after");
+
+        return result;
+    }
+
+    /**
+     * Gets a specific user from a UID, this is used after the authentication has been made
+     * @param uid
+     * @return
+     */
+    public Pupil getUser(String uid){
+        Pupil pupil = new Pupil();
+        String myUrl = baseUrl + "/getuser";
+        String result = "";
+        HttpGetAllUsersRequest getRequest = new HttpGetAllUsersRequest();
+
+        try {
+            result = getRequest.execute(myUrl, uid).get();
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
+        try {
+            pupil = JSONtoPupil(result);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return pupil;
+    }
+
+    /**
+     * Just as in backend, hardcoded the json that is returned to a pupil object
+     * @param jsonString
+     * @throws JSONException
+     */
+    public Pupil JSONtoPupil(String s) throws JSONException{
+
+        JSONObject json = new JSONObject(s);
+
+        System.out.println(json.toString());
+
+        Pupil pupil = new Pupil();
+
+        pupil.setUsername(json.getString("username"));
+        pupil.setPassword(json.getString("password"));
+        pupil.setUID(json.getString("uid"));
+        pupil.setFirstTimeLoggedIn(json.getBoolean("firstTimeLoggedIn"));
+
+        //Kunne ikke få ting fra nested json objekter så lavede et nyt
+        Physique physique = new Physique();
+        JSONObject jsonObjectPhysique = json.getJSONObject("physique");
+        physique.setHeight(jsonObjectPhysique.getDouble("height"));
+        physique.setWeight(jsonObjectPhysique.getDouble("weight"));
+        physique.setActivityLevel(jsonObjectPhysique.getInt("activityLevel"));
+        pupil.setPhysique(physique);
+
+        PersonalInfo personalInfo = new PersonalInfo();
+        JSONObject jsonObjectPersonalInfo = json.getJSONObject("personalInfo");
+        personalInfo.setFirstName(jsonObjectPersonalInfo.getString("firstName"));
+        personalInfo.setLastName(jsonObjectPersonalInfo.getString("lastName"));
+        personalInfo.setGender(jsonObjectPersonalInfo.getString("gender"));
+        personalInfo.setDateOfBirth(jsonObjectPersonalInfo.getLong("dateOfBirth"));
+        personalInfo.setZipCode(jsonObjectPersonalInfo.getInt("zipCode"));
+        pupil.setPersonalInfo(personalInfo);
+
+        Experience experience = new Experience();
+        JSONObject jsonObjectExperience = json.getJSONObject("experience");
+        experience.setLevel(jsonObjectExperience.getInt("level"));
+        experience.setNutritionXP(jsonObjectExperience.getInt("nutritionXP"));
+        experience.setActivityXP(jsonObjectExperience.getInt("activityXP"));
+        experience.setSocialXP(jsonObjectExperience.getInt("socialXP"));
+        experience.setTicket(jsonObjectExperience.getInt("ticket"));
+        experience.setXPForCalories(jsonObjectExperience.getBoolean("xpforCalories"));
+        experience.setXPForProtein(jsonObjectExperience.getBoolean("xpforProtein"));
+        experience.setXPForCarbs(jsonObjectExperience.getBoolean("xpforCarbs"));
+        experience.setXPForFat(jsonObjectExperience.getBoolean("xpforFat"));
+        pupil.setExperience(experience);
+
+        return pupil;
+    }
 
 }
 

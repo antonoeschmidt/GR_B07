@@ -131,6 +131,8 @@ public class FB {
 
                             if (Settings.getCurrentUser() != null) {
                                 if (Settings.getCurrentUser().getClass().equals(Pupil.class)) {
+
+
                                     Settings.setCurrentPupil((Pupil) Settings.getCurrentUser());
                                 }
                             }
