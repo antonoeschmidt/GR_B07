@@ -14,6 +14,7 @@ import com.gr_b07.logik.FB;
 import com.gr_b07.logik.Food;
 import com.gr_b07.logik.Meal;
 import com.gr_b07.logik.Settings;
+import com.gr_b07.logik.SpringClient;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -24,6 +25,7 @@ public abstract class AbstractMealActivity extends AppCompatActivity implements 
     protected InputStream inputStream;
     protected String[] data;
     private FB fb = new FB();
+    private SpringClient springClient = new SpringClient(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +60,7 @@ public abstract class AbstractMealActivity extends AppCompatActivity implements 
     public void eatFood(Food food, String typeOfMeal){
         Settings.getCurrentPupil().addMeal(new Meal(food.getName(),food.getCalories(),food.getProtein(),food.getCarbs(),
         food.getFat(),typeOfMeal,System.currentTimeMillis()));
-        fb.updateDatabase();
+        //fb.updateDatabase();
+        springClient.updateDatabase();
     }
 }

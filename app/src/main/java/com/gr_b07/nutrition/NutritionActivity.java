@@ -18,6 +18,7 @@ import com.gr_b07.R;
 import com.gr_b07.logik.FB;
 import com.gr_b07.logik.Food;
 import com.gr_b07.logik.Settings;
+import com.gr_b07.logik.SpringClient;
 import com.gr_b07.nutrition.BreakfastActivity;
 import com.gr_b07.nutrition.DinnerActivity;
 import com.gr_b07.nutrition.LunchActivity;
@@ -49,6 +50,7 @@ public class NutritionActivity extends AppCompatActivity implements View.OnClick
     boolean XPForCalories, XPForProtein, XPForCarbs, XPForFat;
     ArrayList<Boolean> XPBooleans = new ArrayList<>();
     private FB fb = new FB();
+    private SpringClient springClient = new SpringClient(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -163,7 +165,8 @@ public class NutritionActivity extends AppCompatActivity implements View.OnClick
             Settings.getCurrentPupil().getExperience().setXPForFat(true);
             Toast.makeText(this, "Fedt + 5", Toast.LENGTH_SHORT).show();
         }
-        fb.updateDatabase();
+        springClient.updateDatabase();
+        //fb.updateDatabase();
     }
 
     private void createDBarray() {

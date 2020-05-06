@@ -11,6 +11,7 @@ import com.gr_b07.R;
 import com.gr_b07.logik.FB;
 import com.gr_b07.logik.Meal;
 import com.gr_b07.logik.Settings;
+import com.gr_b07.logik.SpringClient;
 
 import java.util.ArrayList;
 
@@ -21,6 +22,7 @@ public class MealsActivity extends AppCompatActivity implements MealDialog.Dialo
     private RecyclerViewAdapterMeals adapter;
     private ArrayList<Integer> mealImages = new ArrayList<>();
     private FB fb = new FB();
+    private SpringClient springClient = new SpringClient(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +56,7 @@ public class MealsActivity extends AppCompatActivity implements MealDialog.Dialo
     @Override
     public void updateMeals() {
         adapter.notifyDataSetChanged();
-        fb.updateDatabase();
+        //fb.updateDatabase();
+        springClient.updateDatabase();
     }
 }

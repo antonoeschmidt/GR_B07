@@ -84,8 +84,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         if (!authorisedUID.equals("f")) {
                             Toast.makeText(this, "WE IN BABY", Toast.LENGTH_SHORT).show();
                             Pupil user = springClient.getUser(authorisedUID);
-                            System.out.println(user.getPersonalInfo().getFirstName());
-
                             Settings.setCurrentUser(user);
                             //this will handle if someone other than pupil logs in ex. admin
                             //this needs to be implimented

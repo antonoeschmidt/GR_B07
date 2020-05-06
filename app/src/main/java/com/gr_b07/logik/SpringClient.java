@@ -3,12 +3,20 @@ package com.gr_b07.logik;
 import android.app.Activity;
 import android.app.PictureInPictureParams;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
 import com.gr_b07.logik.HttpRequests.HttpAuthenticateLogInRequest;
 import com.gr_b07.logik.HttpRequests.HttpGetAllUsersRequest;
+import com.gr_b07.logik.HttpRequests.HttpUpdateDatabaseRequest;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 public class SpringClient {
@@ -93,7 +101,7 @@ public class SpringClient {
 
     /**
      * Just as in backend, hardcoded the json that is returned to a pupil object
-     * @param jsonString
+     * @param
      * @throws JSONException
      */
     public Pupil JSONtoPupil(String s) throws JSONException{
@@ -139,7 +147,40 @@ public class SpringClient {
         experience.setXPForFat(jsonObjectExperience.getBoolean("xpforFat"));
         pupil.setExperience(experience);
 
+        List<Meal> meals = new ArrayList<>();
+        JSONArray mealsJsonArray = new JSONArray(json.get("meals"));
+        System.out.println("This should " + mealsJsonArray + " be empty");
+        for(int i = 0; i > mealsJsonArray.length(); i++){
+            meals.add((Meal) mealsJsonArray.get(i));
+        }
+
         return pupil;
+    }
+
+    public void updateDatabase(){
+        //Pupil to json
+        ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
+        String json = "";
+        try {
+            json = ow.writeValueAsString(Settings.getCurrentPupil());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println(json);
+
+        //Request itself
+
+        String myUrl = baseUrl + "/saveuser";
+        String result = "";
+        HttpUpdateDatabaseRequest httpUpdateDatabaseRequest = new HttpUpdateDatabaseRequest();
+        try {
+            result = httpUpdateDatabaseRequest.execute(myUrl, json).get();
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println("before");
+        System.out.println(result);
+        System.out.println("after");
     }
 
 }

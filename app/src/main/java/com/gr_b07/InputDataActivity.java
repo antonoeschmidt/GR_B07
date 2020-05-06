@@ -22,6 +22,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.gr_b07.logik.FB;
 import com.gr_b07.logik.Settings;
+import com.gr_b07.logik.SpringClient;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -38,6 +39,7 @@ public class InputDataActivity extends AppCompatActivity implements View.OnClick
     private RatingBar activityLevelRatingBar;
     private DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
     private FB fb = new FB();
+    private SpringClient springClient = new SpringClient(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -150,8 +152,8 @@ public class InputDataActivity extends AppCompatActivity implements View.OnClick
 
                 Settings.getCurrentUser().setFirstTimeLoggedIn(false);
 
-                fb.updateDatabase();
-
+                //fb.updateDatabase();
+                springClient.updateDatabase();
                 Intent mainMenuIntent = new Intent(this, MainMenuActivity.class);
                 startActivity(mainMenuIntent);
             }
@@ -213,7 +215,7 @@ public class InputDataActivity extends AppCompatActivity implements View.OnClick
                 activityLevelRatingBar.setRating(Settings.getCurrentPupil().getPhysique().getActivityLevel());
                 updateActivityLevelView();
             }
-        } else if (Settings.getCurrentPupil().isFirstTimeLoggedIn()){
+        } else if (Settings.getCurrentPupil().isFirstTimeLoggedIn()) {
             radioGroup.clearCheck();
             editTextHeight.setText("");
             editTextHeight.setHint("Indtast højde");
