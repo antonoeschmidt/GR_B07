@@ -29,7 +29,6 @@ public class SlotMachineActivity extends AppCompatActivity implements ImageViewS
     private ImageViewScrolling image, image2, image3;
     private TextView tickets;
     private RewardItems rewardItems = new RewardItems();
-    private FB fb = new FB();
     private int countDone = 0;
     private SpringClient springClient = new SpringClient(this);
 

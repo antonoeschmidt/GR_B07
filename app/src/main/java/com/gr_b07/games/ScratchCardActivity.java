@@ -39,7 +39,6 @@ public class ScratchCardActivity extends AppCompatActivity implements View.OnCli
     private Random random = new Random();
     private int chosenCard;
     private RewardItems rewardItems = new RewardItems();
-    private FB fb = new FB();
     private SpringClient springClient = new SpringClient(this);
 
 

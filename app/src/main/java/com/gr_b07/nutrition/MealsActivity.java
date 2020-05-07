@@ -21,7 +21,6 @@ public class MealsActivity extends AppCompatActivity implements MealDialog.Dialo
     private RecyclerView recyclerView;
     private RecyclerViewAdapterMeals adapter;
     private ArrayList<Integer> mealImages = new ArrayList<>();
-    private FB fb = new FB();
     private SpringClient springClient = new SpringClient(this);
 
     @Override

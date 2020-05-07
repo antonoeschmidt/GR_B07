@@ -31,7 +31,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     private EditText passwordText;
     private Button signUpButton;
     private ProgressDialog progressDialog;
-    private FB fb = new FB();
     private SpringClient springClient = new SpringClient(this);
 
 

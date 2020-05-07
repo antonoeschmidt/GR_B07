@@ -24,7 +24,6 @@ import java.io.InputStreamReader;
 public abstract class AbstractMealActivity extends AppCompatActivity implements View.OnClickListener {
     protected InputStream inputStream;
     protected String[] data;
-    private FB fb = new FB();
     private SpringClient springClient = new SpringClient(this);
 
     @Override

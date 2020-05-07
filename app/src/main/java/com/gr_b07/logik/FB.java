@@ -25,6 +25,7 @@ import com.gr_b07.MainMenuActivity;
 import java.util.ArrayList;
 
 public class FB {
+/*
     private FirebaseAuth auth;
     private FirebaseDatabase db;
     private FirebaseAuth.AuthStateListener authStateListener;
@@ -182,5 +183,5 @@ public class FB {
         return authStateListener;
     }
 
-
+*/
 }

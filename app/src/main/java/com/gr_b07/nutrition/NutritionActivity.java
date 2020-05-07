@@ -49,7 +49,6 @@ public class NutritionActivity extends AppCompatActivity implements View.OnClick
     public static String[] foodAutoText;
     boolean XPForCalories, XPForProtein, XPForCarbs, XPForFat;
     ArrayList<Boolean> XPBooleans = new ArrayList<>();
-    private FB fb = new FB();
     private SpringClient springClient = new SpringClient(this);
 
     @Override

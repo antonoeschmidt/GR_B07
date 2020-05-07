@@ -28,7 +28,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private ImageView imageViewPass;
     private Button loginButton, signUpButton;
     private ProgressDialog progressDialog;
-    private FB fb = new FB();
     private SpringClient springClient;
 
     @Override
@@ -47,10 +46,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         springClient = new SpringClient(this);
-
-        if (fb.getAuth().getCurrentUser() != null) {
-            fb.getAuth().signOut();
-        }
 
         boolean EMULATOR = Build.PRODUCT.contains("sdk") || Build.MODEL.contains("Emulator");
         if (!EMULATOR) {
@@ -121,9 +116,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected void onResume() {
         super.onResume();
 
+        /*
         if (fb.getAuth().getCurrentUser() != null) {
             usernameText.setText(Settings.getCurrentPupil().getUsername());
             passwordText.setText(Settings.getCurrentPupil().getPassword());
         }
+        */
+
     }
 }

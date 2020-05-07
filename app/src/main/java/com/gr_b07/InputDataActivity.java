@@ -38,7 +38,6 @@ public class InputDataActivity extends AppCompatActivity implements View.OnClick
     private Calendar c;
     private RatingBar activityLevelRatingBar;
     private DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-    private FB fb = new FB();
     private SpringClient springClient = new SpringClient(this);
 
     @Override
