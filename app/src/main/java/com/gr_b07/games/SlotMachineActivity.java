@@ -17,6 +17,7 @@ import com.gr_b07.logik.FB;
 import com.gr_b07.logik.Reward;
 import com.gr_b07.logik.Settings;
 import com.gr_b07.logik.RewardItems;
+import com.gr_b07.logik.SpringClient;
 
 import java.util.Random;
 import java.util.Set;
@@ -30,6 +31,7 @@ public class SlotMachineActivity extends AppCompatActivity implements ImageViewS
     private RewardItems rewardItems = new RewardItems();
     private FB fb = new FB();
     private int countDone = 0;
+    private SpringClient springClient = new SpringClient(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,7 +99,7 @@ public class SlotMachineActivity extends AppCompatActivity implements ImageViewS
             } else {
                 Toast.makeText(SlotMachineActivity.this, "Du taber", Toast.LENGTH_SHORT).show();
             }
-            fb.updateDatabase();
+            springClient.updateDatabase();
         }
         try {
             Log.d(Settings.getCurrentPupil().getRewards().toString(), "44444");

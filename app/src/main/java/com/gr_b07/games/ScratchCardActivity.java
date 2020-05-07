@@ -18,6 +18,7 @@ import com.gr_b07.logik.FB;
 import com.gr_b07.logik.FB;
 import com.gr_b07.logik.Settings;
 import com.gr_b07.logik.RewardItems;
+import com.gr_b07.logik.SpringClient;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -39,6 +40,7 @@ public class ScratchCardActivity extends AppCompatActivity implements View.OnCli
     private int chosenCard;
     private RewardItems rewardItems = new RewardItems();
     private FB fb = new FB();
+    private SpringClient springClient = new SpringClient(this);
 
 
     @Override
@@ -61,7 +63,7 @@ public class ScratchCardActivity extends AppCompatActivity implements View.OnCli
     public void onClick(View v) {
         if (Settings.getCurrentPupil().getExperience().getTicket() > 0) {
             Settings.getCurrentPupil().getExperience().setTicket(Settings.getCurrentPupil().getExperience().getTicket() - 1);
-            fb.updateDatabase();
+            springClient.updateDatabase();
             redeemButton.setVisibility(View.INVISIBLE);
             updateTextView();
             initScratchCard();
@@ -82,7 +84,7 @@ public class ScratchCardActivity extends AppCompatActivity implements View.OnCli
         if (chosenCard == R.drawable.scratch_card_image_win_big) {
             Settings.getCurrentPupil().addReward(rewardItems.getTierTwoReward());
         }
-        fb.updateDatabase();
+        springClient.updateDatabase();
         //Image1 callback
         scratchImageView.setRevealListener(new ScratchImageView.IRevealListener() {
             @Override

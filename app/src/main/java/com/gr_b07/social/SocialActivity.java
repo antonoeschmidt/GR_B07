@@ -23,6 +23,7 @@ import com.gr_b07.R;
 import com.gr_b07.logik.FB;
 import com.gr_b07.logik.Pupil;
 import com.gr_b07.logik.Settings;
+import com.gr_b07.logik.SpringClient;
 import com.gr_b07.logik.User;
 import com.gr_b07.nutrition.MealDialog;
 
@@ -33,7 +34,6 @@ import io.sentry.android.AndroidSentryClientFactory;
 
 public class SocialActivity extends AppCompatActivity implements RecyclerViewAdapterSocial.ItemClickListener, View.OnClickListener, SocialDialog.DialogFragmentUpdateListener {
 
-    private FB fb = new FB();
     private ImageView imageViewAccountPhoto;
     private Button buttonGetFriends, buttonAddActivity, buttonSeeQRcode, buttonScanQRcode;
     private TextView friendsTextView, suggestedFriendsTextView;
@@ -46,6 +46,7 @@ public class SocialActivity extends AppCompatActivity implements RecyclerViewAda
     private ArrayList<String> suggestedFriendsUsernames = new ArrayList<>();
     private ArrayList<Integer> suggestedFriendsUserPhotos = new ArrayList<>();
     private String resultFromScan = "";
+    private SpringClient springClient = new SpringClient(this);
 
 
     @Override
@@ -82,7 +83,7 @@ public class SocialActivity extends AppCompatActivity implements RecyclerViewAda
         buttonGetFriends.setVisibility(View.INVISIBLE);
 
 
-        fb.getAllUsersFromDatabase();
+        //fb.getAllUsersFromDatabase();
 
         Log.d(Settings.getUsers().toString(), "onCreate: ");
 
@@ -243,7 +244,7 @@ public class SocialActivity extends AppCompatActivity implements RecyclerViewAda
                     Settings.getCurrentPupil().getFriends().add(resultFromScan);
                     Toast.makeText(this, "Du har tilføjet \n" + resultFromScan, Toast.LENGTH_SHORT).show();
                     Settings.getCurrentPupil().getExperience().setSocialXP(Settings.getCurrentPupil().getExperience().getSocialXP() + 5);
-                    fb.updateDatabase();
+                    springClient.updateDatabase();
                 }
             }
             initializeFriends();
@@ -266,6 +267,6 @@ public class SocialActivity extends AppCompatActivity implements RecyclerViewAda
     public void updateFriends() {
         initializeFriends();
         friendsAdapter.notifyDataSetChanged();
-        fb.updateDatabase();
+        springClient.updateDatabase();
     }
 }

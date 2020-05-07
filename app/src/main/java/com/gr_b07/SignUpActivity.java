@@ -12,9 +12,18 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.gr_b07.logik.Experience;
 import com.gr_b07.logik.FB;
+import com.gr_b07.logik.Meal;
+import com.gr_b07.logik.PersonalInfo;
+import com.gr_b07.logik.Physique;
+import com.gr_b07.logik.Pupil;
+import com.gr_b07.logik.Reward;
+import com.gr_b07.logik.Settings;
+import com.gr_b07.logik.SpringClient;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener {
@@ -23,6 +32,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     private Button signUpButton;
     private ProgressDialog progressDialog;
     private FB fb = new FB();
+    private SpringClient springClient = new SpringClient(this);
 
 
     @Override
@@ -49,7 +59,16 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                     progressDialog.show();
                     final String email = usernameText.getText().toString();
                     final String password = passwordText.getText().toString();
-                    fb.signUp(progressDialog,this, email,password);
+                    Pupil newUser = new Pupil(true, email, password,"thisshouldhopefullybeligemeget", new Physique(0, 0, 0),
+                            new PersonalInfo("", "", "n", 0, 0),
+                            new Experience(1, 0, 0, 0, 0, false, false, false, false),
+                            new ArrayList<Meal>(), new ArrayList<String>(), new ArrayList<String>(), new ArrayList<Reward>()
+                    );
+                    Settings.setCurrentPupil(newUser);
+                    springClient.createUser(newUser);
+                    Intent inputDataIntent = new Intent(this, InputDataActivity.class);
+                    startActivity(inputDataIntent);
+                    //fb.signUp(progressDialog,this, email,password);
                 } else if (!emailIsValid(usernameText.getText().toString())) {
                     Toast.makeText(this, "E-mail har ikke det rigtige format", Toast.LENGTH_SHORT).show();
                 } else {

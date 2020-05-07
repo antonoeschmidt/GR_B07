@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.google.gson.Gson;
 import com.gr_b07.logik.HttpRequests.HttpAuthenticateLogInRequest;
+import com.gr_b07.logik.HttpRequests.HttpCreateUserRequest;
 import com.gr_b07.logik.HttpRequests.HttpGetAllUsersRequest;
 import com.gr_b07.logik.HttpRequests.HttpUpdateDatabaseRequest;
 
@@ -98,6 +99,31 @@ public class SpringClient {
         }
 
         return pupil;
+    }
+
+    public String createUser(Pupil user){
+        ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
+        String json = "";
+        try {
+            json = ow.writeValueAsString(user);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println(json);
+        String myUrl = baseUrl + "/createUser";
+        String result = "";
+        HttpCreateUserRequest httpCreateUserRequest = new HttpCreateUserRequest();
+        try {
+            result = httpCreateUserRequest.execute(myUrl, json).get();
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println("before");
+        System.out.println(result);
+        System.out.println("after");
+
+        return result;
+
     }
 
     /**

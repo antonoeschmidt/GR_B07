@@ -150,10 +150,11 @@ public class InputDataActivity extends AppCompatActivity implements View.OnClick
                     Settings.getCurrentPupil().getPersonalInfo().setGender("female");
                 }
 
-                Settings.getCurrentUser().setFirstTimeLoggedIn(false);
+                Settings.getCurrentPupil().setFirstTimeLoggedIn(false);
 
                 //fb.updateDatabase();
                 springClient.updateDatabase();
+
                 Intent mainMenuIntent = new Intent(this, MainMenuActivity.class);
                 startActivity(mainMenuIntent);
             }

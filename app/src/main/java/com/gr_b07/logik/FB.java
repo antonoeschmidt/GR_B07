@@ -61,7 +61,7 @@ public class FB {
                             );
 
                             Settings.setCurrentPupil(newUser);
-                            updateDatabase();
+                          //  updateDatabase();
                             progressDialog.hide();
                             activity.finish();
                         } else {
@@ -124,7 +124,7 @@ public class FB {
                             FirebaseUser firebaseUser = auth.getCurrentUser();
                             if (firebaseUser != null) {
                                 Settings.logginIn = true;
-                                checkFirstTimeLoggedInFromDatabase(activity, firebaseUser.getUid());
+                                //checkFirstTimeLoggedInFromDatabase(activity, firebaseUser.getUid());
 
                             }
 
