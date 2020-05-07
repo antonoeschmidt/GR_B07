@@ -5,6 +5,7 @@ import android.app.PictureInPictureParams;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
+import com.google.gson.Gson;
 import com.gr_b07.logik.HttpRequests.HttpAuthenticateLogInRequest;
 import com.gr_b07.logik.HttpRequests.HttpGetAllUsersRequest;
 import com.gr_b07.logik.HttpRequests.HttpUpdateDatabaseRequest;
@@ -107,6 +108,14 @@ public class SpringClient {
     public Pupil JSONtoPupil(String s) throws JSONException{
 
         JSONObject json = new JSONObject(s);
+        System.out.println(json);
+        Gson g = new Gson();
+        Pupil p = g.fromJson(json.toString(), Pupil.class);
+        p.setUID(json.getString("uid"));
+        return p;
+        /*
+
+
 
         System.out.println(json.toString());
 
@@ -153,8 +162,8 @@ public class SpringClient {
         for(int i = 0; i > mealsJsonArray.length(); i++){
             meals.add((Meal) mealsJsonArray.get(i));
         }
-
         return pupil;
+        */
     }
 
     public void updateDatabase(){

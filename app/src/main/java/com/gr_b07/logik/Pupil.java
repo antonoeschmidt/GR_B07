@@ -1,8 +1,5 @@
 package com.gr_b07.logik;
 
-import android.widget.TextView;
-
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -13,7 +10,7 @@ public class Pupil extends User {
     private Physique physique;
     private PersonalInfo personalInfo;
     private Experience experience;
-    private String UID;
+    private String uid;
 
     private List<Meal> meals = new ArrayList<>();
     private List<String> friends = new ArrayList<>();
@@ -31,7 +28,7 @@ public class Pupil extends User {
         this.friends = friends;
         this.activities = activities;
         this.rewards = rewards;
-        this.UID = UID;
+        this.uid = UID;
 
     }
 
