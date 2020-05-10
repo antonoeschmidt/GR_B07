@@ -83,7 +83,7 @@ public class SpringClient {
      */
     public Pupil getUser(String uid){
         Pupil pupil = new Pupil();
-        String myUrl = baseUrl + "/getuser";
+        String myUrl = baseUrl + "/getuserandroid";
         String result = "";
         HttpGetAllUsersRequest getRequest = new HttpGetAllUsersRequest();
 
@@ -132,6 +132,8 @@ public class SpringClient {
      * @throws JSONException
      */
     public Pupil JSONtoPupil(String s) throws JSONException{
+
+        System.out.println(s);
 
         JSONObject json = new JSONObject(s);
         System.out.println(json);
