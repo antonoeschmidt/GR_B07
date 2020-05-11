@@ -23,8 +23,7 @@ import java.util.concurrent.ExecutionException;
 
 public class SpringClient {
 
-    private String baseUrl = "http://10.0.2.2:8080";
-    //private String baseUrl = "http://35.246.214.109:8080";
+    private String baseUrl = "http://35.246.214.109:8080";
     private Activity activity;
 
     public SpringClient(Activity activity) {
@@ -58,7 +57,7 @@ public class SpringClient {
      * @param username
      * @param password
      */
-    public String authenticateLogIn(String username, String password) {
+    public String authenticateLogIn(String username, String password){
         String myUrl = baseUrl + "/androidlogin";
         String result = "";
         String body = "{\"user\":\"" + username + "\",\"pass\":\"" + password + "\"" + "}";
@@ -110,7 +109,7 @@ public class SpringClient {
             e.printStackTrace();
         }
         System.out.println(json);
-        String myUrl = baseUrl + "/createUser";
+        String myUrl = baseUrl + "/createuser";
         String result = "";
         HttpCreateUserRequest httpCreateUserRequest = new HttpCreateUserRequest();
         try {
@@ -141,57 +140,6 @@ public class SpringClient {
         Pupil p = g.fromJson(json.toString(), Pupil.class);
         p.setUID(json.getString("uid"));
         return p;
-        /*
-
-
-
-        System.out.println(json.toString());
-
-        Pupil pupil = new Pupil();
-
-        pupil.setUsername(json.getString("username"));
-        pupil.setPassword(json.getString("password"));
-        pupil.setUID(json.getString("uid"));
-        pupil.setFirstTimeLoggedIn(json.getBoolean("firstTimeLoggedIn"));
-
-        //Kunne ikke få ting fra nested json objekter så lavede et nyt
-        Physique physique = new Physique();
-        JSONObject jsonObjectPhysique = json.getJSONObject("physique");
-        physique.setHeight(jsonObjectPhysique.getDouble("height"));
-        physique.setWeight(jsonObjectPhysique.getDouble("weight"));
-        physique.setActivityLevel(jsonObjectPhysique.getInt("activityLevel"));
-        pupil.setPhysique(physique);
-
-        PersonalInfo personalInfo = new PersonalInfo();
-        JSONObject jsonObjectPersonalInfo = json.getJSONObject("personalInfo");
-        personalInfo.setFirstName(jsonObjectPersonalInfo.getString("firstName"));
-        personalInfo.setLastName(jsonObjectPersonalInfo.getString("lastName"));
-        personalInfo.setGender(jsonObjectPersonalInfo.getString("gender"));
-        personalInfo.setDateOfBirth(jsonObjectPersonalInfo.getLong("dateOfBirth"));
-        personalInfo.setZipCode(jsonObjectPersonalInfo.getInt("zipCode"));
-        pupil.setPersonalInfo(personalInfo);
-
-        Experience experience = new Experience();
-        JSONObject jsonObjectExperience = json.getJSONObject("experience");
-        experience.setLevel(jsonObjectExperience.getInt("level"));
-        experience.setNutritionXP(jsonObjectExperience.getInt("nutritionXP"));
-        experience.setActivityXP(jsonObjectExperience.getInt("activityXP"));
-        experience.setSocialXP(jsonObjectExperience.getInt("socialXP"));
-        experience.setTicket(jsonObjectExperience.getInt("ticket"));
-        experience.setXPForCalories(jsonObjectExperience.getBoolean("xpforCalories"));
-        experience.setXPForProtein(jsonObjectExperience.getBoolean("xpforProtein"));
-        experience.setXPForCarbs(jsonObjectExperience.getBoolean("xpforCarbs"));
-        experience.setXPForFat(jsonObjectExperience.getBoolean("xpforFat"));
-        pupil.setExperience(experience);
-
-        List<Meal> meals = new ArrayList<>();
-        JSONArray mealsJsonArray = new JSONArray(json.get("meals"));
-        System.out.println("This should " + mealsJsonArray + " be empty");
-        for(int i = 0; i > mealsJsonArray.length(); i++){
-            meals.add((Meal) mealsJsonArray.get(i));
-        }
-        return pupil;
-        */
     }
 
     public void updateDatabase(){
@@ -221,39 +169,3 @@ public class SpringClient {
     }
 
 }
-
-
-
-
-        /*final CountDownLatch latch = new CountDownLatch(1);
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                RequestQueue queue = Volley.newRequestQueue(activity);
-                StringRequest stringRequest = new StringRequest(Request.Method.GET, baseUrl + "/getallusers",
-                        new Response.Listener<String>() {
-                            @Override
-                            public void onResponse(String response) {
-                                // Display the first 500 characters of the response string.
-                                System.out.println("Response is: " + response.substring(0, 500));
-                                allUsersString = response.substring(0, 500);
-                                latch.countDown();
-                            }
-                        }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        System.out.println("That didn't work!");
-                        allUsersString = "That didn't work";
-                        latch.countDown();
-                    }
-                });
-
-// Add the request to the RequestQueue.
-                queue.add(stringRequest);
-                System.out.println(allUsersString);
-            }
-        });
-        thread.start();
-        latch.await();
-
-        return allUsersString;*/
